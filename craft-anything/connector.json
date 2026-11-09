@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "preset": {
+    "id": "craft-anything",
+    "display_name": "Craft Anything",
+    "category": "productivity",
+    "description_en": "Configure the official Craft Anything MCP command for this device.",
+    "description_it": "Configura il comando MCP ufficiale di Craft Anything per questo dispositivo.",
+    "documentation_url": "https://github.com/storytold/craft-anything/blob/main/docs/mcp.md",
+    "executable_hint": "craft-anything-cli",
+    "base_args": [
+      "mcp"
+    ],
+    "path_fields": [
+      {
+        "key": "project",
+        "flag": "--project",
+        "required": false,
+        "label_en": "Project folder",
+        "label_it": "Cartella progetto",
+        "help_en": "Optional. The folder is created if it does not exist.",
+        "help_it": "Facoltativa. La cartella viene creata se non esiste."
+      }
+    ]
+  }
+}

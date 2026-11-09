@@ -1,0 +1,9 @@
+{
+  "id": "artcraft/filmcraft",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "FilmCraft MCP",
+  "description": "Configure the official FilmCraft MCP command for this device. Configure only on the user device.",
+  "publisher": "artcraft",
+  "license": "MIT"
+}

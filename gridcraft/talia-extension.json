@@ -1,0 +1,9 @@
+{
+  "id": "artcraft/gridcraft",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "GridCraft MCP",
+  "description": "Configure the official GridCraft MCP command for this device. Configure only on the user device.",
+  "publisher": "artcraft",
+  "license": "MIT"
+}

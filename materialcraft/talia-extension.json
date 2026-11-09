@@ -1,0 +1,9 @@
+{
+  "id": "artcraft/materialcraft",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "MaterialCraft MCP",
+  "description": "Configure the official MaterialCraft MCP command for this device. Configure only on the user device.",
+  "publisher": "artcraft",
+  "license": "MIT"
+}

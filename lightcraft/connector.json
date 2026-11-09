@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "preset": {
+    "id": "lightcraft",
+    "display_name": "LightCraft",
+    "category": "productivity",
+    "description_en": "Configure the official LightCraft MCP command for this device.",
+    "description_it": "Configura il comando MCP ufficiale di LightCraft per questo dispositivo.",
+    "documentation_url": "https://craft.wiki/apps/lightcraft/ai-agents/",
+    "executable_hint": "lightcraft-cli",
+    "base_args": [
+      "mcp"
+    ],
+    "path_fields": [
+      {
+        "key": "library",
+        "flag": "--library",
+        "required": false,
+        "label_en": "Library folder",
+        "label_it": "Cartella libreria",
+        "help_en": "Optional. The CLI uses its demo library when this is blank.",
+        "help_it": "Facoltativa. Se vuota, la CLI usa la libreria demo."
+      }
+    ]
+  }
+}

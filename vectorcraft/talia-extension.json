@@ -1,0 +1,9 @@
+{
+  "id": "artcraft/vectorcraft",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "VectorCraft MCP",
+  "description": "Configure the official VectorCraft MCP command for this device. Configure only on the user device.",
+  "publisher": "artcraft",
+  "license": "MIT"
+}
