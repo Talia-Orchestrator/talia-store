@@ -1,0 +1,31 @@
+{
+  "id": "talia-agents/officeworker",
+  "kind": "agent",
+  "version": "1.0.17",
+  "name": "OfficeWorker",
+  "description": "Creates, reads, edits, checks and batch-processes Word/DOCX, Excel/XLSX, PowerPoint/PPTX, WPS-compatible files and PDFs, including CSV conversion, formulas, charts and formatting. Not for high-design presentations from scratch or non-office deliverables.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/office-word"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/office-excel"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/office-ppt"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/wps"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/pdf-editing"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "talia-agents/videostudio",
+  "kind": "agent",
+  "version": "1.6.101",
+  "name": "VideoStudio",
+  "description": "Creates and edits videos from briefs, reference images or videos, including recreation, explainers, animation, generated footage, avatars and semantic edits. Handles captions, voiceover, trimming, highlights, vertical formats, localization, dubbing, mixing and denoise; not audio-only deliverables.",
+  "publisher": "talia-agents",
+  "license": "MIT"
+}

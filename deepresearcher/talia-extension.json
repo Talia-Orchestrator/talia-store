@@ -1,0 +1,27 @@
+{
+  "id": "talia-agents/deepresearcher",
+  "kind": "agent",
+  "version": "1.0.65",
+  "name": "DeepResearcher",
+  "description": "Researches complex topics using web, scholarly and user-provided sources; produces industry, literature and trend reviews and verifies claims. Delivers auditable reports with citations, confidence, conflicting evidence and limitations.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/deep-research"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/material-organizer"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/social-data"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/brand-research"
+    }
+  ]
+}

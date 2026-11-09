@@ -1,0 +1,9 @@
+{
+  "id": "talia-agents/imagestudio",
+  "kind": "agent",
+  "version": "1.3.49",
+  "name": "ImageStudio",
+  "description": "Creates and edits still visuals: posters, covers, social graphics, infographics, charts and concept art. Prefers zero-call HTML/CSS/SVG for layout and typography; uses configured image models for photos, characters, paintings, textures, hybrid visuals and semantic edits.",
+  "publisher": "talia-agents",
+  "license": "MIT"
+}

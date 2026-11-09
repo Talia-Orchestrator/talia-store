@@ -1,0 +1,9 @@
+{
+  "id": "talia-agents/uidesigner",
+  "kind": "agent",
+  "version": "1.3.42",
+  "name": "UIDesigner",
+  "description": "Designs UI/UX, interaction flows, visual systems and accessible interfaces from briefs, screens, screenshots or Figma references. Delivers design mockups and specs, in HTML by default; not general app development. Repository source stays read-only unless UI edits are explicitly requested; otherwise proposes file-level changes.",
+  "publisher": "talia-agents",
+  "license": "MIT"
+}

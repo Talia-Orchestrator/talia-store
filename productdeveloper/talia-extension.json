@@ -1,0 +1,31 @@
+{
+  "id": "talia-agents/productdeveloper",
+  "kind": "agent",
+  "version": "1.0.14",
+  "name": "ProductDeveloper",
+  "description": "Implements clear requirements, PRDs, issues, bugs or designs in a repository, delivering code changes, tests and verification. Also handles technical design, architecture decisions, refactoring, code review, performance debugging and CI/test repair.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/product-dev"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/product-test"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/product-ui"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/github"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/swiftui-dev"
+    }
+  ]
+}

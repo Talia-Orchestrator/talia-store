@@ -1,0 +1,15 @@
+{
+  "id": "talia-agents/ecommerceoperator",
+  "kind": "agent",
+  "version": "1.0.0",
+  "name": "ECommerceOperator",
+  "description": "Plans ecommerce catalog, price, promotion, inventory and order-exception changes from supplied records; executes only through available connected tools and returns verified per-item outcomes; not for product selection, copywriting or analytical diagnosis; For: \"prepare this promotion\", \"update these stock settings\", \"handle these order exceptions\"; Triggers: ecommerce operations, catalog, price, promotion, stock, order exceptions",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-operations"
+    }
+  ]
+}
