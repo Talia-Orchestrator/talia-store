@@ -25,3 +25,11 @@ This writes `catalog.json` and the referenced `artifacts/` files. Sign the exact
 The builder selects the ten canonical specialist agents explicitly and selects the current skills, connectors, and apps from their source repositories. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing. If the source repositories are not siblings, set `TALIA_SOURCE_ROOT` to the directory containing them.
 
 Run `npm test` to compare the committed catalog and artifacts with the selected sources, verify artifact digests and sizes, scan package text for personal paths and credentials, and validate the detached signature with the public key. This check does not regenerate or sign files. After rebuilding, the committed signature no longer represents the new catalog until the release owner signs the reviewed `catalog.json`; do not publish a mismatched index/signature pair.
+
+## Pagina download
+
+La pagina pubblica usa il contenuto di `site/` e gli eseguibili delle Releases. `npm run build:download-site` genera l’indice dai manifest verificati delle versioni pubblicate.
+
+Il workflow `pages.yml` pubblica uno snapshot nel branch generato `gh-pages`, con commit lineari e controllo contro esecuzioni obsolete. Richiede poi esplicitamente un build GitHub Pages. La configurazione Pages del repository deve usare il branch `gh-pages`, percorso `/`. I contributi alla pagina modificano `site/`, il builder e i test sul branch principale.
+
+Il job usa il token standard del repository con permessi Contents e Pages in scrittura. Il client legge solo file statici pubblici. I cataloghi firmati delle risorse mantengono il proprio percorso di distribuzione.
