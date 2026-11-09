@@ -11,7 +11,7 @@ function safeDownloadUrl(value) {
   try {
     const url = new URL(value);
     return url.protocol === 'https:' && url.hostname === 'github.com'
-      && url.pathname.startsWith('/Talia-orchestator/talia-store/releases/download/');
+      && url.pathname.startsWith('/Talia-Orchestrator/talia-store/releases/download/');
   } catch {
     return false;
   }
@@ -21,7 +21,7 @@ function safeReleaseUrl(value) {
   try {
     const url = new URL(value);
     return url.protocol === 'https:' && url.hostname === 'github.com'
-      && url.pathname.startsWith('/Talia-orchestator/talia-store/releases/tag/');
+      && url.pathname.startsWith('/Talia-Orchestrator/talia-store/releases/tag/');
   } catch {
     return false;
   }
