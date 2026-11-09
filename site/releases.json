@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-09T16:25:35.857Z",
+  "releases": [
+    {
+      "version": "0.7.0+main.6.1.dab2da552cea",
+      "baseVersion": "0.7.0",
+      "channel": "main",
+      "publishedAt": "2026-11-09T16:24:55Z",
+      "tag": "v0.7.0-main.6.1",
+      "releaseUrl": "https://github.com/Talia-orchestator/talia-store/releases/tag/v0.7.0-main.6.1",
+      "commit": "dab2da552ceaea57ae3aea07ce956e929e0a58b2",
+      "runNumber": 6,
+      "runAttempt": 1,
+      "platforms": {
+        "darwin-arm64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.7.0-mac-arm64.dmg",
+              "url": "https://github.com/Talia-orchestator/talia-store/releases/download/v0.7.0-main.6.1/Talia-0.7.0-mac-arm64.dmg",
+              "size": 471306738,
+              "sha256": "e479e64871254f26299a117c6c891439c730ab1076c7b7f64928befd0a01dfeb"
+            },
+            {
+              "name": "Talia-0.7.0-mac-arm64.zip",
+              "url": "https://github.com/Talia-orchestator/talia-store/releases/download/v0.7.0-main.6.1/Talia-0.7.0-mac-arm64.zip",
+              "size": 461501012,
+              "sha256": "b3a36df20e15885313a64c1f53d43e23f373fdf418703f4dafab75d12ca23309"
+            }
+          ]
+        },
+        "darwin-x64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.7.0-mac-x64.dmg",
+              "url": "https://github.com/Talia-orchestator/talia-store/releases/download/v0.7.0-main.6.1/Talia-0.7.0-mac-x64.dmg",
+              "size": 506786744,
+              "sha256": "10ae6a1d9405802ab81bcb78ba87fcbf649a370f48a090737a2da07c7c7deeff"
+            },
+            {
+              "name": "Talia-0.7.0-mac-x64.zip",
+              "url": "https://github.com/Talia-orchestator/talia-store/releases/download/v0.7.0-main.6.1/Talia-0.7.0-mac-x64.zip",
+              "size": 495808424,
+              "sha256": "8ea454b0df488a7f8a0ddd9580c856d5ae60d2b12bd1f51eff42bc13425a8e38"
+            }
+          ]
+        },
+        "win32-x64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.7.0-win-x64.exe",
+              "url": "https://github.com/Talia-orchestator/talia-store/releases/download/v0.7.0-main.6.1/Talia-0.7.0-win-x64.exe",
+              "size": 402213646,
+              "sha256": "8122f29d20cbf9066c2dbdb567addb395ff9b81a29a8729fc0b0a98fb5146546"
+            },
+            {
+              "name": "Talia-0.7.0-win-x64.zip",
+              "url": "https://github.com/Talia-orchestator/talia-store/releases/download/v0.7.0-main.6.1/Talia-0.7.0-win-x64.zip",
+              "size": 514202710,
+              "sha256": "d2782de8640d5c8dc9e68d359ebefcfc2c27fac8e174b624945b2df5fe979bb4"
+            }
+          ]
+        },
+        "linux-x64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.7.0-linux-x64.tar.gz",
+              "url": "https://github.com/Talia-orchestator/talia-store/releases/download/v0.7.0-main.6.1/Talia-0.7.0-linux-x64.tar.gz",
+              "size": 512413511,
+              "sha256": "1ea387369acf10cc01afc6ed218c22003b7fabba5044fefc60008a8ad3da8142"
+            },
+            {
+              "name": "Talia-0.7.0-linux-x86_64.AppImage",
+              "url": "https://github.com/Talia-orchestator/talia-store/releases/download/v0.7.0-main.6.1/Talia-0.7.0-linux-x86_64.AppImage",
+              "size": 528975383,
+              "sha256": "2481bdc06a1a0f87f9e662f41ef5819f201cdb921ce3282907dac0a9449cc78c"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -5,6 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build:catalog": "node scripts/build-catalog.cjs",
+    "build:download-site": "node scripts/build-download-site.cjs",
+    "test:site": "node --test tests/download-site.test.cjs",
     "validate": "node scripts/validate-catalog-source.cjs",
     "test": "npm run validate && node --test tests/store.test.cjs"
   }

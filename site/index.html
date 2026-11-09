@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101522">
+    <meta name="description" content="Scarica Talia per macOS, Windows e Linux. Controlla versione, piattaforme disponibili e checksum.">
+    <title>Scarica Talia</title>
+    <link rel="icon" href="assets/talia-symbol.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Talia, home">
+        <img src="assets/talia-symbol.svg" width="38" height="38" alt="">
+        <span>Talia</span>
+      </a>
+      <a class="header-link" href="https://github.com/Talia-orchestator/talia-store/releases">Release su GitHub</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Assistente desktop, al tuo ritmo</p>
+        <h1 id="page-title">Scarica Talia</h1>
+        <p class="intro">Conversazioni con agenti, strumenti e app locali. Scegli il pacchetto per il tuo computer e controlla sempre versione e checksum prima di installarlo.</p>
+        <p class="release-summary" id="release-summary" aria-live="polite">Sto caricando le release…</p>
+      </section>
+
+      <section class="downloads" aria-labelledby="downloads-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Download</p>
+            <h2 id="downloads-title">Scegli il tuo sistema</h2>
+          </div>
+          <a class="all-releases" href="https://github.com/Talia-orchestator/talia-store/releases">Tutte le release</a>
+        </div>
+        <div class="release-list" id="release-list" aria-live="polite">
+          <p class="empty-state">Sto caricando i pacchetti disponibili…</p>
+        </div>
+      </section>
+
+      <section class="notes" aria-labelledby="notes-title">
+        <p class="eyebrow">Prima di installare</p>
+        <h2 id="notes-title">Firma e aggiornamenti</h2>
+        <div class="note-grid">
+          <article class="note-card">
+            <h3>macOS</h3>
+            <p>I pacchetti attuali usano una firma ad hoc e non sono notarizzati da Apple. macOS può mostrare un avviso al primo avvio. Il download e l’installazione restano manuali.</p>
+          </article>
+          <article class="note-card">
+            <h3>Windows e Linux</h3>
+            <p>I pacchetti attuali non hanno firma Authenticode o firma AppImage. Windows può mostrare un avviso SmartScreen. Confronta il checksum SHA-256 pubblicato con il file scaricato.</p>
+          </article>
+          <article class="note-card">
+            <h3>Aggiornamenti</h3>
+            <p>Queste release richiedono installazione manuale e non includono un updater collegato. Gli aggiornamenti automatici sono in preparazione per Windows e Linux; macOS resterà manuale finché firma e notarizzazione non saranno disponibili e verificate.</p>
+          </article>
+        </div>
+        <p class="integrity-note">Il checksum aiuta a verificare che il file corrisponda alla release pubblicata; da solo non certifica l’identità dell’autore o la sicurezza del programma.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© Talia</span>
+      <a href="https://github.com/Talia-orchestator/talia-store">Codice e risorse pubbliche</a>
+    </footer>
+  </body>
+</html>
