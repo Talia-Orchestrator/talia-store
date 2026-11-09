@@ -6,7 +6,7 @@ Public, anonymous HTTPS distribution for signed Talia resources. The store conta
 
 The configured anonymous source URL is:
 
-`https://raw.githubusercontent.com/Talia-orchestator/talia-store/main/catalog.signature.json`
+`https://raw.githubusercontent.com/Talia-Orchestrator/talia-store/main/catalog.signature.json`
 
 Unauthenticated downloads require the repository and its `main` branch contents to be public. Relative artifact URLs resolve under the same `main/` origin. Talia verifies the signed index and the selected artifact bytes; package installation still requires explicit review and approval. No GitHub account, token, or sign-in is required by clients. The URL is configured in the Talia desktop source; this workspace checkout does not publish it or prove that the remote URL is live. Publication requires pushing the reviewed files to the public repository.
 

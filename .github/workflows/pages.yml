@@ -31,7 +31,7 @@ jobs:
       - run: npm run build:download-site
         env:
           GH_TOKEN: ${{ github.token }}
-          TALIA_RELEASE_REPOSITORY: Talia-orchestator/talia-store
+          TALIA_RELEASE_REPOSITORY: Talia-Orchestrator/talia-store
       - name: Publish static branch and request Pages build
         run: node scripts/deploy-pages-branch.cjs
         env:

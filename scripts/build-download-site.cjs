@@ -6,7 +6,8 @@ const os = require('node:os');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 
-const DEFAULT_REPOSITORY = 'Talia-orchestator/talia-store';
+const DEFAULT_REPOSITORY = 'Talia-Orchestrator/talia-store';
+const FORMER_REPOSITORY = 'Talia-orchestator/talia-store';
 const TARGETS = ['darwin-arm64', 'darwin-x64', 'win32-x64', 'linux-x64'];
 const MAX_MANIFEST_BYTES = 512 * 1024;
 
@@ -23,6 +24,22 @@ function safeRepository(value) {
     fail('repository must use owner/name form');
   }
   return value;
+}
+
+function canonicalReleaseUrl(value, repository) {
+  try {
+    const url = new URL(value);
+    if (url.protocol !== 'https:' || url.hostname !== 'github.com' || url.username || url.password
+      || url.search || url.hash || url.port) return null;
+    const oldPrefix = `/${FORMER_REPOSITORY}/releases/`;
+    const currentPrefix = `/${repository}/releases/`;
+    if (repository === DEFAULT_REPOSITORY && url.pathname.startsWith(oldPrefix)) {
+      url.pathname = currentPrefix + url.pathname.slice(oldPrefix.length);
+    }
+    return url.pathname.startsWith(currentPrefix) ? url.href : null;
+  } catch {
+    return null;
+  }
 }
 
 function parseManifest(manifest, tagName, repository = DEFAULT_REPOSITORY) {
@@ -44,7 +61,7 @@ function parseManifest(manifest, tagName, repository = DEFAULT_REPOSITORY) {
   const expectedTag = `v${manifest.baseVersion}-main.${manifest.runNumber}.${manifest.runAttempt}`;
   const expectedReleaseUrl = `https://github.com/${repository}/releases/tag/${encodeURIComponent(expectedTag)}`;
   if (typeof manifest.version !== 'string' || (!legacyVersion.test(manifest.version) && !orderedVersion.test(manifest.version))
-    || tagName !== expectedTag || manifest.releaseUrl !== expectedReleaseUrl) {
+    || tagName !== expectedTag || canonicalReleaseUrl(manifest.releaseUrl, repository) !== expectedReleaseUrl) {
     fail('release tag and version do not match manifest metadata');
   }
   if (!isPlainObject(manifest.platforms) || Object.keys(manifest.platforms).some(target => !TARGETS.includes(target))) {
@@ -54,13 +71,7 @@ function parseManifest(manifest, tagName, repository = DEFAULT_REPOSITORY) {
 }
 
 function githubAssetUrl(url, repository) {
-  try {
-    const parsed = new URL(url);
-    return parsed.protocol === 'https:' && parsed.hostname === 'github.com'
-      && parsed.pathname.startsWith(`/${repository}/releases/download/`);
-  } catch {
-    return false;
-  }
+  return canonicalReleaseUrl(url, repository)?.startsWith(`https://github.com/${repository}/releases/download/`) || false;
 }
 
 function normalizeRelease(record, repository) {
@@ -96,10 +107,11 @@ function normalizeRelease(record, repository) {
         fail(`release file metadata is invalid: ${target}`);
       }
       const publishedAsset = assets.get(file.name);
-      if (!publishedAsset || publishedAsset.size !== file.size || publishedAsset.browser_download_url !== file.url) {
+      if (!publishedAsset || publishedAsset.size !== file.size
+        || canonicalReleaseUrl(publishedAsset.browser_download_url, repository) !== canonicalReleaseUrl(file.url, repository)) {
         fail(`release manifest references a missing or mismatched asset: ${file.name}`);
       }
-      files.push({ name: file.name, url: publishedAsset.browser_download_url, size: file.size, sha256: file.sha256 });
+      files.push({ name: file.name, url: canonicalReleaseUrl(publishedAsset.browser_download_url, repository), size: file.size, sha256: file.sha256 });
     }
     platforms[target] = { automaticUpdate: platform.automaticUpdate, files };
   }
@@ -110,7 +122,7 @@ function normalizeRelease(record, repository) {
     channel: manifest.channel,
     publishedAt: release.published_at,
     tag: release.tag_name,
-    releaseUrl: manifest.releaseUrl,
+    releaseUrl: canonicalReleaseUrl(manifest.releaseUrl, repository),
     commit: manifest.commit,
     runNumber: manifest.runNumber,
     runAttempt: manifest.runAttempt,

@@ -8,7 +8,7 @@ const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const { deployPagesBranch, requestAndWaitForPagesBuild } = require('../scripts/deploy-pages-branch.cjs');
 
-const REPOSITORY = 'Talia-orchestator/talia-store';
+const REPOSITORY = 'Talia-Orchestrator/talia-store';
 
 function git(cwd, args) {
   return execFileSync('git', args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();

@@ -8,7 +8,7 @@ const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const { buildDownloadIndex, fetchReleaseRecordsWithGh, parseManifest } = require('../scripts/build-download-site.cjs');
 
-const REPOSITORY = 'Talia-orchestator/talia-store';
+const REPOSITORY = 'Talia-Orchestrator/talia-store';
 const COMMIT = '0123456789abcdef0123456789abcdef01234567';
 const TAG = 'v0.7.0-main.6.1';
 const ROOT_URL = `https://github.com/${REPOSITORY}/releases/download/${TAG}`;
@@ -88,6 +88,20 @@ test('rejects mismatched release assets and malformed manifest contracts', () =>
   const badReleaseUrl = record();
   badReleaseUrl.manifest.releaseUrl = 'https://example.com/forged-release';
   assert.throws(() => buildDownloadIndex([badReleaseUrl]), /tag and version/);
+});
+
+test('reads manifests signed before the organization rename and publishes canonical URLs', () => {
+  const source = record();
+  source.manifest.releaseUrl = source.manifest.releaseUrl.replace('Talia-Orchestrator', 'Talia-orchestator');
+  for (const platform of Object.values(source.manifest.platforms)) {
+    for (const entry of platform.files) entry.url = entry.url.replace('Talia-Orchestrator', 'Talia-orchestator');
+  }
+  const index = buildDownloadIndex([source]);
+  assert.equal(index.releases[0].releaseUrl, `https://github.com/${REPOSITORY}/releases/tag/${TAG}`);
+  assert.equal(index.releases[0].platforms['darwin-arm64'].files[0].url, `${ROOT_URL}/Talia-arm64.dmg`);
+
+  source.manifest.releaseUrl = source.manifest.releaseUrl.replace('Talia-orchestator', 'Unrelated-owner');
+  assert.throws(() => buildDownloadIndex([source]), /tag and version/);
 });
 
 test('accepts legacy 0.7 build metadata and ordered prerelease SemVer for future versions', () => {

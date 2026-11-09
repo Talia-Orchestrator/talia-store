@@ -13,19 +13,19 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
-          repository: Talia-orchestator/talia-agents
+          repository: Talia-Orchestrator/talia-agents
           path: .ci/sources/talia-agents
       - uses: actions/checkout@v4
         with:
-          repository: Talia-orchestator/talia-skills
+          repository: Talia-Orchestrator/talia-skills
           path: .ci/sources/talia-skills
       - uses: actions/checkout@v4
         with:
-          repository: Talia-orchestator/talia-connectors
+          repository: Talia-Orchestrator/talia-connectors
           path: .ci/sources/talia-connectors
       - uses: actions/checkout@v4
         with:
-          repository: Talia-orchestator/talia-apps
+          repository: Talia-Orchestrator/talia-apps
           path: .ci/sources/talia-apps
       - uses: actions/setup-node@v4
         with:
