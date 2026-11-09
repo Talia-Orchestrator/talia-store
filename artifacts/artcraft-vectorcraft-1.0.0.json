@@ -1,0 +1,22 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "artcraft/vectorcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "VectorCraft MCP",
+      "description": "Configure the official VectorCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Talia includes software derived from Orkas.\nCopyright (c) 2026 Orkas contributors. MIT License.\nThe original copyright and license are preserved in LICENSE and desktop/LICENSE.\n\nTalia-specific modifications and integration are contributed by the Talia contributors.\nThird-party license notices accompany their respective source and vendor directories.\n\nThe source repositories do not contain personal profiles, credentials, installed dependencies,\nlocal release snapshots or QA artifacts. Resource packages retain their own licenses and provenance.\n",
+        "README.md": "# vectorcraft MCP preset\n\nDeclarative configuration for the official vectorcraft MCP integration. The package stores a generic executable hint and optional path-field definitions only. It does not include or execute the external application, MCP server, credentials, or machine-specific paths. Users install the preset, then configure and connect it explicitly in Talia.\n\nArtCraft and other referenced software remain subject to their own licenses and must be installed separately. See LICENSE and NOTICE for the license of this Talia package.\n",
+        "connector.json": "{\n  \"schemaVersion\": 1,\n  \"preset\": {\n    \"id\": \"vectorcraft\",\n    \"display_name\": \"VectorCraft\",\n    \"category\": \"productivity\",\n    \"description_en\": \"Configure the official VectorCraft MCP command for this device.\",\n    \"description_it\": \"Configura il comando MCP ufficiale di VectorCraft per questo dispositivo.\",\n    \"documentation_url\": \"https://craft.wiki/apps/vectorcraft/ai-agents/\",\n    \"executable_hint\": \"vectorcraft-cli\",\n    \"base_args\": [\n      \"mcp\"\n    ],\n    \"path_fields\": [\n      {\n        \"key\": \"automation_read_root\",\n        \"flag\": \"--automation-read-root\",\n        \"required\": false,\n        \"label_en\": \"Readable folder\",\n        \"label_it\": \"Cartella di lettura\",\n        \"help_en\": \"Optional. Leave blank to use the app’s default access behavior.\",\n        \"help_it\": \"Facoltativa. Se lasciata vuota, vale il comportamento di accesso predefinito dell’app.\"\n      },\n      {\n        \"key\": \"automation_write_root\",\n        \"flag\": \"--automation-write-root\",\n        \"required\": false,\n        \"label_en\": \"Writable folder\",\n        \"label_it\": \"Cartella di scrittura\",\n        \"help_en\": \"Optional. Leave blank to use the app’s default access behavior.\",\n        \"help_it\": \"Facoltativa. Se lasciata vuota, vale il comportamento di accesso predefinito dell’app.\"\n      }\n    ]\n  }\n}\n"
+      },
+      "digest": "sha256:e2347286aec5f7fa07f47d68a8c485a5c9b4d15fe5aaf8244c5c3c6f8a3fa249"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-skills/project-brief",
+      "kind": "skill",
+      "version": "0.1.0",
+      "name": "project-brief",
+      "description": "Turn an objective and supplied materials into a project brief with scope, constraints and observable acceptance criteria.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Talia includes software derived from Orkas.\nCopyright (c) 2026 Orkas contributors. MIT License.\nThe original copyright and license are preserved in LICENSE and desktop/LICENSE.\n\nTalia-specific modifications and integration are contributed by the Talia contributors.\nThird-party license notices accompany their respective source and vendor directories.\n\nThe source repositories do not contain personal profiles, credentials, installed dependencies,\nlocal release snapshots or QA artifacts. Resource packages retain their own licenses and provenance.\n",
+        "README.md": "# project-brief\n\nShared Talia skill package. The instruction entrypoint is SKILL.md; this package contains declarative text and supporting reference assets only.\n\nSee LICENSE and NOTICE for license and provenance.\n",
+        "SKILL.md": "---\nname: project-brief\ndescription_en: \"Turn an objective and supplied materials into a project brief with scope, constraints and observable acceptance criteria.\"\ndescription_zh: \"将目标和提供的资料整理为项目简报，明确范围、约束和可观察的验收标准。\"\n---\n\n# Brief di progetto\n\nIdentifica risultato desiderato, destinatario e problema da risolvere. Se mancano informazioni che cambiano radicalmente l’ambito, chiedi solo quelle essenziali; le ipotesi reversibili possono essere esplicitate.\n\nDefinisci ciò che il risultato deve includere e ciò che resta fuori, preservando le richieste originali. Trasforma espressioni come “veloce”, “completo” o “facile” in criteri osservabili; se una soglia è proposta, etichettala come proposta.\n\nSepara requisiti, preferenze e ipotesi. Individua dipendenze esterne, decisioni aperte e il primo incremento verificabile. Priorità basate su valore e rischio, non sull’ordine in cui gli elementi sono stati nominati.\n\nNon promettere tempi o costi senza baseline e disponibilità note. Il brief non autorizza implementazioni, acquisti o contatti con terzi. Restituisci un documento conciso utilizzabile come input alla pianificazione.\n"
+      },
+      "digest": "sha256:1534f9c1256afe16920ea31d492bea146c0cb7f22c7a95614b434bae0b8f152a"
+    }
+  ]
+}

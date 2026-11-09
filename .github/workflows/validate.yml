@@ -1,0 +1,35 @@
+name: Validate signed public store
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Talia-orchestator/talia-agents
+          path: .ci/sources/talia-agents
+      - uses: actions/checkout@v4
+        with:
+          repository: Talia-orchestator/talia-skills
+          path: .ci/sources/talia-skills
+      - uses: actions/checkout@v4
+        with:
+          repository: Talia-orchestator/talia-connectors
+          path: .ci/sources/talia-connectors
+      - uses: actions/checkout@v4
+        with:
+          repository: Talia-orchestator/talia-apps
+          path: .ci/sources/talia-apps
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+        env:
+          TALIA_SOURCE_ROOT: ${{ github.workspace }}/.ci/sources

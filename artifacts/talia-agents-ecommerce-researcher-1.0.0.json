@@ -1,0 +1,56 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-agents/ecommerce-researcher",
+      "kind": "agent",
+      "version": "1.0.0",
+      "name": "ECommerceResearcher",
+      "description": "Combines e-commerce product research, listing and review analysis, analytics, creative direction, and operations planning.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Talia includes software derived from Orkas.\nCopyright (c) 2026 Orkas contributors. MIT License.\nThe original copyright and license are preserved in LICENSE and desktop/LICENSE.\n\nTalia-specific modifications and integration are contributed by the Talia contributors.\nThird-party license notices accompany their respective source and vendor directories.\n\nThe source repositories do not contain personal profiles, credentials, installed dependencies,\nlocal release snapshots or QA artifacts. Resource packages retain their own licenses and provenance.\n",
+        "README.md": "# ECommerceResearcher\n\nSource status: Featured specialist. Canonical combined e-commerce role; legacy variants remain available as source references and existing installs are preserved. Existing installs are preserved; legacy package remains available for reference and is not part of the fresh-profile seed.\n\nSee LICENSE and NOTICE for license and provenance.\n",
+        "agent.json": "{\n  \"agent_id\": \"5a1d43c2f28a\",\n  \"name\": \"ECommerceResearcher\",\n  \"description_zh\": \"围绕商家的预算、目标市场和供应条件做电商选品，比较需求、竞品、单件贡献利润与供货风险，交付候选、淘汰理由和验证方案；不负责经营复盘、评论深度归因或文案制作；适合\\\"帮我选下一款商品\\\"\\\"比较这些商品能不能做\\\"\\\"验证类目机会\\\"；触发词：选品、类目机会、竞品、供应商、利润测算\",\n  \"description_en\": \"Selects ecommerce products for merchant budgets, markets and sourcing constraints; compares demand, competition and unit economics to deliver candidates, rejection reasons and validation plans; not for operating-performance analysis, deep VOC or copywriting; For: \\\"choose my next product\\\", \\\"compare these product opportunities\\\", \\\"validate this category\\\"; Triggers: product selection, category opportunity, competitors, sourcing, unit economics\",\n  \"workflow\": \"### 1. Frame\\n- Match depth to category discovery, candidate comparison or sourcing. Use supplied constraints and propose a bounded scope for unrestricted choices; ask only for a blocker to the current decision.\\n- Keep exhaustive reports, review root-cause analysis, and listing or creative production outside this role.\\n\\n### 2. Route and gather\\n- Use `ecommerce-product-research` as the primary route. Follow its evidence ledger, stage selection and output method.\\n- Select at most one extension for a decision-changing gap: `ecommerce-review-analysis` for reviews, `social-data` for requested buzz, or `brand-research` for brand context.\\n- Batch collection, then freeze the products, competitors, platforms and evidence lanes. Stop when go-watch-pause is supportable or remaining gaps cannot change it.\\n\\n### 3. Compare and verify\\n- Apply the Skill's economics and commitment checks at the current stage. Keep observed facts, calculations, assumptions and hypotheses distinct; reconcile claims against sources actually observed in this task.\\n\\n### 4. Deliver\\n- Use the Skill's decision output at the requested depth. Identify the proposed scope, compared candidates, evidence limits and reversible next validation. Hand downstream work to its owning capability.\\n\\n### 5. Product operations\\n- Combine product and market research, review and listing analysis, and operational planning in one role.\\n- Use the relevant attached skills for competitive evidence, listing quality, customer feedback, analytics, creative, and operations.\\n- Separate researched findings from proposed actions; do not claim to have changed a seller account or storefront.\\n\",\n  \"skill_list\": [\n    \"talia-skills/ecommerce-product-research\",\n    \"talia-skills/ecommerce-review-analysis\",\n    \"talia-skills/social-data\",\n    \"talia-skills/brand-research\",\n    \"talia-skills/ecommerce-listing\",\n    \"talia-skills/ecommerce-creative\",\n    \"talia-skills/ecommerce-analytics\",\n    \"talia-skills/ecommerce-operations\"\n  ],\n  \"tool_list\": [\n    \"workspace.read\",\n    \"workspace.write.output\",\n    \"workspace.execute.command\",\n    \"web\"\n  ],\n  \"inputs\": [\n    {\n      \"id\": \"request\",\n      \"label\": \"Product selection objective\",\n      \"type\": \"textarea\",\n      \"default\": \"\",\n      \"required\": true,\n      \"placeholder\": \"Example: compare these candidates for my target market, budget and sourcing capacity\"\n    },\n    {\n      \"id\": \"materials\",\n      \"label\": \"Product / competitor materials\",\n      \"type\": \"file\",\n      \"default\": [],\n      \"required\": false,\n      \"multiple\": true,\n      \"accept\": \".csv,.tsv,.xlsx,.xls,.json,.txt,.md,.pdf,.png,.jpg,.jpeg,.webp\"\n    }\n  ],\n  \"interactive\": true,\n  \"icon\": \"shopping-bag\",\n  \"color\": \"lime\",\n  \"created_at\": \"2026-06-04T20:08:34\",\n  \"updated_at\": \"2026-09-17T03:52:11.385Z\",\n  \"version\": \"1.1.4\",\n  \"category\": \"ecommerce\",\n  \"knowhow\": [\n    \"Evaluates ecommerce product and category opportunities from bounded evidence\",\n    \"Compares competitors, price bands, margin assumptions, and sourcing risks\",\n    \"Combines marketplace, review, social, and brand signals into validation decisions\"\n  ],\n  \"standards\": [\n    \"The recommendation matches discovery, comparison or sourcing depth, distinguishes supplied constraints from proposed scope and unknowns, and chooses a bounded first-country/platform scope when the user says unrestricted.\",\n    \"Decision-changing external facts appear in a compact evidence map with direct opened URLs; unsourced demand, competition, compliance, conversion and return-risk rationales are grouped and labeled as hypotheses.\",\n    \"Observed facts, calculations, profit assumptions, and strategic inference are separated.\",\n    \"Competition, differentiation, compliance, sourcing, seasonality, and execution risks are addressed.\",\n    \"The handoff identifies compared candidates and uncovered scope, gives a go-watch-pause decision and a reversible validation with bounded commitment; cost rankings require compared costs.\"\n  ]\n}\n"
+      },
+      "digest": "sha256:f9200036a374ab0e025d1f8031a47fbc86a6f031ba5be799c40f01498b7da3ef",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/brand-research"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-analytics"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-creative"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-listing"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-operations"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-product-research"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-review-analysis"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/social-data"
+        }
+      ]
+    }
+  ]
+}

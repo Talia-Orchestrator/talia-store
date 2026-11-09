@@ -1,0 +1,924 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 3,
+  "packages": [
+    {
+      "id": "artcraft/cadcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "CADCraft MCP",
+      "description": "Configure the official CADCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:c1a7cae6a06b69cb2f65929714e20d65382967e72e073e16bfe7c2179162a418",
+      "artifact": {
+        "url": "artifacts/artcraft-cadcraft-1.0.0.json",
+        "sha256": "sha256:f4c8500f040e729fb3bcf0a428029172425307a3bbb46bd1746ac4b20a7df91e",
+        "size": 3336
+      }
+    },
+    {
+      "id": "artcraft/craft-anything",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Craft Anything MCP",
+      "description": "Configure the official Craft Anything MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:392a39ba1eea1c01eb9f12e4adab84872c13c341baf2c8dffad3fc616e9e520b",
+      "artifact": {
+        "url": "artifacts/artcraft-craft-anything-1.0.0.json",
+        "sha256": "sha256:389a64cf37b5a2ba935dabd909dc589cbb6e5ab37db1a3334f55bda5361fbc4d",
+        "size": 3785
+      }
+    },
+    {
+      "id": "artcraft/deckcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "DeckCraft MCP",
+      "description": "Configure the official DeckCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:c4f00e95118388dd2f4154a3d231f6a947fbe3b23e2de131d7ff20aeabd03f85",
+      "artifact": {
+        "url": "artifacts/artcraft-deckcraft-1.0.0.json",
+        "sha256": "sha256:fffe897a9c7fbae2fa2df2ee9c8e2ba8e720d353b2d421dc92486b1999286b13",
+        "size": 4235
+      }
+    },
+    {
+      "id": "artcraft/designcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "DesignCraft MCP",
+      "description": "Configure the official DesignCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:0efe61c9e1c29e41cae9ea126486124a4f44ddc6a70e7f886092769205459eae",
+      "artifact": {
+        "url": "artifacts/artcraft-designcraft-1.0.0.json",
+        "sha256": "sha256:30da90fc3377c88d467602ade46df15f6a5ae8f78716a8d0cb022fa783cc5ebf",
+        "size": 4257
+      }
+    },
+    {
+      "id": "artcraft/effectcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "EffectCraft MCP",
+      "description": "Configure the official EffectCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:f1531ae7e9ee7ab06dd938868ad9bea6e7c06bb4238f1541412266468e65489f",
+      "artifact": {
+        "url": "artifacts/artcraft-effectcraft-1.0.0.json",
+        "sha256": "sha256:140fd1b13ed7bdb08387a8fcc4e60f9dc0245ab80acc0a564931e97f65784292",
+        "size": 4257
+      }
+    },
+    {
+      "id": "artcraft/figcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "FigCraft MCP",
+      "description": "Configure FigCraft’s official MCP command. Automation roots are optional and can confine file access. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:3558f332b1d84510158214db09b201559df88f29bf42d03b45104714f3db65e9",
+      "artifact": {
+        "url": "artifacts/artcraft-figcraft-1.0.0.json",
+        "sha256": "sha256:dd87bc76380219a7b14eb36d64989c769632c0dbbab93794a6533cb2f3fd02b0",
+        "size": 4371
+      }
+    },
+    {
+      "id": "artcraft/filmcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "FilmCraft MCP",
+      "description": "Configure the official FilmCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:88791c5551bb56ba3a8f1c58b4f6e529cfe0d570e3a630cd08dd0349b1005864",
+      "artifact": {
+        "url": "artifacts/artcraft-filmcraft-1.0.0.json",
+        "sha256": "sha256:b535bc73c516aef446f96a85ba3768b96c4bf4005b78fad7f4cff96905c521e7",
+        "size": 3682
+      }
+    },
+    {
+      "id": "artcraft/gridcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "GridCraft MCP",
+      "description": "Configure the official GridCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:204865ad781c4e6a4e821ab4e2a06520be5bea30fd74ea86097b0fa34553cb5d",
+      "artifact": {
+        "url": "artifacts/artcraft-gridcraft-1.0.0.json",
+        "sha256": "sha256:133a2de1cab69f54d01a5a1f565b0ff7813b07d4a1e9933e82b0aec2dc53ac21",
+        "size": 3346
+      }
+    },
+    {
+      "id": "artcraft/lightcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "LightCraft MCP",
+      "description": "Configure the official LightCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:09cbbcb3c25adb8890cf56d86f31ead13f34918b8f509c5bd8ab5c1703e0487d",
+      "artifact": {
+        "url": "artifacts/artcraft-lightcraft-1.0.0.json",
+        "sha256": "sha256:82f6e444ae57ee039b3fa90d7742dc542645c4fe2f3586b2313b3ed8a09a82fd",
+        "size": 3730
+      }
+    },
+    {
+      "id": "artcraft/materialcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "MaterialCraft MCP",
+      "description": "Configure the official MaterialCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:363ca38d52e8221a25a21a1fe5028a4ac15eab5386ffda27551311642d4ac0bb",
+      "artifact": {
+        "url": "artifacts/artcraft-materialcraft-1.0.0.json",
+        "sha256": "sha256:167db5a83917b0a55ef81e5e113f01f795e5e93bc1398cae314fe894788ef245",
+        "size": 4235
+      }
+    },
+    {
+      "id": "artcraft/pdfcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "PDFCraft MCP",
+      "description": "Configure the official PDFCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:1e1a0f988fe5f1d455f3bb3afc5f061558d2a0304c94eb9d04e99d082819a92c",
+      "artifact": {
+        "url": "artifacts/artcraft-pdfcraft-1.0.0.json",
+        "sha256": "sha256:93bde431ba3e07f00780f1df4e7c0dbbf57299d21c4997e01ded6f6703ae020e",
+        "size": 4669
+      }
+    },
+    {
+      "id": "artcraft/photocraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "PhotoCraft MCP",
+      "description": "Configure the official PhotoCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:90afb56e5c1cd16f9e23d742a1823807e638f680cf15be9d437b280a2be66ce2",
+      "artifact": {
+        "url": "artifacts/artcraft-photocraft-1.0.0.json",
+        "sha256": "sha256:2c126af83ab59e71bd601e7ae1cf364add4ce8af42b1abb41c9af5aa43324acf",
+        "size": 4247
+      }
+    },
+    {
+      "id": "artcraft/soundcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "SoundCraft MCP",
+      "description": "Configure the official SoundCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:841223ebde4b666f1ea406ee826f518ce5ba3997b4adb6daf7c3bbee36c7f3a2",
+      "artifact": {
+        "url": "artifacts/artcraft-soundcraft-1.0.0.json",
+        "sha256": "sha256:70b91e6734256328ea8e45f6ddaee6c1577177a16731abef723bb557e7e9b1ff",
+        "size": 4246
+      }
+    },
+    {
+      "id": "artcraft/texturecraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "TextureCraft MCP",
+      "description": "Configure the official TextureCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:ba20bb8ffb734f34cb9f51acab3ecb1dc3accbe7ea16fbbba9bfbb140af92d75",
+      "artifact": {
+        "url": "artifacts/artcraft-texturecraft-1.0.0.json",
+        "sha256": "sha256:42ca74e42e77c3ebf3377dff5b3ba3061a79a99f832b8369238c012d6d2e0f9f",
+        "size": 4224
+      }
+    },
+    {
+      "id": "artcraft/vectorcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "VectorCraft MCP",
+      "description": "Configure the official VectorCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:e2347286aec5f7fa07f47d68a8c485a5c9b4d15fe5aaf8244c5c3c6f8a3fa249",
+      "artifact": {
+        "url": "artifacts/artcraft-vectorcraft-1.0.0.json",
+        "sha256": "sha256:0c87f424491db1603c9a9665e43bff3be59007ee45491c0272686b8273f45a80",
+        "size": 4257
+      }
+    },
+    {
+      "id": "artcraft/wordcraft",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "WordCraft MCP",
+      "description": "Configure the official WordCraft MCP command for this device. Configure only on the user device.",
+      "publisher": "artcraft",
+      "license": "MIT",
+      "digest": "sha256:0dd4ffb3ce5978ff7655d059f861a5631057db28653837aac34fc23eef666ad6",
+      "artifact": {
+        "url": "artifacts/artcraft-wordcraft-1.0.0.json",
+        "sha256": "sha256:6cee8d145bf9dc8da7b4998c481ba162f102cb7377741fb3b5e31ee3e514750e",
+        "size": 4235
+      }
+    },
+    {
+      "id": "talia-agents/contentwriter",
+      "kind": "agent",
+      "version": "1.0.38",
+      "name": "ContentWriter",
+      "description": "Drafts and revises publication-ready social posts, articles, newsletters, tutorials and case studies from goals, sources or drafts; adapts voice and structure, humanizes prose, and checks evidence and citations.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:39a8f1db7e3722406d9cfe2a231f94c401c386049c1fd66755ed28c4cffece39",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/content-writer"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-contentwriter-1.0.38.json",
+        "sha256": "sha256:849f3a4c69e5af0b3442f3a7e1b8f3444f16ddd7368fd7b692fc9d6c434f65ff",
+        "size": 6045
+      }
+    },
+    {
+      "id": "talia-agents/deepresearcher",
+      "kind": "agent",
+      "version": "1.0.65",
+      "name": "DeepResearcher",
+      "description": "Researches complex topics using web, scholarly and user-provided sources; produces industry, literature and trend reviews and verifies claims. Delivers auditable reports with citations, confidence, conflicting evidence and limitations.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:7381aad13ae22fd82ff1bfa4fd7655f0500207d737bb02e45c00460e0f8c45d5",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/brand-research"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/deep-research"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/material-organizer"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/social-data"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-deepresearcher-1.0.65.json",
+        "sha256": "sha256:05b3467c0f2b060674aac418b06924a8149960706070f73d0bf8fb9ba42ce839",
+        "size": 7016
+      }
+    },
+    {
+      "id": "talia-agents/ecommerce-researcher",
+      "kind": "agent",
+      "version": "1.0.0",
+      "name": "ECommerceResearcher",
+      "description": "Combines e-commerce product research, listing and review analysis, analytics, creative direction, and operations planning.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:f9200036a374ab0e025d1f8031a47fbc86a6f031ba5be799c40f01498b7da3ef",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/brand-research"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-analytics"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-creative"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-listing"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-operations"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-product-research"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/ecommerce-review-analysis"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/social-data"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-ecommerce-researcher-1.0.0.json",
+        "sha256": "sha256:a3dc20bcd2e6cd3ee5c679af41ceded5714fffa22cc258c133d1e9a89cee0186",
+        "size": 8705
+      }
+    },
+    {
+      "id": "talia-agents/imagestudio",
+      "kind": "agent",
+      "version": "1.3.49",
+      "name": "ImageStudio",
+      "description": "Creates and edits still visuals: posters, covers, social graphics, infographics, charts and concept art. Prefers zero-call HTML/CSS/SVG for layout and typography; uses configured image models for photos, characters, paintings, textures, hybrid visuals and semantic edits.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:7911c8f6b40d2eabb5c67629841071098291f35b5b976b240c5a05debb44976e",
+      "artifact": {
+        "url": "artifacts/talia-agents-imagestudio-1.3.49.json",
+        "sha256": "sha256:f8f63ce116070d75c95a1a7360e3f468116e0e15ace9841e5c998c916390d4eb",
+        "size": 106540
+      }
+    },
+    {
+      "id": "talia-agents/officeworker",
+      "kind": "agent",
+      "version": "1.0.17",
+      "name": "OfficeWorker",
+      "description": "Creates, reads, edits, checks and batch-processes Word/DOCX, Excel/XLSX, PowerPoint/PPTX, WPS-compatible files and PDFs, including CSV conversion, formulas, charts and formatting. Not for high-design presentations from scratch or non-office deliverables.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:e96ba896e0733328618529034a7c221cb5190d59b8e353857b8f872d1506bd2d",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/office-excel"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/office-ppt"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/office-word"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/pdf-editing"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/wps"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-officeworker-1.0.17.json",
+        "sha256": "sha256:1ca7926126869c53b8d4f06ce30c09fa9f309857688a484270d40916fe9a2260",
+        "size": 6917
+      }
+    },
+    {
+      "id": "talia-agents/pptmaker",
+      "kind": "agent",
+      "version": "1.2.30",
+      "name": "PptMaker",
+      "description": "Creates, edits and reviews native editable PPTX presentations or deck outlines from topics, documents, data, visual references or existing decks. Follows supplied visual direction or develops an audience-led design and checks rendered results.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:749d1432abdecb03434b5f2d053747103d59da693b5d5017d783716cf232765e",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/office-ppt"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-pptmaker-1.2.30.json",
+        "sha256": "sha256:00e7b1c5a4548aa9919a3d9f3ddfa8a655a3b4c8ec86ca36c76de4cbda7ea6bd",
+        "size": 64497
+      }
+    },
+    {
+      "id": "talia-agents/productdeveloper",
+      "kind": "agent",
+      "version": "1.0.14",
+      "name": "ProductDeveloper",
+      "description": "Implements clear requirements, PRDs, issues, bugs or designs in a repository, delivering code changes, tests and verification. Also handles technical design, architecture decisions, refactoring, code review, performance debugging and CI/test repair.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:dbd9b0e32c0e67913e2116ff59b724ea48c3d322454b6844b1572a25cc308dce",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/github"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/product-dev"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/product-test"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/product-ui"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/swiftui-dev"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-productdeveloper-1.0.14.json",
+        "sha256": "sha256:fe617067a047eafbbca8b0737605a272d70888296965bcd8c6703a3f940b70c7",
+        "size": 7935
+      }
+    },
+    {
+      "id": "talia-agents/seogeoagent",
+      "kind": "agent",
+      "version": "1.0.53",
+      "name": "SeoGeoAgent",
+      "description": "Audits and improves website SEO/GEO: technical SEO, indexing, structured data, Core Web Vitals, content quality and AI citability. Delivers scores, prioritized actions and dashboards; monitors regressions, fixes supplied repositories with retesting, writes GEO content, and evaluates backlink or guest-post pricing.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:9dbe40f94d3c6956dc8d31783558c8284b435b73e92786266dda258645c79bfd",
+      "artifact": {
+        "url": "artifacts/talia-agents-seogeoagent-1.0.53.json",
+        "sha256": "sha256:2f32828be893548bf5001ca9a4f24a94dd20c2eb6e58bf80a34edd8a75938fe3",
+        "size": 534790
+      }
+    },
+    {
+      "id": "talia-agents/uidesigner",
+      "kind": "agent",
+      "version": "1.3.42",
+      "name": "UIDesigner",
+      "description": "Designs UI/UX, interaction flows, visual systems and accessible interfaces from briefs, screens, screenshots or Figma references. Delivers design mockups and specs, in HTML by default; not general app development. Repository source stays read-only unless UI edits are explicitly requested; otherwise proposes file-level changes.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:38a2367868c3cd141fbd5d7ef3ceb2779802ee9e3f48cd768420b5e16d5c6efd",
+      "artifact": {
+        "url": "artifacts/talia-agents-uidesigner-1.3.42.json",
+        "sha256": "sha256:f8c05f5c4cae848f87574b2b3a3fc1c8e9b772cb3dfc3eb68124187825a64f31",
+        "size": 196787
+      }
+    },
+    {
+      "id": "talia-agents/videostudio",
+      "kind": "agent",
+      "version": "1.6.101",
+      "name": "VideoStudio",
+      "description": "Creates and edits videos from briefs, reference images or videos, including recreation, explainers, animation, generated footage, avatars and semantic edits. Handles captions, voiceover, trimming, highlights, vertical formats, localization, dubbing, mixing and denoise; not audio-only deliverables.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:26d684a2d499d3fa8580957f96f9d7d51ec8d1075b235e0009255c9960f17a0e",
+      "artifact": {
+        "url": "artifacts/talia-agents-videostudio-1.6.101.json",
+        "sha256": "sha256:00741bffb464f28bc0a95b5af04850701a7e1833bea2edcc3b5d57f896d334c5",
+        "size": 914679
+      }
+    },
+    {
+      "id": "talia-apps/csv-viewer",
+      "kind": "app",
+      "version": "1.0.0",
+      "name": "CSV Viewer",
+      "description": "Open local CSV files, search rows, and sort columns without uploading your data.",
+      "publisher": "talia-apps",
+      "license": "MIT",
+      "digest": "sha256:195ddbc6a21120be8d79086735d4a67df1876f822d26f0e112190306bdfbb61a",
+      "artifact": {
+        "url": "artifacts/talia-apps-csv-viewer-1.0.0.json",
+        "sha256": "sha256:ce35fdae3533d6eaaa4e37a28256db0350495b8bf0f966e5f88b749aeec85cf3",
+        "size": 13316
+      }
+    },
+    {
+      "id": "talia-apps/notes",
+      "kind": "app",
+      "version": "1.0.0",
+      "name": "Notes",
+      "description": "Create and browse private notes saved on your device.",
+      "publisher": "talia-apps",
+      "license": "MIT",
+      "digest": "sha256:372a6d632d5c2f571317f3599ba304242063bb1757d924af33ea64d791a1a835",
+      "artifact": {
+        "url": "artifacts/talia-apps-notes-1.0.0.json",
+        "sha256": "sha256:be1eff141d3fbdeeeec5d586f7d92e7d3cb583c9c55064d5e3b45eb794059246",
+        "size": 9579
+      }
+    },
+    {
+      "id": "talia-apps/task-board",
+      "kind": "app",
+      "version": "1.0.0",
+      "name": "Task Board",
+      "description": "Create tasks and move them between To do, In progress, and Done.",
+      "publisher": "talia-apps",
+      "license": "MIT",
+      "digest": "sha256:a8c32331e9de7774471a6dab9ffd740b9d20fb6006ea66ca77eb11c413e5f5e8",
+      "artifact": {
+        "url": "artifacts/talia-apps-task-board-1.0.0.json",
+        "sha256": "sha256:442defdb17c25a5d201a004ade46eab5f9547f38ddf849a42a839ff40a97c6c0",
+        "size": 14168
+      }
+    },
+    {
+      "id": "talia-skills/brand-research",
+      "kind": "skill",
+      "version": "1.0.5",
+      "name": "brand-research",
+      "description": "Research public company, product or brand information for sourced Brand DNA: positioning, audience, competitors, voice, pricing, social proof and content gaps for GTM preparation.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:5b38bbd44ad24492c8580a3ba5ffaab5d0db509f05792f4216ee61d3babf4ba4",
+      "artifact": {
+        "url": "artifacts/talia-skills-brand-research-1.0.5.json",
+        "sha256": "sha256:b90d55d7f7b876dd31e1edd49123f7ba65b28807ccbb58aaeb4d50cfd21b305b",
+        "size": 9665
+      }
+    },
+    {
+      "id": "talia-skills/content-writer",
+      "kind": "skill",
+      "version": "1.0.53",
+      "name": "content-writer",
+      "description": "Plan, research, draft, revise, humanize, adapt or audit social posts and long-form content, delivering channel-ready writing or reviews with preserved voice, evidence and citations.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:1fea9538faee0b3cc68648bfbd4305c8fcc11780d5788166e5d66925cfd3686f",
+      "artifact": {
+        "url": "artifacts/talia-skills-content-writer-1.0.53.json",
+        "sha256": "sha256:84ae5fb5a8b45261e97d6c4e35493dace45ee9f267c208c8475c437f6ed2e86e",
+        "size": 95469
+      }
+    },
+    {
+      "id": "talia-skills/data-analysis",
+      "kind": "skill",
+      "version": "1.2.6",
+      "name": "data-analysis",
+      "description": "Analyze quantitative evidence: exact totals, comparisons, experiments and causal uncertainty. Excludes formatting-only work.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:66e0967a0db255de2af23d2433391316b669628074c7bf3edd9d1de8cb4b4d31",
+      "artifact": {
+        "url": "artifacts/talia-skills-data-analysis-1.2.6.json",
+        "sha256": "sha256:163f05b56c66d0f375ac75ea2b77bdb0b5da7203b67d4097d46effd16730a6ab",
+        "size": 51584
+      }
+    },
+    {
+      "id": "talia-skills/deep-research",
+      "kind": "skill",
+      "version": "1.0.56",
+      "name": "deep-research",
+      "description": "Support deep research, literature reviews and citation checks with retrieval budgets, academic search, evidence compression and source/quote/DOI verification, producing comparison and evidence tables.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:d8fd011d92bfce537b22dc6f669cc30ad567cd620c35470f1f17412cda4820d4",
+      "artifact": {
+        "url": "artifacts/talia-skills-deep-research-1.0.56.json",
+        "sha256": "sha256:8c2c2dbb6395fd74b72df14cb6c6753ac904542cad95658a843462affe451828",
+        "size": 313138
+      }
+    },
+    {
+      "id": "talia-skills/deliverable-review",
+      "kind": "skill",
+      "version": "0.1.0",
+      "name": "deliverable-review",
+      "description": "Review a supplied deliverable against requirements and available evidence, distinguishing defects from unverified assumptions.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:3667901078e51a57e82311f74849a8c02fd58a202bff016635ff60c17f4bb7ab",
+      "artifact": {
+        "url": "artifacts/talia-skills-deliverable-review-0.1.0.json",
+        "sha256": "sha256:1384b2303e7f1b600593c4cda4c6db5b74bf65a3af288e13053bd68fd279ff87",
+        "size": 3773
+      }
+    },
+    {
+      "id": "talia-skills/ecommerce-analytics",
+      "kind": "skill",
+      "version": "1.0.2",
+      "name": "ecommerce-analytics",
+      "description": "Analyze cross-platform sales, fees, refunds, ads and inventory exports to deliver reproducible operating metrics, drivers and priorities. Use for store performance, contribution profit and channel analysis, not product selection or live changes.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:4159de5da5cecc921c2d76b6dfa7c90866f6032b0bdd9347398e9c598c903385",
+      "artifact": {
+        "url": "artifacts/talia-skills-ecommerce-analytics-1.0.2.json",
+        "sha256": "sha256:716e90a95b108393d884050946918d8c8b030a2b676c85d0819acbec1320bc39",
+        "size": 10082
+      }
+    },
+    {
+      "id": "talia-skills/ecommerce-creative",
+      "kind": "skill",
+      "version": "1.1.6",
+      "name": "ecommerce-creative",
+      "description": "Create ecommerce image copy, product image prompts, video scripts and storyboards grounded in product facts and source assets. Use for cross-channel creative briefs and experiments, not actual media generation or ad publication.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:74ef39db6edd128c410d8b3e05af9486a8f57727a63f468a43dde002f5a826d7",
+      "artifact": {
+        "url": "artifacts/talia-skills-ecommerce-creative-1.1.6.json",
+        "sha256": "sha256:d4d0032118e56a949700e36062eea2b692f283ba8746c317619b3b7aeff16ada",
+        "size": 19523
+      }
+    },
+    {
+      "id": "talia-skills/ecommerce-listing",
+      "kind": "skill",
+      "version": "1.2.17",
+      "name": "ecommerce-listing",
+      "description": "Turn product facts into cross-platform titles, benefits, descriptions, keyword placement, FAQs and A+ modules, including page audits and localization. Use for listing writing and optimization, not selection, media generation or live publishing.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:34d652a95f50c889689103b5f8d7323a911483e3a880222a46186d759d69f762",
+      "artifact": {
+        "url": "artifacts/talia-skills-ecommerce-listing-1.2.17.json",
+        "sha256": "sha256:443be4197621ed49ea859d54f5b6a4cd63aa5dc8645d2e2972a75579423453c3",
+        "size": 21953
+      }
+    },
+    {
+      "id": "talia-skills/ecommerce-operations",
+      "kind": "skill",
+      "version": "1.0.4",
+      "name": "ecommerce-operations",
+      "description": "Prepare concrete ecommerce catalog, price, promotion, stock and order-exception changes; apply and verify them only through available connected tools supporting the action. Use for operating changes and previews, not selection, copywriting or analytical diagnosis.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:42776086243fcb0827d52d0aad16e75d20f7594fb9f9c804be73252f45232555",
+      "artifact": {
+        "url": "artifacts/talia-skills-ecommerce-operations-1.0.4.json",
+        "sha256": "sha256:f03181840b45052d6c2b7fc2bb6eabb7de21b7b04426ea637f549a10b7e3958c",
+        "size": 9904
+      }
+    },
+    {
+      "id": "talia-skills/ecommerce-product-research",
+      "kind": "skill",
+      "version": "1.1.10",
+      "name": "ecommerce-product-research",
+      "description": "Select ecommerce products and assess category opportunities across channels using demand, competition, contribution profit, sourcing and validation costs. Use for product selection, competitor comparison and supplier evaluation, not purchasing or operating-performance reporting.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:b074a4dfaf9ecc986f227a7f0dc5d9807503bb1a4448f9faa7254ab2b82973ec",
+      "artifact": {
+        "url": "artifacts/talia-skills-ecommerce-product-research-1.1.10.json",
+        "sha256": "sha256:b48f56480600d528be6b678f9fe0dcdf941480c222bd6f9695a23b0e9df43b0f",
+        "size": 26064
+      }
+    },
+    {
+      "id": "talia-skills/ecommerce-review-analysis",
+      "kind": "skill",
+      "version": "1.1.4",
+      "name": "ecommerce-review-analysis",
+      "description": "Analyze cross-platform product reviews, ratings, follow-ups and support feedback with SKU-level evidence, purchase scenarios, positive drivers, pain themes and action priorities. Use for VOC and competitor feedback, not product selection or full copy production.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:5d4f3d8711285f5785e8ee71cbc55489360fba447246c548d6dfa998359c5211",
+      "artifact": {
+        "url": "artifacts/talia-skills-ecommerce-review-analysis-1.1.4.json",
+        "sha256": "sha256:0b5d23b6b57089c202ae1de80b4375040ef1e806aadd594c9202e1513504f6c4",
+        "size": 10634
+      }
+    },
+    {
+      "id": "talia-skills/github",
+      "kind": "skill",
+      "version": "1.0.8",
+      "name": "github",
+      "description": "Read GitHub issues, pull requests, CI, releases, and repository metadata; perform exact writes authorized by the current request and reconfirm target or scope changes.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:8b0c7c5dc0c5694024114b19dcb3d60a4a78e5f3517932b714f3e72fe88da7b3",
+      "artifact": {
+        "url": "artifacts/talia-skills-github-1.0.8.json",
+        "sha256": "sha256:04cd529631f2bd719d920071b82823ff0920288ae05c8328d11a86937dc375d7",
+        "size": 6827
+      }
+    },
+    {
+      "id": "talia-skills/material-organizer",
+      "kind": "skill",
+      "version": "1.0.6",
+      "name": "material-organizer",
+      "description": "Organize supplied links, files or folders into traceable notes, knowledge cards, entity links and indexes, identifying duplicates, exceptions and folder-cleanup needs.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:f0ee7b815a4e0f0a043504ccfa4f26e4004b594b38d7d3e7e864e477c46f9e79",
+      "artifact": {
+        "url": "artifacts/talia-skills-material-organizer-1.0.6.json",
+        "sha256": "sha256:7575f40bfc05ec5bdcfbe56e350ca6089e44cc1ef9a91fa3c087416ee3214880",
+        "size": 27116
+      }
+    },
+    {
+      "id": "talia-skills/office-excel",
+      "kind": "skill",
+      "version": "1.0.15",
+      "name": "office-excel",
+      "description": "Create, read, edit and check Excel/XLSX reports, formula models and templates, including CSV conversion, data cleanup, charts and format-preserving changes.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:e5c8b88624e2e7f5b81c7a254f5f56c4e3f45763a35e5b1315426e173250c050",
+      "artifact": {
+        "url": "artifacts/talia-skills-office-excel-1.0.15.json",
+        "sha256": "sha256:058745b62256c12369f9ecbba5e38a4ded02bf5c9ff6e2edaac35da9176e575d",
+        "size": 10721
+      }
+    },
+    {
+      "id": "talia-skills/office-ppt",
+      "kind": "skill",
+      "version": "1.0.8",
+      "name": "office-ppt",
+      "description": "Create straightforward PowerPoint/PPTX decks, read or safely make small edits to existing presentations, and check content, notes, structure and visible layout.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:0b4f6c931937f25356fc56a23c66ce32afa47ffd6d3ad7588adcc737207cf2a4",
+      "artifact": {
+        "url": "artifacts/talia-skills-office-ppt-1.0.8.json",
+        "sha256": "sha256:55d541319b7c4d30b5ca7f261f1680bfe95b4041c4bd8a64ad654922d7beba8e",
+        "size": 5647
+      }
+    },
+    {
+      "id": "talia-skills/office-word",
+      "kind": "skill",
+      "version": "1.0.7",
+      "name": "office-word",
+      "description": "Create, read, edit, and check Word/DOCX reports and templates: preserve styles, numbering, revisions, comments, fields, tables, sections, headers, footers, and layout.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:03e7ee0eec57f6aaaee357e77fab0d91f6336d086d33de202da9e4cfebe0787e",
+      "artifact": {
+        "url": "artifacts/talia-skills-office-word-1.0.7.json",
+        "sha256": "sha256:8343fe33d20a8a0618b5f5a8182cce9723d81845ef78a83afd8ade64a77b55fd",
+        "size": 5958
+      }
+    },
+    {
+      "id": "talia-skills/pdf-editing",
+      "kind": "skill",
+      "version": "1.0.8",
+      "name": "pdf-editing",
+      "description": "Read, create and edit PDFs, including scanned-page reading, page organization, watermarks, text/image overlays, form filling and layout checks.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:343c4a2ab25f55a6a23547f0ad53ff0a5a3599d9b52bc8897032d1e00429a10d",
+      "artifact": {
+        "url": "artifacts/talia-skills-pdf-editing-1.0.8.json",
+        "sha256": "sha256:753e9f342eac25b08d199c16f81ce4bcff0387de7904baa6943c91eaa329e568",
+        "size": 5424
+      }
+    },
+    {
+      "id": "talia-skills/product-dev",
+      "kind": "skill",
+      "version": "1.0.13",
+      "name": "product-dev",
+      "description": "Deliver verified features, bug fixes, refactors and technical decisions in an existing repository from clear requirements; not vague discovery, disposable demos or repository operations.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:f80cd395dfcaea55c8f072c93deab6830defcb7b28b30755faa4dc64a5d72cca",
+      "artifact": {
+        "url": "artifacts/talia-skills-product-dev-1.0.13.json",
+        "sha256": "sha256:f9477a1ec305d04bf0f47c53769458cfc21270584d556e435499936547f0d115",
+        "size": 37411
+      }
+    },
+    {
+      "id": "talia-skills/product-test",
+      "kind": "skill",
+      "version": "1.0.6",
+      "name": "product-test",
+      "description": "Turn PRDs, stories or feature slices into stable-ID Given/When/Then acceptance scenarios covering edges, recovery and non-functional criteria; not implementation or test automation.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:2774000b9f78166349da8c67491647c2789f4055c346cb69b74f4ae68e2c1112",
+      "artifact": {
+        "url": "artifacts/talia-skills-product-test-1.0.6.json",
+        "sha256": "sha256:ef715baaa39707d58801be2684ada35400cbcad9e09a52f89df9df43bd793818",
+        "size": 8317
+      }
+    },
+    {
+      "id": "talia-skills/product-ui",
+      "kind": "skill",
+      "version": "1.0.11",
+      "name": "product-ui",
+      "description": "Design and implement screens, components, landing pages, dashboards or design systems from product needs, flows or design sources, with responsive behavior, accessibility, UI polish and rendered checks.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:08a515437a0221fafce085ed9810bb5461402d6af981386646a1f0e68e51aa6a",
+      "artifact": {
+        "url": "artifacts/talia-skills-product-ui-1.0.11.json",
+        "sha256": "sha256:41d9574a5bba7ba504117e30c56775ab2b9bced8d02d3f0272e622f44514264e",
+        "size": 859412
+      }
+    },
+    {
+      "id": "talia-skills/project-brief",
+      "kind": "skill",
+      "version": "0.1.0",
+      "name": "project-brief",
+      "description": "Turn an objective and supplied materials into a project brief with scope, constraints and observable acceptance criteria.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:1534f9c1256afe16920ea31d492bea146c0cb7f22c7a95614b434bae0b8f152a",
+      "artifact": {
+        "url": "artifacts/talia-skills-project-brief-0.1.0.json",
+        "sha256": "sha256:3ed4d2ebfada17b7d410bbfac482f7a9a4cdd16158c1f73f0ba43ab17e00b90d",
+        "size": 3744
+      }
+    },
+    {
+      "id": "talia-skills/social-data",
+      "kind": "skill",
+      "version": "1.0.9",
+      "name": "social-data",
+      "description": "Fetch public Xiaohongshu, X/Twitter, Reddit, YouTube and Bilibili posts, or analyze supplied social/campaign data for sentiment, engagement, CTR, ROI, comparisons and experiments; not publishing.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:93ddf47fab33c223255408e71e5f8443ac7e06edf544115039ac1f6873444455",
+      "artifact": {
+        "url": "artifacts/talia-skills-social-data-1.0.9.json",
+        "sha256": "sha256:8871a8d0b8393e7ce4c8736bf8bc8fad1f0478baaa53c6ea257fc6c1765531fe",
+        "size": 72923
+      }
+    },
+    {
+      "id": "talia-skills/source-synthesis",
+      "kind": "skill",
+      "version": "0.1.0",
+      "name": "source-synthesis",
+      "description": "Synthesize supplied materials with traceable references, disagreements and missing information. No autonomous web research.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:5e304263ffed988426e0f0528aa707ee48d461d5f9bc9fa00d5916a3b5e74ef6",
+      "artifact": {
+        "url": "artifacts/talia-skills-source-synthesis-0.1.0.json",
+        "sha256": "sha256:2b0119c96b26774922ee5cab0ba1dbe37602f78beeab293bfc82fd81d7c82289",
+        "size": 3746
+      }
+    },
+    {
+      "id": "talia-skills/swiftui-dev",
+      "kind": "skill",
+      "version": "1.0.7",
+      "name": "swiftui-dev",
+      "description": "Review or refactor SwiftUI architecture, state, rendering, scrolling and layout, or diagnose native macOS/iOS hotspots from profiling evidence; not web or server profiling.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:55dff55bf3af304ecf2224a9b701b314ca2c919b862782b0e32135dac7732d13",
+      "artifact": {
+        "url": "artifacts/talia-skills-swiftui-dev-1.0.7.json",
+        "sha256": "sha256:483fde171543bc413c0f33e27d7e02ab0195f09509c64d66edfa40863f430ee4",
+        "size": 41222
+      }
+    },
+    {
+      "id": "talia-skills/wps",
+      "kind": "skill",
+      "version": "1.0.7",
+      "name": "wps",
+      "description": "Prepare WPS-compatible DOCX, XLSX, PPTX and PDF deliverables, checking Chinese fonts, A4 layout, numbering, printing and export compatibility.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:6194a99e4bd830f18fbe5122f102b42c1ab322327ec9dfbe669afbf03c2c8ef9",
+      "artifact": {
+        "url": "artifacts/talia-skills-wps-1.0.7.json",
+        "sha256": "sha256:26438e73c95c833822592d20f3d0c808c4da9b7f0968651266881f2038f7647c",
+        "size": 7581
+      }
+    }
+  ]
+}

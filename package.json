@@ -1,0 +1,11 @@
+{
+  "name": "talia-store",
+  "version": "0.7.0",
+  "description": "Signed public Talia extension catalog and artifacts",
+  "license": "MIT",
+  "scripts": {
+    "build:catalog": "node scripts/build-catalog.cjs",
+    "validate": "node scripts/validate-catalog-source.cjs",
+    "test": "npm run validate && node --test tests/store.test.cjs"
+  }
+}

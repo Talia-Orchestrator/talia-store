@@ -1,0 +1,22 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-skills/source-synthesis",
+      "kind": "skill",
+      "version": "0.1.0",
+      "name": "source-synthesis",
+      "description": "Synthesize supplied materials with traceable references, disagreements and missing information. No autonomous web research.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Talia includes software derived from Orkas.\nCopyright (c) 2026 Orkas contributors. MIT License.\nThe original copyright and license are preserved in LICENSE and desktop/LICENSE.\n\nTalia-specific modifications and integration are contributed by the Talia contributors.\nThird-party license notices accompany their respective source and vendor directories.\n\nThe source repositories do not contain personal profiles, credentials, installed dependencies,\nlocal release snapshots or QA artifacts. Resource packages retain their own licenses and provenance.\n",
+        "README.md": "# source-synthesis\n\nShared Talia skill package. The instruction entrypoint is SKILL.md; this package contains declarative text and supporting reference assets only.\n\nSee LICENSE and NOTICE for license and provenance.\n",
+        "SKILL.md": "---\nname: source-synthesis\ndescription_en: \"Synthesize supplied materials with traceable references, disagreements and missing information. No autonomous web research.\"\ndescription_zh: \"综合提供的资料，给出可追溯的来源、分歧和缺失信息；不代表自动执行网络研究。\"\n---\n\n# Sintesi da fonti\n\nLavora sui materiali disponibili nel contesto. Se un file è solo nominato ma non leggibile con gli strumenti disponibili, dichiaralo e chiedi il contenuto necessario; non attribuirgli affermazioni.\n\nRicava l’obiettivo della sintesi e mantieni separati fatti riportati, interpretazioni e incognite. Collega le affermazioni decisive alla fonte con titolo e sezione/pagina quando disponibili. Non inventare pagine, citazioni o URL.\n\nQuando le fonti divergono, descrivi la divergenza, le date e la diversa attendibilità senza scegliere automaticamente l’ultima. Riduci duplicazioni, conserva numeri, unità e condizioni. Concludi con le implicazioni per l’obiettivo e le informazioni mancanti che potrebbero cambiarle.\n\nRestituisci la sintesi nella lingua richiesta, adattando lunghezza e struttura al destinatario. Non effettuare invii, pubblicazioni o salvataggi esterni impliciti.\n"
+      },
+      "digest": "sha256:5e304263ffed988426e0f0528aa707ee48d461d5f9bc9fa00d5916a3b5e74ef6"
+    }
+  ]
+}
