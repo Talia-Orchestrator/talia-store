@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/office-excel",
+  "kind": "skill",
+  "version": "1.0.15",
+  "name": "office-excel",
+  "description": "Create, read, edit and check Excel/XLSX reports, formula models and templates, including CSV conversion, data cleanup, charts and format-preserving changes.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

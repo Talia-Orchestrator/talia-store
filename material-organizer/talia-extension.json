@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/material-organizer",
+  "kind": "skill",
+  "version": "1.0.6",
+  "name": "material-organizer",
+  "description": "Organize supplied links, files or folders into traceable notes, knowledge cards, entity links and indexes, identifying duplicates, exceptions and folder-cleanup needs.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

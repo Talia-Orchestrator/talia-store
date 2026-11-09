@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/product-dev",
+  "kind": "skill",
+  "version": "1.0.13",
+  "name": "product-dev",
+  "description": "Deliver verified features, bug fixes, refactors and technical decisions in an existing repository from clear requirements; not vague discovery, disposable demos or repository operations.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

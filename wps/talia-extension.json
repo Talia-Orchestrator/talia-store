@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/wps",
+  "kind": "skill",
+  "version": "1.0.7",
+  "name": "wps",
+  "description": "Prepare WPS-compatible DOCX, XLSX, PPTX and PDF deliverables, checking Chinese fonts, A4 layout, numbering, printing and export compatibility.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

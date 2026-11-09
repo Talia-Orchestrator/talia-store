@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/deliverable-review",
+  "kind": "skill",
+  "version": "0.1.0",
+  "name": "deliverable-review",
+  "description": "Review a supplied deliverable against requirements and available evidence, distinguishing defects from unverified assumptions.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

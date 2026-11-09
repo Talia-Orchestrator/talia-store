@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/github",
+  "kind": "skill",
+  "version": "1.0.8",
+  "name": "github",
+  "description": "Read GitHub issues, pull requests, CI, releases, and repository metadata; perform exact writes authorized by the current request and reconfirm target or scope changes.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

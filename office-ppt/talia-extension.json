@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/office-ppt",
+  "kind": "skill",
+  "version": "1.0.8",
+  "name": "office-ppt",
+  "description": "Create straightforward PowerPoint/PPTX decks, read or safely make small edits to existing presentations, and check content, notes, structure and visible layout.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/ecommerce-review-analysis",
+  "kind": "skill",
+  "version": "1.1.4",
+  "name": "ecommerce-review-analysis",
+  "description": "Analyze cross-platform product reviews, ratings, follow-ups and support feedback with SKU-level evidence, purchase scenarios, positive drivers, pain themes and action priorities. Use for VOC and competitor feedback, not product selection or full copy production.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}
