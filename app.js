@@ -112,7 +112,7 @@ function makeReleaseCard(release, index) {
   metadata.className = 'release-meta';
   const date = new Date(release.publishedAt);
   const dateText = Number.isNaN(date.valueOf()) ? 'Data non disponibile' : new Intl.DateTimeFormat('it-IT', { dateStyle: 'long', timeZone: 'UTC' }).format(date);
-  metadata.append(document.createTextNode(`${dateText} · build ${release.runNumber}.${release.runAttempt} · commit `));
+  metadata.append(document.createTextNode(`${dateText} · ${release.buildSource === 'local' ? 'compilazione locale · solo macOS Apple Silicon' : `build ${release.runNumber}.${release.runAttempt}`} · commit `));
   const commit = document.createElement('code');
   commit.textContent = String(release.commit).slice(0, 12);
   metadata.append(commit);
