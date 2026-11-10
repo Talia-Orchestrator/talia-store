@@ -33,3 +33,26 @@ La pagina pubblica usa il contenuto di `site/` e gli eseguibili delle Releases. 
 Il workflow `pages.yml` pubblica uno snapshot nel branch generato `gh-pages`, con commit lineari e controllo contro esecuzioni obsolete. Richiede poi esplicitamente un build GitHub Pages. La configurazione Pages del repository deve usare il branch `gh-pages`, percorso `/`. I contributi alla pagina modificano `site/`, il builder e i test sul branch principale.
 
 Il job usa il token standard del repository con permessi Contents e Pages in scrittura. Il client legge solo file statici pubblici. I cataloghi firmati delle risorse mantengono il proprio percorso di distribuzione.
+
+### Release locali manuali sul sito download
+
+L'indice `site/releases.json` è generato da `scripts/build-download-site.cjs`
+leggendo l'asset pubblico `release-manifest.json`, non dalla sola presenza di
+DMG/ZIP nella release. Il frontend `site/app.js` mostra disponibilità e checksum
+per ogni piattaforma; non modifica i feed di aggiornamento.
+
+Per l'eccezione locale autorizzata macOS Apple Silicon, il manifesto schema 1
+usa `buildSource: "local"`, `channel: "main"`, versione SemVer semplice e tag
+`v<version>`, commit sorgente e data pubblicazione. Sono ammessi solo file
+`darwin-arm64` con `automaticUpdate: false`; `runNumber` e `runAttempt` sono
+vietati per non inventare una provenienza CI. URL, dimensioni e presenza degli
+asset sono controllati come per le release CI. I checksum devono corrispondere
+agli artifact verificati e al file SHA256SUMS allegato. Gli altri formati CI
+restano invariati. Questo metadato pubblico non espone il core privato.
+
+Il 10 novembre 2026 la 0.8.1 era assente dal sito perché mancava il manifesto;
+il deploy Pages era riuscito ma l'indicizzatore la saltava. Regressioni coperte
+in `tests/download-site.test.cjs`: inclusione locale, assenza dati CI fittizi,
+rifiuto di piattaforme aggiuntive, updater, tag errati e asset mancanti.
+Si tratta solo di metadati/renderer statici sostituibili, senza IPC Electron,
+provider, credenziali o dipendenze dal futuro backend Rust.

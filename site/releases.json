@@ -1,7 +1,36 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T20:24:57.776Z",
+  "generatedAt": "2026-11-10T10:47:54.847Z",
   "releases": [
+    {
+      "version": "0.8.1",
+      "baseVersion": "0.8.1",
+      "channel": "main",
+      "publishedAt": "2026-11-10T10:42:02Z",
+      "tag": "v0.8.1",
+      "releaseUrl": "https://github.com/Talia-Orchestrator/talia-store/releases/tag/v0.8.1",
+      "commit": "b69627838ec6e18a855b8c7de1929342b5716d52",
+      "buildSource": "local",
+      "platforms": {
+        "darwin-arm64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.8.1-mac-arm64.dmg",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.8.1/Talia-0.8.1-mac-arm64.dmg",
+              "size": 471665197,
+              "sha256": "a3e652c0ad22d0c12bbb046bdbd4c89e63da4926dcb14ec5d7d88369e1110b84"
+            },
+            {
+              "name": "Talia-0.8.1-mac-arm64.zip",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.8.1/Talia-0.8.1-mac-arm64.zip",
+              "size": 461771936,
+              "sha256": "8cefd9a8ea47fe1c92f482e819e9cea6738586c9099a13f406485b9d26da7721"
+            }
+          ]
+        }
+      }
+    },
     {
       "version": "0.8.0-main.10.1+784ed34e6896",
       "baseVersion": "0.8.0",

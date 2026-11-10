@@ -157,3 +157,40 @@ test('CLI builds the static release index from an input JSON file', () => {
     fs.rmSync(directory, { recursive: true, force: true });
   }
 });
+
+function localRecord() {
+  const source = record();
+  source.release.tag_name = 'v0.8.1';
+  const manifest = source.manifest;
+  Object.assign(manifest, { version: '0.8.1', baseVersion: '0.8.1', buildSource: 'local',
+    releaseUrl: `https://github.com/${REPOSITORY}/releases/tag/v0.8.1` });
+  delete manifest.runNumber;
+  delete manifest.runAttempt;
+  manifest.platforms = { 'darwin-arm64': manifest.platforms['darwin-arm64'] };
+  return source;
+}
+
+test('local manual release is indexed without invented CI metadata', () => {
+  const release = buildDownloadIndex([localRecord()]).releases[0];
+  assert.equal(release.version, '0.8.1');
+  assert.equal(release.buildSource, 'local');
+  assert.equal(release.runNumber, undefined);
+  assert.deepEqual(Object.keys(release.platforms), ['darwin-arm64']);
+});
+
+test('local exception rejects expanded platforms, updater, wrong tag and fabricated CI runs', () => {
+  for (const mutate of [
+    s => { s.manifest.platforms['win32-x64'] = s.manifest.platforms['darwin-arm64']; },
+    s => { s.manifest.platforms['darwin-arm64'].automaticUpdate = true; },
+    s => { s.release.tag_name = 'v0.8.2'; },
+    s => { s.manifest.runNumber = 1; },
+    s => { s.manifest.platforms['darwin-arm64'].files = []; },
+  ]) {
+    const source = localRecord();
+    mutate(source);
+    assert.throws(() => buildDownloadIndex([source]), /local release/);
+  }
+  const missing = localRecord();
+  missing.release.assets = [];
+  assert.throws(() => buildDownloadIndex([missing]), /missing or mismatched/);
+});

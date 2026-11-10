@@ -46,15 +46,30 @@ function parseManifest(manifest, tagName, repository = DEFAULT_REPOSITORY) {
   if (!isPlainObject(manifest) || manifest.schemaVersion !== 1 || manifest.channel !== 'main') {
     fail('release manifest must use schemaVersion 1 and the main channel');
   }
-  const allowed = ['schemaVersion', 'version', 'baseVersion', 'channel', 'commit', 'runNumber', 'runAttempt', 'publishedAt', 'releaseUrl', 'platforms'];
+  const allowed = ['schemaVersion', 'version', 'baseVersion', 'channel', 'commit', 'runNumber', 'runAttempt', 'publishedAt', 'releaseUrl', 'platforms', 'buildSource'];
   if (Object.keys(manifest).some(key => !allowed.includes(key))) fail('release manifest contains unknown fields');
   if (typeof manifest.baseVersion !== 'string' || !/^\d+\.\d+\.\d+$/.test(manifest.baseVersion)
-    || !Number.isSafeInteger(manifest.runNumber) || manifest.runNumber < 1
-    || !Number.isSafeInteger(manifest.runAttempt) || manifest.runAttempt < 1
+    || (manifest.buildSource !== 'local' && (!Number.isSafeInteger(manifest.runNumber) || manifest.runNumber < 1
+      || !Number.isSafeInteger(manifest.runAttempt) || manifest.runAttempt < 1))
     || typeof manifest.commit !== 'string' || !/^[a-f0-9]{40}$/.test(manifest.commit)
     || typeof manifest.publishedAt !== 'string' || !Number.isFinite(Date.parse(manifest.publishedAt))) {
     fail('release manifest metadata is invalid');
   }
+  // Il percorso locale autorizzato resta manuale e limitato ad Apple Silicon.
+  if (manifest.buildSource === 'local') {
+    if (manifest.version !== manifest.baseVersion || tagName !== `v${manifest.version}`
+      || canonicalReleaseUrl(manifest.releaseUrl, repository) !== `https://github.com/${repository}/releases/tag/${tagName}`
+      || Object.hasOwn(manifest, 'runNumber') || Object.hasOwn(manifest, 'runAttempt')
+      || !isPlainObject(manifest.platforms) || Object.keys(manifest.platforms).length !== 1
+      || !isPlainObject(manifest.platforms['darwin-arm64'])
+      || manifest.platforms['darwin-arm64'].automaticUpdate !== false
+      || !Array.isArray(manifest.platforms['darwin-arm64'].files)
+      || manifest.platforms['darwin-arm64'].files.length === 0) {
+      fail('local release must match its version and contain only manual macOS arm64 downloads');
+    }
+    return manifest;
+  }
+  if (Object.hasOwn(manifest, 'buildSource')) fail('unknown build source');
   const escapedBase = manifest.baseVersion.replaceAll('.', '\\.');
   const legacyVersion = new RegExp(`^${escapedBase}\\+main\\.${manifest.runNumber}\\.${manifest.runAttempt}\\.${manifest.commit.slice(0, 12)}$`);
   const orderedVersion = new RegExp(`^${escapedBase}-main\\.${manifest.runNumber}\\.${manifest.runAttempt}\\+${manifest.commit.slice(0, 12)}$`);
@@ -124,6 +139,7 @@ function normalizeRelease(record, repository) {
     tag: release.tag_name,
     releaseUrl: canonicalReleaseUrl(manifest.releaseUrl, repository),
     commit: manifest.commit,
+    ...(manifest.buildSource === 'local' ? { buildSource: 'local' } : {}),
     runNumber: manifest.runNumber,
     runAttempt: manifest.runAttempt,
     platforms,
