@@ -145,7 +145,7 @@ async function renderDownloads() {
       return;
     }
     releases.forEach((release, index) => list.append(makeReleaseCard(release, index)));
-    summary.textContent = `${releases.length} release di anteprima disponibile${releases.length === 1 ? '' : 'i'}.`;
+    summary.textContent = `${releases.length} release di anteprima disponibil${releases.length === 1 ? 'e' : 'i'}.`;
   } catch {
     list.replaceChildren();
     const error = document.createElement('p');
