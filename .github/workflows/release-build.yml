@@ -1,0 +1,135 @@
+name: Encrypted desktop release build
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_asset_id:
+        description: Encrypted source asset in this repository
+        required: true
+      ciphertext_sha256:
+        description: SHA256 of the encrypted archive
+        required: true
+      archive_sha256:
+        description: SHA256 of the authenticated source archive
+        required: true
+      source_sha:
+        description: Exact core commit to build
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: encrypted-desktop-release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: darwin-arm64
+            runner: macos-15
+          - target: darwin-x64
+            runner: macos-15-intel
+          - target: win32-x64
+            runner: windows-2025
+          - target: linux-x64
+            runner: ubuntu-24.04
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: bash
+    env:
+      TALIA_CORE_SHA: ${{ inputs.source_sha }}
+      TALIA_RELEASE_ATTEMPT: 1
+    steps:
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+      - name: Restore authenticated private source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TALIA_SOURCE_KEY: ${{ secrets.TALIA_RELEASE_SOURCE_KEY }}
+          SOURCE_ASSET: ${{ inputs.source_asset_id }}
+          CIPHERTEXT_SHA256: ${{ inputs.ciphertext_sha256 }}
+          ARCHIVE_SHA256: ${{ inputs.archive_sha256 }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          node -e 'if (!/^[0-9]+$/.test(process.env.SOURCE_ASSET) || !/^[a-f0-9]{40}$/.test(process.env.SOURCE_SHA) || !/^[a-f0-9]{64}$/.test(process.env.CIPHERTEXT_SHA256) || !/^[a-f0-9]{64}$/.test(process.env.ARCHIVE_SHA256)) throw Error("Invalid source identity")'
+          gh api "repos/${GITHUB_REPOSITORY}/releases/assets/${SOURCE_ASSET}" -H 'Accept: application/octet-stream' > source.enc
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          import { pipeline } from 'node:stream/promises';
+          async function digest(file) {
+            const hash = crypto.createHash('sha256');
+            for await (const bytes of fs.createReadStream(file)) hash.update(bytes);
+            return hash.digest('hex');
+          }
+          if (await digest('source.enc') !== process.env.CIPHERTEXT_SHA256) throw Error('Ciphertext checksum mismatch');
+          const handle = fs.openSync('source.enc', 'r');
+          const header = Buffer.alloc(28);
+          const bytes = fs.readSync(handle, header);
+          fs.closeSync(handle);
+          const key = Buffer.from(process.env.TALIA_SOURCE_KEY || '', 'base64');
+          if (bytes !== 28 || key.length !== 32) throw Error('Invalid encrypted source envelope');
+          const decipher = crypto.createDecipheriv('aes-256-gcm', key, header.subarray(0, 12));
+          decipher.setAuthTag(header.subarray(12, 28));
+          await pipeline(fs.createReadStream('source.enc', { start: 28 }), decipher, fs.createWriteStream('source.tar.gz'));
+          if (await digest('source.tar.gz') !== process.env.ARCHIVE_SHA256) throw Error('Source checksum mismatch');
+          NODE
+          mkdir source
+          tar -xzf source.tar.gz -C source
+          test "$(git -C source rev-parse HEAD)" = "$SOURCE_SHA"
+          rm source.enc source.tar.gz
+      - name: Cache npm packages
+        uses: actions/cache@v6.1.0
+        with:
+          path: ~/.npm
+          key: release-npm-${{ runner.os }}-${{ hashFiles('source/desktop/package-lock.json') }}
+      - name: Install Linux packaging dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libfuse2 libsecret-1-dev libasound2-dev
+      - name: Install dependencies
+        working-directory: source/desktop
+        run: node ../scripts/retry-ci-command.mjs -- npm ci --include=dev
+      - name: Typecheck
+        working-directory: source/desktop
+        run: npm run typecheck
+      - name: Verify packaging contracts
+        working-directory: source/desktop
+        run: npm run test:js -- test/main/util/packaged-dependency-gate.test.ts test/main/util/native-package-gate.test.ts test/main/util/codesign-runtime-gate.test.ts test/main/util/packaged-resource-gate.test.ts
+      - name: Verify release identity
+        working-directory: source
+        run: node --test tests/release/version.test.mjs
+      - name: Cache phone passkey helper
+        if: runner.os == 'macOS'
+        uses: actions/cache@v6.1.0
+        with:
+          path: source/desktop/resources/runtime/phone-passkey/${{ matrix.target }}
+          key: release-passkey-${{ matrix.target }}-${{ hashFiles('source/desktop/src/main/native/phone_passkey/**', 'source/desktop/scripts/build-phone-passkey.cjs') }}
+      - name: Build native installers
+        working-directory: source
+        run: GITHUB_SHA="$TALIA_CORE_SHA" node scripts/package-ci.mjs ${{ matrix.target }}
+      - name: Verify native installers
+        working-directory: source
+        run: GITHUB_SHA="$TALIA_CORE_SHA" node scripts/package-ci.mjs --verify ${{ matrix.target }}
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: Talia-${{ matrix.target }}-release-${{ github.run_number }}-${{ inputs.source_sha }}
+          path: |
+            source/desktop/dist/ci/${{ matrix.target }}/*.dmg
+            source/desktop/dist/ci/${{ matrix.target }}/*.zip
+            source/desktop/dist/ci/${{ matrix.target }}/*.exe
+            source/desktop/dist/ci/${{ matrix.target }}/*.AppImage
+            source/desktop/dist/ci/${{ matrix.target }}/*.tar.gz
+            source/desktop/dist/ci/${{ matrix.target }}/*.blockmap
+            source/desktop/dist/ci/${{ matrix.target }}/main*.yml
+            source/desktop/dist/ci/${{ matrix.target }}/SHA256SUMS.txt
+            source/desktop/dist/ci/${{ matrix.target }}/build-info.json
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
