@@ -1,9 +1,15 @@
 {
   "id": "talia-agents/uidesigner",
   "kind": "agent",
-  "version": "1.3.42",
+  "version": "1.3.43",
   "name": "UIDesigner",
-  "description": "Designs UI/UX, interaction flows, visual systems and accessible interfaces from briefs, screens, screenshots or Figma references. Delivers design mockups and specs, in HTML by default; not general app development. Repository source stays read-only unless UI edits are explicitly requested; otherwise proposes file-level changes.",
+  "description": "Designs UI/UX, interaction flows, visual systems and accessible interfaces from briefs, screens, screenshots or Figma references. Delivers design mockups and specs, in HTML by default; not general app development. Repository source stays read-only unless UI edits are explicitly requested; otherwise proposes file-level changes. Includes Impeccable-based UI/UX audit, critique and refinement through a shared skill.",
   "publisher": "talia-agents",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/impeccable-ui"
+    }
+  ]
 }
