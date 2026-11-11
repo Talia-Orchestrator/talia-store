@@ -101,7 +101,7 @@ jobs:
         run: npm run typecheck
       - name: Verify packaging contracts
         working-directory: source/desktop
-        run: npm run test:js -- test/main/util/packaged-dependency-gate.test.ts test/main/util/native-package-gate.test.ts test/main/util/codesign-runtime-gate.test.ts test/main/util/packaged-resource-gate.test.ts
+        run: npm run test:js -- test/main/util/packaged-dependency-gate.test.ts test/main/util/native-package-gate.test.ts test/main/util/codesign-runtime-gate.test.ts test/main/util/packaged-resource-gate.test.ts test/main/features/connectors/figcraft-launch.test.ts test/main/ipc/mcp-portability-files.test.ts test/renderer/new-chat-draft.test.ts
       - name: Verify release identity
         working-directory: source
         run: node --test tests/release/version.test.mjs
@@ -111,6 +111,14 @@ jobs:
         with:
           path: source/desktop/resources/runtime/phone-passkey/${{ matrix.target }}
           key: release-passkey-${{ matrix.target }}-${{ hashFiles('source/desktop/src/main/native/phone_passkey/**', 'source/desktop/scripts/build-phone-passkey.cjs') }}
+      - name: Cache Office CLI
+        uses: actions/cache@v6.1.0
+        with:
+          path: |
+            source/desktop/resources/officecli/officecli-*
+            source/desktop/resources/officecli/LICENSE
+            !source/desktop/resources/officecli/*.part
+          key: release-officecli-${{ matrix.target }}-${{ hashFiles('source/desktop/scripts/fetch-officecli.cjs') }}
       - name: Build native installers
         working-directory: source
         run: GITHUB_SHA="$TALIA_CORE_SHA" node scripts/package-ci.mjs ${{ matrix.target }}
