@@ -1,0 +1,9 @@
+{
+  "id": "talia-connectors/solidcraft",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "SolidCraft MCP",
+  "description": "Connect Talia to SolidCraft’s official stdio MCP server for parametric 3D CAD. Requires a separately installed SolidCraft CLI; no install-time execution.",
+  "publisher": "talia-connectors",
+  "license": "MIT"
+}

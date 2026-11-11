@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "template": {
+    "id": "talia-connectors/solidcraft",
+    "display_name": "SolidCraft",
+    "transport_kind": "stdio",
+    "description_en": "Use SolidCraft’s official MCP server for parametric 3D CAD. Install SolidCraft separately and select its CLI when configuring.",
+    "documentation_url": "https://docs.solidcraft.io/guide/mcp.html",
+    "command_hint": "solidcraft-cli",
+    "args": [
+      "mcp"
+    ]
+  }
+}
