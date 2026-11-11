@@ -5,7 +5,8 @@ Task: `t_c876c31a3a30`.
 
 ## Contenuto della proposta
 
-- Sorgenti nel repository pubblico talia-connectors, branch `feat/solidcraft-store`.
+- Sorgenti integrati nel repository pubblico talia-connectors, branch `main`
+  (PR #1, commit `a2c5da5777ec644a3df3bf96110585a22830af17`).
 - Artifact v2 riproducibile tramite il packer pubblico, con SHA-256 e dimensione
   nel nuovo indice v3; nessuna modifica agli artifact preesistenti.
 - Template stdio ufficiale: comando `solidcraft-cli`, argomenti `["mcp"]`.
@@ -20,12 +21,11 @@ firma sui byte definitivi di `catalog.json`, usando la trust root già distribui
 Non cambiare la chiave pubblica e non disattivare la verifica per aggirare il gate.
 Non inviare chiavi private in chat né committarle nei repository.
 
-1. Integrare prima la proposta talia-connectors.
-2. Sincronizzare i quattro repository sorgente sulle revisioni che si vogliono
-   effettivamente pubblicare. Già prima di questo intervento la validazione
-   completa segnalava `catalog.json is stale`: la directory sorgente locale
-   contiene pacchetti aggiuntivi rispetto all'indice pubblicato. Non includerli
-   implicitamente: riconciliare le revisioni prima di rigenerare l'indice.
+1. Completato: proposta talia-connectors integrata dopo test e validazione.
+2. Completato: confronto con checkout temporanei puliti dei quattro repository
+   pubblici su `main`. `npm run validate` verifica 61 pacchetti e 61 artifact:
+   il catalogo candidato coincide byte per byte con i sorgenti pubblicati.
+   Nessun pacchetto aggiuntivo o artifact preesistente modificato.
 3. Verificare il delta: l'indice qui proposto conserva tutte le voci pubblicate
    e aggiunge esclusivamente SolidCraft. Gli artifact preesistenti sono invariati.
 4. Firmare l'indice definitivo con il processo di release autorizzato e verificare
@@ -43,6 +43,9 @@ Non inviare chiavi private in chat né committarle nei repository.
 - Store candidato: 4 test superati (metadati, hash/dimensioni, scansione dati
   personali, SolidCraft); test firma fallito, atteso finché manca la nuova firma.
 - Sito: 9 test superati.
+- Ripresa rilascio: validazione sorgenti pubblici superata; 4 test store superati,
+  unico fallimento sul payload della firma precedente. Nessun workflow di firma
+  del catalogo presente nello store. Serve il firmatario della trust root esistente.
 - Nessuna sessione CAD live eseguita; non è stata richiesta un'installazione locale.
 
 ## Mappa tecnica e sostituibilità
