@@ -1,13 +1,13 @@
 {
-  "version": "0.9.0-main.2.1",
+  "version": "0.9.1-main.3.1",
   "files": [
     {
-      "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.0-main.2.1/Talia-0.9.0-main.2.1-win-x64.exe",
-      "sha512": "CirUdRGU47SsNTQ/42sJp00Yny3IoLweOMETYCOeFPWgcfAnddIlpOgAc9rA4bWDZcOgYOwQC4F+aHfzen+jrw==",
-      "size": 419676868
+      "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.1-main.3.1/Talia-0.9.1-main.3.1-win-x64.exe",
+      "sha512": "yPi+bg2sjLxNe6xiWDUpfPegEESLEDMmmkxiB+pe1Yan2f2mObO5RJvCh7ly2oAaZIPRP9DVEbq32jAXP5+1Lg==",
+      "size": 419679105
     }
   ],
-  "path": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.0-main.2.1/Talia-0.9.0-main.2.1-win-x64.exe",
-  "sha512": "CirUdRGU47SsNTQ/42sJp00Yny3IoLweOMETYCOeFPWgcfAnddIlpOgAc9rA4bWDZcOgYOwQC4F+aHfzen+jrw==",
-  "releaseDate": "2026-11-11T01:40:30.995Z"
+  "path": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.1-main.3.1/Talia-0.9.1-main.3.1-win-x64.exe",
+  "sha512": "yPi+bg2sjLxNe6xiWDUpfPegEESLEDMmmkxiB+pe1Yan2f2mObO5RJvCh7ly2oAaZIPRP9DVEbq32jAXP5+1Lg==",
+  "releaseDate": "2026-11-11T08:12:44.433Z"
 }
