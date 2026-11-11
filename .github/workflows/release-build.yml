@@ -101,7 +101,7 @@ jobs:
         run: npm run typecheck
       - name: Verify packaging contracts
         working-directory: source/desktop
-        run: npm run test:js -- test/main/util/packaged-dependency-gate.test.ts test/main/util/native-package-gate.test.ts test/main/util/codesign-runtime-gate.test.ts test/main/util/packaged-resource-gate.test.ts test/main/features/connectors/figcraft-launch.test.ts test/main/ipc/mcp-portability-files.test.ts test/renderer/new-chat-draft.test.ts
+        run: npm run test:js -- test/main/util/packaged-dependency-gate.test.ts test/main/util/native-package-gate.test.ts test/main/util/codesign-runtime-gate.test.ts test/main/util/packaged-resource-gate.test.ts test/main/features/connectors/figcraft-launch.test.ts test/main/ipc/mcp-portability-files.test.ts test/renderer/new-chat-draft.test.ts test/main/features/antigravity.test.ts test/main/util/native-network.test.ts test/main/model/antigravity-text.test.ts test/main/features/network_settings.test.ts test/main/util/browser-proxy.test.ts
       - name: Verify release identity
         working-directory: source
         run: node --test tests/release/version.test.mjs
