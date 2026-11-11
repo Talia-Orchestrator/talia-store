@@ -243,6 +243,119 @@
       }
     },
     {
+      "id": "talia-agents/app-architetto",
+      "kind": "agent",
+      "version": "1.0.0",
+      "name": "App-Architetto",
+      "description": "Definisce l'architettura tecnica di un'app: stack, struttura dei moduli, modelli dati e contratti API. Produce documenti di design scaricabili (DOCX/PDF) e consegna le specifiche di riferimento per backend e frontend; non implementa codice applicativo.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:362fa6065f68a46e37a2df3339e387d9b4ec253925a7a61b7eb4aaadcd8d48f7",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/deliverable-review"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/project-brief"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/source-synthesis"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-app-architetto-1.0.0.json",
+        "sha256": "sha256:9de25999ffa17c90a86dab18db205ad94092c847c224e9019c577e6cd0405d00",
+        "size": 6075
+      }
+    },
+    {
+      "id": "talia-agents/app-backend",
+      "kind": "agent",
+      "version": "1.0.0",
+      "name": "App-Backend",
+      "description": "Implementa API, logica di business, modelli dati e integrazioni server-side. Scrive codice testabile e documentazione API scaricabile; non definisce l'architettura generale né l'interfaccia utente.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:802f5577bf71237c4f99cb5ca6e73cf288011df7c764c0ff4908247b29372b61",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/deliverable-review"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-app-backend-1.0.0.json",
+        "sha256": "sha256:813fcc2b23f70ce65c3a338d8e066b7fbdfec519637db53f9b52273b6f4c216c",
+        "size": 5282
+      }
+    },
+    {
+      "id": "talia-agents/app-devops",
+      "kind": "agent",
+      "version": "1.0.0",
+      "name": "App-DevOps",
+      "description": "Configura CI/CD, containerizzazione, ambienti e pipeline di deploy. Scrive Dockerfile, script di automazione e documentazione operativa scaricabile; non implementa logica di business applicativa.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:4b688cfd8d92c6d2ed37d417b32ee2d98a099d43e645ae494aabea8f178da29e",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/deliverable-review"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-app-devops-1.0.0.json",
+        "sha256": "sha256:3df828c01d2952230ec166879ce54f4c3a3dca7df9529814da31435753413cd8",
+        "size": 5430
+      }
+    },
+    {
+      "id": "talia-agents/app-e2e-tester",
+      "kind": "agent",
+      "version": "1.0.0",
+      "name": "App-E2E-Tester",
+      "description": "Scrive ed esegue test end-to-end con Playwright: suite di test, report di copertura e documentazione di qualità scaricabile. Non definisce l'architettura né implementa logica di business.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:7cbc0b58646f93ea22b4a87061aac3224a05d0d65d973d3c95c67267bd046e9b",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/deliverable-review"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-app-e2e-tester-1.0.0.json",
+        "sha256": "sha256:82dfd50de4e72bbe7e0906a6840107e968994a9ac62820df7b07658c6c5c7e38",
+        "size": 6940
+      }
+    },
+    {
+      "id": "talia-agents/app-frontend",
+      "kind": "agent",
+      "version": "1.0.0",
+      "name": "App-Frontend",
+      "description": "Implementa interfacce utente, componenti, gestione stato e integrazione API lato client. Crea prototipi interattivi e documentazione UI scaricabile; non definisce l'architettura di sistema né il design visivo.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:d0a5681d9d77feab8735d94300c9fbab445d1309259561f6da5b39f623c06704",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/deliverable-review"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-app-frontend-1.0.0.json",
+        "sha256": "sha256:274bec9a44ce9e0b92df5f0c00941583bff486e42f315c30d5d0a0f362b1fdc7",
+        "size": 5312
+      }
+    },
+    {
       "id": "talia-agents/contentwriter",
       "kind": "agent",
       "version": "1.0.38",

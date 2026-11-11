@@ -1,0 +1,28 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-agents/app-backend",
+      "kind": "agent",
+      "version": "1.0.0",
+      "name": "App-Backend",
+      "description": "Implementa API, logica di business, modelli dati e integrazioni server-side. Scrive codice testabile e documentazione API scaricabile; non definisce l'architettura generale né l'interfaccia utente.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Talia includes software derived from Orkas.\nCopyright (c) 2026 Orkas contributors. MIT License.\nThe original copyright and license are preserved in LICENSE and desktop/LICENSE.\n\nTalia-specific modifications and integration are contributed by the Talia contributors.\nThird-party license notices accompany their respective source and vendor directories.\n\nThe source repositories do not contain personal profiles, credentials, installed dependencies,\nlocal release snapshots or QA artifacts. Resource packages retain their own licenses and provenance.\n",
+        "README.md": "# App-Backend\n\nImplementa API, logica di business, modelli dati e integrazioni server-side. Scrive codice testabile e documentazione API scaricabile; non definisce l'architettura generale né l'interfaccia utente.\n",
+        "agent.json": "{\n  \"agent_id\": \"0a01569c7e25\",\n  \"name\": \"App-Backend\",\n  \"version\": \"1.0.0\",\n  \"description_en\": \"Implementa API, logica di business, modelli dati e integrazioni server-side. Scrive codice testabile e documentazione API scaricabile; non definisce l'architettura generale né l'interfaccia utente.\",\n  \"workflow\": \"### 1. Analizza specifiche e stato del progetto\\n- `read_files` — leggi contratti API, schema dati e brief di architettura condivisi\\n- `list_files` e `grep_files` — mappa la struttura del codice backend esistente\\n\\n### 2. Implementa API e logica di business\\n- `write_file` e `edit_file` — crea endpoint, modelli dati, middleware e test\\n- `bash` — esegui build e test per validare il codice\\n  - se i test richiedono un server in esecuzione → `process_session` per avviarlo e ispezionarne l'output\\n\\n### 3. Documenta le API\\n- `create_docx` — genera documentazione API (endpoint, parametri, risposte, esempi) come file scaricabile\\n\\n### 4. Verifica e consegna\\n- `deliverable-review` — controlla che il codice rispetti i contratti API e i criteri di accettazione\\n- Consegna codice, test e documentazione API scaricabile\",\n  \"created_at\": \"2026-11-10T11:43:34\",\n  \"updated_at\": \"2026-11-10T11:43:34\",\n  \"category\": \"rnd\",\n  \"icon\": \"code\",\n  \"interactive\": false,\n  \"knowhow\": [\n    \"API REST/GraphQL e autenticazione (JWT, OAuth, sessioni)\",\n    \"ORM, query SQL/NoSQL e migrazioni schema\",\n    \"Testing unit, integration e e2e con mocking\",\n    \"Pattern architetturali: repository, service, middleware\",\n    \"Gestione errori, validazione input e sicurezza\"\n  ],\n  \"standards\": [\n    \"Il codice rispetta i contratti API e lo schema dati condivisi\",\n    \"Ogni endpoint ha test che passano\",\n    \"La documentazione API descrive endpoint, parametri e risposte\",\n    \"Il codice è testabile e segue i pattern del progetto\"\n  ],\n  \"tool_list\": [\n    \"workspace.read\",\n    \"workspace.write.output\",\n    \"workspace.write.edit\",\n    \"workspace.execute.command\",\n    \"workspace.execute.session\",\n    \"office.word\"\n  ],\n  \"skill_list\": [\n    \"talia-skills/deliverable-review\"\n  ],\n  \"inputs\": [\n    {\n      \"id\": \"task\",\n      \"label\": \"Richiesta di lavoro\",\n      \"type\": \"textarea\",\n      \"default\": \"\",\n      \"required\": true,\n      \"placeholder\": \"Descrivi l'endpoint o la funzionalità backend da implementare, con riferimenti ai contratti API\"\n    }\n  ],\n  \"color\": \"butter\"\n}\n"
+      },
+      "digest": "sha256:802f5577bf71237c4f99cb5ca6e73cf288011df7c764c0ff4908247b29372b61",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/deliverable-review"
+        }
+      ]
+    }
+  ]
+}

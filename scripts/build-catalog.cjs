@@ -10,7 +10,7 @@ const ecosystemRoot = process.env.TALIA_SOURCE_ROOT
   : path.resolve(storeRoot, '..');
 const packer = path.join(storeRoot, 'tools', 'talia-catalog-pack.cjs');
 const featuredAgents = [
-  'deepresearcher', 'contentwriter', 'officeworker',
+  'app-architetto', 'app-frontend', 'app-backend', 'app-devops', 'app-e2e-tester', 'deepresearcher', 'contentwriter', 'officeworker',
   'productdeveloper', 'uidesigner', 'pptmaker', 'imagestudio', 'videostudio', 'seogeoagent',
   'ecommerce-researcher',
 ];

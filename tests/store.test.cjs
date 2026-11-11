@@ -13,9 +13,14 @@ const sha256 = (bytes) => `sha256:${crypto.createHash('sha256').update(bytes).di
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);
   const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
-  assert.deepEqual(counts, { agent: 10, skill: 25, connector: 16, app: 3 });
+  assert.deepEqual(counts, { agent: 15, skill: 25, connector: 16, app: 3 });
   const agents = new Set(catalog.packages.filter((pkg) => pkg.kind === 'agent').map((pkg) => pkg.id));
   assert.deepEqual([...agents].sort(), [
+    'talia-agents/app-architetto',
+    'talia-agents/app-frontend',
+    'talia-agents/app-backend',
+    'talia-agents/app-devops',
+    'talia-agents/app-e2e-tester',
     'talia-agents/contentwriter', 'talia-agents/deepresearcher',
     'talia-agents/ecommerce-researcher', 'talia-agents/imagestudio',
     'talia-agents/officeworker', 'talia-agents/pptmaker', 'talia-agents/productdeveloper',
