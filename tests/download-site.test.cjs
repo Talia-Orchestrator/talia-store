@@ -178,15 +178,17 @@ test('local manual release is indexed without invented CI metadata', () => {
   assert.deepEqual(Object.keys(release.platforms), ['darwin-arm64']);
 });
 
-test('local manual release can include the Windows installer alongside the Mac download', () => {
+test('local manual release can include both Windows downloads alongside the Mac download', () => {
   const source = localRecord();
   const name = 'Talia-0.8.1-win-x64.exe';
   const url = `https://github.com/${REPOSITORY}/releases/download/v0.8.1/${name}`;
   const file = { name, url, size: 1024, sha256: 'a'.repeat(64) };
   source.release.assets.push({ name, size: file.size, browser_download_url: url });
-  source.manifest.platforms['win32-x64'] = { automaticUpdate: false, files: [file] };
+  const zip = { ...file, name: name.replace('.exe', '.zip'), url: url.replace('.exe', '.zip') };
+  source.release.assets.push({ name: zip.name, size: zip.size, browser_download_url: zip.url });
+  source.manifest.platforms['win32-x64'] = { automaticUpdate: false, files: [file, zip] };
   const release = buildDownloadIndex([source]).releases[0];
-  assert.deepEqual(release.platforms['win32-x64'], { automaticUpdate: false, files: [file] });
+  assert.deepEqual(release.platforms['win32-x64'], { automaticUpdate: false, files: [file, zip] });
 });
 
 test('local exception rejects unsupported platforms, updater, wrong tag and fabricated CI runs', () => {

@@ -66,7 +66,8 @@ function parseManifest(manifest, tagName, repository = DEFAULT_REPOSITORY) {
     for (const [target, platform] of Object.entries(manifest.platforms)) {
       if (!['darwin-arm64', 'win32-x64'].includes(target) || !isPlainObject(platform)
         || platform.automaticUpdate !== false || !Array.isArray(platform.files) || platform.files.length === 0
-        || (target === 'win32-x64' && platform.files.some(file => !/^Talia-[\d.]+-win-x64\.exe$/.test(file?.name)))) {
+        || (target === 'win32-x64' && platform.files.some(file =>
+          ![`Talia-${manifest.version}-win-x64.exe`, `Talia-${manifest.version}-win-x64.zip`].includes(file?.name)))) {
         fail(`local release must contain valid manual downloads: ${target}`);
       }
     }
