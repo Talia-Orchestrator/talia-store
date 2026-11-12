@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-12T21:18:25.293Z",
+  "generatedAt": "2026-11-12T21:19:32.872Z",
   "releases": [
     {
       "version": "0.9.4",
@@ -31,6 +31,12 @@
               "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.4/Talia-0.9.4-win-x64.exe",
               "size": 420207981,
               "sha256": "867fbc9acdc0e2deb8d4dec2bdbb8cfbf6dbf8d995810f5418035fd674337414"
+            },
+            {
+              "name": "Talia-0.9.4-win-x64.zip",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.4/Talia-0.9.4-win-x64.zip",
+              "size": 534796777,
+              "sha256": "f31da71909b10fcce86326a44b71b03c5f9e95715c5de11c253bb2b932772716"
             }
           ]
         }
