@@ -55,17 +55,20 @@ function parseManifest(manifest, tagName, repository = DEFAULT_REPOSITORY) {
     || typeof manifest.publishedAt !== 'string' || !Number.isFinite(Date.parse(manifest.publishedAt))) {
     fail('release manifest metadata is invalid');
   }
-  // Il percorso locale autorizzato resta manuale e limitato ad Apple Silicon.
+  // Le anteprime compilate localmente sono disponibili per il download manuale.
   if (manifest.buildSource === 'local') {
     if (manifest.version !== manifest.baseVersion || tagName !== `v${manifest.version}`
       || canonicalReleaseUrl(manifest.releaseUrl, repository) !== `https://github.com/${repository}/releases/tag/${tagName}`
       || Object.hasOwn(manifest, 'runNumber') || Object.hasOwn(manifest, 'runAttempt')
-      || !isPlainObject(manifest.platforms) || Object.keys(manifest.platforms).length !== 1
-      || !isPlainObject(manifest.platforms['darwin-arm64'])
-      || manifest.platforms['darwin-arm64'].automaticUpdate !== false
-      || !Array.isArray(manifest.platforms['darwin-arm64'].files)
-      || manifest.platforms['darwin-arm64'].files.length === 0) {
-      fail('local release must match its version and contain only manual macOS arm64 downloads');
+      || !isPlainObject(manifest.platforms) || Object.keys(manifest.platforms).length === 0) {
+      fail('local release metadata is invalid');
+    }
+    for (const [target, platform] of Object.entries(manifest.platforms)) {
+      if (!['darwin-arm64', 'win32-x64'].includes(target) || !isPlainObject(platform)
+        || platform.automaticUpdate !== false || !Array.isArray(platform.files) || platform.files.length === 0
+        || (target === 'win32-x64' && platform.files.some(file => !/^Talia-[\d.]+-win-x64\.exe$/.test(file?.name)))) {
+        fail(`local release must contain valid manual downloads: ${target}`);
+      }
     }
     return manifest;
   }
