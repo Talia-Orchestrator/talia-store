@@ -13,7 +13,7 @@ const sha256 = (bytes) => `sha256:${crypto.createHash('sha256').update(bytes).di
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);
   const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
-  assert.deepEqual(counts, { agent: 15, skill: 26, connector: 16, app: 3 });
+  assert.deepEqual(counts, { agent: 15, skill: 26, connector: 17, app: 3 });
   const agents = new Set(catalog.packages.filter((pkg) => pkg.kind === 'agent').map((pkg) => pkg.id));
   assert.deepEqual([...agents].sort(), [
     'talia-agents/app-architetto',
@@ -73,4 +73,19 @@ test('committed detached signature verifies against the published public key', (
   assert.equal(envelope.format, 'talia-catalog-signature-v1');
   assert.deepEqual(payload, fs.readFileSync(catalogPath));
   assert.equal(crypto.verify(null, payload, publicKey, signature), true);
+});
+
+
+test('SolidCraft is distributed as a portable template, not a configured local instance', () => {
+  const item = catalog.packages.find(pkg => pkg.id === 'talia-connectors/solidcraft');
+  assert.ok(item);
+  assert.equal(item.version, '1.0.0');
+  const pkg = JSON.parse(fs.readFileSync(path.join(root, item.artifact.url), 'utf8')).packages[0];
+  const connector = JSON.parse(pkg.files['connector.json']);
+  assert.equal(connector.template.id, item.id);
+  assert.equal(connector.template.command_hint, 'solidcraft-cli');
+  assert.deepEqual(connector.template.args, ['mcp']);
+  assert.equal(connector.template.transport_kind, 'stdio');
+  assert.equal(connector.template.documentation_url, 'https://docs.solidcraft.io/guide/mcp.html');
+  assert.deepEqual(Object.keys(connector).sort(), ['schemaVersion', 'template']);
 });
