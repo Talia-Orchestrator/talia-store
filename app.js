@@ -4,6 +4,7 @@ const TARGETS = [
   { id: 'darwin-arm64', title: 'macOS · Apple Silicon', extension: '.dmg' },
   { id: 'darwin-x64', title: 'macOS · Intel', extension: '.dmg' },
   { id: 'win32-x64', title: 'Windows · 64 bit', extension: '.exe' },
+  { id: 'win32-x64', title: 'Windows · senza installazione', extension: '.zip', optional: true },
   { id: 'linux-x64', title: 'Linux · 64 bit', extension: '.appimage' },
 ];
 
@@ -54,6 +55,7 @@ function makePlatformCard(release, target) {
 
   const platform = release.platforms && release.platforms[target.id];
   const file = findPrimaryFile(platform, target.extension);
+  if (!file && target.optional) return null;
   if (!file) {
     const unavailable = document.createElement('p');
     unavailable.className = 'unavailable';
@@ -71,7 +73,9 @@ function makePlatformCard(release, target) {
 
   const metadata = document.createElement('p');
   metadata.className = 'file-meta';
-  metadata.textContent = `${file.name} · ${formatSize(file.size)}${platform.automaticUpdate ? ' · aggiornamenti automatici supportati' : ' · aggiornamento manuale'}`;
+  const usage = target.extension === '.zip' ? 'Estrai lo ZIP e avvia Talia.exe'
+    : platform.automaticUpdate ? 'aggiornamenti automatici supportati' : 'aggiornamento manuale';
+  metadata.textContent = `${file.name} · ${formatSize(file.size)} · ${usage}`;
   card.append(metadata);
 
   const checksum = document.createElement('details');
@@ -120,7 +124,10 @@ function makeReleaseCard(release, index) {
 
   const grid = document.createElement('div');
   grid.className = 'platform-grid';
-  for (const target of TARGETS) grid.append(makePlatformCard(release, target));
+  for (const target of TARGETS) {
+    const platformCard = makePlatformCard(release, target);
+    if (platformCard) grid.append(platformCard);
+  }
   card.append(grid);
   return card;
 }
