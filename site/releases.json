@@ -1,7 +1,227 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-10T15:37:29.762Z",
+  "generatedAt": "2026-11-12T17:36:48.754Z",
   "releases": [
+    {
+      "version": "0.9.3",
+      "baseVersion": "0.9.3",
+      "channel": "main",
+      "publishedAt": "2026-11-11T18:57:31Z",
+      "tag": "v0.9.3",
+      "releaseUrl": "https://github.com/Talia-Orchestrator/talia-store/releases/tag/v0.9.3",
+      "commit": "26040137fbefe3ab4c10767140f34b971ef3ae1e",
+      "buildSource": "local",
+      "platforms": {
+        "darwin-arm64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.9.3-mac-arm64.dmg",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.3/Talia-0.9.3-mac-arm64.dmg",
+              "size": 491040987,
+              "sha256": "1bf91bc544fd1c0fa33f62e0e82cb460a698a79ef825bdbbd2d55cebea223f86"
+            },
+            {
+              "name": "Talia-0.9.3-mac-arm64.zip",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.3/Talia-0.9.3-mac-arm64.zip",
+              "size": 480534122,
+              "sha256": "96a5bcca82a171632c5f55b7d8e95f38a6d4eb1f7e115820833839ca23cbc831"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "version": "0.9.2",
+      "baseVersion": "0.9.2",
+      "channel": "main",
+      "publishedAt": "2026-11-11T12:15:06Z",
+      "tag": "v0.9.2",
+      "releaseUrl": "https://github.com/Talia-Orchestrator/talia-store/releases/tag/v0.9.2",
+      "commit": "f9bb8778192541a6220b51242e4dd8422cff0b1a",
+      "buildSource": "local",
+      "platforms": {
+        "darwin-arm64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.9.2-mac-arm64.dmg",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.2/Talia-0.9.2-mac-arm64.dmg",
+              "size": 491043795,
+              "sha256": "5f5b53e218556fcd04b6f6936c1270a05176f8f214093de80e89957a2caa390e"
+            },
+            {
+              "name": "Talia-0.9.2-mac-arm64.zip",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.2/Talia-0.9.2-mac-arm64.zip",
+              "size": 480525073,
+              "sha256": "b150a066bbeb8c1dcb47df6b268212c64b0b142f0e21f7820239f0acae3894f9"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "version": "0.9.1-main.3.1+c324c9815019",
+      "baseVersion": "0.9.1",
+      "channel": "main",
+      "publishedAt": "2026-11-11T09:13:35Z",
+      "tag": "v0.9.1-main.3.1",
+      "releaseUrl": "https://github.com/Talia-Orchestrator/talia-store/releases/tag/v0.9.1-main.3.1",
+      "commit": "c324c9815019568800dbfe470add21194b61a27e",
+      "runNumber": 3,
+      "runAttempt": 1,
+      "platforms": {
+        "darwin-arm64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.9.1-main.3.1-mac-arm64.dmg",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.1-main.3.1/Talia-0.9.1-main.3.1-mac-arm64.dmg",
+              "size": 490054584,
+              "sha256": "3b6d259d5aedfa8a8d375909b829e09fe77ed3a5ba4099f29296f59514eebca1"
+            },
+            {
+              "name": "Talia-0.9.1-main.3.1-mac-arm64.zip",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.1-main.3.1/Talia-0.9.1-main.3.1-mac-arm64.zip",
+              "size": 479642201,
+              "sha256": "2240159dd25b60ac49860f324abb8f0ce65cbf8d9dbd14dfd5ed42239e7d357c"
+            }
+          ]
+        },
+        "darwin-x64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.9.1-main.3.1-mac-x64.dmg",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.1-main.3.1/Talia-0.9.1-main.3.1-mac-x64.dmg",
+              "size": 526398335,
+              "sha256": "0d538a707c5873e7da14ad85b8ccdaa9db92019770e66bc354af3d2a1f49bd64"
+            },
+            {
+              "name": "Talia-0.9.1-main.3.1-mac-x64.zip",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.1-main.3.1/Talia-0.9.1-main.3.1-mac-x64.zip",
+              "size": 514766225,
+              "sha256": "c0b41a73efb35daed935c75580feeaf918cade43b340fde83328660f188b16aa"
+            }
+          ]
+        },
+        "win32-x64": {
+          "automaticUpdate": true,
+          "files": [
+            {
+              "name": "Talia-0.9.1-main.3.1-win-x64.exe",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.1-main.3.1/Talia-0.9.1-main.3.1-win-x64.exe",
+              "size": 419679105,
+              "sha256": "9383f33cdddbb4150567622de4e8cb866dc619f39993d45f390966dee4113a0d"
+            },
+            {
+              "name": "Talia-0.9.1-main.3.1-win-x64.zip",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.1-main.3.1/Talia-0.9.1-main.3.1-win-x64.zip",
+              "size": 533508846,
+              "sha256": "0b767ea0470169e48a0197898b69de1b304596d7d295bd7381868eafd52b6af4"
+            }
+          ]
+        },
+        "linux-x64": {
+          "automaticUpdate": true,
+          "files": [
+            {
+              "name": "Talia-0.9.1-main.3.1-linux-x64.tar.gz",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.1-main.3.1/Talia-0.9.1-main.3.1-linux-x64.tar.gz",
+              "size": 532007505,
+              "sha256": "608fd6fc522e75cd75f1411f673fc276c7c55a7898965b1620a031c250929d01"
+            },
+            {
+              "name": "Talia-0.9.1-main.3.1-linux-x86_64.AppImage",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.1-main.3.1/Talia-0.9.1-main.3.1-linux-x86_64.AppImage",
+              "size": 549558418,
+              "sha256": "9d09ac5438d3d12c2f423a8fbacf7c13a843c1e7f416ea8c1c8dbc8bbf6a6c05"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "version": "0.9.0-main.2.1+ba9e9539a3c6",
+      "baseVersion": "0.9.0",
+      "channel": "main",
+      "publishedAt": "2026-11-11T02:20:31Z",
+      "tag": "v0.9.0-main.2.1",
+      "releaseUrl": "https://github.com/Talia-Orchestrator/talia-store/releases/tag/v0.9.0-main.2.1",
+      "commit": "ba9e9539a3c69e94e0bd1eb2ddb8a353c0c5496b",
+      "runNumber": 2,
+      "runAttempt": 1,
+      "platforms": {
+        "darwin-arm64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.9.0-main.2.1-mac-arm64.dmg",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.0-main.2.1/Talia-0.9.0-main.2.1-mac-arm64.dmg",
+              "size": 490065509,
+              "sha256": "0fa8fb3cc07fb33e89bde57974c45dd9c705334b2acd16e90fae858a96c0fada"
+            },
+            {
+              "name": "Talia-0.9.0-main.2.1-mac-arm64.zip",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.0-main.2.1/Talia-0.9.0-main.2.1-mac-arm64.zip",
+              "size": 479639372,
+              "sha256": "8f551e65fc9df025f06a2f22773dfe6c0c204366d91ce6d738a5543fe5a79560"
+            }
+          ]
+        },
+        "darwin-x64": {
+          "automaticUpdate": false,
+          "files": [
+            {
+              "name": "Talia-0.9.0-main.2.1-mac-x64.dmg",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.0-main.2.1/Talia-0.9.0-main.2.1-mac-x64.dmg",
+              "size": 526392265,
+              "sha256": "3a861a8590a84a21a755f55303962c20dd19c221efca2ec575f3d28cf1cfd765"
+            },
+            {
+              "name": "Talia-0.9.0-main.2.1-mac-x64.zip",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.0-main.2.1/Talia-0.9.0-main.2.1-mac-x64.zip",
+              "size": 514763421,
+              "sha256": "54d30aa63d32ca8fe82931ad761e112c628a64d59584b65e959a8d80c08018c1"
+            }
+          ]
+        },
+        "win32-x64": {
+          "automaticUpdate": true,
+          "files": [
+            {
+              "name": "Talia-0.9.0-main.2.1-win-x64.exe",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.0-main.2.1/Talia-0.9.0-main.2.1-win-x64.exe",
+              "size": 419676868,
+              "sha256": "24bf6c58d52fadba036cbebef7b7814e18528248e8d830ca4e8e8b01d7b271ba"
+            },
+            {
+              "name": "Talia-0.9.0-main.2.1-win-x64.zip",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.0-main.2.1/Talia-0.9.0-main.2.1-win-x64.zip",
+              "size": 533505421,
+              "sha256": "585bb10b9a1f2d613c89eba6ee70a5d6707240aa104a3fb38daa41d6b6e6bcf0"
+            }
+          ]
+        },
+        "linux-x64": {
+          "automaticUpdate": true,
+          "files": [
+            {
+              "name": "Talia-0.9.0-main.2.1-linux-x64.tar.gz",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.0-main.2.1/Talia-0.9.0-main.2.1-linux-x64.tar.gz",
+              "size": 532006047,
+              "sha256": "c24245aac3d96b57e2c3d27891fcb095027669440a459b5bff829f5862fa4fbb"
+            },
+            {
+              "name": "Talia-0.9.0-main.2.1-linux-x86_64.AppImage",
+              "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.9.0-main.2.1/Talia-0.9.0-main.2.1-linux-x86_64.AppImage",
+              "size": 549558434,
+              "sha256": "d0129d4e9f5b15c3f9bd5066236bfd21a86a7509ee8b948da5d70189a47d182c"
+            }
+          ]
+        }
+      }
+    },
     {
       "version": "0.8.4",
       "baseVersion": "0.8.4",
