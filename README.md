@@ -26,6 +26,8 @@ The builder selects fifteen specialist agents explicitly and selects the current
 
 Run `npm test` to compare the committed catalog and artifacts with the selected sources, verify artifact digests and sizes, scan package text for personal paths and credentials, and validate the detached signature with the public key. This check does not regenerate or sign files. After rebuilding, the committed signature no longer represents the new catalog until the release owner signs the reviewed `catalog.json`; do not publish a mismatched index/signature pair.
 
+Il procedimento completo per aggiornare catalogo, release dell'app e pagina download è in [`docs/store-update-runbook.md`](docs/store-update-runbook.md).
+
 ## Pagina download
 
 La pagina pubblica usa il contenuto di `site/` e gli eseguibili delle Releases. `npm run build:download-site` genera l’indice dai manifest verificati delle versioni pubblicate.
