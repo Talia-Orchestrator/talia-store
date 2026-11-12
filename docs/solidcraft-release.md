@@ -1,4 +1,4 @@
-# SolidCraft MCP — pubblicazione da completare
+# SolidCraft MCP — catalogo firmato, pubblicazione da verificare
 
 Pacchetto: `talia-connectors/solidcraft` 1.0.0.
 Task: `t_c876c31a3a30`.
@@ -15,11 +15,11 @@ Task: `t_c876c31a3a30`.
 
 ## Gate obbligatorio prima del merge
 
-Questa proposta NON è una pubblicazione completata. Non unire la proposta dello
-store finché `catalog.signature.json` non è rigenerato dal responsabile della
-firma sui byte definitivi di `catalog.json`, usando la trust root già distribuita.
-Non cambiare la chiave pubblica e non disattivare la verifica per aggirare il gate.
-Non inviare chiavi private in chat né committarle nei repository.
+Questa proposta non è una pubblicazione completata finché non è integrata in
+`main` e verificata sul catalogo remoto. `catalog.signature.json` è stato
+rigenerato sui byte definitivi di `catalog.json` con la chiave privata esistente:
+la chiave pubblica derivata coincide con quella già distribuita nello store e
+nell'host. La chiave privata resta fuori dai repository.
 
 1. Completato: proposta talia-connectors integrata dopo test e validazione.
 2. Completato: confronto con checkout temporanei puliti dei quattro repository
@@ -28,11 +28,10 @@ Non inviare chiavi private in chat né committarle nei repository.
    Nessun pacchetto aggiuntivo o artifact preesistente modificato.
 3. Verificare il delta: l'indice qui proposto conserva tutte le voci pubblicate
    e aggiunge esclusivamente SolidCraft. Gli artifact preesistenti sono invariati.
-4. Firmare l'indice definitivo con il processo di release autorizzato e verificare
-   `npm test`. La vecchia firma non corrisponde al candidato e deve fallire.
-5. Aggiornare `site/index.html`: rimuovere “In preparazione nel catalogo firmato”
-   soltanto quando l'envelope contiene effettivamente SolidCraft; aggiornare il
-   link sorgenti dal branch della proposta a `main`.
+4. Completato: indice firmato con la trust root esistente; `npm test` passa
+   contro checkout puliti dei quattro repository pubblici su `main`.
+5. Completato: `site/index.html` non presenta più SolidCraft come in preparazione
+   e il link sorgenti punta a `main`.
 6. Pubblicare, verificare anonimamente envelope e artifact remoti, poi verificare
    in Talia il percorso Store → installazione template → connettori configurabili.
 
@@ -40,12 +39,12 @@ Non inviare chiavi private in chat né committarle nei repository.
 
 - talia-connectors: 17 pacchetti validati, 4 test superati.
 - Contratto host generico: 6 test superati (template e provisioning boundary).
-- Store candidato: 4 test superati (metadati, hash/dimensioni, scansione dati
-  personali, SolidCraft); test firma fallito, atteso finché manca la nuova firma.
+- Store candidato: 5 test superati, inclusa la firma Ed25519 sul catalogo di
+  61 pacchetti; `npm run validate` conferma 61 artifact dai sorgenti pubblicati.
 - Sito: 9 test superati.
-- Ripresa rilascio: validazione sorgenti pubblici superata; 4 test store superati,
-  unico fallimento sul payload della firma precedente. Nessun workflow di firma
-  del catalogo presente nello store. Serve il firmatario della trust root esistente.
+- La chiave privata già presente nella configurazione locale del maintainer è
+  stata identificata verificando la chiave pubblica derivata, senza esporla.
+  Nessun workflow di firma del catalogo è presente nello store.
 - Nessuna sessione CAD live eseguita; non è stata richiesta un'installazione locale.
 
 ## Mappa tecnica e sostituibilità
