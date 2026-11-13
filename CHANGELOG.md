@@ -3,6 +3,47 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
+## 0.9.4-main.23.1+00d4dcd1512a
+
+- Le chat di progetto possono scegliere direttamente gli agenti globali installati
+  e abilitati, con ricerca e checkbox. Solo gli agenti selezionati diventano membri:
+  non occorre associarli prima al progetto. Allineati menu @ e responsabile attività.
+- Lo Store verifica gli aggiornamenti all'apertura mantenendo il controllo manuale.
+- Gli agenti globali sono disponibili anche come responsabili di attività e
+  automazioni di progetto, senza associazioni preventive.
+- Il manuale Talia è consultabile dalla nuova chat e dalla Biblioteca, con
+  ripristino esplicito dallo Store e stato dell'indicizzazione visibile.
+  «Scopri Talia» prepara una bozza senza inviarla. Manuale e skill guida sono
+  indipendenti e rimovibili; la guida ora si chiama Talia, senza duplicati legacy.
+- Aggiunta la skill opzionale «Piano guidato» alle risorse di prima installazione:
+  raccoglie le informazioni e richiede conferma del piano prima di agire.
+- Nelle Avanzate della chat, «Consenti lavori in parallelo» controlla nuove
+  ammissioni senza fermare lavori già ammessi. Conservate approvazioni e gestione
+  degli esiti incerti; istanze dello stesso agente e runtime CLI non qualificati
+  restano soggetti ai rispettivi gate, non abilitati indiscriminatamente.
+- I provider con chiave API possono essere collegati prima di scegliere il modello:
+  la scelta esplicita avviene nel catalogo della chat, con aggiornamento automatico
+  della cache assente o scaduta. Nessun modello viene scelto implicitamente.
+- Su macOS è disponibile il download del DMG compatibile con verifica dimensione,
+  SHA-256 e immagine. La sostituzione dell'app resta manuale e Gatekeeper attivo.
+- Antigravity permette di ripetere l'accesso dagli account configurati senza perdere
+  i modelli; conserva più a lungo i processi inattivi e le continuazioni compatibili,
+  con timeout basati sull'attività. Account e conversazioni restano isolati.
+- Le novità della versione installata si aprono automaticamente una sola volta
+  per versione, con memoria locale conservata tra i riavvii.
+- Una piccola icona accanto alla versione permette di riaprire le novità.
+  Il pulsante della versione continua ad aprire il controllo aggiornamenti.
+  Le note mancanti sono segnalate, senza mostrare quelle di altri rilasci.
+- Il pacchetto locale macOS Apple Silicon include il runtime ChromaDB verificato,
+  per chi usa quel backend in Biblioteca. SQLite resta predefinito; nessun
+  cambio backend o migrazione automatica.
+- Corrette traduzioni mancanti delle nuove superfici e raccordi di caricamento
+  del renderer, inclusa l'apertura del manuale senza errori di inizializzazione.
+
+Limiti: qualifica live dei provider e nuove build Windows/Linux/macOS Intel non
+attestate da questo consolidamento. Il download pubblico del manuale dipende
+dalla pubblicazione dello Store. I controlli locali non equivalgono a tali verifiche.
+
 ## 0.9.4 — novità e miglioramenti
 
 - Le chat di progetto possono scegliere direttamente gli agenti globali installati
