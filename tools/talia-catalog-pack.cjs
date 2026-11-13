@@ -236,6 +236,9 @@ function readPackage(packageDirectory, formatVersion = 1) {
   if (id.split('/')[0] !== publisher) fail(`${id}: publisher must match the id namespace`);
   const name = safeMetadataText(manifest.name, `${id} name`);
   const description = safeMetadataText(manifest.description, `${id} description`, 4000);
+  // description_it è opzionale: descrizione italiana bilingue affiancata alla base.
+  const description_it = manifest.description_it === undefined
+    ? undefined : safeMetadataText(manifest.description_it, `${id} description_it`, 4000);
   const version = manifest.version;
   if (!isSemver(version)) fail(`${id}: version must be semver`);
   const license = safeMetadataText(manifest.license, `${id} license`);
@@ -312,12 +315,13 @@ function readPackage(packageDirectory, formatVersion = 1) {
     if (new Set(dependencies.map(dependency => dependency.id)).size !== dependencies.length) fail(`${id}: dependencies must be unique`);
   }
   if (kind === 'agent') {
-    const item = { id, kind, version, name, description, publisher, license, files, digest: digestFiles(files), dependencies };
+    const item = { id, kind, version, name, description, description_it, publisher, license, files, digest: digestFiles(files), dependencies };
     readAgentSkillList(item, id);
   }
   return {
     id, kind, version, name: name.trim(), description: description.trim(), publisher,
     license: license.trim(), files, digest: digestFiles(files),
+    ...(description_it ? { description_it } : {}),
     ...(repository ? { repository } : {}),
     ...(minHostVersion ? { minHostVersion } : {}),
     ...(dependencies?.length ? { dependencies } : {}),
@@ -379,7 +383,7 @@ function validateCatalogV3Payload(payload) {
     if (!item || !['agent', 'skill', 'connector', 'app'].includes(item.kind)
       || Object.hasOwn(item, 'files') || !item.artifact || typeof item.artifact !== 'object'
       || Array.isArray(item.artifact)) fail('catalog package digest or schema is invalid');
-    const allowed = ['id', 'kind', 'version', 'name', 'description', 'publisher', 'license', 'repository', 'minHostVersion', 'dependencies', 'digest', 'artifact'];
+    const allowed = ['id', 'kind', 'version', 'name', 'description', 'description_it', 'publisher', 'license', 'repository', 'minHostVersion', 'dependencies', 'digest', 'artifact'];
     if (Object.keys(item).some(key => !allowed.includes(key))) fail('catalog package digest or schema is invalid');
     const id = safePackageId(item.id, 'catalog package id');
     if (ids.has(id)) fail('catalog package ids must be unique');
@@ -390,6 +394,8 @@ function validateCatalogV3Payload(payload) {
       || typeof item.license !== 'string' || !item.license.trim() || item.license.length > 256
       || /[\u0000-\u001f\u007f]/.test(item.name) || /[\u0000-\u001f\u007f]/.test(item.description)
       || /[\u0000-\u001f\u007f]/.test(item.license) || !isSemver(item.version)
+      || (item.description_it !== undefined && (typeof item.description_it !== 'string' || !item.description_it.trim()
+        || item.description_it.length > 4000 || /[\u0000-\u001f\u007f]/.test(item.description_it)))
       || (item.repository !== undefined && (typeof item.repository !== 'string' || !item.repository || item.repository.length > 2048))
       || (item.minHostVersion !== undefined && !isSemver(item.minHostVersion))
       || !/^sha256:[a-f0-9]{64}$/.test(item.digest)) fail('catalog package metadata is invalid');
@@ -451,7 +457,9 @@ function validateCatalogBytes(payloadBytes, options = {}) {
     }
     if ((item.repository !== undefined && (typeof item.repository !== 'string' || !item.repository || item.repository.length > 2048
       || /[\u0000-\u001f\u007f]/.test(item.repository)))
-      || (item.minHostVersion !== undefined && !isSemver(item.minHostVersion))) {
+      || (item.minHostVersion !== undefined && !isSemver(item.minHostVersion))
+      || (item.description_it !== undefined && (typeof item.description_it !== 'string' || !item.description_it.trim()
+        || item.description_it.length > 4000 || /[\u0000-\u001f\u007f]/.test(item.description_it)))) {
       fail('catalog package metadata is invalid');
     }
     const paths = Object.keys(item.files);
