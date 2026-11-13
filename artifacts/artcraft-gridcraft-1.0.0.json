@@ -16,7 +16,8 @@
         "README.md": "# gridcraft MCP preset\n\nDeclarative configuration for the official gridcraft MCP integration. The package stores a generic executable hint and optional path-field definitions only. It does not include or execute the external application, MCP server, credentials, or machine-specific paths. Users install the preset, then configure and connect it explicitly in Talia.\n\nArtCraft and other referenced software remain subject to their own licenses and must be installed separately. See LICENSE and NOTICE for the license of this Talia package.\n",
         "connector.json": "{\n  \"schemaVersion\": 1,\n  \"preset\": {\n    \"id\": \"gridcraft\",\n    \"display_name\": \"GridCraft\",\n    \"category\": \"productivity\",\n    \"description_en\": \"Configure the official GridCraft MCP command for this device.\",\n    \"description_it\": \"Configura il comando MCP ufficiale di GridCraft per questo dispositivo.\",\n    \"documentation_url\": \"https://craft.wiki/apps/gridcraft/ai-agents/\",\n    \"executable_hint\": \"gridcraft-cli\",\n    \"base_args\": [\n      \"mcp\"\n    ],\n    \"path_fields\": []\n  }\n}\n"
       },
-      "digest": "sha256:204865ad781c4e6a4e821ab4e2a06520be5bea30fd74ea86097b0fa34553cb5d"
+      "digest": "sha256:204865ad781c4e6a4e821ab4e2a06520be5bea30fd74ea86097b0fa34553cb5d",
+      "description_it": "Configura il comando MCP ufficiale di GridCraft per questo dispositivo. Configurare solo sul dispositivo dell'utente."
     }
   ]
 }
