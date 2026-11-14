@@ -58,3 +58,20 @@ in `tests/download-site.test.cjs`: inclusione locale, assenza dati CI fittizi,
 rifiuto di piattaforme aggiuntive, updater, tag errati e asset mancanti.
 Si tratta solo di metadati/renderer statici sostituibili, senza IPC Electron,
 provider, credenziali o dipendenze dal futuro backend Rust.
+
+## Recupero guided-plan e manuale — 14 novembre 2026
+
+L'aggiornamento coordinato con `talia-skills` aggiunge guided-plan 0.1.0: il
+catalogo passa a 62 risorse (27 skill), senza cambiare le 61 voci precedenti.
+La skill raccoglie requisiti, presenta il piano ed esegue solo dopo conferma;
+il testo SKILL coincide con il seed già nel core. La firma usa la chiave
+Ed25519 esistente: nessuna rotazione della trust root.
+
+Il manuale scaricabile è allineato byte per byte al documento canonico core
+1.1.0, incluse le correzioni Providers già su main core. Non si tratta di una nuova versione dell'app né di una build. Le correzioni
+Windows dei vecchi commit non vengono importate in questa PR documentale.
+Per setup, aggiornamento del catalogo e pubblicazione del sito vedere
+[il runbook](docs/store-update-runbook.md). Per rollback preparare una PR che
+rimuova solo il nuovo pacchetto e rigeneri e firmi il catalogo con la stessa
+chiave, senza ripristinare vecchi feed o installer. Il manuale può essere
+ripristinato separatamente tramite PR; nessuna chiave o credenziale è in Git.

@@ -13,6 +13,10 @@ test('manual download is a complete static document linked from the store', asyn
   const text = bytes.toString('utf8');
   for (const section of ['Documenti, libreria e RAG', 'Chat e squadra di agenti', 'Progetti e cartelle di lavoro', 'Modelli, provider', 'Tema, lingua', 'Skill, agenti e connettori', 'Rimuovere e ripristinare']) assert.ok(text.includes(section), section);
   assert.ok(bytes.length > 20000);
+  assert.equal((text.match(/<a id="manuale-\d+"><\/a>/g) || []).length, 32);
+  assert.ok(text.includes('Impostazioni → Providers'));
+  assert.ok(text.includes('Nome / ID modello (facoltativo)'));
+  assert.ok(!text.includes('Impostazioni → Modelli'));
   assert.ok(text.includes('non modificare nulla senza una mia richiesta'));
   const server = http.createServer((req, res) => {
     if (req.url !== '/docs/Manuale-Talia.md') { res.writeHead(404); res.end(); return; }
