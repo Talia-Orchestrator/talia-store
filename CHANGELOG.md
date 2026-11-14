@@ -3,53 +3,193 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
-## Non rilasciato — risorse Store
+## 0.10.0-main.24.1+0ec184ff60f8
 
-- Recuperata guided-plan 0.1.0: raccolta requisiti, piano e attuazione soltanto
-  dopo conferma; catalogo a 62 risorse (27 skill) firmato con la chiave esistente.
-- Manuale completo 1.1.0 scaricabile, riconciliato con la fonte core corrente
-  e con le nuove etichette Providers. Nessun nuovo eseguibile o versione app.
+- In Impostazioni → Generali è disponibile «Workspace a schede (sperimentale)».
+  La scelta è persistente sul dispositivo/profilo di installazione e ha effetto
+  solo al prossimo avvio manuale. Nessun riavvio automatico o ricreazione delle
+  viste/chat nella sessione corrente.
+- `TALIA_ADAPTIVE_WORKSPACE=1` continua a forzare l'attivazione e prevale sulla
+  preferenza; la UI spiega come rimuovere questa forzatura. Default disattivato.
+- Verificati sorgenti Electron macOS arm64, persistenza, entrambi i versi del
+  cambio al riavvio e controllo UI desktop/390 px. Packaging e collaudo del
+  pacchetto restano da eseguire: le app già installate non acquisiscono questo
+  controllo prima di una distribuzione successiva.
+  Dettagli e limiti: `desktop/docs/workspace-settings.md`.
+- Rimossa la card fissa «Manuale Talia» sopra la Biblioteca. Il documento resta
+  nell'albero dei file con indicizzazione invariata; apertura e ripristino
+  esplicito restano disponibili nello Store.
 
-## 0.9.4-main.23.1+00d4dcd1512a
+## Non rilasciato
 
-- Le chat di progetto possono scegliere direttamente gli agenti globali installati
-  e abilitati, con ricerca e checkbox. Solo gli agenti selezionati diventano membri:
-  non occorre associarli prima al progetto. Allineati menu @ e responsabile attività.
-- Lo Store verifica gli aggiornamenti all'apertura mantenendo il controllo manuale.
-- Gli agenti globali sono disponibili anche come responsabili di attività e
-  automazioni di progetto, senza associazioni preventive.
-- Il manuale Talia è consultabile dalla nuova chat e dalla Biblioteca, con
-  ripristino esplicito dallo Store e stato dell'indicizzazione visibile.
-  «Scopri Talia» prepara una bozza senza inviarla. Manuale e skill guida sono
-  indipendenti e rimovibili; la guida ora si chiama Talia, senza duplicati legacy.
-- Aggiunta la skill opzionale «Piano guidato» alle risorse di prima installazione:
-  raccoglie le informazioni e richiede conferma del piano prima di agire.
-- Nelle Avanzate della chat, «Consenti lavori in parallelo» controlla nuove
-  ammissioni senza fermare lavori già ammessi. Conservate approvazioni e gestione
-  degli esiti incerti; istanze dello stesso agente e runtime CLI non qualificati
-  restano soggetti ai rispettivi gate, non abilitati indiscriminatamente.
-- I provider con chiave API possono essere collegati prima di scegliere il modello:
-  la scelta esplicita avviene nel catalogo della chat, con aggiornamento automatico
-  della cache assente o scaduta. Nessun modello viene scelto implicitamente.
-- Su macOS è disponibile il download del DMG compatibile con verifica dimensione,
-  SHA-256 e immagine. La sostituzione dell'app resta manuale e Gatekeeper attivo.
-- Antigravity permette di ripetere l'accesso dagli account configurati senza perdere
-  i modelli; conserva più a lungo i processi inattivi e le continuazioni compatibili,
-  con timeout basati sull'attività. Account e conversazioni restano isolati.
-- Le novità della versione installata si aprono automaticamente una sola volta
-  per versione, con memoria locale conservata tra i riavvii.
-- Una piccola icona accanto alla versione permette di riaprire le novità.
-  Il pulsante della versione continua ad aprire il controllo aggiornamenti.
-  Le note mancanti sono segnalate, senza mostrare quelle di altri rilasci.
-- Il pacchetto locale macOS Apple Silicon include il runtime ChromaDB verificato,
-  per chi usa quel backend in Biblioteca. SQLite resta predefinito; nessun
-  cambio backend o migrazione automatica.
-- Corrette traduzioni mancanti delle nuove superfici e raccordi di caricamento
-  del renderer, inclusa l'apertura del manuale senza errori di inizializzazione.
+- Team Builder: nel pannello per-agente la scelta del Pensiero usa il controllo
+  value-first a quattro stop (Auto · Rapido · Bilanciato · Profondo) dell'anteprima
+  approvata: valore corrente in evidenza con ripristino esplicito, stop mappati
+  soltanto sui livelli attestati dalla capability del modello esatto, stop non
+  disponibili visibili ma non selezionabili e saltati da tastiera, valore
+  confermato divenuto non applicabile mostrato in avviso con salvataggio
+  bloccato e nessuna correzione automatica. La scelta del modello continua ad
+  aprire la modale standard del catalogo già usata nell'app (ricerca, filtri,
+  account, stati selezionabili/non selezionabili). I default del team restano
+  usati nelle nuove chat e restano modificabili per chat. Etichette in 19 lingue.
+  Dettagli e limiti: desktop/docs/team-builder-model-thinking-ui.md.
 
-Limiti: qualifica live dei provider e nuove build Windows/Linux/macOS Intel non
-attestate da questo consolidamento. Il download pubblico del manuale dipende
-dalla pubblicazione dello Store. I controlli locali non equivalgono a tali verifiche.
+- Deleghe agenti: il cooldown conserva la causa account (credito/billing,
+  rate limit temporaneo, autenticazione, permessi), invece di convertirla in
+  selezione modello indisponibile. Il coordinatore riceve una causa sanitizzata
+  e l’indicazione di non cambiare agente sullo stesso credito esaurito;
+  alternative indipendenti già autorizzate preservate. Causa ignota esplicita.
+  Verifica sintetica e limiti: desktop/docs/provider-error-propagation.md.
+  Nessuna verifica del saldo reale, nuova build o modifica dei provider.
+
+- Impostazioni: la pagina «Modelli» ora si chiama «Providers». Collegamento
+  API/OAuth ed endpoint personalizzati senza obbligo di modello;
+  il modello si sceglie nel catalogo della chat, anche tramite ID manuale per
+  endpoint personalizzati e OpenRouter. Per custom senza catalogo (Ollama,
+  LM Studio e simili), nome/ID modello facoltativo anche nel form provider,
+  persistente e selezionabile in chat senza perdere le altre voci salvate.
+  Profili senza modello persistenti e
+  configurazioni precedenti preservate. Nessuna nuova build.
+  Dettagli e limiti: desktop/docs/provider-settings.md.
+
+- Tasks: la sezione italiana si chiama Tasks; terminologia, categorie e aiuto
+  aggiornati nei 19 cataloghi. Categorie facoltative condivise per account,
+  gestione di nome/colore, archiviazione e ripristino non distruttivi.
+  Bacheca ed Elenco riusano gli stessi task, con ricerca e filtri categoria/agente
+  combinati, conteggi, reset e preferenze per account; + apre l'editor nello
+  stato della colonna. Invariati stati, conferme, Human, allegati, chat e driver.
+  Le traduzioni non sono certificate da madrelingua. Nessuna build o
+  sincronizzazione cloud aggiunta. Prove e limiti: desktop/docs/tasks-categories-ui.md.
+- Workspace a schede: le istanze divise conservano tutte le informazioni e i
+  controlli dell'header. Le bozze «Nuova attività» hanno una barra con modello,
+  destinatario, squadra, agenti/modelli, avanzate, costi e guida; l'header
+  delle chat va a capo nei pannelli stretti senza troncare titolo, progetto,
+  membri, costi o azioni; il pannello dettagli resta affiancato e non copre
+  più il toggle. Rinomina ed eliminazione aggiornano subito le linguette e il
+  link progetto apre la pagina nella finestra principale. Attivazione invariata
+  solo da Impostazioni → Generali → «Workspace a schede (sperimentale)».
+  Dettagli in desktop/docs/adaptive-workspace.md.
+- Kanban: trascinamento tra colonne, ordine verticale persistente, alternativa
+  da tastiera, responsabile Human e filtro Tutti/Human/Agenti. Play visibile
+  sostituisce il comando nel menu; matita per Modifica/Elimina. Human non è
+  avviabile e il server impedisce le modifiche degli agenti ai suoi task.
+  Due nuovi percorsi Electron globali/progetto verificati anche a viewport stretto.
+  Corretto anche l'avvio dei task assegnati: entra nella chat soltanto l'agente
+  responsabile, senza iscrivere gli altri agenti del progetto o del catalogo.
+  Tutti i 18 percorsi Electron board/Human superati dopo riproduzione del difetto.
+  Dettagli in desktop/docs/kanban-human-ui.md; nessuna nuova build.
+- Parità agente/team (backend): un team globale può essere assegnatario di un
+  task di progetto o Todos (`owner_team`/`owner_team_id`/`owner_team_revision`
+  con CAS esplicito sulla revisione), di una riga della task board/Kanban di
+  conversazione (riferimento tipizzato `assignee_team`, esecuzione resta di
+  Commander coordinatore) e destinatario di un'attività pianificata
+  (`TaskRecipient` kind `team` con apply esplicito alla conversazione creata).
+  Le menzioni `@team` nei messaggi utente instradano a Commander con
+  applicazione esplicita del team alla chat (membri, modello/thinking e
+  risorse con i contratti esistenti); nessun nuovo attore, nessun broadcast
+  implicito, inviti/permessi/approvazioni invariati. Team eliminato o risorse
+  mancanti → errore esplicito (`owner_team_invalid`, `GROUP_NOT_FOUND`,
+  `CHAT_BUSY`, `GROUP_ALREADY_BOUND`), nessun degrado silenzioso. Contratto
+  per il frontend in `desktop/docs/team-parita-backend.md`. La delega di
+  Commander supporta anche il team come bersaglio: `dispatch_to` con
+  `team:<id>` (o nome univoco) applica il team alla chat e nomina Commander
+  coordinatore (ricevuta, mai risposta di un worker fittizio, mai broadcast);
+  `hand_off_to` verso un team è rifiutato con errore tipizzato
+  (`TEAM_TARGET_UNSUPPORTED`, nessun attore esecutore); nel composer
+  `@team:<id>` indirizza il team esplicitamente anche in omonimia con un
+  agente.
+
+- Parità agente/team (frontend): ovunque si sceglie un assegnatario o un
+  destinatario è ora selezionabile anche un team, con la semantica conservativa
+  del backend (team template, Commander coordinatore, nessun broadcast). Todos
+  e task di progetto: menu assegnatario con sezione team, chip dedicata,
+  selettore `team:<id>` nell'editor con CAS sulla revisione del catalogo e
+  messaggi dedicati per `owner_team_invalid`/`owner_team_stale`/`owner_not_bound`.
+  Kanban/task board: righe team raggruppate a sé con nome persistito e badge,
+  avviso «Team non trovato» solo con catalogo letto, pulsante «Riassegna» sulle
+  righe in coda (Commander, agenti membri, team) con mappa esplicita degli
+  errori di apply e resync. Attività pianificate: destinatario team
+  (`TaskRecipient` kind `team`) con chip dedicata ed errore dedicato se il team
+  non esiste più. Composer: tab «Team» nel picker (quattro anchor) che inserisce
+  sempre il riferimento tipizzato `@team:<id>` (contratto §8.4: non ambiguo con
+  agenti omonimi o nomi team duplicati, stabile a rinomine), mostrato come chip
+  leggibile col nome del team nel composer; il bus instrada a Commander, applica
+  il team e coordina — nessun worker avviato né broadcast, e l'hand-off
+  terminale a un team non è supportato (`TEAM_TARGET_UNSUPPORTED`). UI IT/EN e
+  test renderer dedicati (board, Todos, picker, automazioni, chip menzione).
+  Dettagli e limiti in `desktop/docs/team-parita-frontend.md`;
+  QA E2E indipendente superata il 14 novembre 2026; integrazione in `main`
+  tramite pull request autorizzata dall'utente.
+
+- Team Builder: area ragionamento Commander sempre riconoscibile, anche con
+  ereditarietà/automatico. Slider discreto sui livelli canonici (3 o più quando
+  supportati), valore ereditato del modello esplicito risolto in sola lettura;
+  nessun cursore fittizio per default ignoto. Personalizzazione confermata nella
+  bozza, Default/Spento separati dai livelli; limite a due livelli dichiarato.
+  Budget token e runtime non ordinali conservano i controlli nativi. Prove locali
+  Electron IT/EN desktop/mobile, nessuna attestazione provider live.
+
+- Team Builder: i testi modello/thinking sono presenti in tutte le 19 tabelle
+  locali. L'italiano resta l'unica traduzione completa; le altre lingue ricevono
+  gli stessi testi inglesi come fallback esplicito, secondo la convenzione del
+  repository, con placeholder preservati e inserimento al medesimo punto
+  ordinale di `en.json`. Il confronto automatico delle chiavi con `main` mostra
+  solo i gap preesistenti, estranei alla feature. Nessuna traduzione certificata
+  nelle altre lingue; prove e hash nel diario di completamento i18n.
+
+- Team Builder, backend: preferenze modello e thinking per membro, incluso
+  Commander, persistite nei template e negli snapshot. Bozze esplicite e
+  impostazioni dei membri esistenti hanno precedenza; commit inferenza/roster
+  recuperabile, catalogo e capability canonici senza nuovi permessi o login.
+  Controlli frontend dinamici per attore disponibili nel pannello Team, con
+  conferma nella bozza distinta dal salvataggio del team, ereditarietà esplicita,
+  anteprima effetti e preservazione delle impostazioni già presenti. Il
+  compositore non promuove il fallback a override in una bozza team senza
+  modello esplicito. Prove locali Electron; QA indipendente del delta superata
+  localmente, nessuna certificazione provider live o regressione globale verde.
+
+- Team Builder: recovery dei nuovi journal isolato per chat. Un journal
+  corrotto non blocca le chat sane; la chat coinvolta resta protetta da
+  `RECOVERY_REQUIRED`, senza scartare dati incerti. Compatibilità conservativa
+  con i journal precedenti; se il vecchio file non contiene più un'identità
+  ricostruibile il blocco resta esteso al profilo. Recheck QA indipendente aperto.
+
+- Team Builder nel pannello Agenti: crea squadre globali al profilo con agenti,
+  skill e istanze connettore e, se serve, istruzioni solo per Commander. Salva
+  il modello senza modificare chat, poi controlla l'anteprima prima di usarlo
+  in una chat esistente o nella bozza libera/di progetto. Gli aggiornamenti
+  sono espliciti; scollegare conserva membri e cronologia. Selezionare risorse
+  non concede permessi e non connette servizi. UI IT/EN, temi e layout stretto.
+  Verifiche dedicate Electron con fixture sintetiche; QA indipendente
+  superata il 14 novembre 2026; regressioni complete ancora aperte, nessuna
+  compatibilità CLI con risorse o servizio live certificata. I dati v1 sono leggibili; il downgrade a vecchi
+  writer non è supportato. Nessuna build o modifica di versione in questa tranche.
+
+- Nella sidebar, le chat con un lavoro completato ma non ancora visualizzato
+  mostrano una spunta cerchiata accanto al titolo, con etichetta accessibile.
+  Il segnale persiste al riavvio e si rimuove quando la cronologia viene
+  effettivamente caricata fino all'ultima pagina e la fine del risultato è
+  visibile con finestra attiva, non aprendo un messaggio storico né se il
+  caricamento fallisce. Dopo un errore si può ritentare cliccando la stessa
+  chat, senza duplicare richieste pendenti. Gli altri esiti conservano il
+  puntino di attenzione esistente. Nessuna nuova build prodotta.
+
+## 0.10.0 — workspace a schede nelle Impostazioni
+
+- In Impostazioni → Generali è disponibile «Workspace a schede (sperimentale)».
+  La scelta è persistente sul dispositivo/profilo di installazione e ha effetto
+  solo al prossimo avvio manuale. Nessun riavvio automatico o ricreazione delle
+  viste/chat nella sessione corrente.
+- `TALIA_ADAPTIVE_WORKSPACE=1` continua a forzare l'attivazione e prevale sulla
+  preferenza; la UI spiega come rimuovere questa forzatura. Default disattivato.
+- Verificati sorgenti Electron macOS arm64, persistenza, entrambi i versi del
+  cambio al riavvio e controllo UI desktop/390 px. Packaging e collaudo del
+  pacchetto restano da eseguire: le app già installate non acquisiscono questo
+  controllo prima di una distribuzione successiva.
+  Dettagli e limiti: `desktop/docs/workspace-settings.md`.
+- Rimossa la card fissa «Manuale Talia» sopra la Biblioteca. Il documento resta
+  nell'albero dei file con indicizzazione invariata; apertura e ripristino
+  esplicito restano disponibili nello Store.
 
 ## 0.9.4 — novità e miglioramenti
 
