@@ -3,6 +3,13 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
+## Non rilasciato — risorse Store
+
+- Recuperata guided-plan 0.1.0: raccolta requisiti, piano e attuazione soltanto
+  dopo conferma; catalogo a 62 risorse (27 skill) firmato con la chiave esistente.
+- Manuale completo 1.1.0 scaricabile, riconciliato con la fonte core corrente
+  e con le nuove etichette Providers. Nessun nuovo eseguibile o versione app.
+
 ## 0.9.4-main.23.1+00d4dcd1512a
 
 - Le chat di progetto possono scegliere direttamente gli agenti globali installati
