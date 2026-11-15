@@ -1,0 +1,24 @@
+{
+  "id": "talia-agents/functional-analyst",
+  "kind": "agent",
+  "version": "1.0.0",
+  "name": "Senior Functional Analyst",
+  "description": "Turns business goals, existing behavior and user problems into testable requirements and acceptance criteria without inventing scope.",
+  "description_it": "Traduce obiettivi, comportamento esistente e problemi utente in requisiti e criteri di accettazione verificabili senza inventare lo scope.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/project-brief"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/source-synthesis"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/deliverable-review"
+    }
+  ]
+}

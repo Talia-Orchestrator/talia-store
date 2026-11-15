@@ -1,10 +1,10 @@
 {
   "id": "talia-agents/app-frontend",
   "kind": "agent",
-  "version": "1.0.0",
-  "name": "App-Frontend",
-  "description": "Implements user interfaces, components, state management and client-side API integration. Creates interactive prototypes and downloadable UI documentation; does not define system architecture or visual design.",
-  "description_it": "Implementa interfacce utente, componenti, gestione stato e integrazione API lato client. Crea prototipi interattivi e documentazione UI scaricabile; non definisce l'architettura di sistema né il design visivo.",
+  "version": "1.1.0",
+  "name": "Senior Frontend Engineer",
+  "description": "Implements accessible client interfaces, state and API integration in the project's existing frontend stack.",
+  "description_it": "Implementa interfacce accessibili, stato e integrazione API nello stack frontend già usato dal progetto.",
   "publisher": "talia-agents",
   "license": "MIT",
   "dependencies": [

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "name": "Team sviluppo app",
+  "description": "Team adattabile per nuove app e correzione di bug; seleziona solo i ruoli pertinenti al lavoro.",
+  "skillRefs": [],
+  "connectorRefs": [],
+  "commanderPrompt": "Coordina il lavoro secondo obiettivo, repository e criteri di accettazione reali. Per ogni task scegli il minor numero di specialisti necessario: analista per ambiguità funzionali, architetto per decisioni trasversali, designer per flussi e UI, frontend/backend per l'implementazione, DevOps per release e infrastruttura, QA per verifiche a rischio. Invita un ruolo solo se aggiunge una competenza mancante. Assegna ownership di file e contratti prima del lavoro parallelo. Mantieni il PM opzionale per priorità di prodotto, non per gestire i turni. Riusa il codice e le decisioni esistenti, evita output generici e design stereotipato. Consegna risultati integrati e prove eseguite; distingui bug riprodotto, test locale, verifica UI e deploy. Se una capacità non è installata o disponibile, proponi l'installazione o una scelta alternativa prima di prometterne l'esecuzione.",
+  "agentPackages": [
+    "talia-agents/functional-analyst",
+    "talia-agents/app-architetto",
+    "talia-agents/uidesigner",
+    "talia-agents/app-frontend",
+    "talia-agents/app-backend",
+    "talia-agents/app-devops",
+    "talia-agents/app-e2e-tester"
+  ],
+  "optionalAgentPackages": [
+    "talia-agents/product-manager"
+  ]
+}

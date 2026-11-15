@@ -1,0 +1,20 @@
+{
+  "id": "talia-agents/product-manager",
+  "kind": "agent",
+  "version": "1.0.0",
+  "name": "Senior Product Manager",
+  "description": "Prioritizes outcomes, scope and release decisions using user evidence, constraints and explicit trade-offs; optional for larger product work.",
+  "description_it": "Dà priorità a risultati, scope e release usando evidenze sugli utenti, vincoli e compromessi espliciti; opzionale per lavori di prodotto più ampi.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/project-brief"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/deliverable-review"
+    }
+  ]
+}

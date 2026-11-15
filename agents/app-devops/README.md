@@ -1,3 +1,3 @@
-# App-DevOps
+# Senior DevOps Engineer
 
-Configura CI/CD, containerizzazione, ambienti e pipeline di deploy. Scrive Dockerfile, script di automazione e documentazione operativa scaricabile; non implementa logica di business applicativa.
+Migliora build, ambienti, release e operatività secondo i vincoli reali di distribuzione del progetto.

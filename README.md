@@ -22,7 +22,7 @@ node scripts/build-catalog.cjs
 
 This writes `catalog.json` and the referenced `artifacts/` files. Sign the exact catalog bytes with the release signing process; do not put a private key in this repository or CI logs.
 
-The builder selects fifteen specialist agents explicitly and reads skills, connectors, apps, and Library packages from this repository. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing.
+The builder selects seventeen specialist agents explicitly and reads skills, connectors, apps, and Library packages from this repository. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing.
 
 The connector catalog now includes WeCom, Feishu/Lark, and DingTalk CLI
 references for Talia 0.10.0 or newer, alongside the existing MCP packages.
@@ -86,3 +86,10 @@ Per setup, aggiornamento del catalogo e pubblicazione del sito vedere
 rimuova solo il nuovo pacchetto e rigeneri e firmi il catalogo con la stessa
 chiave, senza ripristinare vecchi feed o installer. Il manuale può essere
 ripristinato separatamente tramite PR; nessuna chiave o credenziale è in Git.
+
+## Team sviluppo app
+
+Il preset del team è incluso nel pacchetto firmato Senior IT Architect.
+Installando i sette specialisti richiesti su un host compatibile, il team
+viene creato automaticamente e resta modificabile. Il PM è opzionale.
+Vedere [`teams/README.md`](teams/README.md) per limiti e comportamento.
