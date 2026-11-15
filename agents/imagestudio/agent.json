@@ -1,6 +1,6 @@
 {
   "agent_id": "814b61b027f0",
-  "version": "1.3.49",
+  "version": "1.3.50",
   "min_app_version": "1.7.2",
   "name": "ImageStudio",
   "description_zh": "制作和修改海报、封面、社媒图、信息图、图表和概念图等静态视觉；排版与文字优先用 HTML/CSS/SVG 零调用制作，照片、角色、绘画、材质、混合画面和语义修改使用已配置的图片模型。",
@@ -92,5 +92,9 @@
       "accept": "image/*,.svg",
       "description": "Optional source images, brand assets, screenshots, or style references."
     }
+  ],
+  "routing_tags": [
+    "media.images",
+    "media.illustration"
   ]
 }

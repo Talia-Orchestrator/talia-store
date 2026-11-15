@@ -1,7 +1,7 @@
 {
   "agent_id": "a19101ba698a",
   "name": "OfficeWorker",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description_zh": "创建、读取、编辑、检查和批量处理 Word/DOCX、Excel/XLSX、PowerPoint/PPTX、WPS 兼容文件与 PDF，支持 CSV 转换、公式、图表和格式整理；不负责从零创作高设计演示或以非办公工件为主的任务。",
   "description_en": "Creates, reads, edits, checks and batch-processes Word/DOCX, Excel/XLSX, PowerPoint/PPTX, WPS-compatible files and PDFs, including CSV conversion, formulas, charts and formatting. Not for high-design presentations from scratch or non-office deliverables.",
   "description_it": "Crea, legge, modifica, controlla ed elabora in batch file Word/DOCX, Excel/XLSX, PowerPoint/PPTX, compatibili WPS e PDF, incluse conversioni CSV, formule, grafici e formattazione. Non per presentazioni di alto design da zero o deliverable non office.",
@@ -49,5 +49,9 @@
   "created_at": "2026-06-04T15:30:00",
   "updated_at": "2026-09-15T08:24:17.847Z",
   "category": "office",
-  "min_app_version": "1.6.1"
+  "min_app_version": "1.6.1",
+  "routing_tags": [
+    "office.documents",
+    "office.spreadsheets"
+  ]
 }

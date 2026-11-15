@@ -78,6 +78,21 @@ test('public store includes only the approved categories and canonical agent set
   assert.equal([...agents].some((id) => /stockanalyser|ecommerceoperator|ecommercereviewer|ecommercewriter|ecommerceanalyzer/.test(id)), false);
 });
 
+test('signed sidecar routing tags stay compact and match their artifacts', () => {
+  const index = JSON.parse(fs.readFileSync(path.join(root,'routing-index.json')));
+  assert.equal(index.catalog_sha256,sha256(fs.readFileSync(catalogPath)));
+  const routing = new Map(index.agents.map(row => [row.id,row]));
+  for (const item of catalog.packages.filter(pkg => pkg.kind === 'agent')) {
+    const row = routing.get(item.id);
+    assert.equal(row.version,item.version);
+    assert.ok(Array.isArray(row.tags) && row.tags.length > 0 && row.tags.length <= 16, item.id);
+    const artifact = JSON.parse(fs.readFileSync(path.join(root, item.artifact.url), 'utf8')).packages[0];
+    const definition = JSON.parse(artifact.files['agent.json']);
+    assert.deepEqual(definition.routing_tags, row.tags, item.id);
+  }
+  assert.equal(routing.size,catalog.packages.filter(pkg => pkg.kind === 'agent').length);
+});
+
 test('senior app team references installable Store agent packages', () => {
   const template = JSON.parse(fs.readFileSync(path.join(root, 'agents/app-architetto/team-preset.json'), 'utf8'));
   const teamPackage = catalog.packages.find(row => row.kind === 'skill' && row.id === 'talia-teams/app-development');

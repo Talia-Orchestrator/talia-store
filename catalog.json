@@ -262,12 +262,12 @@
     {
       "id": "talia-agents/app-architetto",
       "kind": "agent",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "name": "Senior IT Architect",
       "description": "Defines and reviews technical boundaries, data and API contracts, migrations and trade-offs for the actual application and stack.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:93f8acb6af47abe32458b237932458835ae51610ac8eec0f80240ff55d8ed75b",
+      "digest": "sha256:6ca6840ce4bd7499ff96fe5fbe8e9458cbd7dc8d33024e042712a6ac79cf173a",
       "description_it": "Definisce e rivede confini tecnici, contratti dati/API, migrazioni e compromessi per l'applicazione e lo stack reali.",
       "dependencies": [
         {
@@ -284,20 +284,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-app-architetto-1.1.0.json",
-        "sha256": "sha256:cbd62bc78b1c10e22b84ec0755f609478ef51a244c36425b5acb3f761d99ddda",
-        "size": 7750
+        "url": "artifacts/talia-agents-app-architetto-1.1.1.json",
+        "sha256": "sha256:45339d7f4efc125bc09aa276c20dc35a239caa10c0ea1e872a0f372b2230f662",
+        "size": 7852
       }
     },
     {
       "id": "talia-agents/app-backend",
       "kind": "agent",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "name": "Senior Backend Engineer",
       "description": "Implements server behavior, data changes and integrations with explicit failure, security and compatibility handling.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:65c1c1557f3f6e2e5933a83d02a0c719397b37d8aca8e6aff0c2e01863c92248",
+      "digest": "sha256:a3f92cc66cded2ddf6005c77ead06430cee47ca2f3da326e77299b10a08f1105",
       "description_it": "Implementa logica server, modifiche ai dati e integrazioni con gestione esplicita di errori, sicurezza e compatibilità.",
       "dependencies": [
         {
@@ -306,20 +306,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-app-backend-1.1.0.json",
-        "sha256": "sha256:c895b96e0642b82c5e633ff3931cd6b7a14d2517057d8f904030061930cb5a8c",
-        "size": 5880
+        "url": "artifacts/talia-agents-app-backend-1.1.1.json",
+        "sha256": "sha256:d428e090115d7b448a9ed8307a21e4c8c883661903edc102f90d1e4899c3c74c",
+        "size": 5981
       }
     },
     {
       "id": "talia-agents/app-devops",
       "kind": "agent",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "name": "Senior DevOps Engineer",
       "description": "Improves builds, environments, release and operations according to the repository's real deployment constraints.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:a2b24322629972dfedd6747538e355cae7032f892c92ff7663dc6061534b8aed",
+      "digest": "sha256:3877b54a79ecf7c785fd6f85f72003c41cfc0a984ab31b6ec1f9a90932ff4533",
       "description_it": "Migliora build, ambienti, release e operatività secondo i vincoli reali di distribuzione del progetto.",
       "dependencies": [
         {
@@ -328,20 +328,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-app-devops-1.1.0.json",
-        "sha256": "sha256:576708bdaa34b676bcc4d823f2e4f48b2104fcb818496fd08b289207f0bb7ae9",
-        "size": 5643
+        "url": "artifacts/talia-agents-app-devops-1.1.1.json",
+        "sha256": "sha256:f39fee9816edce7d58c3df3eacbcfa610778f7c0c971b5cdd3bfc47cbc5cc578",
+        "size": 5758
       }
     },
     {
       "id": "talia-agents/app-e2e-tester",
       "kind": "agent",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "name": "Senior QA Engineer",
       "description": "Tests user journeys and regressions, isolates failures and reports evidence with precise limits.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:daef0ce0c3c7899a5ee6f702607407204189ea24d47d4e4c9f92a7ab16afddde",
+      "digest": "sha256:b435f9422b8daed528e8d36a6f055bf7c1d0519f10560933689149842e7c1adc",
       "description_it": "Verifica percorsi utente e regressioni, isola i guasti e riporta prove con limiti precisi.",
       "dependencies": [
         {
@@ -350,20 +350,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-app-e2e-tester-1.1.0.json",
-        "sha256": "sha256:934b186b72891375aeeb7696fb1eb413c5daf9c8cf1f00248e01ad8b1dbdd35a",
-        "size": 5492
+        "url": "artifacts/talia-agents-app-e2e-tester-1.1.1.json",
+        "sha256": "sha256:28e9c33096438d606ec400be5773166b6f5dab66e66cebcba2eab124871559f0",
+        "size": 5600
       }
     },
     {
       "id": "talia-agents/app-frontend",
       "kind": "agent",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "name": "Senior Frontend Engineer",
       "description": "Implements accessible client interfaces, state and API integration in the project's existing frontend stack.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:a45eebc7965269c1dd7a9887eed82c34c0986205df65efd758b568fd84c508d7",
+      "digest": "sha256:ccd92f14d7c6632857c940224b2b642ca8dbf25cdbd2e006a5158c92f9cf45da",
       "description_it": "Implementa interfacce accessibili, stato e integrazione API nello stack frontend già usato dal progetto.",
       "dependencies": [
         {
@@ -372,20 +372,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-app-frontend-1.1.0.json",
-        "sha256": "sha256:c1d9cfa8c0ca70c1852f462959ffcec5fea1bde07fbcd4b5fcb3ce2b41d7144a",
-        "size": 5865
+        "url": "artifacts/talia-agents-app-frontend-1.1.1.json",
+        "sha256": "sha256:b50d666716201ea936d7eeab3a19cd2edafc7e25f283cc77b43a1dd490bfdc78",
+        "size": 5968
       }
     },
     {
       "id": "talia-agents/contentwriter",
       "kind": "agent",
-      "version": "1.0.39",
+      "version": "1.0.40",
       "name": "Content Writer",
       "description": "Drafts and revises publication-ready social posts, articles, newsletters, tutorials and case studies from goals, sources or drafts; adapts voice and structure, humanizes prose, and checks evidence and citations.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:122e6303e445a4ac05f6f6b9989edaff36afde79782d63d87861fd158e44ff61",
+      "digest": "sha256:d3b5d79b7ea7906e11bbd8dc371934215c3e2646cc1b9090a1d27bc92af7621a",
       "description_it": "Redige e revisiona post social, articoli, newsletter, tutorial e case study pronti per la pubblicazione a partire da obiettivi, fonti o bozze; adatta voce e struttura, umanizza la prosa e verifica evidenze e citazioni.",
       "dependencies": [
         {
@@ -394,20 +394,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-contentwriter-1.0.39.json",
-        "sha256": "sha256:65074f47bf04ede6e3f13d301d05a1f8c6247a020e20ebaac7a232070fc001b9",
-        "size": 6537
+        "url": "artifacts/talia-agents-contentwriter-1.0.40.json",
+        "sha256": "sha256:f2515386321018c7a682ad5ca9bbb7621148b7be3d919bf94b9fc7463027f3db",
+        "size": 6617
       }
     },
     {
       "id": "talia-agents/deepresearcher",
       "kind": "agent",
-      "version": "1.0.65",
+      "version": "1.0.66",
       "name": "DeepResearcher",
       "description": "Researches complex topics using web, scholarly and user-provided sources; produces industry, literature and trend reviews and verifies claims. Delivers auditable reports with citations, confidence, conflicting evidence and limitations.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:8b800eb678813e4962f47f3cc88d8f9692c3244f3f28fcbe6743119208344782",
+      "digest": "sha256:2515e3a0dbc1844e6df26f8bc8a5ca0eb6c505a396e1380f378f2dc7f8508076",
       "description_it": "Ricerca argomenti complessi usando fonti web, accademiche e fornite dall'utente; produce review di settore, letteratura e trend e verifica le affermazioni. Consegna report verificabili con citazioni, livello di confidenza, evidenze contrastanti e limiti.",
       "dependencies": [
         {
@@ -428,20 +428,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-deepresearcher-1.0.65.json",
-        "sha256": "sha256:5992333cb5ab7a1875c4c10057a1bfbabe586254a34527a31feaaaa48d5c6af8",
-        "size": 7581
+        "url": "artifacts/talia-agents-deepresearcher-1.0.66.json",
+        "sha256": "sha256:a76dd993d4bf5f7eb318428b8fdb008c4424d37777bd7c9b0f1799cca19ef82e",
+        "size": 7660
       }
     },
     {
       "id": "talia-agents/ecommerce-researcher",
       "kind": "agent",
-      "version": "1.0.0",
+      "version": "1.1.5",
       "name": "ECommerceResearcher",
       "description": "Combines e-commerce product research, listing and review analysis, analytics, creative direction, and operations planning.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:c3bab2db1b2ed75e89b3b9de4e9e095939b3b99b67da5da3725964edf001fc7a",
+      "digest": "sha256:d2a2d06055645cf469f3dcc030f5743a760652b304a9af27e4f4c847fcfb490b",
       "description_it": "Combina ricerca prodotti e-commerce, analisi di listing e recensioni, analytics, direzione creativa e pianificazione operativa.",
       "dependencies": [
         {
@@ -478,20 +478,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-ecommerce-researcher-1.0.0.json",
-        "sha256": "sha256:3195d743d9f8e3580a5fe8bbfa13310cd8f23e08a300bf682e2d643cbf6dae09",
-        "size": 9383
+        "url": "artifacts/talia-agents-ecommerce-researcher-1.1.5.json",
+        "sha256": "sha256:79f9d88e722bdfbcd43163fab088bad8828e6e64ac66adfd1b1c815fee0df6f7",
+        "size": 9467
       }
     },
     {
       "id": "talia-agents/functional-analyst",
       "kind": "agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "name": "Senior Functional Analyst",
       "description": "Turns business goals, existing behavior and user problems into testable requirements and acceptance criteria without inventing scope.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:5e601c6133f01015907bc7105f69ceb21e5937d5c7a9c73e885d792d6116a3dd",
+      "digest": "sha256:5ec5bb1cf1b0803ee5efc85b366fa1106bc98d68e60db44e66ecab2ba36696d6",
       "description_it": "Traduce obiettivi, comportamento esistente e problemi utente in requisiti e criteri di accettazione verificabili senza inventare lo scope.",
       "dependencies": [
         {
@@ -508,36 +508,36 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-functional-analyst-1.0.0.json",
-        "sha256": "sha256:055aacdf9bc8596c76aa6df81b116794637e69f2de34003b6e3055730e55f0bc",
-        "size": 5739
+        "url": "artifacts/talia-agents-functional-analyst-1.0.1.json",
+        "sha256": "sha256:c8657bc8fa1bea918b60bc86f1a6736e281d15313f622158ae6678d94d87197a",
+        "size": 5829
       }
     },
     {
       "id": "talia-agents/imagestudio",
       "kind": "agent",
-      "version": "1.3.49",
+      "version": "1.3.50",
       "name": "ImageStudio",
       "description": "Creates and edits still visuals: posters, covers, social graphics, infographics, charts and concept art. Prefers zero-call HTML/CSS/SVG for layout and typography; uses configured image models for photos, characters, paintings, textures, hybrid visuals and semantic edits.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:ba1fb737be892f0347e5185512e92439dbdea8949f879ff8e207a82ad2ac54da",
+      "digest": "sha256:f3d5309213ffa581fe94040187c1fef4e7c8ef22765bf2fd97d1f4ebcdb4922d",
       "description_it": "Crea e modifica visual statici: poster, copertine, grafiche social, infografiche, grafici e concept art. Preferisce HTML/CSS/SVG senza chiamate per layout e tipografia; usa i modelli immagine configurati per foto, personaggi, pitture, texture, visual ibridi ed edit semantici.",
       "artifact": {
-        "url": "artifacts/talia-agents-imagestudio-1.3.49.json",
-        "sha256": "sha256:997b6d2b963dcfdba3f4fc9b958d357924d2ba91d59a3cf6da7bf1e96531dd89",
-        "size": 107149
+        "url": "artifacts/talia-agents-imagestudio-1.3.50.json",
+        "sha256": "sha256:44ef4eba59a610fe7093b209476483c3a909805c3fbd25e1f41b5d12545be936",
+        "size": 107229
       }
     },
     {
       "id": "talia-agents/officeworker",
       "kind": "agent",
-      "version": "1.0.17",
+      "version": "1.0.18",
       "name": "OfficeWorker",
       "description": "Creates, reads, edits, checks and batch-processes Word/DOCX, Excel/XLSX, PowerPoint/PPTX, WPS-compatible files and PDFs, including CSV conversion, formulas, charts and formatting. Not for high-design presentations from scratch or non-office deliverables.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:5fb1928fef2f0ec5426ab9a2e34563ec7f1a1b075480eda53b25b7fac78982f1",
+      "digest": "sha256:6c5b1ee3c8e8e42d1e2e6efb68920d0ce446454717f50cc00d97e3037a5af31e",
       "description_it": "Crea, legge, modifica, controlla ed elabora in batch file Word/DOCX, Excel/XLSX, PowerPoint/PPTX, compatibili WPS e PDF, incluse conversioni CSV, formule, grafici e formattazione. Non per presentazioni di alto design da zero o deliverable non office.",
       "dependencies": [
         {
@@ -562,20 +562,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-officeworker-1.0.17.json",
-        "sha256": "sha256:1a8a7900248bdfa67c0a902c1867ccdb83a9bb25ac2b463bc3ee4c60742049f8",
-        "size": 7474
+        "url": "artifacts/talia-agents-officeworker-1.0.18.json",
+        "sha256": "sha256:11000c2c1f31c49e2da00d77e5a65c47fcc94f3dbdffd5e2b5f4896e52337197",
+        "size": 7559
       }
     },
     {
       "id": "talia-agents/pptmaker",
       "kind": "agent",
-      "version": "1.2.30",
+      "version": "1.2.31",
       "name": "PptMaker",
       "description": "Creates, edits and reviews native editable PPTX presentations or deck outlines from topics, documents, data, visual references or existing decks. Follows supplied visual direction or develops an audience-led design and checks rendered results.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:42c9167b78ba295703c2aa4ac6b6f75e9d60bd09272947dbaf7a85cb9dbc25f7",
+      "digest": "sha256:bc057096a93ba56300cb750682c1361480f58e49d4b4e14c74a25a8ba142b623",
       "description_it": "Crea, modifica e revisiona presentazioni PPTX native modificabili o outline di deck da argomenti, documenti, dati, riferimenti visivi o deck esistenti. Segue la direzione visiva fornita o sviluppa un design guidato dal pubblico e verifica i risultati renderizzati.",
       "dependencies": [
         {
@@ -584,20 +584,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-pptmaker-1.2.30.json",
-        "sha256": "sha256:a4490e1c1e3792e36e04af9c5dccf62243bd82e328ceb1b1290f2f86c45bf7e0",
-        "size": 65082
+        "url": "artifacts/talia-agents-pptmaker-1.2.31.json",
+        "sha256": "sha256:c4f52b1756fef7b99aa92cffad46901f7b8d6b82b1103de345870e58aac14457",
+        "size": 65171
       }
     },
     {
       "id": "talia-agents/product-manager",
       "kind": "agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "name": "Senior Product Manager",
       "description": "Prioritizes outcomes, scope and release decisions using user evidence, constraints and explicit trade-offs; optional for larger product work.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:13b96a66477e333547b2f09e429fd73985f1294217641da24d046ddb9472766b",
+      "digest": "sha256:de83d154dc56157b68cc0869293c4fedebc234d9efc522ff661bca1141468a4c",
       "description_it": "Dà priorità a risultati, scope e release usando evidenze sugli utenti, vincoli e compromessi espliciti; opzionale per lavori di prodotto più ampi.",
       "dependencies": [
         {
@@ -610,20 +610,20 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-product-manager-1.0.0.json",
-        "sha256": "sha256:146185e562d8af36ba1f298c50155f15189dd114f5badd90e904cc64b619fdd5",
-        "size": 5494
+        "url": "artifacts/talia-agents-product-manager-1.0.1.json",
+        "sha256": "sha256:73208689de75bcd2542e4b163ff02fc0d2d8bfc02ffbf407f85c54c9146579ec",
+        "size": 5581
       }
     },
     {
       "id": "talia-agents/productdeveloper",
       "kind": "agent",
-      "version": "1.0.14",
+      "version": "1.0.15",
       "name": "ProductDeveloper",
       "description": "Implements clear requirements, PRDs, issues, bugs or designs in a repository, delivering code changes, tests and verification. Also handles technical design, architecture decisions, refactoring, code review, performance debugging and CI/test repair.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:df92d5244124682c4c24b3e64f3c6ab04af5a447410c294fdd59ae6272314b99",
+      "digest": "sha256:d1631041cc69c18e122f8e9c957620262f9e084737a73d32c92cfcff730faa78",
       "description_it": "Implementa requisiti chiari, PRD, issue, bug o design in un repository, consegnando modifiche al codice, test e verifiche. Gestisce anche design tecnico, decisioni di architettura, refactoring, code review, debug di performance e riparazione di CI/test.",
       "dependencies": [
         {
@@ -648,36 +648,36 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-productdeveloper-1.0.14.json",
-        "sha256": "sha256:116ba31593cff90e83b317ca7999955cff0a439c7af2c83a6d6b00b583d7d763",
-        "size": 8498
+        "url": "artifacts/talia-agents-productdeveloper-1.0.15.json",
+        "sha256": "sha256:61a2a550cc3e82368e488719f361c3855fa67394d4071b1c4b6e99189b7b4b98",
+        "size": 8586
       }
     },
     {
       "id": "talia-agents/seogeoagent",
       "kind": "agent",
-      "version": "1.0.53",
+      "version": "1.0.54",
       "name": "SeoGeoAgent",
       "description": "Audits and improves website SEO/GEO: technical SEO, indexing, structured data, Core Web Vitals, content quality and AI citability. Delivers scores, prioritized actions and dashboards; monitors regressions, fixes supplied repositories with retesting, writes GEO content, and evaluates backlink or guest-post pricing.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:c1ed8f0884e95fddd6421140b73f55b70778d335a71c18eb165d3a7c73fdfb37",
+      "digest": "sha256:e1396f29a377973cc63181922f59a25656f05bb1deba2e421e2e3a855d233763",
       "description_it": "Audita e migliora SEO/GEO del sito: SEO tecnica, indicizzazione, dati strutturati, Core Web Vitals, qualità dei contenuti e citabilità AI. Consegna punteggi, azioni prioritarie e dashboard; monitora regressioni, corregge repository forniti con ritest, scrive contenuti GEO e valuta prezzi di backlink o guest post.",
       "artifact": {
-        "url": "artifacts/talia-agents-seogeoagent-1.0.53.json",
-        "sha256": "sha256:2970cc3d0dae2ef7589d7954c94911776fa769614787e781f7316d5246e8c9bf",
-        "size": 535479
+        "url": "artifacts/talia-agents-seogeoagent-1.0.54.json",
+        "sha256": "sha256:9a878f14bb6ee339bebefef3198847466e6b7feb81bb98d4a437d931a3df0722",
+        "size": 535553
       }
     },
     {
       "id": "talia-agents/uidesigner",
       "kind": "agent",
-      "version": "1.3.44",
+      "version": "1.3.45",
       "name": "Senior UX/UI Designer",
       "description": "Designs and critiques usable, accessible product flows and visual systems, applying Impeccable anti-pattern checks with contextual judgment.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:d35bbab72f23eec80c8036399e1ef3b26602cefd0e08cb741b6b4edfdb6ecd70",
+      "digest": "sha256:a681173be73d4feb8666626f7791be0f21d0bbc5e81721fc58fbbadb42249b14",
       "description_it": "Progetta e valuta flussi e sistemi visivi accessibili e usabili, usando i controlli antipattern di Impeccable con giudizio sul contesto.",
       "dependencies": [
         {
@@ -686,25 +686,25 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-uidesigner-1.3.44.json",
-        "sha256": "sha256:f23531e1a4d8f256d270ddf1aff2a65c6a71bb5330d455b7f206e2c92d663bdc",
-        "size": 198064
+        "url": "artifacts/talia-agents-uidesigner-1.3.45.json",
+        "sha256": "sha256:489ba5361981d18b842e746d4ae4787c06b8949eb3d8ce22b47c4a5dcfd21bd9",
+        "size": 198163
       }
     },
     {
       "id": "talia-agents/videostudio",
       "kind": "agent",
-      "version": "1.6.101",
+      "version": "1.6.102",
       "name": "VideoStudio",
       "description": "Creates and edits videos from briefs, reference images or videos, including recreation, explainers, animation, generated footage, avatars and semantic edits. Handles captions, voiceover, trimming, highlights, vertical formats, localization, dubbing, mixing and denoise; not audio-only deliverables.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:db7bc46be94a6699331821c97b8259ebc502b90d5d2bf6390c7dc8bd42bfbe9d",
+      "digest": "sha256:9532a3df6715c4a4897f905adfdafef38155a6c1017c725a8a576245b12236f0",
       "description_it": "Crea e modifica video da brief, immagini o video di riferimento, inclusa ricreazione, explainer, animazione, footage generato, avatar ed edit semantici. Gestisce sottotitoli, voiceover, trimming, highlights, formati verticali, localizzazione, doppiaggio, mix e denoise; non deliverable solo audio.",
       "artifact": {
-        "url": "artifacts/talia-agents-videostudio-1.6.101.json",
-        "sha256": "sha256:e15870dd58a3b42714d688680423fca0b80a299f58e76e56413df7daa4b7056c",
-        "size": 915330
+        "url": "artifacts/talia-agents-videostudio-1.6.102.json",
+        "sha256": "sha256:5e265dc7a7e0c47ed220db323478f7a950d6aa7b916e263253c21847f5ab73d4",
+        "size": 915404
       }
     },
     {

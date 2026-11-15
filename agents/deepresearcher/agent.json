@@ -1,6 +1,6 @@
 {
   "agent_id": "78900d8758bc",
-  "version": "1.0.65",
+  "version": "1.0.66",
   "name": "DeepResearcher",
   "description_zh": "基于网页、学术来源和用户材料开展复杂主题的深度研究、行业与文献综述、趋势分析和说法核验；交付包含引用、置信度、矛盾证据和限制说明的可复核报告。",
   "description_en": "Researches complex topics using web, scholarly and user-provided sources; produces industry, literature and trend reviews and verifies claims. Delivers auditable reports with citations, confidence, conflicting evidence and limitations.",
@@ -49,5 +49,9 @@
   "color": "sky",
   "created_at": "2026-06-04T18:10:00",
   "updated_at": "2026-09-20T03:05:03.281Z",
-  "category": "data"
+  "category": "data",
+  "routing_tags": [
+    "research.deep",
+    "research.sources"
+  ]
 }

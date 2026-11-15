@@ -1,10 +1,14 @@
 {
   "id": "talia-agents/videostudio",
   "kind": "agent",
-  "version": "1.6.101",
+  "version": "1.6.102",
   "name": "VideoStudio",
   "description": "Creates and edits videos from briefs, reference images or videos, including recreation, explainers, animation, generated footage, avatars and semantic edits. Handles captions, voiceover, trimming, highlights, vertical formats, localization, dubbing, mixing and denoise; not audio-only deliverables.",
   "description_it": "Crea e modifica video da brief, immagini o video di riferimento, inclusa ricreazione, explainer, animazione, footage generato, avatar ed edit semantici. Gestisce sottotitoli, voiceover, trimming, highlights, formati verticali, localizzazione, doppiaggio, mix e denoise; non deliverable solo audio.",
   "publisher": "talia-agents",
-  "license": "MIT"
+  "license": "MIT",
+  "routing_tags": [
+    "media.video",
+    "media.editing"
+  ]
 }

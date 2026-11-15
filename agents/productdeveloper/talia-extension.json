@@ -1,7 +1,7 @@
 {
   "id": "talia-agents/productdeveloper",
   "kind": "agent",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "name": "ProductDeveloper",
   "description": "Implements clear requirements, PRDs, issues, bugs or designs in a repository, delivering code changes, tests and verification. Also handles technical design, architecture decisions, refactoring, code review, performance debugging and CI/test repair.",
   "description_it": "Implementa requisiti chiari, PRD, issue, bug o design in un repository, consegnando modifiche al codice, test e verifiche. Gestisce anche design tecnico, decisioni di architettura, refactoring, code review, debug di performance e riparazione di CI/test.",
@@ -28,5 +28,9 @@
       "kind": "skill",
       "id": "talia-skills/swiftui-dev"
     }
+  ],
+  "routing_tags": [
+    "product.development",
+    "product.prototyping"
   ]
 }
