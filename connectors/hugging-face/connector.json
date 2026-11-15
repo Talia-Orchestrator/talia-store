@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "hugging-face",
+    "display_name": "Hugging Face",
+    "category": "developer",
+    "description_en": "Explore models, datasets, Spaces, and papers; manage collections and discussions.",
+    "description_it": "Esplora modelli, set di dati, Spaces e articoli scientifici; gestisci raccolte e discussioni.",
+    "integration_state": "requires_direct_auth"
+  }
+}

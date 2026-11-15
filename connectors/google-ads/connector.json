@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "google-ads",
+    "display_name": "Google Ads",
+    "category": "commerce",
+    "description_en": "Manage campaigns, ad groups, assets, budgets, bidding, audiences, conversions, and GAQL reporting.",
+    "description_it": "Gestisci campagne, gruppi di annunci, risorse, budget, offerte, segmenti di pubblico, conversioni e report GAQL.",
+    "integration_state": "requires_direct_auth"
+  }
+}

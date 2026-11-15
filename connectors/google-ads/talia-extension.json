@@ -1,0 +1,11 @@
+{
+  "id": "talia-connectors/google-ads",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "Google Ads",
+  "description": "Catalog listing for Google Ads. Direct authentication is not yet available in Talia; installation does not connect the service.",
+  "description_it": "Scheda di Google Ads. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+  "publisher": "talia-connectors",
+  "license": "MIT",
+  "minHostVersion": "0.11.0"
+}

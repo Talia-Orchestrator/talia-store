@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "gcal",
+    "display_name": "Google Calendar",
+    "category": "productivity",
+    "description_en": "View, create, and update calendar events and meetings.",
+    "description_it": "Visualizza, crea e aggiorna eventi del calendario e riunioni.",
+    "integration_state": "requires_direct_auth"
+  }
+}

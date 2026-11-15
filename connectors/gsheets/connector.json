@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "gsheets",
+    "display_name": "Google Sheets",
+    "category": "data",
+    "description_en": "Use spreadsheets as a data source — read and write cells and formulas.",
+    "description_it": "Usa i fogli di calcolo come fonte di dati: leggi e scrivi celle e formule.",
+    "integration_state": "requires_direct_auth"
+  }
+}

@@ -29,6 +29,12 @@ references for Talia 0.10.0 or newer, alongside the existing MCP packages.
 These references open Talia's built-in setup and do not run or authorize a CLI
 during Store installation. Lark shares the Feishu package.
 
+The Store also distributes 29 declarative listings for the selected Atlassian,
+Google, Microsoft, Bitbucket, GitLab, GitHub, and Hugging Face services. These
+listings contain no executable transport or credentials. Installing one adds
+an unavailable card to Talia's connector catalog; direct authentication must
+be implemented and verified before it can connect.
+
 Run `npm test` to compare the committed catalog and artifacts with the selected sources, verify artifact digests and sizes, scan package text for personal paths and credentials, and validate the detached signature with the public key. This check does not regenerate or sign files. After rebuilding, the committed signature no longer represents the new catalog until the release owner signs the reviewed `catalog.json`; do not publish a mismatched index/signature pair.
 
 Il procedimento completo per aggiornare catalogo, release dell'app e pagina download è in [`docs/store-update-runbook.md`](docs/store-update-runbook.md).

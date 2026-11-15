@@ -294,7 +294,20 @@ function readPackage(packageDirectory, formatVersion = 1) {
     if (!connector || typeof connector !== 'object' || Array.isArray(connector) || connector.schemaVersion !== 1) {
       fail(`${id}: connector.json must use schemaVersion 1`);
     }
-    if (connector.catalog_reference !== undefined && connector.preset === undefined && connector.template === undefined) {
+    if (connector.catalog_listing !== undefined && connector.preset === undefined && connector.template === undefined && connector.catalog_reference === undefined) {
+      const listing = connector.catalog_listing;
+      const selected = new Set(['atlassian','bitbucket','excel','gcal','gdocs','gdrive','github','gitlab','gmail','google-ads','google-analytics','google-bigquery','google-classroom','google-maps','google-meet','google-photos','google-slides','google-tasks','google-workspace','gsearch-console','gsheets','gtasks','hugging-face','m365-calendar','m365-mail','microsoft-teams','onedrive','outlook','youtube']);
+      if (Object.keys(connector).sort().join(',') !== 'catalog_listing,schemaVersion'
+        || !listing || typeof listing !== 'object' || Array.isArray(listing)
+        || Object.keys(listing).sort().join(',') !== 'category,description_en,description_it,display_name,id,integration_state'
+        || !selected.has(listing.id) || id !== `talia-connectors/${listing.id}`
+        || !['developer','productivity','communication','search','data','commerce'].includes(listing.category)
+        || listing.integration_state !== 'requires_direct_auth'
+        || [listing.display_name,listing.description_en,listing.description_it].some(value =>
+          typeof value !== 'string' || !value.trim() || value.length > 2000 || /[\u0000-\u001f\u007f<>]/.test(value))) {
+        fail(`${id}: invalid catalog listing`);
+      }
+    } else if (connector.catalog_reference !== undefined && connector.preset === undefined && connector.template === undefined) {
       const reference = connector.catalog_reference;
       const allowed = {wecom: 'talia-connectors/wecom', feishu: 'talia-connectors/feishu', dingtalk: 'talia-connectors/dingtalk'};
       if (Object.keys(connector).sort().join(',') !== 'catalog_reference,schemaVersion'
@@ -334,7 +347,7 @@ function readPackage(packageDirectory, formatVersion = 1) {
           || template.command_hint !== undefined || template.args !== undefined) fail(`${id}: streamable-http connector template is invalid`);
       }
     } else {
-      fail(`${id}: connector.json must contain exactly one preset, template, or catalog reference object`);
+      fail(`${id}: connector.json must contain exactly one preset, template, catalog listing, or catalog reference object`);
     }
   }
   if (kind === 'app') {

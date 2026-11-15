@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "gdrive",
+    "display_name": "Google Drive",
+    "category": "productivity",
+    "description_en": "Search, read, create, and organize Google Drive files.",
+    "description_it": "Cerca, leggi, crea e organizza file di Google Drive.",
+    "integration_state": "requires_direct_auth"
+  }
+}

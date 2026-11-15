@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "google-workspace",
+    "display_name": "Google Workspace",
+    "category": "productivity",
+    "description_en": "Connect Gmail, Calendar, Docs, Sheets, and Tasks in one consent; individual services can also be connected separately.",
+    "description_it": "Collega Gmail, Calendar, Docs, Sheets e Tasks con un unico consenso; i singoli servizi possono anche essere collegati separatamente.",
+    "integration_state": "requires_direct_auth"
+  }
+}

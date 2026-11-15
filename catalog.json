@@ -700,6 +700,40 @@
       }
     },
     {
+      "id": "talia-connectors/atlassian",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Atlassian",
+      "description": "Catalog listing for Atlassian. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:aaab6c9a3d113b455bfb19865e383f8e79a05e6cbfe5793d997f3cc94fc00e80",
+      "description_it": "Scheda di Atlassian. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-atlassian-1.0.0.json",
+        "sha256": "sha256:81a16c4ab55e0d6c13d0ee34ca89fb7a0be9a2f0d7773e11a51a77ea71da3588",
+        "size": 2925
+      }
+    },
+    {
+      "id": "talia-connectors/bitbucket",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Bitbucket",
+      "description": "Catalog listing for Bitbucket. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:baa86cf224e3c500a4006c28520cae82e3dcf8d69078b36aa8365e6414dbbf5b",
+      "description_it": "Scheda di Bitbucket. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-bitbucket-1.0.0.json",
+        "sha256": "sha256:cc6b864bc7587ebeb5d5c176ecf07ca3071292033e475b833b5702e119840361",
+        "size": 2782
+      }
+    },
+    {
       "id": "talia-connectors/dingtalk",
       "kind": "connector",
       "version": "1.0.0",
@@ -716,6 +750,23 @@
       }
     },
     {
+      "id": "talia-connectors/excel",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Microsoft Excel",
+      "description": "Catalog listing for Microsoft Excel. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:8326fc1249f40fa0d9e2daad55bcc39b651f8af26cf46d3f522e147985b5fc1a",
+      "description_it": "Scheda di Microsoft Excel. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-excel-1.0.0.json",
+        "sha256": "sha256:63c141bb4e2140c38debf1395aabff226246c1da451746ae945f5190f8c4520c",
+        "size": 2944
+      }
+    },
+    {
       "id": "talia-connectors/feishu",
       "kind": "connector",
       "version": "1.0.0",
@@ -729,6 +780,431 @@
         "url": "artifacts/talia-connectors-feishu-1.0.0.json",
         "sha256": "sha256:bed44471c509ed4cb12a8a73d66fcbb4078d42a1915de2bbe0e78d24b06bb940",
         "size": 2534
+      }
+    },
+    {
+      "id": "talia-connectors/gcal",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Calendar",
+      "description": "Catalog listing for Google Calendar. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:b9207e1cfd5eef4e6dac04206e7975b28f497c1b2328789b61a7ec5c50b193ed",
+      "description_it": "Scheda di Google Calendar. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-gcal-1.0.0.json",
+        "sha256": "sha256:694b1019e6c05c300bda00fb33b8d60fb7ecd01744cbf0e203c55a14e6c16070",
+        "size": 2797
+      }
+    },
+    {
+      "id": "talia-connectors/gdocs",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Docs",
+      "description": "Catalog listing for Google Docs. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:ea93e8ab8bd7e7b284b060a6921b6eb42ee74c607e037bdca27827c795804afe",
+      "description_it": "Scheda di Google Docs. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-gdocs-1.0.0.json",
+        "sha256": "sha256:8156a989cc179f0990bf7b33f031329f69e00e8a054c3007b5aa8eaf735b3862",
+        "size": 2784
+      }
+    },
+    {
+      "id": "talia-connectors/gdrive",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Drive",
+      "description": "Catalog listing for Google Drive. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:006b04e53b814641a9717a7a751f8f087fc25f249bc3423dfd43897786d42e73",
+      "description_it": "Scheda di Google Drive. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-gdrive-1.0.0.json",
+        "sha256": "sha256:d766a9d935db6ac0ada7865ea6abbc4255fc67d2eed651fb8a713bb11b6023f7",
+        "size": 2771
+      }
+    },
+    {
+      "id": "talia-connectors/github",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "GitHub",
+      "description": "Catalog listing for GitHub. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:8fb8bbc0e07979c3e33c47036a8b6cbfa0787ad827a8eebac54379044571b671",
+      "description_it": "Scheda di GitHub. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-github-1.0.0.json",
+        "sha256": "sha256:1db29169aa8439523d508cde7235e97bafa1046058cba0d363392ffc8ccacf14",
+        "size": 2755
+      }
+    },
+    {
+      "id": "talia-connectors/gitlab",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "GitLab",
+      "description": "Catalog listing for GitLab. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:3565114f757cb6dc3cdc7c29f5fe5077f67bdfe44c3a14484aadf3804e981fa3",
+      "description_it": "Scheda di GitLab. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-gitlab-1.0.0.json",
+        "sha256": "sha256:e970489001fca7d724841a85ce92ea7a1106b92e5e090d41f43aba2721acd8c8",
+        "size": 2814
+      }
+    },
+    {
+      "id": "talia-connectors/gmail",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Gmail",
+      "description": "Catalog listing for Gmail. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:859799664c225e02eb2e009fb517265650fe76f85421332a7dda588cef49aef0",
+      "description_it": "Scheda di Gmail. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-gmail-1.0.0.json",
+        "sha256": "sha256:c48a4e7b27ed7790c1308ff4f1ea625685295f1c0ff6c782abd73641db1e830f",
+        "size": 2704
+      }
+    },
+    {
+      "id": "talia-connectors/google-ads",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Ads",
+      "description": "Catalog listing for Google Ads. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:6e15cd7d876f1f32bfe4f3c71f79e66b7d2d4650b0fbecec8e93da20f55a53c6",
+      "description_it": "Scheda di Google Ads. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-google-ads-1.0.0.json",
+        "sha256": "sha256:b12082f13a77691e87dd31c40d53f83d80a2008f7426eac424485c4ee82951d8",
+        "size": 2865
+      }
+    },
+    {
+      "id": "talia-connectors/google-analytics",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Analytics",
+      "description": "Catalog listing for Google Analytics. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:162ebdd011d4c37f909324bf210951fc85924b3116132716a2d15bf8e4da26a6",
+      "description_it": "Scheda di Google Analytics. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-google-analytics-1.0.0.json",
+        "sha256": "sha256:8c78017a16303024f0e0d54b9c7a7e11e8481f74ee7873d65f1eb2114f30e5da",
+        "size": 2994
+      }
+    },
+    {
+      "id": "talia-connectors/google-bigquery",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google BigQuery",
+      "description": "Catalog listing for Google BigQuery. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:b5a9dbf1023d5ffb3e03b5e235802218cd38096be10050c47365131732c0b101",
+      "description_it": "Scheda di Google BigQuery. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-google-bigquery-1.0.0.json",
+        "sha256": "sha256:0502eb79f7ef0135f775de77fee387d422d459d20c9af11954f4ac0b7496d178",
+        "size": 2823
+      }
+    },
+    {
+      "id": "talia-connectors/google-classroom",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Classroom",
+      "description": "Catalog listing for Google Classroom. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:40d419d5f8a91345e833f94f0170350c2209748fa28259a7825e079599d9254c",
+      "description_it": "Scheda di Google Classroom. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-google-classroom-1.0.0.json",
+        "sha256": "sha256:f8d06450503044e5077be7dff324e44c916be4f18b83f09c4fcf228f349137c1",
+        "size": 2872
+      }
+    },
+    {
+      "id": "talia-connectors/google-maps",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Maps",
+      "description": "Catalog listing for Google Maps. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:c342108cb47b1b91bfb2071b350edbdead3b6d0f05cf732db9e59b72905ef6de",
+      "description_it": "Scheda di Google Maps. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-google-maps-1.0.0.json",
+        "sha256": "sha256:aefae8a7d38432b03d81e234da5e55b04aaca0a5429e648d06defc4388f65180",
+        "size": 2769
+      }
+    },
+    {
+      "id": "talia-connectors/google-meet",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Meet",
+      "description": "Catalog listing for Google Meet. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:3dcbfb88fea8eedadafa7f6cc40b3ba4d1da4676c6c71ce27551951def73be40",
+      "description_it": "Scheda di Google Meet. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-google-meet-1.0.0.json",
+        "sha256": "sha256:64f8f9086a3a805bae2051733c3a719b1aa3e8bfea88984d5f415298d21df4f9",
+        "size": 2877
+      }
+    },
+    {
+      "id": "talia-connectors/google-photos",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Photos",
+      "description": "Catalog listing for Google Photos. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:04d8d82b22843ba19f42777336ba23f1ae670a20b1e5ef36a06cee299c2d32f5",
+      "description_it": "Scheda di Google Photos. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-google-photos-1.0.0.json",
+        "sha256": "sha256:598ad3874a3a836c97893cf09cd3147cc5d646b998a8ab3827ae9ab5aad8228d",
+        "size": 2876
+      }
+    },
+    {
+      "id": "talia-connectors/google-slides",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Slides",
+      "description": "Catalog listing for Google Slides. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:eb592fe33e0758c8d69b9b6e6dd6004bec91b1830e38b4a0ce5a381f3ae82b22",
+      "description_it": "Scheda di Google Slides. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-google-slides-1.0.0.json",
+        "sha256": "sha256:27cc4a8b02b0fe2f51499263e5b8904d73d4499c9818253857e69845c7e96195",
+        "size": 2821
+      }
+    },
+    {
+      "id": "talia-connectors/google-tasks",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Tasks",
+      "description": "Catalog listing for Google Tasks. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:f7d07c41cd8dca479db27c4a21349fcd867d1fd395445a572e36b721852bc6e4",
+      "description_it": "Scheda di Google Tasks. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-google-tasks-1.0.0.json",
+        "sha256": "sha256:f53be2380a32026ce19f2fbf3a6e4206f0765f619f40b41fa43d2c612444135f",
+        "size": 2795
+      }
+    },
+    {
+      "id": "talia-connectors/google-workspace",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Workspace",
+      "description": "Catalog listing for Google Workspace. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:7a0ec73875fc641a437d1fd9f20e4936b2f728775e0f69da3a5f2398d82e265e",
+      "description_it": "Scheda di Google Workspace. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-google-workspace-1.0.0.json",
+        "sha256": "sha256:5531d01b7736f267ab528650e78fd3e622f2454bff141514dbc0ed206914d6b2",
+        "size": 2963
+      }
+    },
+    {
+      "id": "talia-connectors/gsearch-console",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Search Console",
+      "description": "Catalog listing for Google Search Console. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:d684c2d0ad9e01a169d1fb494078586eed6ab91817b34dab49d75bb92a264d16",
+      "description_it": "Scheda di Google Search Console. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-gsearch-console-1.0.0.json",
+        "sha256": "sha256:1f61ffefa9491775e007f454aa3c559745b5e1815959fa915c18766d00640391",
+        "size": 2935
+      }
+    },
+    {
+      "id": "talia-connectors/gsheets",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Sheets",
+      "description": "Catalog listing for Google Sheets. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:04e4ea1e8b3e018d53f2573aa3b80691cdabe0b84174792103d9d3c197a94806",
+      "description_it": "Scheda di Google Sheets. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-gsheets-1.0.0.json",
+        "sha256": "sha256:d1048ce15b0a15d91035c52fcc3b7a9fd522afacf22cd449849375fecba2cc74",
+        "size": 2812
+      }
+    },
+    {
+      "id": "talia-connectors/gtasks",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Tasks",
+      "description": "Catalog listing for Google Tasks. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:03fbca77d85b5097cee5a01b59110a499bef3448c39412adee30a5914cf00bf5",
+      "description_it": "Scheda di Google Tasks. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-gtasks-1.0.0.json",
+        "sha256": "sha256:df1db08c0329e7a2bd3a3ea443cbdb3b2f6b67ae4e72b87973f318df3b8d35bb",
+        "size": 2795
+      }
+    },
+    {
+      "id": "talia-connectors/hugging-face",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Hugging Face",
+      "description": "Catalog listing for Hugging Face. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:d99681abcaf8e7e919e1ef7173c7b5c08e41ef277eb53279d949942c38f05aaf",
+      "description_it": "Scheda di Hugging Face. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-hugging-face-1.0.0.json",
+        "sha256": "sha256:63af2899c6b40b3cc6fe03ac34fcf8ec902c134eac66ae13075249c330010a39",
+        "size": 2848
+      }
+    },
+    {
+      "id": "talia-connectors/m365-calendar",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Microsoft 365 Calendar",
+      "description": "Catalog listing for Microsoft 365 Calendar. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:f44427db0895e1c376e6eede8b3488284a3acc293086eabfadf299cbea65ba87",
+      "description_it": "Scheda di Microsoft 365 Calendar. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-m365-calendar-1.0.0.json",
+        "sha256": "sha256:c19f92de53f3c9bf5b05c343f362362185a35b3f21e8b2b2eafca36709ac12a2",
+        "size": 2871
+      }
+    },
+    {
+      "id": "talia-connectors/m365-mail",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Microsoft 365 Mail",
+      "description": "Catalog listing for Microsoft 365 Mail. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:4e697f7759c90a8247e2d440c785c593cce2f7cf3dc1f8de7b5aa8426b9e0c93",
+      "description_it": "Scheda di Microsoft 365 Mail. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-m365-mail-1.0.0.json",
+        "sha256": "sha256:4958385cef94e0ca4b3b0ad7f4bd2d7c77d700f818894266f9ccc9b3f3b29431",
+        "size": 2822
+      }
+    },
+    {
+      "id": "talia-connectors/microsoft-teams",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Microsoft Teams",
+      "description": "Catalog listing for Microsoft Teams. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:5a71fef3d7d24bb081270cc7826abcb1b75b5ab0d5cac5ac2ae0b8a2b319a55e",
+      "description_it": "Scheda di Microsoft Teams. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-microsoft-teams-1.0.0.json",
+        "sha256": "sha256:a032211ee547bf5e21b1ae1757a459627c0e0345f667e8bb195b289116cfe843",
+        "size": 2959
+      }
+    },
+    {
+      "id": "talia-connectors/onedrive",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "OneDrive",
+      "description": "Catalog listing for OneDrive. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:2d066fce62150ab90c2c3aa730b26b73885429808a9f6077010a1b0f94e8fa43",
+      "description_it": "Scheda di OneDrive. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-onedrive-1.0.0.json",
+        "sha256": "sha256:36dc0e3330d8b07d0b48155a09a89321780721d2296079eef1a51ed5008b7b94",
+        "size": 2738
+      }
+    },
+    {
+      "id": "talia-connectors/outlook",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Outlook",
+      "description": "Catalog listing for Outlook. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:56e4e08f1175be433294a04070db56d18ffcc878e7188d77808e15d4dda36a96",
+      "description_it": "Scheda di Outlook. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-outlook-1.0.0.json",
+        "sha256": "sha256:61a4e59fc8493290ade9e39b6ae5f203b6ccc3fb54e636bddef19fcf4f94d51f",
+        "size": 2788
       }
     },
     {
@@ -764,6 +1240,23 @@
       }
     },
     {
+      "id": "talia-connectors/youtube",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "YouTube",
+      "description": "Catalog listing for YouTube. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:68aa45ddb3a9446ea2af424bab2144c2ac7bca4ea1c9a4d6910432e3f5e25c3d",
+      "description_it": "Scheda di YouTube. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-youtube-1.0.0.json",
+        "sha256": "sha256:3eec9b5f617e2e0460dee9e824caed4837fd0616dea5b798fe78eb55e8b51fb4",
+        "size": 2810
+      }
+    },
+    {
       "id": "talia-library/manuale-talia",
       "kind": "library",
       "version": "1.2.1",
@@ -771,13 +1264,13 @@
       "description": "Complete Talia desktop manual, available offline in the personal Library.",
       "publisher": "talia-library",
       "license": "MIT",
-      "digest": "sha256:3e8465c925aea42c3501ebd84d55811b52482471cb3b14013da47c01afa308f9",
+      "digest": "sha256:8b7b15fdd24d1d44cf8c7ac7836a27b7cbffb9b8ec6600d2107936626340eab1",
       "description_it": "Manuale completo di Talia desktop, disponibile offline nella Biblioteca personale.",
       "minHostVersion": "0.11.0",
       "artifact": {
         "url": "artifacts/talia-library-manuale-talia-1.2.1.json",
-        "sha256": "sha256:816e76c0fd797bad7648eef275033cee2a7ff9ea0e1c3c32c5b7cc813cec3ef4",
-        "size": 95009
+        "sha256": "sha256:e44ba8e8d0ca8c9cf01e518c34263f67dff260089ce0d84f9f8e77fdb25a2ea2",
+        "size": 95072
       }
     },
     {

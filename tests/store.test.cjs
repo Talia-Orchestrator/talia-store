@@ -33,7 +33,7 @@ test('packer accepts only coordinated built-in CLI references', () => {
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);
   const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app', 'library'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
-  assert.deepEqual(counts, { agent: 15, skill: 27, connector: 20, app: 3, library: 1 });
+  assert.deepEqual(counts, { agent: 15, skill: 27, connector: 49, app: 3, library: 1 });
   const agents = new Set(catalog.packages.filter((pkg) => pkg.kind === 'agent').map((pkg) => pkg.id));
   assert.deepEqual([...agents].sort(), [
     'talia-agents/app-architetto',
@@ -47,6 +47,22 @@ test('public store includes only the approved categories and canonical agent set
     'talia-agents/seogeoagent', 'talia-agents/uidesigner', 'talia-agents/videostudio',
   ].sort());
   assert.equal([...agents].some((id) => /stockanalyser|ecommerceoperator|ecommercereviewer|ecommercewriter|ecommerceanalyzer/.test(id)), false);
+});
+
+test('selected service listings are inert and complete', () => {
+  const selected = ['atlassian','bitbucket','excel','gcal','gdocs','gdrive','github','gitlab','gmail','google-ads','google-analytics','google-bigquery','google-classroom','google-maps','google-meet','google-photos','google-slides','google-tasks','google-workspace','gsearch-console','gsheets','gtasks','hugging-face','m365-calendar','m365-mail','microsoft-teams','onedrive','outlook','youtube'];
+  for (const slug of selected) {
+    const id=`talia-connectors/${slug}`;
+    const item=catalog.packages.find(pkg=>pkg.id===id);
+    assert.ok(item,id);
+    const packagePayload=JSON.parse(fs.readFileSync(path.join(root,item.artifact.url),'utf8')).packages[0];
+    const connector=JSON.parse(packagePayload.files['connector.json']);
+    assert.deepEqual(Object.keys(connector).sort(),['catalog_listing','schemaVersion']);
+    assert.equal(connector.catalog_listing.id,slug);
+    assert.equal(connector.catalog_listing.integration_state,'requires_direct_auth');
+    assert.equal(item.minHostVersion,'0.11.0');
+  }
+  assert.equal(catalog.packages.filter(pkg=>pkg.kind==='connector' && pkg.id.startsWith('talia-connectors/')).length,selected.length+4);
 });
 
 test('CLI Store entries reference only the matching built-in setup', () => {

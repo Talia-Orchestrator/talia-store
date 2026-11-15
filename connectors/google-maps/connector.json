@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "google-maps",
+    "display_name": "Google Maps",
+    "category": "search",
+    "description_en": "Search places, geocode addresses, and plan routes.",
+    "description_it": "Cerca luoghi, geocodifica indirizzi e pianifica percorsi.",
+    "integration_state": "requires_direct_auth"
+  }
+}

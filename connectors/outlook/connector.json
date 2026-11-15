@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "outlook",
+    "display_name": "Outlook",
+    "category": "communication",
+    "description_en": "Read Outlook profile, contacts, mailbox settings, and tasks.",
+    "description_it": "Leggi il profilo, i contatti, le impostazioni della casella di posta e le attività di Outlook.",
+    "integration_state": "requires_direct_auth"
+  }
+}

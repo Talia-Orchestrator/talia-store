@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "m365-calendar",
+    "display_name": "Microsoft 365 Calendar",
+    "category": "productivity",
+    "description_en": "View, create, and update Microsoft 365 calendar events.",
+    "description_it": "Visualizza, crea e aggiorna eventi del calendario di Microsoft 365.",
+    "integration_state": "requires_direct_auth"
+  }
+}

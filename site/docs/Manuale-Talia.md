@@ -601,12 +601,13 @@ Il catalogo può mostrare risorse in cache e fonti da aggiornare. Una cache vali
 - **Stdio:** comando eseguibile, argomenti uno per riga e variabili ambiente nel formato richiesto. Il processo parte sul tuo computer a ogni connessione con i privilegi del tuo utente: non è una sandbox. La directory `cwd` non è un campo della form attuale.
 - **Preset/CLI:** un pacchetto può richiedere installazione dell'eseguibile, percorso e login. Rilevamento o configurazione salvata non provano connessione. Non tutti i connettori storici basati su relay sono operativi nel prodotto indipendente.
 
-Il catalogo Talia seleziona Figma, i quattro ID CLI di messaggistica, Atlassian,
-tutti i servizi Google e Microsoft, Bitbucket, GitLab, GitHub e Hugging Face.
-Google Ads, Google Analytics e Google Maps restano eccezioni alle categorie
-Commercio e Ricerca escluse. Le voci che richiedono il vecchio relay OAuth o
-Composio sono mostrate come non disponibili: conservarle nel catalogo non
-autorizza né abilita una connessione. I 16 preset MCP *Craft sono separati,
+Il catalogo incorporato di Talia contiene Figma e i quattro ID CLI di
+messaggistica. Lo Store distribuisce 29 schede per Atlassian, tutti i servizi
+Google e Microsoft, Bitbucket, GitLab, GitHub e Hugging Face. Google Ads,
+Google Analytics e Google Maps sono eccezioni alle categorie Commercio e
+Ricerca escluse. Una scheda appare in Connettori dopo l'installazione, ma
+resta non disponibile finché non esiste autenticazione diretta verificata:
+l'installazione non connette il servizio. I 16 preset MCP *Craft sono separati,
 opzionali e richiedono configurazione e handshake prima dell'uso.
 
 I campi header/ambiente possono essere visibili durante l'inserimento: usa l'area di configurazione, non la chat, e non condividere screenshot. Un preset non autorizza azioni sul servizio. Dopo la connessione chiedi prima una verifica in sola lettura.

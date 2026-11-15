@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "excel",
+    "display_name": "Microsoft Excel",
+    "category": "productivity",
+    "description_en": "Read and edit cloud workbooks, worksheets, tables, and charts; some features require organization permissions.",
+    "description_it": "Leggi e modifica cartelle di lavoro, fogli di lavoro, tabelle e grafici nel cloud; alcune funzionalità richiedono autorizzazioni dell'organizzazione.",
+    "integration_state": "requires_direct_auth"
+  }
+}

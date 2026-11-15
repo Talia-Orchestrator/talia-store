@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "google-bigquery",
+    "display_name": "Google BigQuery",
+    "category": "data",
+    "description_en": "Explore datasets and tables, read and write data, and run SQL.",
+    "description_it": "Esplora set di dati e tabelle, leggi e scrivi dati ed esegui SQL.",
+    "integration_state": "requires_direct_auth"
+  }
+}

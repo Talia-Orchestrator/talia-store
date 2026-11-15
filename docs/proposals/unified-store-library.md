@@ -28,6 +28,9 @@ connesso richiede l'handshake del server MCP.
 
 ## Verifica per la pubblicazione
 
-`npm test` verifica i 66 pacchetti, gli artifact e la firma. Prima di archiviare
+`npm test` verifica i 95 pacchetti, gli artifact e la firma. Le 29 schede
+selezionate per Atlassian, Google, Microsoft e sviluppo sono dichiarative:
+non installano trasporti né concedono autorizzazioni e restano disabilitate
+nel core finché non esiste l'autenticazione diretta. Prima di archiviare
 i quattro repository sorgente precedenti occorre verificare il catalogo online,
 il download anonimo degli artifact e un aggiornamento completo nell'host.

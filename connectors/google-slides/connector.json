@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "google-slides",
+    "display_name": "Google Slides",
+    "category": "productivity",
+    "description_en": "Create, read, and edit presentations; generate slide previews.",
+    "description_it": "Crea, leggi e modifica presentazioni; genera anteprime delle diapositive.",
+    "integration_state": "requires_direct_auth"
+  }
+}
