@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const storeRoot = path.resolve(__dirname, '..');
 const packer = require(path.join(storeRoot, 'tools', 'talia-catalog-pack.cjs'));
+const { validateRetainedArtifacts } = require('./retained-artifacts.cjs');
 const featuredAgents = ['app-architetto', 'app-frontend', 'app-backend', 'app-devops', 'app-e2e-tester', 'deepresearcher', 'contentwriter', 'officeworker', 'productdeveloper', 'uidesigner', 'pptmaker', 'imagestudio', 'videostudio', 'seogeoagent', 'ecommerce-researcher'];
 function packageDirs(category, names) {
   const root = path.join(storeRoot, category);
@@ -27,6 +28,5 @@ for (const artifact of built.artifacts) {
   if (!current.equals(artifact.bytes)) throw new Error(`artifact is stale: ${artifact.url}`);
 }
 const artifactRoot = path.join(storeRoot, 'artifacts');
-const actual = fs.readdirSync(artifactRoot).filter(name => fs.statSync(path.join(artifactRoot, name)).isFile());
-if (actual.length !== expected.size || actual.some(name => !expected.has(name))) throw new Error('artifacts/ contains stale or missing files.');
-console.log(`Committed source matches ${packages.length} selected packages and ${expected.size} artifacts.`);
+const retained = validateRetainedArtifacts(artifactRoot, expected, packer);
+console.log(`Committed source matches ${packages.length} selected packages and ${expected.size} current artifacts; ${retained} valid historical artifacts retained.`);

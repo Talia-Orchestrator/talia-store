@@ -76,13 +76,17 @@ invariati. `scripts/check-catalog-upgrade.cjs` confronta un catalogo
 precedente con il candidato e rifiuta rimozioni, downgrade, mutazioni a pari
 versione, cambi di kind e riuso dell'URL di artifact.
 
-Attenzione: `scripts/build-catalog.cjs` elimina gli artifact non referenziati
-dal catalogo corrente, e `scripts/validate-catalog-source.cjs` pretende
-esattamente quel set. Prima di una release bisogna definire una politica
-immutabile per gli artifact storici: archivio/release con URL stabili oppure
-retention nel repository con validator aggiornato. Se il vecchio URL è già
-stato distribuito, non va eliminato finché è necessario per reinstallazione
-e rollback. La build attuale non garantisce questa proprietà da sola.
+Il builder ora conserva gli artifact versionati non referenziati dal catalogo
+corrente e li controlla prima e dopo la build. Il packer ripete il controllo
+prima di scrivere, poi rifiuta un artifact esistente se i byte cambiano allo
+stesso URL. Il validator controlla che ogni artifact
+storico conservato sia un bundle v2 valido con nome coerente a ID/versione. Il
+test usa due versioni in una directory temporanea e verifica che la vecchia
+resti disponibile.
+Oggi il catalogo firmato contiene 95 artifact correnti e nessuno storico: la
+reinstallazione da un vecchio URL **remoto** richiederà comunque la presenza
+del file nel deployment pubblico e la verifica HTTP dopo la pubblicazione.
+La conservazione locale non prova che Pages/CDN preservino i vecchi URL.
 
 Esempio di gate pre-firma da un catalogo precedente salvato in un file locale:
 

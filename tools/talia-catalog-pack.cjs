@@ -648,6 +648,20 @@ function main(argv = process.argv.slice(2)) {
     if (version === 3) {
       const built = buildCatalogV3(args.packages.map(directory => path.resolve(directory)));
       const outputRoot = path.resolve(path.dirname(args.out));
+      const artifactRoot = path.join(outputRoot, 'artifacts');
+      if (fs.existsSync(artifactRoot)) {
+        const { validateRetainedArtifacts } = require('../scripts/retained-artifacts.cjs');
+        validateRetainedArtifacts(artifactRoot, new Set(), { validateCatalogBytes });
+      }
+      for (const artifact of built.artifacts) {
+        const target = path.join(outputRoot, artifact.url);
+        if (fs.existsSync(target)) {
+          if (!fs.lstatSync(target).isFile()) fail(`${artifact.url}: existing artifact must be a regular file`);
+          if (!fs.readFileSync(target).equals(artifact.bytes)) {
+            fail(`${artifact.url}: existing artifact differs; increase the package version instead of overwriting it`);
+          }
+        }
+      }
       for (const artifact of built.artifacts) writeAtomic(path.join(outputRoot, artifact.url), artifact.bytes);
       bytes = built.catalogBytes;
     } else bytes = buildCatalog(args.packages.map(directory => path.resolve(directory)),version);
