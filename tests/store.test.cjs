@@ -60,7 +60,7 @@ test('packer accepts only coordinated built-in CLI references', () => {
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);
   const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app', 'library'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
-  assert.deepEqual(counts, { agent: 17, skill: 27, connector: 49, app: 3, library: 1 });
+  assert.deepEqual(counts, { agent: 17, skill: 28, connector: 49, app: 3, library: 1 });
   const agents = new Set(catalog.packages.filter((pkg) => pkg.kind === 'agent').map((pkg) => pkg.id));
   assert.deepEqual([...agents].sort(), [
     'talia-agents/app-architetto',
@@ -80,6 +80,13 @@ test('public store includes only the approved categories and canonical agent set
 
 test('senior app team references installable Store agent packages', () => {
   const template = JSON.parse(fs.readFileSync(path.join(root, 'agents/app-architetto/team-preset.json'), 'utf8'));
+  const teamPackage = catalog.packages.find(row => row.kind === 'skill' && row.id === 'talia-teams/app-development');
+  assert.ok(teamPackage, 'team bundle must be visible in the signed catalog');
+  const teamArtifact = JSON.parse(fs.readFileSync(path.join(root, teamPackage.artifact.url), 'utf8')).packages[0];
+  const bundle = JSON.parse(teamArtifact.files['team.json']);
+  assert.equal(bundle.presetAgentPackage, 'talia-agents/app-architetto');
+  assert.deepEqual(bundle.agentPackages, template.agentPackages);
+  assert.deepEqual(bundle.optionalAgentPackages, template.optionalAgentPackages);
   assert.equal(template.schemaVersion, 1);
   const refs = [...template.agentPackages, ...template.optionalAgentPackages];
   assert.equal(new Set(refs).size, 8);

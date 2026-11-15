@@ -1,0 +1,24 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-teams/app-development",
+      "kind": "skill",
+      "version": "1.0.0",
+      "name": "Team sviluppo app",
+      "description": "Install a ready-to-use application development team with its seven senior agents and required skills.",
+      "publisher": "talia-teams",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Talia\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Team sviluppo app is a Talia Store bundle manifest and coordination skill.\nThe referenced agent and skill packages retain their own licenses and notices.\n",
+        "SKILL.md": "---\nname: app-development-team\ndescription_en: \"Coordinate a small, role-based application development team for implementation and bug fixing.\"\ndescription_it: \"Coordina un team di sviluppo app scegliendo solo i ruoli utili per il lavoro.\"\n---\n\n# Team sviluppo app\n\nUse the team's existing agents for implementation and bug fixes. Select only the\nroles needed for the actual task. Give each agent a concrete responsibility and\nintegrate the result before reporting completion. Read the repository's own\ninstructions and verify the changed behavior. Prefer Markdown for working\ndocuments; create Office or PDF files only when the user requests them.\n\nThe team manifest in `team.json` is Store metadata. It is not an instruction to\ninstall packages from a model response or to bypass the Store review.\n",
+        "team.json": "{\n  \"schemaVersion\": 1,\n  \"presetAgentPackage\": \"talia-agents/app-architetto\",\n  \"agentPackages\": [\n    \"talia-agents/functional-analyst\",\n    \"talia-agents/app-architetto\",\n    \"talia-agents/uidesigner\",\n    \"talia-agents/app-frontend\",\n    \"talia-agents/app-backend\",\n    \"talia-agents/app-devops\",\n    \"talia-agents/app-e2e-tester\"\n  ],\n  \"optionalAgentPackages\": [\"talia-agents/product-manager\"],\n  \"skillPackages\": [],\n  \"connectorPackages\": []\n}\n"
+      },
+      "digest": "sha256:38048de5c198e27b162b8037db3224376567a03bcd6d0176835c9ea7bf03bb4a",
+      "description_it": "Installa un team pronto per sviluppo app e correzione bug con sette agenti senior e le skill necessarie.",
+      "minHostVersion": "0.11.0"
+    }
+  ]
+}

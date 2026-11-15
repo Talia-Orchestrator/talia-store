@@ -24,6 +24,17 @@ This writes `catalog.json` and the referenced `artifacts/` files. Sign the exact
 
 The builder selects seventeen specialist agents explicitly and reads skills, connectors, apps, and Library packages from this repository. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing.
 
+## Team bundles
+
+`skills/app-development-team` is the signed bundle descriptor for the Team tab.
+It stays a valid skill package so older Talia clients can still read the catalog.
+`team.json` names the required agents and optional roles; each agent's signed
+package declares its own skill dependencies. The host previews every package
+and installs the required resources through the existing installer. Optional
+roles are not installed by default. A failed installation can be retried; the
+team becomes available only once all required agents are present. The bundle
+never downloads or executes arbitrary URLs from `team.json`.
+
 The connector catalog now includes WeCom, Feishu/Lark, and DingTalk CLI
 references for Talia 0.10.0 or newer, alongside the existing MCP packages.
 These references open Talia's built-in setup and do not run or authorize a CLI
