@@ -380,12 +380,12 @@
     {
       "id": "talia-agents/contentwriter",
       "kind": "agent",
-      "version": "1.0.38",
-      "name": "ContentWriter",
+      "version": "1.0.39",
+      "name": "Content Writer",
       "description": "Drafts and revises publication-ready social posts, articles, newsletters, tutorials and case studies from goals, sources or drafts; adapts voice and structure, humanizes prose, and checks evidence and citations.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:4df1e603e1abde44e9b9f15a8d12f323326c54cb63f4b7546ea2ee2cea9082a1",
+      "digest": "sha256:122e6303e445a4ac05f6f6b9989edaff36afde79782d63d87861fd158e44ff61",
       "description_it": "Redige e revisiona post social, articoli, newsletter, tutorial e case study pronti per la pubblicazione a partire da obiettivi, fonti o bozze; adatta voce e struttura, umanizza la prosa e verifica evidenze e citazioni.",
       "dependencies": [
         {
@@ -394,9 +394,9 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-contentwriter-1.0.38.json",
-        "sha256": "sha256:b4f07d37d74efd9b43ffe8664c6c8525e425fc9df30a0870df18314030389408",
-        "size": 6538
+        "url": "artifacts/talia-agents-contentwriter-1.0.39.json",
+        "sha256": "sha256:65074f47bf04ede6e3f13d301d05a1f8c6247a020e20ebaac7a232070fc001b9",
+        "size": 6537
       }
     },
     {
@@ -1259,18 +1259,18 @@
     {
       "id": "talia-library/manuale-talia",
       "kind": "library",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "name": "Manuale Talia completo",
       "description": "Complete Talia desktop manual, available offline in the personal Library.",
       "publisher": "talia-library",
       "license": "MIT",
-      "digest": "sha256:8b7b15fdd24d1d44cf8c7ac7836a27b7cbffb9b8ec6600d2107936626340eab1",
+      "digest": "sha256:06bdf114fd818242b46b4fc0ca5ddecaf7db84fc6ad80142d048f9787050cae4",
       "description_it": "Manuale completo di Talia desktop, disponibile offline nella Biblioteca personale.",
       "minHostVersion": "0.11.0",
       "artifact": {
-        "url": "artifacts/talia-library-manuale-talia-1.2.1.json",
-        "sha256": "sha256:e44ba8e8d0ca8c9cf01e518c34263f67dff260089ce0d84f9f8e77fdb25a2ea2",
-        "size": 95072
+        "url": "artifacts/talia-library-manuale-talia-1.2.2.json",
+        "sha256": "sha256:de8e3a318d5d2c37af7d124aabd16766b9717565d2ac1dcf2ff90552ae08c5b3",
+        "size": 95073
       }
     },
     {

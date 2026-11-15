@@ -1,6 +1,6 @@
 # Manuale Talia
 
-Versione del manuale: 1.2.1 — 15 novembre 2026. Destinazione: prodotto desktop Electron. Questo documento descrive i flussi e i confini del prodotto: non certifica la disponibilità di un provider esterno, un account o una funzione nella tua installazione. Le etichette possono cambiare con lingua e versione. Il porting Rust/Tauri è un lavoro separato, non una funzionalità già consegnata.
+Versione del manuale: 1.2.2 — 15 novembre 2026. Destinazione: prodotto desktop Electron. Questo documento descrive i flussi e i confini del prodotto: non certifica la disponibilità di un provider esterno, un account o una funzione nella tua installazione. Le etichette possono cambiare con lingua e versione. Il porting Rust/Tauri è un lavoro separato, non una funzionalità già consegnata.
 
 ## Indice
 
@@ -43,7 +43,7 @@ I capitoli 1–13 introducono i concetti; i capitoli 14–32 descrivono i percor
 
 ## 1. Primo avvio ed esempio pratico
 
-Talia è un ambiente di lavoro con un assistente coordinatore, Commander, che può coinvolgere agenti specializzati. Un nuovo profilo include Assistant, General Researcher e ContentWriter, insieme a sei skill iniziali per pianificare, sintetizzare fonti, organizzare materiali, creare brief, rivedere consegne e scrivere contenuti. Gli altri agenti, plugin e MCP si scelgono nello Store; nessun MCP opzionale viene avviato al primo accesso. Non è soltanto una casella per fare domande: puoi lavorare su documenti, analizzare materiale, sviluppare un'app, organizzare attività e utilizzare servizi collegati. Le capacità effettive dipendono da modello, risorse installate, connessioni e permessi.
+Talia è un ambiente di lavoro con un assistente coordinatore, Commander, che può coinvolgere agenti specializzati. Un nuovo profilo include Assistant, General Researcher e Content Writer, insieme a sei skill iniziali per pianificare, sintetizzare fonti, organizzare materiali, creare brief, rivedere consegne e scrivere contenuti. Gli altri agenti, plugin e MCP si scelgono nello Store; nessun MCP opzionale viene avviato al primo accesso. Non è soltanto una casella per fare domande: puoi lavorare su documenti, analizzare materiale, sviluppare un'app, organizzare attività e utilizzare servizi collegati. Le capacità effettive dipendono da modello, risorse installate, connessioni e permessi.
 
 Prima di un compito reale:
 

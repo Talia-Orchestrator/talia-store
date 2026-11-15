@@ -1,7 +1,7 @@
 {
   "agent_id": "173d4235a431",
-  "name": "ContentWriter",
-  "version": "1.0.38",
+  "name": "Content Writer",
+  "version": "1.0.39",
   "description_zh": "把目标、资料或草稿写成可发布的社媒成稿、文章、博客、newsletter、教程、案例和观点稿；支持结构重写、语气调整、去 AI 味与证据、引用审校。",
   "description_en": "Drafts and revises publication-ready social posts, articles, newsletters, tutorials and case studies from goals, sources or drafts; adapts voice and structure, humanizes prose, and checks evidence and citations.",
   "description_it": "Redige e revisiona post social, articoli, newsletter, tutorial e case study pronti per la pubblicazione a partire da obiettivi, fonti o bozze; adatta voce e struttura, umanizza la prosa e verifica evidenze e citazioni.",
@@ -44,7 +44,7 @@
   ],
   "interactive": false,
   "icon": "document",
-  "color": "lavender",
+  "color": "rose",
   "created_at": "2026-06-04",
   "updated_at": "2026-10-20T07:26:23.313Z",
   "category": "creation"
