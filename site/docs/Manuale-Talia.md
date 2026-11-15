@@ -1,6 +1,6 @@
 # Manuale Talia
 
-Versione del manuale: 1.2.0 — 15 novembre 2026. Destinazione: prodotto desktop Electron. Questo documento descrive i flussi e i confini del prodotto: non certifica la disponibilità di un provider esterno, un account o una funzione nella tua installazione. Le etichette possono cambiare con lingua e versione. Il porting Rust/Tauri è un lavoro separato, non una funzionalità già consegnata.
+Versione del manuale: 1.2.1 — 15 novembre 2026. Destinazione: prodotto desktop Electron. Questo documento descrive i flussi e i confini del prodotto: non certifica la disponibilità di un provider esterno, un account o una funzione nella tua installazione. Le etichette possono cambiare con lingua e versione. Il porting Rust/Tauri è un lavoro separato, non una funzionalità già consegnata.
 
 ## Indice
 
@@ -600,6 +600,14 @@ Il catalogo può mostrare risorse in cache e fonti da aggiornare. Una cache vali
 - **HTTP:** inserisci URL Streamable HTTP e autenticazione prevista. HTTPS è richiesto salvo loopback locale. Non è disponibile un trasporto SSE generico separato.
 - **Stdio:** comando eseguibile, argomenti uno per riga e variabili ambiente nel formato richiesto. Il processo parte sul tuo computer a ogni connessione con i privilegi del tuo utente: non è una sandbox. La directory `cwd` non è un campo della form attuale.
 - **Preset/CLI:** un pacchetto può richiedere installazione dell'eseguibile, percorso e login. Rilevamento o configurazione salvata non provano connessione. Non tutti i connettori storici basati su relay sono operativi nel prodotto indipendente.
+
+Il catalogo Talia seleziona Figma, i quattro ID CLI di messaggistica, Atlassian,
+tutti i servizi Google e Microsoft, Bitbucket, GitLab, GitHub e Hugging Face.
+Google Ads, Google Analytics e Google Maps restano eccezioni alle categorie
+Commercio e Ricerca escluse. Le voci che richiedono il vecchio relay OAuth o
+Composio sono mostrate come non disponibili: conservarle nel catalogo non
+autorizza né abilita una connessione. I 16 preset MCP *Craft sono separati,
+opzionali e richiedono configurazione e handshake prima dell'uso.
 
 I campi header/ambiente possono essere visibili durante l'inserimento: usa l'area di configurazione, non la chat, e non condividere screenshot. Un preset non autorizza azioni sul servizio. Dopo la connessione chiedi prima una verifica in sola lettura.
 

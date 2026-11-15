@@ -766,18 +766,18 @@
     {
       "id": "talia-library/manuale-talia",
       "kind": "library",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "name": "Manuale Talia completo",
       "description": "Complete Talia desktop manual, available offline in the personal Library.",
       "publisher": "talia-library",
       "license": "MIT",
-      "digest": "sha256:65028178086afc5c56d7f5cbf3f0793cffe0e42f97c7ba627169ce2a5c06b63e",
+      "digest": "sha256:3e8465c925aea42c3501ebd84d55811b52482471cb3b14013da47c01afa308f9",
       "description_it": "Manuale completo di Talia desktop, disponibile offline nella Biblioteca personale.",
       "minHostVersion": "0.11.0",
       "artifact": {
-        "url": "artifacts/talia-library-manuale-talia-1.2.0.json",
-        "sha256": "sha256:ae414b0fb5ad816a82676161c9141bd054cafef3c05b4e1d20f8ef27a3499645",
-        "size": 94471
+        "url": "artifacts/talia-library-manuale-talia-1.2.1.json",
+        "sha256": "sha256:816e76c0fd797bad7648eef275033cee2a7ff9ea0e1c3c32c5b7cc813cec3ef4",
+        "size": 95009
       }
     },
     {
