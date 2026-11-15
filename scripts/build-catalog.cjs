@@ -8,7 +8,7 @@ const { validateRetainedArtifacts } = require('./retained-artifacts.cjs');
 const storeRoot = path.resolve(__dirname, '..');
 const packer = path.join(storeRoot, 'tools', 'talia-catalog-pack.cjs');
 const featuredAgents = [
-  'app-architetto', 'app-frontend', 'app-backend', 'app-devops', 'app-e2e-tester', 'deepresearcher', 'contentwriter', 'officeworker',
+  'app-architetto', 'app-frontend', 'app-backend', 'app-devops', 'app-e2e-tester', 'functional-analyst', 'product-manager', 'deepresearcher', 'contentwriter', 'officeworker',
   'productdeveloper', 'uidesigner', 'pptmaker', 'imagestudio', 'videostudio', 'seogeoagent',
   'ecommerce-researcher',
 ];

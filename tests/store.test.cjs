@@ -60,7 +60,7 @@ test('packer accepts only coordinated built-in CLI references', () => {
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);
   const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app', 'library'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
-  assert.deepEqual(counts, { agent: 15, skill: 27, connector: 49, app: 3, library: 1 });
+  assert.deepEqual(counts, { agent: 17, skill: 27, connector: 49, app: 3, library: 1 });
   const agents = new Set(catalog.packages.filter((pkg) => pkg.kind === 'agent').map((pkg) => pkg.id));
   assert.deepEqual([...agents].sort(), [
     'talia-agents/app-architetto',
@@ -68,12 +68,23 @@ test('public store includes only the approved categories and canonical agent set
     'talia-agents/app-backend',
     'talia-agents/app-devops',
     'talia-agents/app-e2e-tester',
+    'talia-agents/functional-analyst',
+    'talia-agents/product-manager',
     'talia-agents/contentwriter', 'talia-agents/deepresearcher',
     'talia-agents/ecommerce-researcher', 'talia-agents/imagestudio',
     'talia-agents/officeworker', 'talia-agents/pptmaker', 'talia-agents/productdeveloper',
     'talia-agents/seogeoagent', 'talia-agents/uidesigner', 'talia-agents/videostudio',
   ].sort());
   assert.equal([...agents].some((id) => /stockanalyser|ecommerceoperator|ecommercereviewer|ecommercewriter|ecommerceanalyzer/.test(id)), false);
+});
+
+test('senior app team references installable Store agent packages', () => {
+  const template = JSON.parse(fs.readFileSync(path.join(root, 'agents/app-architetto/team-preset.json'), 'utf8'));
+  assert.equal(template.schemaVersion, 1);
+  const refs = [...template.agentPackages, ...template.optionalAgentPackages];
+  assert.equal(new Set(refs).size, 8);
+  for (const id of refs) assert.ok(catalog.packages.some(row => row.kind === 'agent' && row.id === id), id);
+  assert.ok(template.agentPackages.includes('talia-agents/app-architetto'));
 });
 
 test('selected service listings are inert and complete', () => {

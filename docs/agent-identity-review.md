@@ -1,11 +1,11 @@
 # Identità degli agenti: ruoli, nomi e avatar
 
-Revisione del 15 novembre 2026 sui sorgenti del branch
+Revisione storica del 15 novembre 2026 sui sorgenti del branch
 `feature/orkas_independence_agent_identity_store`. Gli ID di pacchetto e gli
 `agent_id` sono identità persistite: nessuna rinomina qui li modifica. I nomi
 proposti sono etichette per una futura versione dei pacchetti, non nomi già
-distribuiti. Il catalogo locale contiene 15 agenti, 95 pacchetti e 95 artifact;
-la firma Ed25519 corrente verifica i byte attuali.
+distribuiti al momento della revisione. Allora il catalogo conteneva 15 agenti,
+95 pacchetti e 95 artifact. Per lo stato attuale consultare `catalog.json`.
 
 ## Catalogo Store
 

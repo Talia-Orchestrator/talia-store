@@ -1,10 +1,10 @@
 {
   "id": "talia-agents/app-e2e-tester",
   "kind": "agent",
-  "version": "1.0.0",
-  "name": "App-E2E-Tester",
-  "description": "Writes and runs end-to-end tests with Playwright: test suites, coverage reports and downloadable quality documentation. Does not define the architecture or implement business logic.",
-  "description_it": "Scrive ed esegue test end-to-end con Playwright: suite di test, report di copertura e documentazione di qualità scaricabile. Non definisce l'architettura né implementa logica di business.",
+  "version": "1.1.0",
+  "name": "Senior QA Engineer",
+  "description": "Tests user journeys and regressions, isolates failures and reports evidence with precise limits.",
+  "description_it": "Verifica percorsi utente e regressioni, isola i guasti e riporta prove con limiti precisi.",
   "publisher": "talia-agents",
   "license": "MIT",
   "dependencies": [

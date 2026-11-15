@@ -1,10 +1,10 @@
 {
   "id": "talia-agents/app-backend",
   "kind": "agent",
-  "version": "1.0.0",
-  "name": "App-Backend",
-  "description": "Implements APIs, business logic, data models and server-side integrations. Writes testable code and downloadable API documentation; does not define the overall architecture or the user interface.",
-  "description_it": "Implementa API, logica di business, modelli dati e integrazioni server-side. Scrive codice testabile e documentazione API scaricabile; non definisce l'architettura generale né l'interfaccia utente.",
+  "version": "1.1.0",
+  "name": "Senior Backend Engineer",
+  "description": "Implements server behavior, data changes and integrations with explicit failure, security and compatibility handling.",
+  "description_it": "Implementa logica server, modifiche ai dati e integrazioni con gestione esplicita di errori, sicurezza e compatibilità.",
   "publisher": "talia-agents",
   "license": "MIT",
   "dependencies": [

@@ -262,13 +262,13 @@
     {
       "id": "talia-agents/app-architetto",
       "kind": "agent",
-      "version": "1.0.0",
-      "name": "App-Architetto",
-      "description": "Defines the technical architecture of an app: stack, module structure, data models and API contracts. Produces downloadable design documents (DOCX/PDF) and delivers the reference specifications for backend and frontend; does not implement application code.",
+      "version": "1.1.0",
+      "name": "Senior IT Architect",
+      "description": "Defines and reviews technical boundaries, data and API contracts, migrations and trade-offs for the actual application and stack.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:582b4abeb4482a629954f148d02502bd51be2181958f63fae829b0f91cd326ad",
-      "description_it": "Definisce l'architettura tecnica di un'app: stack, struttura dei moduli, modelli dati e contratti API. Produce documenti di design scaricabili (DOCX/PDF) e consegna le specifiche di riferimento per backend e frontend; non implementa codice applicativo.",
+      "digest": "sha256:93f8acb6af47abe32458b237932458835ae51610ac8eec0f80240ff55d8ed75b",
+      "description_it": "Definisce e rivede confini tecnici, contratti dati/API, migrazioni e compromessi per l'applicazione e lo stack reali.",
       "dependencies": [
         {
           "kind": "skill",
@@ -284,21 +284,21 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-app-architetto-1.0.0.json",
-        "sha256": "sha256:3150ccaf3f2cf72fa8086b5d706742922b580441718d5d23fb42505dc85d3ff1",
-        "size": 6644
+        "url": "artifacts/talia-agents-app-architetto-1.1.0.json",
+        "sha256": "sha256:cbd62bc78b1c10e22b84ec0755f609478ef51a244c36425b5acb3f761d99ddda",
+        "size": 7750
       }
     },
     {
       "id": "talia-agents/app-backend",
       "kind": "agent",
-      "version": "1.0.0",
-      "name": "App-Backend",
-      "description": "Implements APIs, business logic, data models and server-side integrations. Writes testable code and downloadable API documentation; does not define the overall architecture or the user interface.",
+      "version": "1.1.0",
+      "name": "Senior Backend Engineer",
+      "description": "Implements server behavior, data changes and integrations with explicit failure, security and compatibility handling.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:7aaf8b26c8b69aa85d14c1379ce5c4a55be13c156dc62835c1ae41127e7a8f33",
-      "description_it": "Implementa API, logica di business, modelli dati e integrazioni server-side. Scrive codice testabile e documentazione API scaricabile; non definisce l'architettura generale né l'interfaccia utente.",
+      "digest": "sha256:65c1c1557f3f6e2e5933a83d02a0c719397b37d8aca8e6aff0c2e01863c92248",
+      "description_it": "Implementa logica server, modifiche ai dati e integrazioni con gestione esplicita di errori, sicurezza e compatibilità.",
       "dependencies": [
         {
           "kind": "skill",
@@ -306,21 +306,21 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-app-backend-1.0.0.json",
-        "sha256": "sha256:a1d5e55d5fa32c0d328627ed69e11153d97099401c43245a4ccadf556d5fff56",
-        "size": 5729
+        "url": "artifacts/talia-agents-app-backend-1.1.0.json",
+        "sha256": "sha256:c895b96e0642b82c5e633ff3931cd6b7a14d2517057d8f904030061930cb5a8c",
+        "size": 5880
       }
     },
     {
       "id": "talia-agents/app-devops",
       "kind": "agent",
-      "version": "1.0.0",
-      "name": "App-DevOps",
-      "description": "Sets up CI/CD, containerization, environments and deployment pipelines. Writes Dockerfiles, automation scripts and downloadable operational documentation; does not implement application business logic.",
+      "version": "1.1.0",
+      "name": "Senior DevOps Engineer",
+      "description": "Improves builds, environments, release and operations according to the repository's real deployment constraints.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:1815a638a52ee2d8360b4c4a7f087e925b7141671e7836fad2a574996e528ce7",
-      "description_it": "Configura CI/CD, containerizzazione, ambienti e pipeline di deploy. Scrive Dockerfile, script di automazione e documentazione operativa scaricabile; non implementa logica di business applicativa.",
+      "digest": "sha256:a2b24322629972dfedd6747538e355cae7032f892c92ff7663dc6061534b8aed",
+      "description_it": "Migliora build, ambienti, release e operatività secondo i vincoli reali di distribuzione del progetto.",
       "dependencies": [
         {
           "kind": "skill",
@@ -328,21 +328,21 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-app-devops-1.0.0.json",
-        "sha256": "sha256:2c1d8ece41225415074eef061a09e88eb6a6852f885f187372bcf65a085b9e06",
-        "size": 5889
+        "url": "artifacts/talia-agents-app-devops-1.1.0.json",
+        "sha256": "sha256:576708bdaa34b676bcc4d823f2e4f48b2104fcb818496fd08b289207f0bb7ae9",
+        "size": 5643
       }
     },
     {
       "id": "talia-agents/app-e2e-tester",
       "kind": "agent",
-      "version": "1.0.0",
-      "name": "App-E2E-Tester",
-      "description": "Writes and runs end-to-end tests with Playwright: test suites, coverage reports and downloadable quality documentation. Does not define the architecture or implement business logic.",
+      "version": "1.1.0",
+      "name": "Senior QA Engineer",
+      "description": "Tests user journeys and regressions, isolates failures and reports evidence with precise limits.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:5008428b6d758f8bcb3c95a3de65dfdb0ea21a41e3c3cf14684df25284dbbeaa",
-      "description_it": "Scrive ed esegue test end-to-end con Playwright: suite di test, report di copertura e documentazione di qualità scaricabile. Non definisce l'architettura né implementa logica di business.",
+      "digest": "sha256:daef0ce0c3c7899a5ee6f702607407204189ea24d47d4e4c9f92a7ab16afddde",
+      "description_it": "Verifica percorsi utente e regressioni, isola i guasti e riporta prove con limiti precisi.",
       "dependencies": [
         {
           "kind": "skill",
@@ -350,21 +350,21 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-app-e2e-tester-1.0.0.json",
-        "sha256": "sha256:1a67607298313e701e1e55ac2058a7ca38566289d7529c28abc863e84c436ddc",
-        "size": 7359
+        "url": "artifacts/talia-agents-app-e2e-tester-1.1.0.json",
+        "sha256": "sha256:934b186b72891375aeeb7696fb1eb413c5daf9c8cf1f00248e01ad8b1dbdd35a",
+        "size": 5492
       }
     },
     {
       "id": "talia-agents/app-frontend",
       "kind": "agent",
-      "version": "1.0.0",
-      "name": "App-Frontend",
-      "description": "Implements user interfaces, components, state management and client-side API integration. Creates interactive prototypes and downloadable UI documentation; does not define system architecture or visual design.",
+      "version": "1.1.0",
+      "name": "Senior Frontend Engineer",
+      "description": "Implements accessible client interfaces, state and API integration in the project's existing frontend stack.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:825e1e040d1812ac3694aa1f10fd672f2447cd09ddb192587b63de4448c08b15",
-      "description_it": "Implementa interfacce utente, componenti, gestione stato e integrazione API lato client. Crea prototipi interattivi e documentazione UI scaricabile; non definisce l'architettura di sistema né il design visivo.",
+      "digest": "sha256:a45eebc7965269c1dd7a9887eed82c34c0986205df65efd758b568fd84c508d7",
+      "description_it": "Implementa interfacce accessibili, stato e integrazione API nello stack frontend già usato dal progetto.",
       "dependencies": [
         {
           "kind": "skill",
@@ -372,9 +372,9 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-app-frontend-1.0.0.json",
-        "sha256": "sha256:d67a0441b0c198e980e6862557d8d7aa69a57b7fabcce6190fdb7641dcc829fa",
-        "size": 5787
+        "url": "artifacts/talia-agents-app-frontend-1.1.0.json",
+        "sha256": "sha256:c1d9cfa8c0ca70c1852f462959ffcec5fea1bde07fbcd4b5fcb3ce2b41d7144a",
+        "size": 5865
       }
     },
     {
@@ -484,6 +484,36 @@
       }
     },
     {
+      "id": "talia-agents/functional-analyst",
+      "kind": "agent",
+      "version": "1.0.0",
+      "name": "Senior Functional Analyst",
+      "description": "Turns business goals, existing behavior and user problems into testable requirements and acceptance criteria without inventing scope.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:5e601c6133f01015907bc7105f69ceb21e5937d5c7a9c73e885d792d6116a3dd",
+      "description_it": "Traduce obiettivi, comportamento esistente e problemi utente in requisiti e criteri di accettazione verificabili senza inventare lo scope.",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/deliverable-review"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/project-brief"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/source-synthesis"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-functional-analyst-1.0.0.json",
+        "sha256": "sha256:055aacdf9bc8596c76aa6df81b116794637e69f2de34003b6e3055730e55f0bc",
+        "size": 5739
+      }
+    },
+    {
       "id": "talia-agents/imagestudio",
       "kind": "agent",
       "version": "1.3.49",
@@ -560,6 +590,32 @@
       }
     },
     {
+      "id": "talia-agents/product-manager",
+      "kind": "agent",
+      "version": "1.0.0",
+      "name": "Senior Product Manager",
+      "description": "Prioritizes outcomes, scope and release decisions using user evidence, constraints and explicit trade-offs; optional for larger product work.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "digest": "sha256:13b96a66477e333547b2f09e429fd73985f1294217641da24d046ddb9472766b",
+      "description_it": "Dà priorità a risultati, scope e release usando evidenze sugli utenti, vincoli e compromessi espliciti; opzionale per lavori di prodotto più ampi.",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/deliverable-review"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/project-brief"
+        }
+      ],
+      "artifact": {
+        "url": "artifacts/talia-agents-product-manager-1.0.0.json",
+        "sha256": "sha256:146185e562d8af36ba1f298c50155f15189dd114f5badd90e904cc64b619fdd5",
+        "size": 5494
+      }
+    },
+    {
       "id": "talia-agents/productdeveloper",
       "kind": "agent",
       "version": "1.0.14",
@@ -616,13 +672,13 @@
     {
       "id": "talia-agents/uidesigner",
       "kind": "agent",
-      "version": "1.3.43",
-      "name": "UIDesigner",
-      "description": "Designs UI/UX, interaction flows, visual systems and accessible interfaces from briefs, screens, screenshots or Figma references. Delivers design mockups and specs, in HTML by default; not general app development. Repository source stays read-only unless UI edits are explicitly requested; otherwise proposes file-level changes. Includes Impeccable-based UI/UX audit, critique and refinement through a shared skill.",
+      "version": "1.3.44",
+      "name": "Senior UX/UI Designer",
+      "description": "Designs and critiques usable, accessible product flows and visual systems, applying Impeccable anti-pattern checks with contextual judgment.",
       "publisher": "talia-agents",
       "license": "MIT",
-      "digest": "sha256:255923e99505dc9167a66bc5675af712c999c3aa19fad4335ae32bfe1196945e",
-      "description_it": "Progetta UI/UX, flussi di interazione, sistemi visivi e interfacce accessibili da brief, schermate, screenshot o riferimenti Figma. Consegna mockup e specifiche di design, in HTML per default; non sviluppo applicativo generale. Il sorgente del repository resta in sola lettura a meno che le modifiche UI non siano richieste esplicitamente; altrimenti propone modifiche a livello di file. Include audit, critica e raffinamento UI/UX basato su Impeccable tramite una skill condivisa.",
+      "digest": "sha256:d35bbab72f23eec80c8036399e1ef3b26602cefd0e08cb741b6b4edfdb6ecd70",
+      "description_it": "Progetta e valuta flussi e sistemi visivi accessibili e usabili, usando i controlli antipattern di Impeccable con giudizio sul contesto.",
       "dependencies": [
         {
           "kind": "skill",
@@ -630,9 +686,9 @@
         }
       ],
       "artifact": {
-        "url": "artifacts/talia-agents-uidesigner-1.3.43.json",
-        "sha256": "sha256:bcdf1983e6888dd9e80a5d0e9e17192782f5c3d33118c921521bd9167aa586f5",
-        "size": 198492
+        "url": "artifacts/talia-agents-uidesigner-1.3.44.json",
+        "sha256": "sha256:f23531e1a4d8f256d270ddf1aff2a65c6a71bb5330d455b7f206e2c92d663bdc",
+        "size": 198064
       }
     },
     {
