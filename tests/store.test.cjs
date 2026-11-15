@@ -1,6 +1,7 @@
 'use strict';
 
 const crypto = require('node:crypto');
+const os = require('node:os');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
@@ -9,6 +10,25 @@ const root = path.resolve(__dirname, '..');
 const catalogPath = path.join(root, 'catalog.json');
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
 const sha256 = (bytes) => `sha256:${crypto.createHash('sha256').update(bytes).digest('hex')}`;
+
+test('packer accepts only coordinated built-in CLI references', () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'talia-cli-reference-'));
+  try {
+    const metadata = { id: 'talia-connectors/feishu', kind: 'connector', version: '1.0.0',
+      name: 'Feishu CLI', description: 'Built-in CLI setup', publisher: 'talia-connectors', license: 'MIT', minHostVersion: '0.10.0' };
+    const connector = { schemaVersion: 1, catalog_reference: { id: metadata.id, catalog_id: 'feishu' } };
+    fs.writeFileSync(path.join(directory, 'talia-extension.json'), JSON.stringify(metadata));
+    for (const file of ['LICENSE', 'NOTICE', 'README.md']) fs.writeFileSync(path.join(directory, file), 'Fixture');
+    const file = path.join(directory, 'connector.json');
+    fs.writeFileSync(file, JSON.stringify(connector));
+    const packer = require('../tools/talia-catalog-pack.cjs');
+    assert.equal(JSON.parse(packer.buildCatalogV3([directory]).catalogBytes).packages[0].id, metadata.id);
+    for (const catalog_id of ['xero', 'lark']) {
+      fs.writeFileSync(file, JSON.stringify({ schemaVersion: 1, catalog_reference: { id: metadata.id, catalog_id } }));
+      assert.throws(() => packer.buildCatalogV3([directory]), /invalid catalog reference/);
+    }
+  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
+});
 
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);

@@ -909,17 +909,17 @@
     {
       "id": "talia-skills/guided-plan",
       "kind": "skill",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "name": "guided-plan",
       "description": "Guide a request into a confirmed action plan: ask targeted questions, gather requirements, present the plan, then execute it on approval or save the prompt for later.",
       "publisher": "talia-skills",
       "license": "MIT",
-      "digest": "sha256:a96784046a3e8ec81f94eba8f31e737d30de12a78ff0f8a74f747a4abf761c33",
+      "digest": "sha256:0594edb644200dbe2873227e5d464aef9d8287378f6348cb88a49f8b4fb5660c",
       "description_it": "Guida una richiesta verso un piano di azione confermato: raccoglie requisiti e domande mirate, presenta il piano e lo esegue soltanto dopo approvazione.",
       "artifact": {
-        "url": "artifacts/talia-skills-guided-plan-0.1.0.json",
-        "sha256": "sha256:c53405d039b11858c68c7bef734812d583f33711d74b32323dea9f0afd71e156",
-        "size": 5159
+        "url": "artifacts/talia-skills-guided-plan-0.2.0.json",
+        "sha256": "sha256:8123b831c3b9d24655292aa7628b97412048ed1b91c29fa55a73fb456e5b8d6d",
+        "size": 8765
       }
     },
     {
