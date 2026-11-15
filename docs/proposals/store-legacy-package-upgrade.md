@@ -44,10 +44,11 @@ artifact che le usano.
    installati e non diventano credenziali, endpoint o servizio remoto.
 4. Il core ora legge `talia-app.json` con `sdkVersion: 1` e ripiega su
    `orkas-app.json` con lo stesso schema; se entrambi esistono, prevale il
-   primo. Il packer Store ancora richiede `orkas-app.json`: prima di firmare
-   pacchetti con il nuovo filename occorre aggiornare e testare anche il
-   packer. Il nuovo SDK può già essere usato con manifesto v1, dopo un
-   `minHostVersion` adeguato.
+   primo. Il packer Store ora accetta entrambi i file, dà precedenza a
+   `talia-app.json` e rifiuta un manifesto nuovo invalido anche se quello
+   legacy è valido. `npm run validate` ricostruisce ancora i byte del catalogo
+   firmato corrente senza modifiche. Il nuovo SDK può essere usato con
+   manifesto v1, dopo un `minHostVersion` adeguato.
 
 ## Percorso di upgrade senza perdita di dati
 

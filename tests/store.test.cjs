@@ -11,6 +11,33 @@ const catalogPath = path.join(root, 'catalog.json');
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
 const sha256 = (bytes) => `sha256:${crypto.createHash('sha256').update(bytes).digest('hex')}`;
 
+test('app packer accepts current and legacy manifests, preferring current and failing closed', () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'talia-app-manifest-'));
+  try {
+    const packer = require('../tools/talia-catalog-pack.cjs');
+    const metadata = { id: 'talia-apps/fixture', kind: 'app', version: '1.0.0',
+      name: 'Fixture', description: 'Manifest compatibility fixture', publisher: 'talia-apps', license: 'MIT' };
+    fs.writeFileSync(path.join(directory, 'talia-extension.json'), JSON.stringify(metadata));
+    for (const file of ['LICENSE', 'NOTICE', 'README.md']) fs.writeFileSync(path.join(directory, file), 'Fixture');
+    fs.writeFileSync(path.join(directory, 'index.html'), '<!doctype html><title>Fixture</title>');
+    const current = path.join(directory, 'talia-app.json');
+    const legacy = path.join(directory, 'orkas-app.json');
+    const valid = JSON.stringify({ sdkVersion: 1, capabilities: ['storage'] });
+    const build = () => packer.buildCatalogV3([directory]);
+    fs.writeFileSync(legacy, valid);
+    assert.equal(JSON.parse(build().artifacts[0].bytes).packages[0].files['orkas-app.json'], valid);
+    fs.rmSync(legacy);
+    fs.writeFileSync(current, valid);
+    assert.equal(JSON.parse(build().artifacts[0].bytes).packages[0].files['talia-app.json'], valid);
+    fs.writeFileSync(legacy, '{ invalid legacy }');
+    assert.doesNotThrow(build);
+    fs.writeFileSync(current, '{ invalid current }');
+    assert.throws(build, /talia-app\.json must be valid JSON/);
+    fs.writeFileSync(current, JSON.stringify({ sdkVersion: 2, capabilities: [] }));
+    assert.throws(build, /talia-app\.json must use the supported SDK v1/);
+  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
+});
+
 test('packer accepts only coordinated built-in CLI references', () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'talia-cli-reference-'));
   try {

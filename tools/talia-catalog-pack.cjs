@@ -167,24 +167,30 @@ function readAgentSkillList(item, label) {
   return agent.skill_list;
 }
 
-function validateAppManifest(manifest, label) {
+function appManifestFile(files) {
+  if (Object.hasOwn(files, 'talia-app.json')) return 'talia-app.json';
+  if (Object.hasOwn(files, 'orkas-app.json')) return 'orkas-app.json';
+  return null;
+}
+
+function validateAppManifest(manifest, label, file) {
   const allowed = ['sdkVersion', 'minimumClient', 'capabilities', 'data'];
   const capabilities = ['storage', 'appFiles', 'files', 'ai', 'library', 'connectors', 'data'];
   if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest)
     || Object.keys(manifest).some(key => !allowed.includes(key))) {
-    fail(`${label}: orkas-app.json contains unknown or invalid fields`);
+    fail(`${label}: ${file} contains unknown or invalid fields`);
   }
   if (manifest.sdkVersion !== 1
     || (manifest.minimumClient !== undefined && manifest.minimumClient !== '1.9.0')
     || !Array.isArray(manifest.capabilities) || manifest.capabilities.length > capabilities.length
     || manifest.capabilities.some(capability => !capabilities.includes(capability))) {
-    fail(`${label}: orkas-app.json must use the supported SDK v1 manifest fields`);
+    fail(`${label}: ${file} must use the supported SDK v1 manifest fields`);
   }
   if (Object.hasOwn(manifest, 'data') && (!manifest.data || typeof manifest.data !== 'object' || Array.isArray(manifest.data))) {
-    fail(`${label}: orkas-app.json data must be an object`);
+    fail(`${label}: ${file} data must be an object`);
   }
   if (manifest.capabilities.includes('data') && !Object.hasOwn(manifest, 'data')) {
-    fail(`${label}: orkas-app.json must declare a data object when using the data capability`);
+    fail(`${label}: ${file} must declare a data object when using the data capability`);
   }
 }
 
@@ -276,8 +282,8 @@ function readPackage(packageDirectory, formatVersion = 1) {
     if (/(?:^|\/)(?:AGENT\.md|SKILL\.md)$/i.test(value) || /\.json$/i.test(value)) fail('mandatory metadata and instruction files must be text');
   }
   const files = scanPackageFiles(packageDirectory, formatVersion, declarations);
-  const entrypoint = kind === 'agent' ? 'agent.json' : kind === 'skill' ? 'SKILL.md' : kind === 'connector' ? 'connector.json' : kind === 'library' ? 'library.json' : 'orkas-app.json';
-  if (!Object.hasOwn(files, entrypoint)) fail(`${id}: ${kind} packages require ${entrypoint}`);
+  const entrypoint = kind === 'agent' ? 'agent.json' : kind === 'skill' ? 'SKILL.md' : kind === 'connector' ? 'connector.json' : kind === 'library' ? 'library.json' : appManifestFile(files);
+  if (!entrypoint || !Object.hasOwn(files, entrypoint)) fail(`${id}: ${kind} package entrypoint is missing`);
   if (kind === 'library') {
     let spec;
     try { spec = JSON.parse(files['library.json']); } catch (_) { fail(`${id}: invalid library manifest`); }
@@ -352,11 +358,11 @@ function readPackage(packageDirectory, formatVersion = 1) {
   }
   if (kind === 'app') {
     let appManifest;
-    try { appManifest = JSON.parse(files['orkas-app.json']); } catch (_) { fail(`${id}: orkas-app.json must be valid JSON`); }
+    try { appManifest = JSON.parse(files[entrypoint]); } catch (_) { fail(`${id}: ${entrypoint} must be valid JSON`); }
     if (!Object.hasOwn(files, 'index.html')) {
       fail(`${id}: app packages require an SDK v1 manifest, capabilities, and index.html`);
     }
-    validateAppManifest(appManifest, id);
+    validateAppManifest(appManifest, id, entrypoint);
   }
   let dependencies;
   if (manifest.dependencies !== undefined) {
@@ -555,13 +561,13 @@ function validateCatalogBytes(payloadBytes, options = {}) {
     if (item.digest!==digestFiles(item.files)) fail('catalog package digest or schema is invalid');
     totalBytes+=packageBytes;
     if (payload.version===2 && (packageBytes>MAX_V2_PACKAGE_BYTES || totalBytes>MAX_V2_TOTAL_BYTES)) fail('catalog exceeds decoded byte limit');
-    const entrypoint = item.kind === 'agent' ? 'agent.json' : item.kind === 'skill' ? 'SKILL.md' : item.kind === 'connector' ? 'connector.json' : item.kind === 'library' ? 'library.json' : 'orkas-app.json';
-    if (typeof item.files[entrypoint] !== 'string') fail('catalog package entrypoint is missing');
+    const entrypoint = item.kind === 'agent' ? 'agent.json' : item.kind === 'skill' ? 'SKILL.md' : item.kind === 'connector' ? 'connector.json' : item.kind === 'library' ? 'library.json' : appManifestFile(item.files);
+    if (!entrypoint || typeof item.files[entrypoint] !== 'string') fail('catalog package entrypoint is missing');
     if (item.kind === 'app' && typeof item.files['index.html'] !== 'string') fail('catalog app bundle entrypoint is missing');
     if (item.kind === 'app') {
       let appManifest;
-      try { appManifest = JSON.parse(item.files['orkas-app.json']); } catch (_) { fail('catalog app manifest is invalid'); }
-      validateAppManifest(appManifest, 'catalog app');
+      try { appManifest = JSON.parse(item.files[entrypoint]); } catch (_) { fail(`catalog app ${entrypoint} is invalid`); }
+      validateAppManifest(appManifest, 'catalog app', entrypoint);
     }
     if (item.dependencies !== undefined && (!Array.isArray(item.dependencies) || item.dependencies.length > 32
       || (item.kind === 'skill' && item.dependencies.length > 0))) fail('catalog package dependencies are invalid');
