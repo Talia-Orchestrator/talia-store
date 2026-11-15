@@ -2,7 +2,7 @@
 * text=auto eol=lf
 # Questo launcher Windows è già incluso nell'artifact firmato con CRLF.
 # Conservare esattamente gli stessi byte nei checkout puliti.
-skills/impeccable-ui/upstream/scripts/impeccable.cmd -text
+skills/impeccable-ui/upstream/scripts/impeccable.cmd -text whitespace=cr-at-eol
 *.png -text
 *.jpg -text
 *.jpeg -text
