@@ -263,7 +263,14 @@ function readPackage(packageDirectory, formatVersion = 1) {
     if (!connector || typeof connector !== 'object' || Array.isArray(connector) || connector.schemaVersion !== 1) {
       fail(`${id}: connector.json must use schemaVersion 1`);
     }
-    if (connector.preset !== undefined && connector.template === undefined) {
+    if (connector.catalog_reference !== undefined && connector.preset === undefined && connector.template === undefined) {
+      const reference = connector.catalog_reference;
+      const allowed = {wecom: 'talia-connectors/wecom', feishu: 'talia-connectors/feishu', dingtalk: 'talia-connectors/dingtalk'};
+      if (Object.keys(connector).sort().join(',') !== 'catalog_reference,schemaVersion'
+        || !reference || typeof reference !== 'object' || Array.isArray(reference)
+        || Object.keys(reference).sort().join(',') !== 'catalog_id,id'
+        || allowed[reference.catalog_id] !== id || reference.id !== id) fail(`${id}: invalid catalog reference`);
+    } else if (connector.preset !== undefined && connector.template === undefined) {
       if (!connector.preset || typeof connector.preset !== 'object' || Array.isArray(connector.preset)) fail(`${id}: connector preset must be an object`);
     } else if (connector.template !== undefined && connector.preset === undefined) {
       const template = connector.template;
@@ -291,7 +298,7 @@ function readPackage(packageDirectory, formatVersion = 1) {
           || template.command_hint !== undefined || template.args !== undefined) fail(`${id}: streamable-http connector template is invalid`);
       }
     } else {
-      fail(`${id}: connector.json must contain exactly one preset or template object`);
+      fail(`${id}: connector.json must contain exactly one preset, template, or catalog reference object`);
     }
   }
   if (kind === 'app') {
