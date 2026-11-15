@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "preset": {
+    "id": "cadcraft",
+    "display_name": "CADCraft",
+    "category": "productivity",
+    "description_en": "Configure the official CADCraft MCP command for this device.",
+    "description_it": "Configura il comando MCP ufficiale di CADCraft per questo dispositivo.",
+    "documentation_url": "https://craft.wiki/apps/cadcraft/automation/",
+    "executable_hint": "cadcraft-cli",
+    "base_args": [
+      "mcp"
+    ],
+    "path_fields": []
+  }
+}

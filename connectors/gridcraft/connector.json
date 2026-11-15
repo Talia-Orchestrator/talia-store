@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "preset": {
+    "id": "gridcraft",
+    "display_name": "GridCraft",
+    "category": "productivity",
+    "description_en": "Configure the official GridCraft MCP command for this device.",
+    "description_it": "Configura il comando MCP ufficiale di GridCraft per questo dispositivo.",
+    "documentation_url": "https://craft.wiki/apps/gridcraft/ai-agents/",
+    "executable_hint": "gridcraft-cli",
+    "base_args": [
+      "mcp"
+    ],
+    "path_fields": []
+  }
+}

@@ -85,17 +85,18 @@
     {
       "id": "artcraft/figcraft",
       "kind": "connector",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "name": "FigCraft MCP",
       "description": "Configure FigCraft’s official MCP command. Automation roots are optional and can confine file access. Configure only on the user device.",
       "publisher": "artcraft",
       "license": "MIT",
-      "digest": "sha256:3558f332b1d84510158214db09b201559df88f29bf42d03b45104714f3db65e9",
+      "digest": "sha256:7b243744f9a53ae25bf5b71cdbff0137fd464d97814009f2e3f771e27f935b96",
       "description_it": "Configura il comando MCP ufficiale di FigCraft. Le radici di automazione sono opzionali e possono confinare l'accesso ai file. Configurare solo sul dispositivo dell'utente.",
+      "minHostVersion": "0.11.0",
       "artifact": {
-        "url": "artifacts/artcraft-figcraft-1.0.0.json",
-        "sha256": "sha256:6679bfffc492e51ae0d3dcd044a05cfcc7420b507da3f22ae501c96104be15f9",
-        "size": 4571
+        "url": "artifacts/artcraft-figcraft-1.1.0.json",
+        "sha256": "sha256:9fbbc7d967f83b8d17d040791b73c73e1be55b28c160a16f64e4a224dc695592",
+        "size": 5458
       }
     },
     {
@@ -763,6 +764,23 @@
       }
     },
     {
+      "id": "talia-library/manuale-talia",
+      "kind": "library",
+      "version": "1.2.0",
+      "name": "Manuale Talia completo",
+      "description": "Complete Talia desktop manual, available offline in the personal Library.",
+      "publisher": "talia-library",
+      "license": "MIT",
+      "digest": "sha256:65028178086afc5c56d7f5cbf3f0793cffe0e42f97c7ba627169ce2a5c06b63e",
+      "description_it": "Manuale completo di Talia desktop, disponibile offline nella Biblioteca personale.",
+      "minHostVersion": "0.11.0",
+      "artifact": {
+        "url": "artifacts/talia-library-manuale-talia-1.2.0.json",
+        "sha256": "sha256:ae414b0fb5ad816a82676161c9141bd054cafef3c05b4e1d20f8ef27a3499645",
+        "size": 94471
+      }
+    },
+    {
       "id": "talia-skills/brand-research",
       "kind": "skill",
       "version": "1.0.5",
@@ -802,12 +820,12 @@
       "description": "Analyze quantitative evidence: exact totals, comparisons, experiments and causal uncertainty. Excludes formatting-only work.",
       "publisher": "talia-skills",
       "license": "MIT",
-      "digest": "sha256:c61cb6147a4364ef8d6090ba094328525e1780cd2dbda71d90459377583b9c20",
+      "digest": "sha256:55221a75bfd5eb1ebdfb5d052fb65e64cb9e0a1c514c423d2aacf79c536329c9",
       "description_it": "Analizza evidenze quantitative: totali esatti, confronti, esperimenti e incertezza causale. Esclude lavori di sola formattazione.",
       "artifact": {
         "url": "artifacts/talia-skills-data-analysis-1.2.6.json",
-        "sha256": "sha256:49fa32795aeec70f3ed899493cc89b9561be2496f2fc6344113c43072ef24ba5",
-        "size": 51892
+        "sha256": "sha256:4c64d1a66433b05509b120b9bb88130ccc82b9a2bec6433efe24970ee18becd8",
+        "size": 51890
       }
     },
     {
@@ -978,12 +996,12 @@
       "description": "UI/UX design, scored critique, accessibility audit, typography, layout, responsive behavior and design-system refinement using Impeccable 4.8.2 references. Includes optional upstream CLI launchers; Talia hook automation requires host integration.",
       "publisher": "talia-skills",
       "license": "Apache-2.0",
-      "digest": "sha256:f79f07b1ec5a7504330a0b41315685cf163e9a8a85990fb3b2712bc267fc0aeb",
+      "digest": "sha256:3a49171ab3e8fca6365eccdf7c5b9681b2df69e85aab0868a554fbb78dd9a02d",
       "description_it": "Design UI/UX, critica con punteggio, audit di accessibilità, tipografia, layout, comportamento responsive e raffinamento del design system con riferimenti Impeccable 4.8.2. Include launcher CLI opzionali upstream; l'automazione hook Talia richiede integrazione host.",
       "artifact": {
         "url": "artifacts/talia-skills-impeccable-ui-1.0.0.json",
-        "sha256": "sha256:e2a38c63bed1e3a11c68fd16bfe157901a1fba8392bbc16f71462d4c41ce7fa1",
-        "size": 2353688
+        "sha256": "sha256:8df6ad8e87d6ecf6db299368f4cef2ac7d2c8630a117fccc768fa2585a1db73b",
+        "size": 2353681
       }
     },
     {

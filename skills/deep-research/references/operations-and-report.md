@@ -1,0 +1,228 @@
+<!-- deep-research reference. Read this before the first caps, academic,
+compress, or citations call, and before assembling a verifier-backed report. -->
+
+# Operations and verified report assembly
+
+## `caps`
+
+`plan` input:
+
+```json
+{"subquestions":["..."],"depth":0,"caps":{}}
+```
+
+Optional `caps` fields are `max_subquestions`, `max_fetches`,
+`max_fetches_per_subquestion`, `max_model_calls`, `max_depth`, and
+`max_cost_usd`. Omit limits that should keep their defaults. Use caps for normal
+fan-out research and whenever the user, task, cost policy, or resumed state
+supplies a real budget. A fetch cap below its default (40 total, 8 per
+subquestion) needs a top-level `caps_reason` string naming that budget; `plan`
+rejects the input otherwise and records the reason in `caps_plan.json`. A fresh
+compact landscape has no default fetch-count ceiling: its two-batch/eight-fetch
+suggestion is only an efficiency target.
+
+When caps apply, use returned deduplicated `subquestions`,
+`fetch_budget_per_subquestion`, `total_fetch_budget`, `allowed`, and `dropped`.
+After every fetch batch, append one JSON object for every attempted call to
+`fetch_ledger.jsonl`, including failed, cached, or repeated attempts, then run:
+
+```bash
+"$ORKAS_NODE" "$ORKAS_PC_DIR/bin/run-skill.cjs" deep-research caps -- --op account --plan caps_plan.json --fetch-ledger fetch_ledger.jsonl --out account_output.json
+```
+
+Each valid fetch row consumes one fetch attempt under that saved budget; search
+or query rows remain audit history but do not consume `max_fetches`. Two row
+kinds are exempt up to the allowances reported in `data.fetch_rows`, then count:
+a continuation window of an already-fetched page and a no-content result.
+
+```json
+{"kind":"fetch","url":"https://example.org/paper","status":"ok"}
+{"kind":"fetch","url":"https://example.org/paper","offset":12000,"status":"ok"}
+{"kind":"fetch","url":"https://example.org/card.pdf","status":"no_content","reason":"binary"}
+```
+
+Use `reason` `binary`, `navigation_only`, or `empty`. Continue fetching only
+when the latest result has `data.stop=false` and `data.remaining.fetches>0`;
+when `data.stop=true`, make no further fetch and deliver an honest partial result
+if evidence is incomplete. `caps_plan.json` is a static plan and has no `stop`
+field.
+
+For explicit model-call or cost accounting, `account` also accepts:
+
+```json
+{"steps":[{"step":"gather","fetches":3,"model_calls":0,"cost_usd":0}]}
+```
+
+`data.limits_reached` names which budget ran out. Explicit input audits
+caller-reported events; file-backed fetch accounting derives its count from the
+durable ledger. The script does not intercept native tools.
+
+## `academic`
+
+Use only when scholarly evidence is relevant. Optional sources are
+`arxiv,openalex,crossref,semanticscholar,pubmed`. Results share `id`, `source`,
+`title`, `text`, `authors`, `date`, `doi`, and `url` (plus `pmid` when present).
+Providers fail independently: retain valid results, record provider-specific
+errors, and report partial coverage rather than failing the entire run.
+
+## `compress`
+
+Input:
+
+```json
+{"query":"sub-question","sources":[{"id":"s1","url":"https://...","title":"...","text":"..."}],"max_chars":12000}
+```
+
+Use `data.kept` directly. It is already de-duplicated, ranked by multilingual
+lexical relevance, and selected without exceeding `max_chars`; preserve source
+metadata when writing evidence. Compression is relevance pruning, not evidence
+validation, and does not permit altered quotes. Do not also feed the full raw
+pages to synthesis.
+
+## `citations`
+
+### Verification hygiene
+
+Before citation verification, reject mojibake, replacement characters, or
+visibly corrupted multilingual text from `citations_input.json`; select a clean
+exact quote from the same fetched official source or mark the affected field
+`Not verified`.
+
+For a retained landscape candidate, do not combine unrelated factual fields in
+one broad omnibus claim. Persist only the narrow material claims needed by the
+retained comparison cells; when evidence does not support a field, expose the
+gap instead of manufacturing another claim. Audit every canonical comparison
+column before running citations.
+
+On the compact landscape path, let the verifier write `RESEARCH-<topic>.md`
+from the field-tagged evidence ledger, compact candidate profiles, and your
+`analysis_markdown`. Review meaning before assembly. Do not duplicate the
+comparison table, reconstruct fields from memory, or use shell code to assemble
+the report. Other paths may use the returned Markdown fields directly.
+
+### Compact-path payload
+
+When web excerpts are already bounded and exact evidence rows are saved, skip
+`compress`; it adds no decision value here. Citation verification remains
+mandatory. For the compact path, `citations_input.json` contains only this
+schema; the verifier derives sources, claims, factual cells, claim bindings, and
+evidence-source bindings from the sibling field-tagged ledger:
+
+```json
+{
+  "compact_landscape": {
+    "title": "AI desktop-app comparison",
+    "boundary": "Scope, cutoff, source limits, and named evidence gaps.",
+    "analysis_markdown": "## Recommendations\n\nYour evidence-grounded choices, decisive citations, conditions, and limitations.",
+    "candidates": [{
+      "candidate": "Exact ledger candidate name",
+      "best_for": "A bounded decision mode",
+      "ideal_user": "The user profile for that mode"
+    }]
+  }
+}
+```
+
+Each line of `evidence_ledger.jsonl` uses this complete schema; source metadata
+after `canonical_url` is optional and no implementation-specific fields are
+required.
+
+```json
+{"id":"E1","source_id":"S1","candidate":"Exact candidate name","field":"os","claim":"Narrow claim checked against the quoted context","quote":"Exact source text","canonical_url":"https://official.example/page"}
+```
+
+Do not mix this with copied `sources`, `claims`, or `comparison` arrays. The
+candidate name must exactly match its ledger rows. `best_for` and `ideal_user`
+are model inferences, not verifier-proven facts. Before writing these profiles,
+compare each proposed path with the saved evidence rows. Recommend a candidate
+only when its choice-changing facts are verified. If an unresolved fact could
+reverse the path, present only the condition and how either outcome changes the
+choice, and keep the result partial. Every factual cell comes from the first
+valid matching candidate/field row and otherwise becomes `Not verified`. For
+non-compact verification, the expanded sources/claims/comparison schema
+remains valid.
+
+### Verification behavior
+
+- Exact quote matching normalizes Unicode, smart punctuation, case, and
+  whitespace, but never accepts a paraphrase.
+- Claims may paraphrase or translate; quotes must preserve the fetched wording.
+  Apply the Skill's verification rules to the final ledger and analysis.
+- A citation `verdict=verified` means its quote and DOI attribution passed,
+  never that its claim is true. No claim-support verdict is emitted.
+- An optional claim `baseline` names what a comparative claim is measured
+  against and is shown after the claim in the Evidence section. A claim with an
+  explicit comparison (a multiplier, percentage points, vs/compared with,
+  better/higher than, from X to Y) and no `baseline` returns a
+  `comparison_baseline_missing` warning.
+- `coverage_leads` lists up to ten works that source texts cite (author-year
+  citations, arXiv IDs, DOIs) but no fetched source, cited source, or
+  fetch-ledger URL matches, newest first, each with a context snippet;
+  `summary.coverage_leads` is the total. It names leads; it does not judge them.
+- An unknown source, missing quote in source, malformed DOI, or DOI absent from
+  the source is flagged. A known source without an adequate quote is weak.
+- When the input file has a sibling `evidence_ledger.jsonl`, missing dates,
+  access dates, publisher/type, and limitations are merged by source ID or URL.
+- `data.comparison_markdown` is a complete table. Missing cells or bindings
+  without matched quotes from the candidate's declared sources become
+  `Not verified`; retained factual cells carry their Evidence IDs inline.
+  The script does not judge whether a cell follows from its bound claim.
+- `data.comparison_coverage` lists `fields_with_citations` and
+  `missing_citation_fields`; it never determines recommendation readiness.
+- `data.evidence_markdown` contains Agent-authored claims, matched quotes,
+  links, dates, and limitations. Its labels describe quote matching only.
+
+For `--report-out`, provide non-empty `analysis_markdown` in `compact_landscape`.
+Write concise recommendations in the user's language from the checked ledger
+claims, citing decisive Evidence IDs and retaining their conditions. Label
+inferences and explain how the cited facts support the choice. Do not add unsupported
+capabilities or privacy guarantees while summarizing, or call a candidate best,
+easiest, or most complete without comparative evidence. Keep useful supported
+choices when other facts remain unknown. The script preserves this prose
+unchanged and appends the comparison and evidence tables; it never generates
+recommendations. Correct invalid citations when a material gap can be resolved;
+otherwise retain the supported subset and disclose the gap. Do not rewrite the
+payload merely to remove non-material warnings.
+
+## Final compact report
+
+Generate the compact report once with:
+
+```bash
+"$ORKAS_NODE" "$ORKAS_PC_DIR/bin/run-skill.cjs" deep-research citations -- --op verify --input citations_input.json --out citations_output.json --report-out RESEARCH-<topic>.md
+```
+
+Replace `<topic>` with a short slug of this research question, so the report
+carries a name a reader can recognise in the file list. The command refuses an
+existing target: a second research run in the same conversation is a new report,
+not a revision of the earlier one, and must never overwrite it.
+
+The report contains the supplied title and boundary, then your unchanged
+analysis, the only systematic comparison table, and the final Evidence used section. Do not
+reconstruct or rewrite it.
+
+Keep the report compact with one short boundary and one retained evidence row
+per factual candidate/field. Keep analysis decision-focused; do not restate
+comparison-table cells or add repetitive per-candidate sections. The
+deterministic table uses this literal header:
+
+```markdown
+| Candidate | Best for | OS | Setup/ease | Model capabilities | Local/offline | Privacy/data handling | Pricing/cost | Key limitations | Ideal user | Evidence |
+```
+
+It gives every retained candidate every column and marks gaps `Not verified`
+rather than guessing. The evidence markdown is the de-duplicated reference list
+and already contains Agent-authored claims, matched source quotes, official links,
+source/release dates, access dates, verification status, and limitations. Do not
+append a separate bare source list.
+
+In the response after the usable verifier result, emit the final plan update and
+publication as ordered calls together; include the final account command only
+when caps apply. Do not spend one model round per file or read the unchanged
+report back for validation or call `read_files` with `metadata_only:true`. If actual
+compaction happens after the write, publish the already-known path and give a
+concise handoff instead of reading the full report merely to reproduce it. The
+persisted report is incomplete if either non-empty verifier Markdown field is
+absent. Shorten narrative prose rather than the table or Evidence used section.
+If verification fails, label the claim unverified and do not use it as an
+evidence-backed recommendation.

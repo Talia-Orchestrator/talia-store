@@ -32,8 +32,8 @@ test('packer accepts only coordinated built-in CLI references', () => {
 
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);
-  const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
-  assert.deepEqual(counts, { agent: 15, skill: 27, connector: 20, app: 3 });
+  const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app', 'library'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
+  assert.deepEqual(counts, { agent: 15, skill: 27, connector: 20, app: 3, library: 1 });
   const agents = new Set(catalog.packages.filter((pkg) => pkg.kind === 'agent').map((pkg) => pkg.id));
   assert.deepEqual([...agents].sort(), [
     'talia-agents/app-architetto',
@@ -60,6 +60,16 @@ test('CLI Store entries reference only the matching built-in setup', () => {
   }
   assert.equal(catalog.packages.some(pkg => pkg.id === 'talia-connectors/lark'), false);
   assert.equal(catalog.packages.some(pkg => pkg.id === 'talia-connectors/xero'), false);
+});
+test('the complete Library manual has one canonical source and a signed artifact', () => {
+  const item = catalog.packages.find(pkg => pkg.id === 'talia-library/manuale-talia');
+  assert.ok(item);
+  assert.equal(item.kind, 'library');
+  assert.equal(item.minHostVersion, '0.11.0');
+  const pkg = JSON.parse(fs.readFileSync(path.join(root, item.artifact.url), 'utf8')).packages[0];
+  assert.deepEqual(JSON.parse(pkg.files['library.json']), { schemaVersion: 1, file: 'Manuale-Talia.md', destination: 'Manuale-Talia.md' });
+  assert.equal(pkg.files['Manuale-Talia.md'], fs.readFileSync(path.join(root, 'library/manuale-talia/Manuale-Talia.md'), 'utf8'));
+  assert.equal(pkg.files['Manuale-Talia.md'], fs.readFileSync(path.join(root, 'site/docs/Manuale-Talia.md'), 'utf8'));
 });
 
 test('every artifact is relative, digest-verified and retains its license and notice', () => {

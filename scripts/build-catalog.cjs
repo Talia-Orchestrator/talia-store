@@ -5,17 +5,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const storeRoot = path.resolve(__dirname, '..');
-const ecosystemRoot = process.env.TALIA_SOURCE_ROOT
-  ? path.resolve(process.env.TALIA_SOURCE_ROOT)
-  : path.resolve(storeRoot, '..');
 const packer = path.join(storeRoot, 'tools', 'talia-catalog-pack.cjs');
 const featuredAgents = [
   'app-architetto', 'app-frontend', 'app-backend', 'app-devops', 'app-e2e-tester', 'deepresearcher', 'contentwriter', 'officeworker',
   'productdeveloper', 'uidesigner', 'pptmaker', 'imagestudio', 'videostudio', 'seogeoagent',
   'ecommerce-researcher',
 ];
-function packageDirs(repo, names) {
-  const root = path.join(ecosystemRoot, repo, 'packages');
+function packageDirs(category, names) {
+  const root = path.join(storeRoot, category);
   const selected = names || fs.readdirSync(root).filter((name) => fs.statSync(path.join(root, name)).isDirectory());
   return selected.map((name) => {
     const dir = path.join(root, name);
@@ -24,10 +21,11 @@ function packageDirs(repo, names) {
   });
 }
 const packages = [
-  ...packageDirs('talia-agents', featuredAgents),
-  ...packageDirs('talia-skills'),
-  ...packageDirs('talia-connectors'),
-  ...packageDirs('talia-apps'),
+  ...packageDirs('agents', featuredAgents),
+  ...packageDirs('skills'),
+  ...packageDirs('connectors'),
+  ...packageDirs('apps'),
+  ...packageDirs('library'),
 ];
 const result = spawnSync(process.execPath, [packer, 'build', '--format', '3', ...packages.flatMap((dir) => ['--package', dir]), '--out', path.join(storeRoot, 'catalog.json')], { stdio: 'inherit' });
 if (result.error) throw result.error;

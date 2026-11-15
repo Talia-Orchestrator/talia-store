@@ -37,6 +37,27 @@ function safeMetadataText(value, field, max = 256) {
   }
   return value;
 }
+function validateCraftRuntime(runtime, presetId, packageId) {
+  if (!runtime || typeof runtime !== 'object' || Array.isArray(runtime)
+    || Object.keys(runtime).sort().join(',') !== 'assets,version'
+    || !isSemver(runtime.version) || !runtime.assets || typeof runtime.assets !== 'object'
+    || Array.isArray(runtime.assets) || !Object.keys(runtime.assets).length
+    || Object.keys(runtime.assets).some(target => !['darwin-arm64','darwin-x64','win32-x64','linux-x64'].includes(target))) fail(`${packageId}: invalid Craft runtime`);
+  for (const [target, asset] of Object.entries(runtime.assets)) {
+    if (!asset || typeof asset !== 'object' || Array.isArray(asset)
+      || Object.keys(asset).sort().join(',') !== 'binary,format,sha256,size,url'
+      || !['zip','raw'].includes(asset.format)
+      || !Number.isSafeInteger(asset.size) || asset.size < 1 || asset.size > 500*1024*1024
+      || !/^[a-f0-9]{64}$/.test(asset.sha256)
+      || typeof asset.binary !== 'string' || !/^[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*$/.test(asset.binary)
+      || asset.binary.split('/').some(part => part === '..' || part.startsWith('.'))
+      || asset.binary.split('/').at(-1) !== `${presetId}-cli${target.startsWith('win32') ? '.exe' : ''}`) fail(`${packageId}: invalid Craft runtime asset`);
+    let url;
+    try { url = new URL(asset.url); } catch (_) { fail(`${packageId}: invalid Craft runtime URL`); }
+    if (url.protocol !== 'https:' || url.hostname !== 'github.com' || url.username || url.password || url.search || url.hash
+      || !url.pathname.startsWith(`/storytold/${presetId}/releases/download/`)) fail(`${packageId}: invalid Craft runtime URL`);
+  }
+}
 
 function isSemver(value) {
   if (typeof value !== 'string' || value.length > 80) return false;
@@ -228,8 +249,8 @@ function readPackage(packageDirectory, formatVersion = 1) {
   if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest)) fail('package manifest must be a JSON object');
   const id = safePackageId(manifest.id, 'id');
   const kind = manifest.kind;
-  if (!['agent', 'skill', 'connector', 'app'].includes(kind) || (formatVersion === 1 && kind !== 'agent' && kind !== 'skill')) {
-    fail(`${id}: kind must be agent, skill, connector, or app`);
+  if (!['agent', 'skill', 'connector', 'app', 'library'].includes(kind) || (formatVersion === 1 && kind !== 'agent' && kind !== 'skill') || (formatVersion !== 3 && kind === 'library')) {
+    fail(`${id}: unsupported package kind`);
   }
   const publisher = manifest.publisher;
   if (typeof publisher !== 'string' || !/^[A-Za-z0-9_-]+$/.test(publisher)) fail(`${id}: publisher is invalid`);
@@ -255,8 +276,18 @@ function readPackage(packageDirectory, formatVersion = 1) {
     if (/(?:^|\/)(?:AGENT\.md|SKILL\.md)$/i.test(value) || /\.json$/i.test(value)) fail('mandatory metadata and instruction files must be text');
   }
   const files = scanPackageFiles(packageDirectory, formatVersion, declarations);
-  const entrypoint = kind === 'agent' ? 'agent.json' : kind === 'skill' ? 'SKILL.md' : kind === 'connector' ? 'connector.json' : 'orkas-app.json';
+  const entrypoint = kind === 'agent' ? 'agent.json' : kind === 'skill' ? 'SKILL.md' : kind === 'connector' ? 'connector.json' : kind === 'library' ? 'library.json' : 'orkas-app.json';
   if (!Object.hasOwn(files, entrypoint)) fail(`${id}: ${kind} packages require ${entrypoint}`);
+  if (kind === 'library') {
+    let spec;
+    try { spec = JSON.parse(files['library.json']); } catch (_) { fail(`${id}: invalid library manifest`); }
+    if (!spec || typeof spec !== 'object' || Array.isArray(spec)
+      || Object.keys(spec).sort().join(',') !== 'destination,file,schemaVersion'
+      || spec.schemaVersion !== 1 || spec.file !== 'Manuale-Talia.md'
+      || spec.destination !== 'Manuale-Talia.md' || typeof files[spec.file] !== 'string'
+      || Buffer.byteLength(files[spec.file], 'utf8') > 2 * 1024 * 1024
+      || id !== 'talia-library/manuale-talia') fail(`${id}: invalid library content`);
+  }
   if (kind === 'connector') {
     let connector;
     try { connector = JSON.parse(files['connector.json']); } catch (_) { fail(`${id}: connector.json must be valid JSON`); }
@@ -272,6 +303,11 @@ function readPackage(packageDirectory, formatVersion = 1) {
         || allowed[reference.catalog_id] !== id || reference.id !== id) fail(`${id}: invalid catalog reference`);
     } else if (connector.preset !== undefined && connector.template === undefined) {
       if (!connector.preset || typeof connector.preset !== 'object' || Array.isArray(connector.preset)) fail(`${id}: connector preset must be an object`);
+      if (Object.keys(connector).some(key => !['schemaVersion','preset','runtime'].includes(key))) fail(`${id}: connector preset has unknown fields`);
+      if (connector.runtime !== undefined) {
+        if (id !== `artcraft/${connector.preset.id}`) fail(`${id}: invalid Craft runtime owner`);
+        validateCraftRuntime(connector.runtime, connector.preset.id, id);
+      }
     } else if (connector.template !== undefined && connector.preset === undefined) {
       const template = connector.template;
       const allowed = ['id', 'display_name', 'transport_kind', 'description_en', 'documentation_url', 'command_hint', 'args', 'url_hint'];
@@ -387,7 +423,7 @@ function validateCatalogV3Payload(payload) {
   const ids = new Set();
   const urls = new Set();
   for (const item of payload.packages) {
-    if (!item || !['agent', 'skill', 'connector', 'app'].includes(item.kind)
+    if (!item || !['agent', 'skill', 'connector', 'app', 'library'].includes(item.kind)
       || Object.hasOwn(item, 'files') || !item.artifact || typeof item.artifact !== 'object'
       || Array.isArray(item.artifact)) fail('catalog package digest or schema is invalid');
     const allowed = ['id', 'kind', 'version', 'name', 'description', 'description_it', 'publisher', 'license', 'repository', 'minHostVersion', 'dependencies', 'digest', 'artifact'];
@@ -449,7 +485,7 @@ function validateCatalogBytes(payloadBytes, options = {}) {
   if (payload.version===1 && payloadBytes.length>MAX_CATALOG_BYTES) fail('catalog exceeds byte limit');
   const ids = new Set(); let totalBytes=0;
   for (const item of payload.packages) {
-    if (!item || !['agent', 'skill', ...(payload.version === 1 ? [] : ['connector', 'app'])].includes(item.kind)
+    if (!item || !['agent', 'skill', ...(payload.version === 1 ? [] : ['connector', 'app', 'library'])].includes(item.kind)
       || typeof item.files !== 'object' || Array.isArray(item.files)
       || item.files === null || typeof item.digest !== 'string') fail('catalog package digest or schema is invalid');
     const id = safePackageId(item.id, 'catalog package id');
@@ -506,7 +542,7 @@ function validateCatalogBytes(payloadBytes, options = {}) {
     if (item.digest!==digestFiles(item.files)) fail('catalog package digest or schema is invalid');
     totalBytes+=packageBytes;
     if (payload.version===2 && (packageBytes>MAX_V2_PACKAGE_BYTES || totalBytes>MAX_V2_TOTAL_BYTES)) fail('catalog exceeds decoded byte limit');
-    const entrypoint = item.kind === 'agent' ? 'agent.json' : item.kind === 'skill' ? 'SKILL.md' : item.kind === 'connector' ? 'connector.json' : 'orkas-app.json';
+    const entrypoint = item.kind === 'agent' ? 'agent.json' : item.kind === 'skill' ? 'SKILL.md' : item.kind === 'connector' ? 'connector.json' : item.kind === 'library' ? 'library.json' : 'orkas-app.json';
     if (typeof item.files[entrypoint] !== 'string') fail('catalog package entrypoint is missing');
     if (item.kind === 'app' && typeof item.files['index.html'] !== 'string') fail('catalog app bundle entrypoint is missing');
     if (item.kind === 'app') {

@@ -3,19 +3,19 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const storeRoot = path.resolve(__dirname, '..');
-const sourceRoot = process.env.TALIA_SOURCE_ROOT ? path.resolve(process.env.TALIA_SOURCE_ROOT) : path.resolve(storeRoot, '..');
 const packer = require(path.join(storeRoot, 'tools', 'talia-catalog-pack.cjs'));
 const featuredAgents = ['app-architetto', 'app-frontend', 'app-backend', 'app-devops', 'app-e2e-tester', 'deepresearcher', 'contentwriter', 'officeworker', 'productdeveloper', 'uidesigner', 'pptmaker', 'imagestudio', 'videostudio', 'seogeoagent', 'ecommerce-researcher'];
-function packageDirs(repo, names) {
-  const root = path.join(sourceRoot, repo, 'packages');
+function packageDirs(category, names) {
+  const root = path.join(storeRoot, category);
   return (names || fs.readdirSync(root).filter(name => fs.statSync(path.join(root, name)).isDirectory()))
     .map(name => path.join(root, name));
 }
 const packages = [
-  ...packageDirs('talia-agents', featuredAgents),
-  ...packageDirs('talia-skills'),
-  ...packageDirs('talia-connectors'),
-  ...packageDirs('talia-apps'),
+  ...packageDirs('agents', featuredAgents),
+  ...packageDirs('skills'),
+  ...packageDirs('connectors'),
+  ...packageDirs('apps'),
+  ...packageDirs('library'),
 ];
 const built = packer.buildCatalogV3(packages);
 const committed = fs.readFileSync(path.join(storeRoot, 'catalog.json'));

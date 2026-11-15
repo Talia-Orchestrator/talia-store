@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "catalog_reference": {
+    "id": "talia-connectors/wecom",
+    "catalog_id": "wecom"
+  }
+}

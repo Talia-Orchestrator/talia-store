@@ -1,0 +1,763 @@
+"""Unit tests for seo-crawl extraction + SSRF guard. stdlib unittest, no deps.
+
+Run:  python3 -m unittest discover -s PC/resources/builtin/marketplace/agents/e064dca9e1bd/skills/seo-crawl/test
+or:   cd PC/resources/builtin/marketplace/agents/e064dca9e1bd/skills/seo-crawl && python3 -m unittest
+
+Covers BOTH matching shapes (real on-page signals we must capture) and
+look-alike non-matching shapes (body text / comments that resemble signals but
+must NOT be treated as them) per the repo's text-processing test rule.
+"""
+
+import gzip
+import os
+import sys
+import unittest
+from unittest import mock
+import zlib
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
+
+import crawl  # noqa: E402
+import url_safety  # noqa: E402
+from crawl import (  # noqa: E402
+    _PageParser, _decode_body, crawl_file, extract_fields, fetch,
+    representative_internal_links,
+)
+from url_safety import (  # noqa: E402
+    URLSafetyError, assert_proxy_target_safe, is_safe_ip, normalize_hostname,
+    resolve_and_pin, validate_url_strict,
+)
+
+
+GOOD_HTML = """<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Orkas — local-first AI agents</title>
+  <meta name="description" content="Direct a team of AI agents by chat.">
+  <meta name="robots" content="index,follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Orkas">
+  <meta property="og:image" content="/res/og.jpg">
+  <link rel="canonical" href="https://orkas.ai/">
+  <link rel="alternate" hreflang="zh" href="/zh/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Orkas"}</script>
+  <script>var scriptsentinel = "delveintothis";</script>
+  <style>.x{content:"stylesentinel"}</style>
+</head>
+<body>
+  <h1>Orkas is an open-source local-first desktop AI client</h1>
+  <h2>Sub heading here</h2>
+  <p>This canonical link looks like rel=canonical but is body text.</p>
+  <img src="/a.png" alt="described">
+  <img src="/b.png">
+  <a href="/about">about</a>
+  <a href="https://other.example/x">external</a>
+  <a href="#frag">frag</a>
+  <a href="mailto:hi@orkas.ai">mail</a>
+</body>
+</html>"""
+
+NOINDEX_HTML = """<html><head>
+<title>Hidden</title>
+<meta name="robots" content="noindex, nofollow">
+</head><body><h1>x</h1><p>noindex appears here as body text too</p></body></html>"""
+
+
+class ExtractTest(unittest.TestCase):
+    def setUp(self):
+        self.f = extract_fields(GOOD_HTML, "https://orkas.ai/", status=200)
+
+    def test_core_meta_fields(self):
+        self.assertEqual(self.f["title"], "Orkas — local-first AI agents")
+        self.assertEqual(self.f["meta_description"], "Direct a team of AI agents by chat.")
+        self.assertEqual(self.f["lang"], "en")
+        self.assertEqual(self.f["charset"], "utf-8")
+        self.assertEqual(self.f["viewport"], "width=device-width, initial-scale=1")
+        self.assertEqual(self.f["og_title"], "Orkas")
+
+    def test_canonical_only_from_link_not_body_text(self):
+        # Matching: the real <link rel="canonical"> is resolved absolute.
+        self.assertEqual(self.f["canonical"], "https://orkas.ai/")
+        # Look-alike: the <p> mentioning "canonical" must not change it.
+
+    def test_og_image_resolved_absolute(self):
+        self.assertEqual(self.f["og_image"], "/res/og.jpg")  # raw content kept; resolution is audit-side
+
+    def test_headings(self):
+        self.assertEqual(self.f["h1s"], ["Orkas is an open-source local-first desktop AI client"])
+        self.assertEqual(self.f["h1_count"], 1)
+        self.assertEqual(self.f["h2_count"], 1)
+        self.assertEqual(self.f["heading_order"], [1, 2])
+
+    def test_links_split_by_origin(self):
+        self.assertIn("https://orkas.ai/about", self.f["internal_links"])
+        self.assertIn("https://other.example/x", self.f["external_links"])
+        # Look-alikes excluded: #frag and mailto: are neither internal nor external.
+        self.assertEqual(self.f["external_link_count"], 1)
+        self.assertEqual(self.f["internal_link_count"], 1)
+
+    def test_images_alt_coverage(self):
+        self.assertEqual(self.f["images_total"], 2)
+        self.assertEqual(self.f["images_missing_alt"], 1)
+
+    def test_structured_data(self):
+        self.assertTrue(self.f["has_structured_data"])
+        self.assertEqual(self.f["structured_data_types"], ["Organization"])
+
+    def test_hreflang(self):
+        self.assertEqual(self.f["hreflang_tags"],
+                         [{"hreflang": "zh", "href": "https://orkas.ai/zh/"}])
+
+    def test_indexable_when_index_follow(self):
+        # Look-alike guard: robots "index,follow" must NOT be read as noindex.
+        self.assertTrue(self.f["is_indexable"])
+        self.assertFalse(self.f["noindex"])
+
+    def test_word_count_excludes_script_and_style(self):
+        p = _PageParser()
+        p.feed(GOOD_HTML)
+        vis = p.visible_text()
+        self.assertNotIn("scriptsentinel", vis)
+        self.assertNotIn("stylesentinel", vis)
+        self.assertNotIn("delveintothis", vis)
+        self.assertIn("open-source", vis)
+        self.assertGreater(self.f["word_count"], 5)
+
+
+class RepresentativeLinksTest(unittest.TestCase):
+    def test_prioritizes_distinct_sections_before_filling(self):
+        links = [
+            "https://example.com/blog/a",
+            "https://example.com/blog/b",
+            "https://example.com/compare/a-vs-b",
+            "https://example.com/docs/start",
+            "https://example.com/marketplace",
+            "https://example.com/pricing",
+            "https://example.com/security",
+            "https://example.com/use/developers",
+        ]
+        self.assertEqual(
+            representative_internal_links(links, limit=5),
+            [
+                "https://example.com/pricing",
+                "https://example.com/compare/a-vs-b",
+                "https://example.com/use/developers",
+                "https://example.com/docs/start",
+                "https://example.com/blog/a",
+            ],
+        )
+
+    def test_deduplicates_and_fills_unclassified_paths(self):
+        links = [
+            "https://example.com/about",
+            "https://example.com/about",
+            "https://example.com/contact",
+        ]
+        self.assertEqual(
+            representative_internal_links(links, limit=12),
+            ["https://example.com/about", "https://example.com/contact"],
+        )
+        self.assertEqual(representative_internal_links(links, limit=0), [])
+
+
+class NoindexTest(unittest.TestCase):
+    def test_noindex_detected_from_meta_only(self):
+        f = extract_fields(NOINDEX_HTML, "https://orkas.ai/hidden", status=200)
+        self.assertTrue(f["noindex"])
+        self.assertFalse(f["is_indexable"])
+
+    def test_404_not_indexable_even_without_noindex(self):
+        f = extract_fields(GOOD_HTML, "https://orkas.ai/", status=404)
+        self.assertFalse(f["is_indexable"])
+
+
+class MalformedTest(unittest.TestCase):
+    def test_unclosed_tags_do_not_crash(self):
+        bad = "<html><head><title>x<body><h1>y<p>z<img src=q><a href=/p>l"
+        f = extract_fields(bad, "https://orkas.ai/")
+        self.assertIsInstance(f["title"], str)
+        self.assertIn("https://orkas.ai/p", f["internal_links"])
+
+    def test_invalid_jsonld_skipped(self):
+        html = '<html><head><script type="application/ld+json">{not valid json}</script></head><body></body></html>'
+        f = extract_fields(html, "https://orkas.ai/")
+        self.assertFalse(f["has_structured_data"])
+        self.assertEqual(f["structured_data_types"], [])
+
+
+class FileModeTest(unittest.TestCase):
+    def test_crawl_local_file_no_network(self):
+        import tempfile
+        d = tempfile.mkdtemp()
+        p = os.path.join(d, "page.html")
+        with open(p, "w", encoding="utf-8") as fh:
+            fh.write(GOOD_HTML)
+        out = crawl_file(p, base_url="https://orkas.ai/")
+        page = out["pages"][0]
+        self.assertEqual(page["source"], "file")
+        self.assertEqual(page["title"], "Orkas — local-first AI agents")
+        self.assertEqual(page["canonical"], "https://orkas.ai/")
+        self.assertEqual(out["site"]["source"], "file")
+
+    def test_out_creates_parent_directory(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            source = os.path.join(tmp, "page.html")
+            out = os.path.join(tmp, "nested", "crawl.json")
+            with open(source, "w", encoding="utf-8") as fh:
+                fh.write(GOOD_HTML)
+            result = crawl.main(["--file", source, "--out", out])
+            self.assertTrue(result["ok"])
+            self.assertTrue(os.path.isfile(out))
+
+
+class SsrfGuardTest(unittest.TestCase):
+    def test_public_ip_safe(self):
+        self.assertTrue(is_safe_ip("8.8.8.8"))
+        self.assertTrue(is_safe_ip("2606:4700:4700::1111"))
+
+    def test_private_loopback_metadata_unsafe(self):
+        for ip in ("127.0.0.1", "10.0.0.5", "192.168.1.1", "172.16.0.1",
+                   "169.254.169.254", "::1", "0.0.0.0", "fd00::1"):
+            self.assertFalse(is_safe_ip(ip), ip)
+
+    def test_scheme_rejected(self):
+        for u in ("file:///etc/passwd", "ftp://x/", "gopher://x/"):
+            with self.assertRaises(URLSafetyError):
+                validate_url_strict(u)
+
+    def test_obfuscated_ipv4_loopback_rejected(self):
+        # 2130706433 == 127.0.0.1 ; 0x7f000001 == 127.0.0.1 — classic SSRF bypass.
+        for u in ("http://2130706433/", "http://0x7f000001/", "http://127.1/"):
+            with self.assertRaises(URLSafetyError):
+                validate_url_strict(u)
+
+    def test_public_ip_literal_validates(self):
+        normalized, ip, port, host = validate_url_strict("https://8.8.8.8/x")
+        self.assertEqual(ip, "8.8.8.8")
+        self.assertEqual(port, 443)
+
+
+class ProxyTargetSsrfTest(unittest.TestCase):
+    """assert_proxy_target_safe: in proxy mode we can't IP-pin, but reject a host
+    that locally resolves to a real internal IP (SSRF), while trusting fake-ip."""
+
+    def setUp(self):
+        self._orig = url_safety._resolve_all
+
+    def tearDown(self):
+        url_safety._resolve_all = self._orig
+
+    def _resolves_to(self, ips):
+        url_safety._resolve_all = lambda host, port: list(ips)
+
+    def test_rejects_private_resolution(self):
+        for ip in ("10.0.0.5", "127.0.0.1", "169.254.169.254", "192.168.1.1"):
+            self._resolves_to([ip])
+            with self.assertRaises(URLSafetyError):
+                assert_proxy_target_safe("internal.example", 443)
+
+    def test_allows_fakeip(self):
+        self._resolves_to(["198.18.0.34"])
+        assert_proxy_target_safe("orkas.ai", 443)  # must not raise
+
+    def test_allows_public(self):
+        self._resolves_to(["8.8.8.8"])
+        assert_proxy_target_safe("dns.google", 443)  # must not raise
+
+    def test_unresolvable_trusts_proxy(self):
+        def boom(host, port):
+            raise URLSafetyError("dns fail")
+        url_safety._resolve_all = boom
+        assert_proxy_target_safe("only-proxy-knows.example", 443)  # must not raise
+
+    def test_rejects_mixed_public_and_private(self):
+        self._resolves_to(["8.8.8.8", "10.0.0.5"])
+        with self.assertRaises(URLSafetyError):
+            assert_proxy_target_safe("split.example", 443)
+
+
+class ProxyDiscoveryTest(unittest.TestCase):
+    def test_uses_os_system_proxy_when_environment_is_empty(self):
+        with mock.patch.dict(os.environ, {}, clear=True):
+            with mock.patch.object(
+                    crawl,
+                    "getproxies",
+                    return_value={"https": "http://127.0.0.1:7897"}):
+                self.assertEqual(crawl._proxy_for("https", "orkas.ai"), ("127.0.0.1", 7897))
+
+    def test_explicit_environment_proxy_wins_over_system_proxy(self):
+        with mock.patch.dict(
+                os.environ,
+                {"HTTPS_PROXY": "http://127.0.0.1:9000"},
+                clear=True):
+            with mock.patch.object(
+                    crawl,
+                    "getproxies",
+                    return_value={"https": "http://127.0.0.1:7897"}):
+                self.assertEqual(crawl._proxy_for("https", "orkas.ai"), ("127.0.0.1", 9000))
+
+    def test_honors_system_bypass_with_windows_separator(self):
+        with mock.patch.dict(os.environ, {}, clear=True):
+            with mock.patch.object(
+                    crawl,
+                    "getproxies",
+                    return_value={
+                        "https": "http://127.0.0.1:7897",
+                        "no": "localhost;*.example.com",
+                    }):
+                self.assertIsNone(crawl._proxy_for("https", "www.example.com"))
+
+
+class SsrfObfuscationTest(unittest.TestCase):
+    """Deeper SSRF-bypass surfaces: IPv6-embedded v4, octal/decimal literals,
+    IPv6-literal URLs, trailing-dot hosts, and reserved/multicast ranges."""
+
+    def test_ipv6_embedded_private_v4_rejected(self):
+        # IPv4-mapped (::ffff:) and 6to4 (2002::) can smuggle a private v4
+        # inside a v6 host. Each MUST be rejected.
+        self.assertFalse(is_safe_ip("::ffff:169.254.169.254"))  # cloud metadata
+        self.assertFalse(is_safe_ip("::ffff:127.0.0.1"))        # loopback
+        self.assertFalse(is_safe_ip("2002:0a00:0001::1"))       # 6to4 -> 10.0.0.1
+        # NOTE: the public look-alike "::ffff:8.8.8.8" is intentionally NOT
+        # asserted as safe here: on CPython < 3.13 the stdlib ipaddress module
+        # marks the whole ::ffff:0:0/96 range is_private/is_reserved, so the
+        # guard rejects it too. That is an over-block (fail-safe), not a hole,
+        # and is Python-version dependent, so we don't pin a value for it.
+
+    def test_octal_ipv4_loopback_rejected(self):
+        # inet_aton canonicalizes octal/decimal forms; both decode to private.
+        with self.assertRaises(URLSafetyError):
+            validate_url_strict("http://0177.0.0.1/")   # 0177 octal == 127
+        with self.assertRaises(URLSafetyError):
+            validate_url_strict("http://167772161/")    # == 10.0.0.1
+
+    def test_ipv6_literal_url_rejected(self):
+        with self.assertRaises(URLSafetyError):
+            validate_url_strict("http://[::1]/")          # loopback
+        with self.assertRaises(URLSafetyError):
+            validate_url_strict("http://[fd00::1]/x")     # unique-local
+
+    def test_trailing_dot_host_still_rejected(self):
+        # FQDN trailing dot must not bypass the loopback check.
+        with self.assertRaises(URLSafetyError):
+            validate_url_strict("http://127.0.0.1./")
+        # normalize_hostname unit behavior: strip brackets and trailing dot.
+        self.assertEqual(normalize_hostname("[::1]"), "::1")
+        self.assertEqual(normalize_hostname("EXAMPLE.COM."), "example.com")
+
+    def test_multicast_reserved_invalid_unsafe(self):
+        self.assertFalse(is_safe_ip("224.0.0.1"))   # multicast
+        self.assertFalse(is_safe_ip("240.0.0.1"))   # reserved (240/4)
+        self.assertFalse(is_safe_ip("ff02::1"))      # v6 multicast
+        self.assertFalse(is_safe_ip("not-an-ip"))    # garbage -> ValueError
+
+
+class ResolveAndPinTest(unittest.TestCase):
+    """resolve_and_pin (direct fetch path) must reject a host whose DNS answer
+    contains ANY non-public address, and otherwise pin the first address."""
+
+    def setUp(self):
+        self._orig = url_safety._resolve_all
+
+    def tearDown(self):
+        url_safety._resolve_all = self._orig
+
+    def test_resolve_and_pin_rejects_mixed(self):
+        url_safety._resolve_all = lambda host, port: ["8.8.8.8", "10.0.0.5"]
+        with self.assertRaises(URLSafetyError):
+            resolve_and_pin("split.example", 443)
+        url_safety._resolve_all = lambda host, port: ["8.8.8.8"]
+        self.assertEqual(resolve_and_pin("split.example", 443), "8.8.8.8")
+
+
+class DecodeBodyTest(unittest.TestCase):
+    """_decode_body handles gzip, zlib-wrapped deflate, raw deflate, identity,
+    and degrades to the raw bytes on a corrupt stream rather than raising."""
+
+    def test_decode_body_variants(self):
+        self.assertEqual(_decode_body(gzip.compress(b"hi"), "gzip"), b"hi")
+        self.assertEqual(_decode_body(zlib.compress(b"hi"), "deflate"), b"hi")
+        co = zlib.compressobj(wbits=-15)  # raw deflate, no zlib header
+        raw_deflate = co.compress(b"hi") + co.flush()
+        self.assertEqual(_decode_body(raw_deflate, "deflate"), b"hi")
+        # corrupt gzip stream -> return the raw input unchanged (best-effort).
+        self.assertEqual(_decode_body(b"\x00garbage", "gzip"), b"\x00garbage")
+        # identity / empty encoding -> passthrough.
+        self.assertEqual(_decode_body(b"plain", ""), b"plain")
+
+
+class RedirectLimitTest(unittest.TestCase):
+    """fetch() follows redirects manually; exceeding max_redirects raises."""
+
+    def setUp(self):
+        self._orig = crawl._fetch_once
+
+    def tearDown(self):
+        crawl._fetch_once = self._orig
+
+    def test_too_many_redirects(self):
+        def always_redirect(url, timeout, ua):
+            return {
+                "final_url": url,
+                "status": 301,
+                "headers": {},
+                "location": "https://orkas.ai/next",
+                "html": "",
+                "truncated": False,
+                "content_type": "",
+                "pinned_ip": "1.2.3.4",
+            }
+        crawl._fetch_once = always_redirect
+        with self.assertRaises(URLSafetyError) as ctx:
+            fetch("https://orkas.ai/", max_redirects=2)
+        self.assertIn("too many redirects", str(ctx.exception))
+
+
+class ParseEdgeCaseTest(unittest.TestCase):
+    """Extraction edge cases beyond the GOOD_HTML happy path."""
+
+    def test_charset_header_wins_over_meta(self):
+        # Content-Type charset header overrides the <meta charset> in the doc.
+        f = extract_fields(GOOD_HTML, "https://x/",
+                           headers={"content-type": "text/html; charset=iso-8859-1"})
+        self.assertEqual(f["charset"], "iso-8859-1")
+        # No header -> fall back to the <meta charset="utf-8"> in GOOD_HTML.
+        self.assertEqual(extract_fields(GOOD_HTML, "https://x/")["charset"], "utf-8")
+
+    def test_jsonld_type_list_and_array(self):
+        html = ('<html><head><script type="application/ld+json">'
+                '[{"@type":["Organization","LocalBusiness"]},{"@type":"FAQPage"}]'
+                '</script></head><body></body></html>')
+        f = extract_fields(html, "https://x/")
+        self.assertEqual(set(f["structured_data_types"]),
+                         {"Organization", "LocalBusiness", "FAQPage"})
+        self.assertTrue(f["has_structured_data"])
+
+    def test_link_count_counts_duplicates(self):
+        html = ('<html><body>'
+                '<a href="/about">a</a>'
+                '<a href="/about">a again</a>'
+                '<a href="https://other.example/x">ext</a>'
+                '</body></html>')
+        f = extract_fields(html, "https://x/")
+        # count includes the duplicate; the deduped list does not.
+        self.assertEqual(f["internal_link_count"], 2)
+        self.assertEqual(len(f["internal_links"]), 1)
+
+    def test_sparse_page_field_defaults(self):
+        f = extract_fields("<html><body><p>hi</p></body></html>", "https://x/")
+        self.assertEqual(f["title"], "")
+        self.assertEqual(f["title_length"], 0)
+        self.assertIsNone(f["meta_description"])
+        self.assertIsNone(f["canonical"])
+        self.assertEqual(f["h1_count"], 0)
+        self.assertEqual(f["h1s"], [])
+        self.assertIsNone(f["lang"])
+        self.assertIsNone(f["viewport"])
+        self.assertFalse(f["has_structured_data"])
+
+    def test_alternate_without_hreflang_excluded(self):
+        # rel=alternate without hreflang (e.g. an RSS feed) is NOT an hreflang
+        # tag; only the hreflang-bearing alternate is captured.
+        html = ('<html><head>'
+                '<link rel="alternate" type="application/rss+xml" href="/feed">'
+                '<link rel="alternate" hreflang="zh" href="/zh/">'
+                '</head><body></body></html>')
+        f = extract_fields(html, "https://x/")
+        self.assertEqual(f["hreflang_tags"],
+                         [{"hreflang": "zh", "href": "https://x/zh/"}])
+
+    def test_word_count_cjk_behavior(self):
+        # CJK runs have no \\b word boundaries, so word_count counts CJK
+        # characters at ~2 chars per word (rounded up): 10 han chars -> 5
+        # words, not the single token the plain word regex would report.
+        f = extract_fields("<html><body><p>你好世界这是测试内容</p></body></html>",
+                           "https://x/")
+        self.assertEqual(f["word_count"], 5)
+
+
+class WordCountCjkTest(unittest.TestCase):
+    """CJK-aware word_count: latin words + ceil(cjk_chars / 2)."""
+
+    @staticmethod
+    def _wc(body_text):
+        return extract_fields(
+            "<html><body><p>{}</p></body></html>".format(body_text),
+            "https://x/")["word_count"]
+
+    def test_long_chinese_text_counts_half_the_chars(self):
+        # 600 han chars -> 300 words (was 1-10 under the token regex).
+        text = "这是一段说明中文分词" * 60
+        self.assertEqual(len(text), 600)
+        self.assertEqual(self._wc(text), 300)
+
+    def test_mixed_text_sums_latin_words_and_cjk_chars(self):
+        # latin: Orkas, local-first (2) + CJK: 桌面客户端设计 (7 chars -> 4).
+        self.assertEqual(self._wc("Orkas 桌面客户端 local-first 设计"), 6)
+
+    def test_kana_and_hangul_counted(self):
+        # 5 hiragana + 5 hangul = 10 CJK chars -> 5 words.
+        self.assertEqual(self._wc("こんにちは 안녕하세요"), 5)
+
+    def test_odd_cjk_char_count_rounds_up(self):
+        self.assertEqual(self._wc("你好世"), 2)
+
+    def test_pure_latin_behavior_unchanged(self):
+        self.assertEqual(self._wc("one two three four"), 4)
+        self.assertEqual(self._wc("it's a test-case, ok"), 4)
+
+    def test_cjk_punctuation_not_counted_as_chars(self):
+        # Full-width punctuation （，。) is not a CJK letter: 4 chars -> 2 words.
+        self.assertEqual(self._wc("你好，世界。"), 2)
+
+
+class DecompressionBombTest(unittest.TestCase):
+    """_decode_body/_finalize_body bound decompressed OUTPUT at MAX_BODY_BYTES;
+    the compressed-input cap alone must not admit a decompression bomb."""
+
+    def test_gzip_bomb_bounded_and_truncated(self):
+        # ~20 MB of zeros gzips to a few KB; output must stop at the cap
+        # (no MemoryError-scale inflation) and be flagged truncated like an
+        # oversized raw body.
+        bomb = gzip.compress(b"\x00" * (crawl.MAX_BODY_BYTES * 4))
+        self.assertLess(len(bomb), crawl.MAX_BODY_BYTES)  # small on the wire
+        body, truncated = crawl._finalize_body(bomb, "gzip")
+        self.assertTrue(truncated)
+        self.assertEqual(len(body), crawl.MAX_BODY_BYTES)
+
+    def test_deflate_bomb_output_capped(self):
+        bomb = zlib.compress(b"\x00" * (crawl.MAX_BODY_BYTES * 2))
+        out = _decode_body(bomb, "deflate")
+        self.assertLessEqual(len(out), crawl.MAX_BODY_BYTES + 1)
+
+    def test_small_gzip_still_decodes(self):
+        body, truncated = crawl._finalize_body(gzip.compress(b"<html>hi</html>"), "gzip")
+        self.assertEqual(body, b"<html>hi</html>")
+        self.assertFalse(truncated)
+
+    def test_identity_passthrough_unchanged(self):
+        body, truncated = crawl._finalize_body(b"plain", "")
+        self.assertEqual((body, truncated), (b"plain", False))
+
+    def test_oversized_raw_body_still_truncates(self):
+        big = b"x" * (crawl.MAX_BODY_BYTES + 10)
+        body, truncated = crawl._finalize_body(big, "")
+        self.assertTrue(truncated)
+        self.assertEqual(len(body), crawl.MAX_BODY_BYTES)
+
+
+GBK_HTML = ('<html><head><meta charset="gbk"><title>中文标题</title></head>'
+            '<body><p>正文内容</p></body></html>')
+
+
+class MetaCharsetDecodeTest(unittest.TestCase):
+    """When the Content-Type header names no charset, the <meta charset> in the
+    first 2 KiB decides the decode; the header still wins when present."""
+
+    def test_meta_charset_gbk_decoded(self):
+        text = crawl._decode_text(GBK_HTML.encode("gbk"), "text/html")
+        self.assertIn("中文标题", text)
+
+    def test_http_equiv_charset_decoded(self):
+        html = ('<html><head><meta http-equiv="Content-Type" '
+                'content="text/html; charset=gbk"><title>中文标题</title>'
+                '</head><body></body></html>')
+        text = crawl._decode_text(html.encode("gbk"), "text/html")
+        self.assertIn("中文标题", text)
+
+    def test_header_charset_still_wins_over_meta(self):
+        body = GBK_HTML.encode("gbk")
+        # Header gbk: decodes fine (unchanged path).
+        self.assertIn("中文标题", crawl._decode_text(body, "text/html; charset=gbk"))
+        # Header utf-8 beats the meta gbk declaration -> mojibake, by design.
+        self.assertNotIn("中文标题", crawl._decode_text(body, "text/html; charset=utf-8"))
+
+    def test_bogus_meta_codec_falls_back_to_utf8(self):
+        body = (b'<html><head><meta charset="bogus-codec-name">'
+                b'<title>ascii title</title></head><body></body></html>')
+        text = crawl._decode_text(body, "")  # must not raise
+        self.assertIn("ascii title", text)
+
+    def test_charset_mention_outside_meta_not_sniffed(self):
+        # Look-alike: charset= in body text / non-meta tags is not a declaration.
+        self.assertIsNone(crawl._sniff_meta_charset(
+            b"<html><body><p>use charset=gbk here</p></body></html>"))
+        self.assertIsNone(crawl._sniff_meta_charset(b'<p charset="gbk">x</p>'))
+
+    def test_meta_charset_beyond_2k_window_ignored(self):
+        body = b"<html><head>" + b" " * 2500 + b'<meta charset="gbk"></head>'
+        self.assertIsNone(crawl._sniff_meta_charset(body))
+
+
+class NoProxyMatchTest(unittest.TestCase):
+    """NO_PROXY entries match exact hosts and dot-suffixes only — never a bare
+    string suffix (orkas.ai must not swallow notorkas.ai)."""
+
+    def test_lookalike_suffix_domain_not_matched(self):
+        self.assertFalse(crawl._no_proxy_match("notorkas.ai", "orkas.ai"))
+
+    def test_exact_and_subdomain_matched(self):
+        self.assertTrue(crawl._no_proxy_match("orkas.ai", "orkas.ai"))
+        self.assertTrue(crawl._no_proxy_match("sub.orkas.ai", "orkas.ai"))
+
+    def test_star_and_dot_entry_forms(self):
+        for entry in ("*.orkas.ai", ".orkas.ai"):
+            self.assertTrue(crawl._no_proxy_match("sub.orkas.ai", entry), entry)
+            self.assertTrue(crawl._no_proxy_match("orkas.ai", entry), entry)
+            self.assertFalse(crawl._no_proxy_match("notorkas.ai", entry), entry)
+
+    def test_multiple_entries_and_empty(self):
+        self.assertTrue(crawl._no_proxy_match("sub.orkas.ai", "example.com, orkas.ai"))
+        self.assertFalse(crawl._no_proxy_match("notexample.com", "example.com, orkas.ai"))
+        self.assertFalse(crawl._no_proxy_match("orkas.ai", ""))
+
+
+class LocalFileEvidenceTest(unittest.TestCase):
+    """A file crawl makes no request, so it must describe no response.
+
+    On 2026-08-09 crawl_file passed status=200 into extract_fields. That 200 and
+    an https derived from the base URL's scheme travelled into the audit, which
+    scored security and indexability 100 and labelled the findings Measured for
+    a page that had never been contacted.
+    """
+
+    HTML = ('<html lang="en"><head><title>Orkas</title>'
+            '<link rel="canonical" href="https://orkas.ai/"></head>'
+            '<body><h1>Orkas</h1><p>Hello.</p></body></html>')
+
+    def _page(self):
+        import tempfile
+        fh = tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, encoding="utf-8")
+        fh.write(self.HTML)
+        fh.close()
+        try:
+            return crawl_file(fh.name, "https://orkas.ai/")
+        finally:
+            os.unlink(fh.name)
+
+    def test_response_fields_are_absent_not_defaulted(self):
+        page = self._page()["pages"][0]
+        for field in ("status_code", "https", "is_indexable",
+                      "redirect_chain", "response_time_ms"):
+            self.assertIsNone(page[field], field)
+        self.assertEqual(page["source"], "file")
+
+    def test_html_derived_fields_still_carry(self):
+        # The negative control: refusing to describe the response must not throw
+        # away what the file really does say.
+        page = self._page()["pages"][0]
+        self.assertEqual(page["title"], "Orkas")
+        self.assertEqual(page["canonical"], "https://orkas.ai/")
+        self.assertEqual(page["h1_count"], 1)
+        self.assertEqual(page["lang"], "en")
+        self.assertFalse(page["noindex"])
+
+    def test_a_real_fetch_still_describes_its_response(self):
+        page = extract_fields(self.HTML, "https://orkas.ai/", status=200,
+                              response_time_ms=42, fetched_at="2026-08-09T00:00:00Z")
+        self.assertEqual(page["status_code"], 200)
+        self.assertIs(page["https"], True)
+        self.assertIs(page["is_indexable"], True)
+        self.assertEqual(page["redirect_chain"], [])
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+class AnswerFirstExtractTest(unittest.TestCase):
+    """first_paragraph now reflects the first real body-prose block (for the
+    GEO answer-first signal), not the first 320 chars of the whole page. Real
+    HTML in, per the repo's 'accepted real shapes' fixture rule."""
+
+    def _fp(self, html):
+        return extract_fields(html, "https://x.test/", status=200)["first_paragraph"]
+
+    def test_answer_first_page_yields_the_opening_sentence(self):
+        html = (
+            '<html><body><nav><a href="/">Home</a><a href="/p">Product</a></nav>'
+            '<main><h1>Orkas</h1>'
+            '<p>Orkas is a local-first AI agent platform that keeps data on device '
+            'and runs fully offline. It never uploads your files.</p>'
+            '<p>A second paragraph follows.</p></main></body></html>'
+        )
+        fp = self._fp(html)
+        # First sentence of the opening body paragraph, not the nav or the h1.
+        self.assertEqual(
+            fp,
+            "Orkas is a local-first AI agent platform that keeps data on device and runs fully offline.")
+        self.assertGreaterEqual(len(fp), 60)  # consumer treats >=60 as answer-first
+
+    def test_cta_or_nav_before_content_reads_as_no_answer_up_top(self):
+        html = (
+            '<html><body><header><h1>Widget</h1></header>'
+            '<div>Buy now</div>'
+            '<p>A much longer explanatory paragraph that only appears after the CTA '
+            'block above and is not front-loaded.</p></body></html>'
+        )
+        fp = self._fp(html)
+        self.assertEqual(fp, "Buy now")
+        self.assertLess(len(fp), 60)  # consumer flags no_answer_first
+
+    def test_heading_text_is_excluded_from_the_first_block(self):
+        html = ('<html><body><h1>Just A Page Title That Is Fairly Long Indeed</h1>'
+                '<p>The body answer sentence is right here.</p></body></html>')
+        self.assertEqual(self._fp(html), "The body answer sentence is right here.")
+
+    def test_nav_header_footer_aside_text_excluded(self):
+        html = (
+            '<html><body>'
+            '<header>Site masthead tagline that is quite long and would look like prose</header>'
+            '<nav>Home Products Pricing About Contact Documentation Blog Careers</nav>'
+            '<aside>Related links and a promotional blurb sitting in the sidebar column</aside>'
+            '<article><p>The real article opens with this direct answer sentence.</p></article>'
+            '<footer>Copyright and a long legal footer line that is not body prose at all</footer>'
+            '</body></html>'
+        )
+        self.assertEqual(self._fp(html), "The real article opens with this direct answer sentence.")
+
+    def test_chinese_first_sentence_split_on_cjk_terminator(self):
+        html = ('<html><body><p>Orkas 是一个本地优先的 AI 智能体平台，数据全部留在设备本地。'
+                '它可以完全离线运行。</p></body></html>')
+        # Splits at the first 。 not the latin period.
+        self.assertEqual(self._fp(html),
+                         "Orkas 是一个本地优先的 AI 智能体平台，数据全部留在设备本地。")
+
+    def test_empty_body_yields_empty_first_paragraph(self):
+        self.assertEqual(self._fp('<html><body></body></html>'), "")
+
+    def test_visible_text_and_word_count_unaffected_by_block_tracking(self):
+        html = ('<html><body><nav>Menu Link</nav><h1>Title</h1>'
+                '<p>Body words here counted normally.</p></body></html>')
+        f = extract_fields(html, "https://x.test/", status=200)
+        # nav + heading + body all still flow into the visible text / word count.
+        self.assertIn("Menu Link", f["text_sample"])
+        self.assertIn("Title", f["text_sample"])
+        self.assertIn("Body words here", f["text_sample"])
+
+    def test_long_first_block_without_terminator_capped_at_limit(self):
+        body = "word " * 200  # 1000 chars, no sentence terminator
+        html = "<html><body><p>{}</p></body></html>".format(body)
+        fp = self._fp(html)
+        self.assertLessEqual(len(fp), 320)
+        self.assertGreater(len(fp), 60)
+
+
+class FirstSentenceUnitTest(unittest.TestCase):
+    def test_splits_on_latin_terminator(self):
+        self.assertEqual(crawl._first_sentence("First one. Second two."), "First one.")
+
+    def test_splits_on_cjk_terminator(self):
+        self.assertEqual(crawl._first_sentence("第一句。第二句。"), "第一句。")
+
+    def test_no_terminator_returns_capped_prefix(self):
+        self.assertEqual(crawl._first_sentence("abc", limit=2), "ab")
+
+    def test_terminator_past_limit_falls_back_to_prefix(self):
+        # sentence end is beyond the cap → return the capped prefix, not the sentence
+        self.assertEqual(crawl._first_sentence("abcdef.", limit=3), "abc")
+
+    def test_empty_in_empty_out(self):
+        self.assertEqual(crawl._first_sentence("   "), "")

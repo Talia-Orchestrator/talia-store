@@ -1,0 +1,10 @@
+{
+  "id": "talia-connectors/dingtalk",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "DingTalk CLI",
+  "description": "Open Talia’s built-in DingTalk DWS CLI setup. The local CLI is installed and authorized only after the user chooses to connect.",
+  "publisher": "talia-connectors",
+  "license": "MIT",
+  "minHostVersion": "0.10.0"
+}
