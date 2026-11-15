@@ -52,12 +52,27 @@ valido: non ricostruire `catalog.json` e non rigenerare `catalog.signature.json`
    ```
 
 8. Eseguire `git diff --check`, revisionare i file generati e proporre una PR.
-   La CI della PR non riceve la chiave privata: verifica la firma già presente.
-   Integrare solo dopo CI verde. Su `main`, verificare che l'envelope remoto
+   La validazione dello Store è locale; non c'è una GitHub Action su ogni PR o
+   push. Su `main`, verificare che l'envelope remoto
    contenga esattamente `catalog.json`, che la firma passi con `public-key.txt`
    e che ogni artifact nuovo sia accessibile anonimamente con hash e dimensioni
    corrispondenti. Verificare poi nell'app il percorso Store → anteprima →
    installazione, distinguendo installazione da avvio del servizio esterno.
+
+### Gate locale prima di `talia-core:main` → `build`
+
+Prima della PR che promuove il core a `build`, aggiornare un checkout pulito
+di `talia-store` al commit di `main` che sarà usato per la build. Eseguire:
+
+```sh
+npm run validate:before-build
+```
+
+Il comando rifiuta modifiche locali, esegue validazione del catalogo, firma e
+artifact tramite `npm test`, controlla che i test non abbiano modificato i
+sorgenti e stampa il commit verificato. Registrare quel commit nella checklist
+della PR `main` → `build`. Se fallisce, fermare la promozione; ripetere dopo
+la correzione su un checkout pulito. Questo gate non avvia una build Electron.
 
 ## 3. Pubblicare una nuova versione dell'app sul sito
 
