@@ -1,6 +1,6 @@
 # Manuale Talia
 
-Versione del manuale: 1.1.0 — 13 novembre 2026. Destinazione: prodotto desktop Electron. Questo documento descrive i flussi e i confini del prodotto: non certifica la disponibilità di un provider esterno, un account o una funzione nella tua installazione. Le etichette possono cambiare con lingua e versione. Il porting Rust/Tauri è un lavoro separato, non una funzionalità già consegnata.
+Versione del manuale: 1.2.2 — 15 novembre 2026. Destinazione: prodotto desktop Electron. Questo documento descrive i flussi e i confini del prodotto: non certifica la disponibilità di un provider esterno, un account o una funzione nella tua installazione. Le etichette possono cambiare con lingua e versione. Il porting Rust/Tauri è un lavoro separato, non una funzionalità già consegnata.
 
 ## Indice
 
@@ -43,7 +43,7 @@ I capitoli 1–13 introducono i concetti; i capitoli 14–32 descrivono i percor
 
 ## 1. Primo avvio ed esempio pratico
 
-Talia è un ambiente di lavoro con un assistente coordinatore, Commander, che può coinvolgere agenti specializzati. Non è soltanto una casella per fare domande: puoi lavorare su documenti, analizzare materiale, sviluppare un'app, organizzare attività e utilizzare servizi collegati. Le capacità effettive dipendono da modello, risorse installate, connessioni e permessi.
+Talia è un ambiente di lavoro con un assistente coordinatore, Commander, che può coinvolgere agenti specializzati. Un nuovo profilo include Assistant, General Researcher e Content Writer, insieme a sei skill iniziali per pianificare, sintetizzare fonti, organizzare materiali, creare brief, rivedere consegne e scrivere contenuti. Gli altri agenti, plugin e MCP si scelgono nello Store; nessun MCP opzionale viene avviato al primo accesso. Non è soltanto una casella per fare domande: puoi lavorare su documenti, analizzare materiale, sviluppare un'app, organizzare attività e utilizzare servizi collegati. Le capacità effettive dipendono da modello, risorse installate, connessioni e permessi.
 
 Prima di un compito reale:
 
@@ -575,15 +575,15 @@ La scheda può mostrare memoria e impostazioni del runtime. Le conversazioni di 
 
 ### 21.3 Installare e aggiornare risorse nello Store
 
-**Percorso:** Store → ricerca e filtri per tipo/stato → dettaglio → installazione/aggiornamento. Le famiglie di estensioni sono agenti, skill, connettori e app. Il manuale è una card documentale separata, non un pacchetto skill duplicato.
+**Percorso:** Store → ricerca e filtri per tipo/stato → dettaglio → installazione/aggiornamento. Le famiglie dello Store sono agenti, skill, connettori, app e Biblioteca condivisa. Il manuale completo è disponibile offline nel prodotto e come pacchetto della Biblioteca: installarlo o aggiornarlo copia il documento nella Biblioteca personale, senza trasformarlo in una skill.
 
 1. Controlla fonte/autore, versione, compatibilità host e dipendenze.
 2. Esamina il piano e gli impatti prima di installare/aggiornare. Una risorsa condivisa può essere usata da più agenti.
 3. Se sono presenti modifiche locali, non sovrascriverle alla cieca: conserva una copia e scegli la strategia proposta.
-4. Dopo l'esito, verifica la risorsa nell'area appropriata. Un connettore installato richiede ancora configurazione e connessione.
+4. Dopo l'esito, verifica la risorsa nell'area appropriata. Un connettore installato richiede ancora configurazione e connessione. Per i *Craft l’installazione guidata della CLI, quando disponibile per il tuo sistema, è un’azione separata con verifica dei file; dove manca un asset ufficiale verificato, usa il percorso manuale indicato. Solo un handshake riuscito rende il connettore utilizzabile.
 5. Per rimuovere usa la disinstallazione esplicita; togliere una fonte di catalogo non è necessariamente disinstallare i pacchetti già presenti.
 
-Il catalogo può mostrare risorse in cache e fonti da aggiornare. Una cache valida non prova l'ultima versione remota; un errore rete/firma/digest non va aggirato scaricando pacchetti non verificati. I builtin di primo avvio sono rimovibili; il tombstone impedisce reinstallazioni automatiche. Solo un ripristino/installazione richiesto può reintrodurli.
+Il catalogo può mostrare risorse in cache e fonti da aggiornare. Una cache valida non prova l'ultima versione remota; un errore rete/firma/digest non va aggirato scaricando pacchetti non verificati. I tre agenti e le sei skill iniziali sono rimovibili; il tombstone impedisce reinstallazioni automatiche. La copia personale del manuale resta tua: un aggiornamento dello Store non deve sovrascrivere modifiche locali. Solo un ripristino/installazione richiesto può reintrodurli.
 
 ### 21.4 Regole di validazione personalizzate
 
@@ -600,6 +600,15 @@ Il catalogo può mostrare risorse in cache e fonti da aggiornare. Una cache vali
 - **HTTP:** inserisci URL Streamable HTTP e autenticazione prevista. HTTPS è richiesto salvo loopback locale. Non è disponibile un trasporto SSE generico separato.
 - **Stdio:** comando eseguibile, argomenti uno per riga e variabili ambiente nel formato richiesto. Il processo parte sul tuo computer a ogni connessione con i privilegi del tuo utente: non è una sandbox. La directory `cwd` non è un campo della form attuale.
 - **Preset/CLI:** un pacchetto può richiedere installazione dell'eseguibile, percorso e login. Rilevamento o configurazione salvata non provano connessione. Non tutti i connettori storici basati su relay sono operativi nel prodotto indipendente.
+
+Il catalogo incorporato di Talia contiene Figma e i quattro ID CLI di
+messaggistica. Lo Store distribuisce 29 schede per Atlassian, tutti i servizi
+Google e Microsoft, Bitbucket, GitLab, GitHub e Hugging Face. Google Ads,
+Google Analytics e Google Maps sono eccezioni alle categorie Commercio e
+Ricerca escluse. Una scheda appare in Connettori dopo l'installazione, ma
+resta non disponibile finché non esiste autenticazione diretta verificata:
+l'installazione non connette il servizio. I 16 preset MCP *Craft sono separati,
+opzionali e richiedono configurazione e handshake prima dell'uso.
 
 I campi header/ambiente possono essere visibili durante l'inserimento: usa l'area di configurazione, non la chat, e non condividere screenshot. Un preset non autorizza azioni sul servizio. Dopo la connessione chiedi prima una verifica in sola lettura.
 
