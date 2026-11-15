@@ -699,6 +699,38 @@
       }
     },
     {
+      "id": "talia-connectors/dingtalk",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "DingTalk CLI",
+      "description": "Open Talia’s built-in DingTalk DWS CLI setup. The local CLI is installed and authorized only after the user chooses to connect.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:735f48e4aa1c34baf5d96a3a6c12ab30b1a249353e718d935028db765d7d27de",
+      "minHostVersion": "0.10.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-dingtalk-1.0.0.json",
+        "sha256": "sha256:c45277e21750f651cf3dcc32a94f4e57c62172960f4b25ad023980ca10e20f53",
+        "size": 2527
+      }
+    },
+    {
+      "id": "talia-connectors/feishu",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Feishu / Lark CLI",
+      "description": "Open Talia’s built-in Feishu/Lark CLI setup. The local CLI is installed and authorized only after the user chooses to connect.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:6f71a81972514047dea584d9b64aad924598faf23ca71cdaa361456928db15bb",
+      "minHostVersion": "0.10.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-feishu-1.0.0.json",
+        "sha256": "sha256:bed44471c509ed4cb12a8a73d66fcbb4078d42a1915de2bbe0e78d24b06bb940",
+        "size": 2534
+      }
+    },
+    {
       "id": "talia-connectors/solidcraft",
       "kind": "connector",
       "version": "1.0.0",
@@ -712,6 +744,22 @@
         "url": "artifacts/talia-connectors-solidcraft-1.0.0.json",
         "sha256": "sha256:2ea4fa8db82247e9cd2be434ab2f09d60347656cfa729fc6ccdc0af7b6a29192",
         "size": 6531
+      }
+    },
+    {
+      "id": "talia-connectors/wecom",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "WeCom CLI",
+      "description": "Open Talia’s built-in WeCom CLI setup. The local CLI is installed and authorized only after the user chooses to connect.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:390f0270ce8cd3fdcb58d4160be59e8c5dae80b83e49163ee8f1dddd7eb2e2a4",
+      "minHostVersion": "0.10.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-wecom-1.0.0.json",
+        "sha256": "sha256:d6ad34a8347c40f5f8b0ea9c3eeb54a19a3fe31649f4ec6fd463c9312f600727",
+        "size": 2495
       }
     },
     {

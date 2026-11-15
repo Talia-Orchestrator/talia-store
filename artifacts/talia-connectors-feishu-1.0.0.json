@@ -1,0 +1,23 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-connectors/feishu",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Feishu / Lark CLI",
+      "description": "Open Talia’s built-in Feishu/Lark CLI setup. The local CLI is installed and authorized only after the user chooses to connect.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\nCopyright (c) 2026 Talia contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Feishu / Lark CLI reference for Talia. No external CLI or credentials are bundled.\n",
+        "README.md": "# Feishu / Lark CLI per Talia\n\nQuesto pacchetto apre la configurazione Feishu/Lark CLI già integrata in Talia.\nL’installazione dallo Store salva solo un riferimento dichiarativo: non avvia\nprocessi, non installa la CLI e non autorizza account.\n\nDopo l’installazione, scegli **Apri connettori** e segui la guida di Talia.\nFeishu e Lark condividono la stessa CLI e la stessa scheda di configurazione.\nLa connessione richiede una versione di Talia che supporti questo pacchetto.\n",
+        "connector.json": "{\n  \"schemaVersion\": 1,\n  \"catalog_reference\": {\n    \"id\": \"talia-connectors/feishu\",\n    \"catalog_id\": \"feishu\"\n  }\n}\n"
+      },
+      "digest": "sha256:6f71a81972514047dea584d9b64aad924598faf23ca71cdaa361456928db15bb",
+      "minHostVersion": "0.10.0"
+    }
+  ]
+}

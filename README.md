@@ -24,6 +24,11 @@ This writes `catalog.json` and the referenced `artifacts/` files. Sign the exact
 
 The builder selects fifteen specialist agents explicitly and selects the current skills, connectors, and apps from their source repositories. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing. If the source repositories are not siblings, set `TALIA_SOURCE_ROOT` to the directory containing them.
 
+The connector catalog now includes WeCom, Feishu/Lark, and DingTalk CLI
+references for Talia 0.10.0 or newer, alongside the existing MCP packages.
+These references open Talia's built-in setup and do not run or authorize a CLI
+during Store installation. Lark shares the Feishu package.
+
 Run `npm test` to compare the committed catalog and artifacts with the selected sources, verify artifact digests and sizes, scan package text for personal paths and credentials, and validate the detached signature with the public key. This check does not regenerate or sign files. After rebuilding, the committed signature no longer represents the new catalog until the release owner signs the reviewed `catalog.json`; do not publish a mismatched index/signature pair.
 
 Il procedimento completo per aggiornare catalogo, release dell'app e pagina download è in [`docs/store-update-runbook.md`](docs/store-update-runbook.md).
