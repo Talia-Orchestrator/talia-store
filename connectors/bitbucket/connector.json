@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "bitbucket",
+    "display_name": "Bitbucket",
+    "category": "developer",
+    "description_en": "Browse code and pipelines; manage branches, issues, and pull requests.",
+    "description_it": "Esplora codice e pipeline; gestisci branch, issue e pull request.",
+    "integration_state": "requires_direct_auth"
+  }
+}

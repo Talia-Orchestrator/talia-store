@@ -5,27 +5,26 @@ Questo documento distingue tre oggetti che hanno controlli diversi:
 | Oggetto | Dove si pubblica | Firma richiesta |
 | --- | --- | --- |
 | Pacchetti dell'app Talia | GitHub Release e pagina download | Firma del bundle secondo la procedura della piattaforma; su macOS le release locali attuali sono ad-hoc e non notarizzate |
-| Catalogo di agenti, skill, connettori e app | `catalog.json`, `artifacts/`, `catalog.signature.json` su `main` | Ed25519 con la chiave privata del maintainer già associata a `public-key.txt` |
+| Catalogo di agenti, skill, connettori, app e Biblioteca | `catalog.json`, `artifacts/`, `catalog.signature.json` su `main` | Ed25519 con la chiave privata del maintainer già associata a `public-key.txt` |
 | Sito, manuale e changelog | `site/` e branch Pages generato | Nessuna firma Ed25519 del catalogo se `catalog.json` non cambia |
 
 ## 1. Identificare il delta
 
 Prima di intervenire, controllare `git status`, `git diff`, branch, tag e
-contenuti già pubblicati. Usare soltanto i sorgenti pubblicati su `main` nei
-quattro repository `talia-agents`, `talia-skills`, `talia-connectors` e
-`talia-apps`. Non incorporare file locali non committati o pacchetti ancora in
-bozza. Conservare i lavori altrui.
+contenuti già pubblicati. Usare soltanto i pacchetti presenti nelle cartelle
+`agents/`, `skills/`, `connectors/`, `apps/` e `library/` di questo repository.
+Non incorporare file locali non committati o pacchetti ancora in bozza.
+Conservare i lavori altrui.
 
 Se cambia solo il sito o una GitHub Release, il catalogo già firmato rimane
 valido: non ricostruire `catalog.json` e non rigenerare `catalog.signature.json`.
 
 ## 2. Aggiornare il catalogo delle risorse, quando necessario
 
-1. Integrare e verificare prima i pacchetti nei rispettivi repository sorgente.
-2. Preparare checkout puliti e aggiornati dei quattro `main` come directory
-   sorelle. Impostare `TALIA_SOURCE_ROOT` se sono in una directory diversa da
-   quella di `talia-store`. Tenere separati gli indici e i lavori locali.
-3. Da `talia-store`, eseguire `npm run build:catalog`. Esaminare il diff completo
+1. Integrare e verificare i pacchetti nello stesso repository Store.
+2. Preparare un checkout pulito e aggiornato di `talia-store`; la CI non usa
+   altri repository come sorgente del catalogo.
+3. Eseguire `npm run build:catalog`. Esaminare il diff completo
    di `catalog.json` e `artifacts/`: ID, versioni, licenze, hash, dimensioni,
    eventuali rimozioni e modifiche inattese. Non firmare un catalogo inatteso.
 4. Eseguire `npm run validate` usando gli stessi sorgenti puliti. La verifica

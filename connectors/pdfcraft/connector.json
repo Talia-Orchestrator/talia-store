@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "preset": {
+    "id": "pdfcraft",
+    "display_name": "PDFCraft",
+    "category": "productivity",
+    "description_en": "Configure the official PDFCraft MCP command for this device.",
+    "description_it": "Configura il comando MCP ufficiale di PDFCraft per questo dispositivo.",
+    "documentation_url": "https://craft.wiki/apps/pdfcraft/ai-agents/",
+    "executable_hint": "pdfcraft-cli",
+    "base_args": [
+      "mcp"
+    ],
+    "path_fields": [
+      {
+        "key": "root",
+        "flag": "--root",
+        "required": false,
+        "label_en": "Default root",
+        "label_it": "Cartella radice predefinita",
+        "help_en": "Optional command root; use the read/write folders below to constrain MCP file access.",
+        "help_it": "Radice comandi facoltativa; usa le cartelle di lettura/scrittura sotto per limitare l’accesso MCP."
+      },
+      {
+        "key": "automation_read_root",
+        "flag": "--automation-read-root",
+        "required": false,
+        "label_en": "Readable folder",
+        "label_it": "Cartella di lettura",
+        "help_en": "Optional. Leave blank to use the app’s default access behavior.",
+        "help_it": "Facoltativa. Se lasciata vuota, vale il comportamento di accesso predefinito dell’app."
+      },
+      {
+        "key": "automation_write_root",
+        "flag": "--automation-write-root",
+        "required": false,
+        "label_en": "Writable folder",
+        "label_it": "Cartella di scrittura",
+        "help_en": "Optional. Leave blank to use the app’s default access behavior.",
+        "help_it": "Facoltativa. Se lasciata vuota, vale il comportamento di accesso predefinito dell’app."
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "github",
+    "display_name": "GitHub",
+    "category": "developer",
+    "description_en": "Find and manage repositories, issues, PRs, files, and code.",
+    "description_it": "Trova e gestisci repository, segnalazioni, richieste di pull, file e codice.",
+    "integration_state": "requires_direct_auth"
+  }
+}

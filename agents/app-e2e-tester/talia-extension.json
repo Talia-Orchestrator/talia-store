@@ -1,0 +1,16 @@
+{
+  "id": "talia-agents/app-e2e-tester",
+  "kind": "agent",
+  "version": "1.0.0",
+  "name": "App-E2E-Tester",
+  "description": "Writes and runs end-to-end tests with Playwright: test suites, coverage reports and downloadable quality documentation. Does not define the architecture or implement business logic.",
+  "description_it": "Scrive ed esegue test end-to-end con Playwright: suite di test, report di copertura e documentazione di qualità scaricabile. Non definisce l'architettura né implementa logica di business.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/deliverable-review"
+    }
+  ]
+}

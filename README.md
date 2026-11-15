@@ -1,6 +1,6 @@
 # Talia Store
 
-Public, anonymous HTTPS distribution for signed Talia resources. The store contains only the v3 index, one v2 JSON artifact per selected package, and the public verification key. Its agent catalog contains fifteen specialists, including the six-role development team documented in the talia-agents repository. Two general-purpose agents are bundled for fresh-profile seeding by Talia desktop and do not appear in the public catalog. Legacy specialist packages remain in their source repository and are intentionally absent from the official catalog.
+Public, anonymous HTTPS distribution for signed Talia resources. This repository is the source of truth for selected packages under `agents/`, `skills/`, `connectors/`, `apps/`, and `library/`. The signed v3 index and v2 artifacts are generated from these local directories. Talia desktop bundles Assistant, General Researcher, ContentWriter, six starter skills, and the complete manual for offline first use; the Store supplies all optional packages and updates.
 
 ## Anonymous desktop source
 
@@ -14,7 +14,7 @@ Unauthenticated downloads require the repository and its `main` branch contents 
 
 ## Build
 
-From the shared workspace after checking out `talia-agents`, `talia-skills`, `talia-connectors`, and `talia-apps` as siblings of `talia-store`, run:
+From this repository, run:
 
 ```sh
 node scripts/build-catalog.cjs
@@ -22,12 +22,18 @@ node scripts/build-catalog.cjs
 
 This writes `catalog.json` and the referenced `artifacts/` files. Sign the exact catalog bytes with the release signing process; do not put a private key in this repository or CI logs.
 
-The builder selects fifteen specialist agents explicitly and selects the current skills, connectors, and apps from their source repositories. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing. If the source repositories are not siblings, set `TALIA_SOURCE_ROOT` to the directory containing them.
+The builder selects fifteen specialist agents explicitly and reads skills, connectors, apps, and Library packages from this repository. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing.
 
 The connector catalog now includes WeCom, Feishu/Lark, and DingTalk CLI
 references for Talia 0.10.0 or newer, alongside the existing MCP packages.
 These references open Talia's built-in setup and do not run or authorize a CLI
 during Store installation. Lark shares the Feishu package.
+
+The Store also distributes 29 declarative listings for the selected Atlassian,
+Google, Microsoft, Bitbucket, GitLab, GitHub, and Hugging Face services. These
+listings contain no executable transport or credentials. Installing one adds
+an unavailable card to Talia's connector catalog; direct authentication must
+be implemented and verified before it can connect.
 
 Run `npm test` to compare the committed catalog and artifacts with the selected sources, verify artifact digests and sizes, scan package text for personal paths and credentials, and validate the detached signature with the public key. This check does not regenerate or sign files. After rebuilding, the committed signature no longer represents the new catalog until the release owner signs the reviewed `catalog.json`; do not publish a mismatched index/signature pair.
 

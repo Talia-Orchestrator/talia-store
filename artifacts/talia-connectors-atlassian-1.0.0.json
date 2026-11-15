@@ -1,0 +1,24 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-connectors/atlassian",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Atlassian",
+      "description": "Catalog listing for Atlassian. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\nCopyright (c) 2026 Talia contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Catalog listing maintained by Talia. Atlassian is a third-party service; this package is not endorsed by its provider.\n",
+        "README.md": "# Atlassian\n\nCatalog listing for Talia. This package contains no credentials or executable code.\n\nDirect authentication is not available yet. Installing this listing does not connect Atlassian; Talia will show it as unavailable until the integration is implemented and verified.\n",
+        "connector.json": "{\n  \"schemaVersion\": 1,\n  \"catalog_listing\": {\n    \"id\": \"atlassian\",\n    \"display_name\": \"Atlassian\",\n    \"category\": \"productivity\",\n    \"description_en\": \"Connect Jira, Confluence, and other Atlassian work data to search, read, and update issues, pages, and project context.\",\n    \"description_it\": \"Collega Jira, Confluence e altri dati di lavoro di Atlassian per cercare, leggere e aggiornare segnalazioni, pagine e informazioni di contesto dei progetti.\",\n    \"integration_state\": \"requires_direct_auth\"\n  }\n}\n"
+      },
+      "digest": "sha256:aaab6c9a3d113b455bfb19865e383f8e79a05e6cbfe5793d997f3cc94fc00e80",
+      "description_it": "Scheda di Atlassian. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0"
+    }
+  ]
+}

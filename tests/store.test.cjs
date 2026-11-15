@@ -11,6 +11,33 @@ const catalogPath = path.join(root, 'catalog.json');
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
 const sha256 = (bytes) => `sha256:${crypto.createHash('sha256').update(bytes).digest('hex')}`;
 
+test('app packer accepts current and legacy manifests, preferring current and failing closed', () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'talia-app-manifest-'));
+  try {
+    const packer = require('../tools/talia-catalog-pack.cjs');
+    const metadata = { id: 'talia-apps/fixture', kind: 'app', version: '1.0.0',
+      name: 'Fixture', description: 'Manifest compatibility fixture', publisher: 'talia-apps', license: 'MIT' };
+    fs.writeFileSync(path.join(directory, 'talia-extension.json'), JSON.stringify(metadata));
+    for (const file of ['LICENSE', 'NOTICE', 'README.md']) fs.writeFileSync(path.join(directory, file), 'Fixture');
+    fs.writeFileSync(path.join(directory, 'index.html'), '<!doctype html><title>Fixture</title>');
+    const current = path.join(directory, 'talia-app.json');
+    const legacy = path.join(directory, 'orkas-app.json');
+    const valid = JSON.stringify({ sdkVersion: 1, capabilities: ['storage'] });
+    const build = () => packer.buildCatalogV3([directory]);
+    fs.writeFileSync(legacy, valid);
+    assert.equal(JSON.parse(build().artifacts[0].bytes).packages[0].files['orkas-app.json'], valid);
+    fs.rmSync(legacy);
+    fs.writeFileSync(current, valid);
+    assert.equal(JSON.parse(build().artifacts[0].bytes).packages[0].files['talia-app.json'], valid);
+    fs.writeFileSync(legacy, '{ invalid legacy }');
+    assert.doesNotThrow(build);
+    fs.writeFileSync(current, '{ invalid current }');
+    assert.throws(build, /talia-app\.json must be valid JSON/);
+    fs.writeFileSync(current, JSON.stringify({ sdkVersion: 2, capabilities: [] }));
+    assert.throws(build, /talia-app\.json must use the supported SDK v1/);
+  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
+});
+
 test('packer accepts only coordinated built-in CLI references', () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'talia-cli-reference-'));
   try {
@@ -32,8 +59,8 @@ test('packer accepts only coordinated built-in CLI references', () => {
 
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);
-  const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
-  assert.deepEqual(counts, { agent: 15, skill: 27, connector: 20, app: 3 });
+  const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app', 'library'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
+  assert.deepEqual(counts, { agent: 15, skill: 27, connector: 49, app: 3, library: 1 });
   const agents = new Set(catalog.packages.filter((pkg) => pkg.kind === 'agent').map((pkg) => pkg.id));
   assert.deepEqual([...agents].sort(), [
     'talia-agents/app-architetto',
@@ -49,6 +76,22 @@ test('public store includes only the approved categories and canonical agent set
   assert.equal([...agents].some((id) => /stockanalyser|ecommerceoperator|ecommercereviewer|ecommercewriter|ecommerceanalyzer/.test(id)), false);
 });
 
+test('selected service listings are inert and complete', () => {
+  const selected = ['atlassian','bitbucket','excel','gcal','gdocs','gdrive','github','gitlab','gmail','google-ads','google-analytics','google-bigquery','google-classroom','google-maps','google-meet','google-photos','google-slides','google-tasks','google-workspace','gsearch-console','gsheets','gtasks','hugging-face','m365-calendar','m365-mail','microsoft-teams','onedrive','outlook','youtube'];
+  for (const slug of selected) {
+    const id=`talia-connectors/${slug}`;
+    const item=catalog.packages.find(pkg=>pkg.id===id);
+    assert.ok(item,id);
+    const packagePayload=JSON.parse(fs.readFileSync(path.join(root,item.artifact.url),'utf8')).packages[0];
+    const connector=JSON.parse(packagePayload.files['connector.json']);
+    assert.deepEqual(Object.keys(connector).sort(),['catalog_listing','schemaVersion']);
+    assert.equal(connector.catalog_listing.id,slug);
+    assert.equal(connector.catalog_listing.integration_state,'requires_direct_auth');
+    assert.equal(item.minHostVersion,'0.11.0');
+  }
+  assert.equal(catalog.packages.filter(pkg=>pkg.kind==='connector' && pkg.id.startsWith('talia-connectors/')).length,selected.length+4);
+});
+
 test('CLI Store entries reference only the matching built-in setup', () => {
   for (const slug of ['wecom', 'feishu', 'dingtalk']) {
     const id = `talia-connectors/${slug}`;
@@ -60,6 +103,16 @@ test('CLI Store entries reference only the matching built-in setup', () => {
   }
   assert.equal(catalog.packages.some(pkg => pkg.id === 'talia-connectors/lark'), false);
   assert.equal(catalog.packages.some(pkg => pkg.id === 'talia-connectors/xero'), false);
+});
+test('the complete Library manual has one canonical source and a signed artifact', () => {
+  const item = catalog.packages.find(pkg => pkg.id === 'talia-library/manuale-talia');
+  assert.ok(item);
+  assert.equal(item.kind, 'library');
+  assert.equal(item.minHostVersion, '0.11.0');
+  const pkg = JSON.parse(fs.readFileSync(path.join(root, item.artifact.url), 'utf8')).packages[0];
+  assert.deepEqual(JSON.parse(pkg.files['library.json']), { schemaVersion: 1, file: 'Manuale-Talia.md', destination: 'Manuale-Talia.md' });
+  assert.equal(pkg.files['Manuale-Talia.md'], fs.readFileSync(path.join(root, 'library/manuale-talia/Manuale-Talia.md'), 'utf8'));
+  assert.equal(pkg.files['Manuale-Talia.md'], fs.readFileSync(path.join(root, 'site/docs/Manuale-Talia.md'), 'utf8'));
 });
 
 test('every artifact is relative, digest-verified and retains its license and notice', () => {

@@ -1,0 +1,11 @@
+{
+  "id": "talia-connectors/excel",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "Microsoft Excel",
+  "description": "Catalog listing for Microsoft Excel. Direct authentication is not yet available in Talia; installation does not connect the service.",
+  "description_it": "Scheda di Microsoft Excel. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+  "publisher": "talia-connectors",
+  "license": "MIT",
+  "minHostVersion": "0.11.0"
+}

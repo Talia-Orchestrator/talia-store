@@ -1,0 +1,11 @@
+{
+  "id": "artcraft/figcraft",
+  "kind": "connector",
+  "version": "1.1.0",
+  "name": "FigCraft MCP",
+  "description": "Configure FigCraft’s official MCP command. Automation roots are optional and can confine file access. Configure only on the user device.",
+  "description_it": "Configura il comando MCP ufficiale di FigCraft. Le radici di automazione sono opzionali e possono confinare l'accesso ai file. Configurare solo sul dispositivo dell'utente.",
+  "publisher": "artcraft",
+  "license": "MIT",
+  "minHostVersion": "0.11.0"
+}

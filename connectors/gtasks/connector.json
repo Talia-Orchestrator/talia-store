@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "gtasks",
+    "display_name": "Google Tasks",
+    "category": "productivity",
+    "description_en": "Integrate task management directly into your workflows.",
+    "description_it": "Integra la gestione delle attività direttamente nei tuoi flussi di lavoro.",
+    "integration_state": "requires_direct_auth"
+  }
+}

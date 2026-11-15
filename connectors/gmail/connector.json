@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "gmail",
+    "display_name": "Gmail",
+    "category": "communication",
+    "description_en": "Read and send mail, organize the inbox.",
+    "description_it": "Leggi e invia email, organizza la posta in arrivo.",
+    "integration_state": "requires_direct_auth"
+  }
+}

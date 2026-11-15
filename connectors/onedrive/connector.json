@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "onedrive",
+    "display_name": "OneDrive",
+    "category": "productivity",
+    "description_en": "Search, read, upload, and update OneDrive files.",
+    "description_it": "Cerca, leggi, carica e aggiorna file di OneDrive.",
+    "integration_state": "requires_direct_auth"
+  }
+}

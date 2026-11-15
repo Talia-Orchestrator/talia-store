@@ -37,6 +37,27 @@ function safeMetadataText(value, field, max = 256) {
   }
   return value;
 }
+function validateCraftRuntime(runtime, presetId, packageId) {
+  if (!runtime || typeof runtime !== 'object' || Array.isArray(runtime)
+    || Object.keys(runtime).sort().join(',') !== 'assets,version'
+    || !isSemver(runtime.version) || !runtime.assets || typeof runtime.assets !== 'object'
+    || Array.isArray(runtime.assets) || !Object.keys(runtime.assets).length
+    || Object.keys(runtime.assets).some(target => !['darwin-arm64','darwin-x64','win32-x64','linux-x64'].includes(target))) fail(`${packageId}: invalid Craft runtime`);
+  for (const [target, asset] of Object.entries(runtime.assets)) {
+    if (!asset || typeof asset !== 'object' || Array.isArray(asset)
+      || Object.keys(asset).sort().join(',') !== 'binary,format,sha256,size,url'
+      || !['zip','raw'].includes(asset.format)
+      || !Number.isSafeInteger(asset.size) || asset.size < 1 || asset.size > 500*1024*1024
+      || !/^[a-f0-9]{64}$/.test(asset.sha256)
+      || typeof asset.binary !== 'string' || !/^[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*$/.test(asset.binary)
+      || asset.binary.split('/').some(part => part === '..' || part.startsWith('.'))
+      || asset.binary.split('/').at(-1) !== `${presetId}-cli${target.startsWith('win32') ? '.exe' : ''}`) fail(`${packageId}: invalid Craft runtime asset`);
+    let url;
+    try { url = new URL(asset.url); } catch (_) { fail(`${packageId}: invalid Craft runtime URL`); }
+    if (url.protocol !== 'https:' || url.hostname !== 'github.com' || url.username || url.password || url.search || url.hash
+      || !url.pathname.startsWith(`/storytold/${presetId}/releases/download/`)) fail(`${packageId}: invalid Craft runtime URL`);
+  }
+}
 
 function isSemver(value) {
   if (typeof value !== 'string' || value.length > 80) return false;
@@ -146,24 +167,30 @@ function readAgentSkillList(item, label) {
   return agent.skill_list;
 }
 
-function validateAppManifest(manifest, label) {
+function appManifestFile(files) {
+  if (Object.hasOwn(files, 'talia-app.json')) return 'talia-app.json';
+  if (Object.hasOwn(files, 'orkas-app.json')) return 'orkas-app.json';
+  return null;
+}
+
+function validateAppManifest(manifest, label, file) {
   const allowed = ['sdkVersion', 'minimumClient', 'capabilities', 'data'];
   const capabilities = ['storage', 'appFiles', 'files', 'ai', 'library', 'connectors', 'data'];
   if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest)
     || Object.keys(manifest).some(key => !allowed.includes(key))) {
-    fail(`${label}: orkas-app.json contains unknown or invalid fields`);
+    fail(`${label}: ${file} contains unknown or invalid fields`);
   }
   if (manifest.sdkVersion !== 1
     || (manifest.minimumClient !== undefined && manifest.minimumClient !== '1.9.0')
     || !Array.isArray(manifest.capabilities) || manifest.capabilities.length > capabilities.length
     || manifest.capabilities.some(capability => !capabilities.includes(capability))) {
-    fail(`${label}: orkas-app.json must use the supported SDK v1 manifest fields`);
+    fail(`${label}: ${file} must use the supported SDK v1 manifest fields`);
   }
   if (Object.hasOwn(manifest, 'data') && (!manifest.data || typeof manifest.data !== 'object' || Array.isArray(manifest.data))) {
-    fail(`${label}: orkas-app.json data must be an object`);
+    fail(`${label}: ${file} data must be an object`);
   }
   if (manifest.capabilities.includes('data') && !Object.hasOwn(manifest, 'data')) {
-    fail(`${label}: orkas-app.json must declare a data object when using the data capability`);
+    fail(`${label}: ${file} must declare a data object when using the data capability`);
   }
 }
 
@@ -228,8 +255,8 @@ function readPackage(packageDirectory, formatVersion = 1) {
   if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest)) fail('package manifest must be a JSON object');
   const id = safePackageId(manifest.id, 'id');
   const kind = manifest.kind;
-  if (!['agent', 'skill', 'connector', 'app'].includes(kind) || (formatVersion === 1 && kind !== 'agent' && kind !== 'skill')) {
-    fail(`${id}: kind must be agent, skill, connector, or app`);
+  if (!['agent', 'skill', 'connector', 'app', 'library'].includes(kind) || (formatVersion === 1 && kind !== 'agent' && kind !== 'skill') || (formatVersion !== 3 && kind === 'library')) {
+    fail(`${id}: unsupported package kind`);
   }
   const publisher = manifest.publisher;
   if (typeof publisher !== 'string' || !/^[A-Za-z0-9_-]+$/.test(publisher)) fail(`${id}: publisher is invalid`);
@@ -255,15 +282,38 @@ function readPackage(packageDirectory, formatVersion = 1) {
     if (/(?:^|\/)(?:AGENT\.md|SKILL\.md)$/i.test(value) || /\.json$/i.test(value)) fail('mandatory metadata and instruction files must be text');
   }
   const files = scanPackageFiles(packageDirectory, formatVersion, declarations);
-  const entrypoint = kind === 'agent' ? 'agent.json' : kind === 'skill' ? 'SKILL.md' : kind === 'connector' ? 'connector.json' : 'orkas-app.json';
-  if (!Object.hasOwn(files, entrypoint)) fail(`${id}: ${kind} packages require ${entrypoint}`);
+  const entrypoint = kind === 'agent' ? 'agent.json' : kind === 'skill' ? 'SKILL.md' : kind === 'connector' ? 'connector.json' : kind === 'library' ? 'library.json' : appManifestFile(files);
+  if (!entrypoint || !Object.hasOwn(files, entrypoint)) fail(`${id}: ${kind} package entrypoint is missing`);
+  if (kind === 'library') {
+    let spec;
+    try { spec = JSON.parse(files['library.json']); } catch (_) { fail(`${id}: invalid library manifest`); }
+    if (!spec || typeof spec !== 'object' || Array.isArray(spec)
+      || Object.keys(spec).sort().join(',') !== 'destination,file,schemaVersion'
+      || spec.schemaVersion !== 1 || spec.file !== 'Manuale-Talia.md'
+      || spec.destination !== 'Manuale-Talia.md' || typeof files[spec.file] !== 'string'
+      || Buffer.byteLength(files[spec.file], 'utf8') > 2 * 1024 * 1024
+      || id !== 'talia-library/manuale-talia') fail(`${id}: invalid library content`);
+  }
   if (kind === 'connector') {
     let connector;
     try { connector = JSON.parse(files['connector.json']); } catch (_) { fail(`${id}: connector.json must be valid JSON`); }
     if (!connector || typeof connector !== 'object' || Array.isArray(connector) || connector.schemaVersion !== 1) {
       fail(`${id}: connector.json must use schemaVersion 1`);
     }
-    if (connector.catalog_reference !== undefined && connector.preset === undefined && connector.template === undefined) {
+    if (connector.catalog_listing !== undefined && connector.preset === undefined && connector.template === undefined && connector.catalog_reference === undefined) {
+      const listing = connector.catalog_listing;
+      const selected = new Set(['atlassian','bitbucket','excel','gcal','gdocs','gdrive','github','gitlab','gmail','google-ads','google-analytics','google-bigquery','google-classroom','google-maps','google-meet','google-photos','google-slides','google-tasks','google-workspace','gsearch-console','gsheets','gtasks','hugging-face','m365-calendar','m365-mail','microsoft-teams','onedrive','outlook','youtube']);
+      if (Object.keys(connector).sort().join(',') !== 'catalog_listing,schemaVersion'
+        || !listing || typeof listing !== 'object' || Array.isArray(listing)
+        || Object.keys(listing).sort().join(',') !== 'category,description_en,description_it,display_name,id,integration_state'
+        || !selected.has(listing.id) || id !== `talia-connectors/${listing.id}`
+        || !['developer','productivity','communication','search','data','commerce'].includes(listing.category)
+        || listing.integration_state !== 'requires_direct_auth'
+        || [listing.display_name,listing.description_en,listing.description_it].some(value =>
+          typeof value !== 'string' || !value.trim() || value.length > 2000 || /[\u0000-\u001f\u007f<>]/.test(value))) {
+        fail(`${id}: invalid catalog listing`);
+      }
+    } else if (connector.catalog_reference !== undefined && connector.preset === undefined && connector.template === undefined) {
       const reference = connector.catalog_reference;
       const allowed = {wecom: 'talia-connectors/wecom', feishu: 'talia-connectors/feishu', dingtalk: 'talia-connectors/dingtalk'};
       if (Object.keys(connector).sort().join(',') !== 'catalog_reference,schemaVersion'
@@ -272,6 +322,11 @@ function readPackage(packageDirectory, formatVersion = 1) {
         || allowed[reference.catalog_id] !== id || reference.id !== id) fail(`${id}: invalid catalog reference`);
     } else if (connector.preset !== undefined && connector.template === undefined) {
       if (!connector.preset || typeof connector.preset !== 'object' || Array.isArray(connector.preset)) fail(`${id}: connector preset must be an object`);
+      if (Object.keys(connector).some(key => !['schemaVersion','preset','runtime'].includes(key))) fail(`${id}: connector preset has unknown fields`);
+      if (connector.runtime !== undefined) {
+        if (id !== `artcraft/${connector.preset.id}`) fail(`${id}: invalid Craft runtime owner`);
+        validateCraftRuntime(connector.runtime, connector.preset.id, id);
+      }
     } else if (connector.template !== undefined && connector.preset === undefined) {
       const template = connector.template;
       const allowed = ['id', 'display_name', 'transport_kind', 'description_en', 'documentation_url', 'command_hint', 'args', 'url_hint'];
@@ -298,16 +353,16 @@ function readPackage(packageDirectory, formatVersion = 1) {
           || template.command_hint !== undefined || template.args !== undefined) fail(`${id}: streamable-http connector template is invalid`);
       }
     } else {
-      fail(`${id}: connector.json must contain exactly one preset, template, or catalog reference object`);
+      fail(`${id}: connector.json must contain exactly one preset, template, catalog listing, or catalog reference object`);
     }
   }
   if (kind === 'app') {
     let appManifest;
-    try { appManifest = JSON.parse(files['orkas-app.json']); } catch (_) { fail(`${id}: orkas-app.json must be valid JSON`); }
+    try { appManifest = JSON.parse(files[entrypoint]); } catch (_) { fail(`${id}: ${entrypoint} must be valid JSON`); }
     if (!Object.hasOwn(files, 'index.html')) {
       fail(`${id}: app packages require an SDK v1 manifest, capabilities, and index.html`);
     }
-    validateAppManifest(appManifest, id);
+    validateAppManifest(appManifest, id, entrypoint);
   }
   let dependencies;
   if (manifest.dependencies !== undefined) {
@@ -387,7 +442,7 @@ function validateCatalogV3Payload(payload) {
   const ids = new Set();
   const urls = new Set();
   for (const item of payload.packages) {
-    if (!item || !['agent', 'skill', 'connector', 'app'].includes(item.kind)
+    if (!item || !['agent', 'skill', 'connector', 'app', 'library'].includes(item.kind)
       || Object.hasOwn(item, 'files') || !item.artifact || typeof item.artifact !== 'object'
       || Array.isArray(item.artifact)) fail('catalog package digest or schema is invalid');
     const allowed = ['id', 'kind', 'version', 'name', 'description', 'description_it', 'publisher', 'license', 'repository', 'minHostVersion', 'dependencies', 'digest', 'artifact'];
@@ -449,7 +504,7 @@ function validateCatalogBytes(payloadBytes, options = {}) {
   if (payload.version===1 && payloadBytes.length>MAX_CATALOG_BYTES) fail('catalog exceeds byte limit');
   const ids = new Set(); let totalBytes=0;
   for (const item of payload.packages) {
-    if (!item || !['agent', 'skill', ...(payload.version === 1 ? [] : ['connector', 'app'])].includes(item.kind)
+    if (!item || !['agent', 'skill', ...(payload.version === 1 ? [] : ['connector', 'app', 'library'])].includes(item.kind)
       || typeof item.files !== 'object' || Array.isArray(item.files)
       || item.files === null || typeof item.digest !== 'string') fail('catalog package digest or schema is invalid');
     const id = safePackageId(item.id, 'catalog package id');
@@ -506,13 +561,13 @@ function validateCatalogBytes(payloadBytes, options = {}) {
     if (item.digest!==digestFiles(item.files)) fail('catalog package digest or schema is invalid');
     totalBytes+=packageBytes;
     if (payload.version===2 && (packageBytes>MAX_V2_PACKAGE_BYTES || totalBytes>MAX_V2_TOTAL_BYTES)) fail('catalog exceeds decoded byte limit');
-    const entrypoint = item.kind === 'agent' ? 'agent.json' : item.kind === 'skill' ? 'SKILL.md' : item.kind === 'connector' ? 'connector.json' : 'orkas-app.json';
-    if (typeof item.files[entrypoint] !== 'string') fail('catalog package entrypoint is missing');
+    const entrypoint = item.kind === 'agent' ? 'agent.json' : item.kind === 'skill' ? 'SKILL.md' : item.kind === 'connector' ? 'connector.json' : item.kind === 'library' ? 'library.json' : appManifestFile(item.files);
+    if (!entrypoint || typeof item.files[entrypoint] !== 'string') fail('catalog package entrypoint is missing');
     if (item.kind === 'app' && typeof item.files['index.html'] !== 'string') fail('catalog app bundle entrypoint is missing');
     if (item.kind === 'app') {
       let appManifest;
-      try { appManifest = JSON.parse(item.files['orkas-app.json']); } catch (_) { fail('catalog app manifest is invalid'); }
-      validateAppManifest(appManifest, 'catalog app');
+      try { appManifest = JSON.parse(item.files[entrypoint]); } catch (_) { fail(`catalog app ${entrypoint} is invalid`); }
+      validateAppManifest(appManifest, 'catalog app', entrypoint);
     }
     if (item.dependencies !== undefined && (!Array.isArray(item.dependencies) || item.dependencies.length > 32
       || (item.kind === 'skill' && item.dependencies.length > 0))) fail('catalog package dependencies are invalid');
@@ -593,6 +648,20 @@ function main(argv = process.argv.slice(2)) {
     if (version === 3) {
       const built = buildCatalogV3(args.packages.map(directory => path.resolve(directory)));
       const outputRoot = path.resolve(path.dirname(args.out));
+      const artifactRoot = path.join(outputRoot, 'artifacts');
+      if (fs.existsSync(artifactRoot)) {
+        const { validateRetainedArtifacts } = require('../scripts/retained-artifacts.cjs');
+        validateRetainedArtifacts(artifactRoot, new Set(), { validateCatalogBytes });
+      }
+      for (const artifact of built.artifacts) {
+        const target = path.join(outputRoot, artifact.url);
+        if (fs.existsSync(target)) {
+          if (!fs.lstatSync(target).isFile()) fail(`${artifact.url}: existing artifact must be a regular file`);
+          if (!fs.readFileSync(target).equals(artifact.bytes)) {
+            fail(`${artifact.url}: existing artifact differs; increase the package version instead of overwriting it`);
+          }
+        }
+      }
       for (const artifact of built.artifacts) writeAtomic(path.join(outputRoot, artifact.url), artifact.bytes);
       bytes = built.catalogBytes;
     } else bytes = buildCatalog(args.packages.map(directory => path.resolve(directory)),version);

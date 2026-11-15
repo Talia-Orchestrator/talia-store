@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "preset": {
+    "id": "filmcraft",
+    "display_name": "FilmCraft",
+    "category": "productivity",
+    "description_en": "Configure the official FilmCraft MCP command for this device.",
+    "description_it": "Configura il comando MCP ufficiale di FilmCraft per questo dispositivo.",
+    "documentation_url": "https://craft.wiki/apps/filmcraft/ai-agents/",
+    "executable_hint": "filmcraft-cli",
+    "base_args": [
+      "mcp"
+    ],
+    "path_fields": [
+      {
+        "key": "project",
+        "flag": "--project",
+        "required": false,
+        "label_en": "Project file",
+        "label_it": "File progetto",
+        "help_en": "Optional headless project to open.",
+        "help_it": "File progetto headless facoltativo da aprire."
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "gitlab",
+    "display_name": "GitLab",
+    "category": "developer",
+    "description_en": "Connect GitLab.com projects, issues, merge requests, pipelines, and code context.",
+    "description_it": "Collega progetti, segnalazioni, richieste di merge, pipeline e informazioni di contesto del codice di GitLab.com.",
+    "integration_state": "requires_direct_auth"
+  }
+}

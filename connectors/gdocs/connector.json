@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "gdocs",
+    "display_name": "Google Docs",
+    "category": "productivity",
+    "description_en": "Read, create, and manage Google Docs from your workflows.",
+    "description_it": "Leggi, crea e gestisci documenti Google Docs dai tuoi flussi di lavoro.",
+    "integration_state": "requires_direct_auth"
+  }
+}

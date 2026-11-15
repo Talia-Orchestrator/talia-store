@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "youtube",
+    "display_name": "YouTube",
+    "category": "communication",
+    "description_en": "Search videos, view captions and metrics, and manage playlists, uploads, and comments.",
+    "description_it": "Cerca video, visualizza sottotitoli e metriche e gestisci playlist, caricamenti e commenti.",
+    "integration_state": "requires_direct_auth"
+  }
+}

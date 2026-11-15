@@ -1,0 +1,11 @@
+Impeccable UI for Talia
+
+Includes Impeccable 4.8.2 by Paul Bakaus, distributed under Apache License 2.0.
+Original project https://github.com/pbakaus/impeccable
+Pinned revision c1e0e5492fbb524f5df84d635ecfae7dc438ec45
+
+The upstream skill, references, helper definitions and launcher sources are retained under upstream/. Talia contributors added the package manifest, Talia adapter entrypoint, README and provenance metadata. The upstream files are unmodified. The Talia adapter is distributed under Apache License 2.0.
+
+UPSTREAM-NOTICE.md preserves the upstream third-party attribution for platform design guidance derived from ehmo/platform-design-skills under MIT. Its license is retained in licenses/platform-design-skills-MIT.txt.
+
+The optional upstream browser capture sources include modern-screenshot by qq15725, licensed under MIT. Its license is retained in licenses/modern-screenshot-MIT.txt. Upstream repository https://github.com/qq15725/modern-screenshot.
