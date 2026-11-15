@@ -15,22 +15,26 @@ artifact che le usano.
   non può copiare alla cieca dati cloud o cancellare dati locali.
 - Installazioni esistenti sono snapshot di file v1: contengono
   `orkas-app.json`, caricano `/__orkas/sdk.js` e usano `window.orkasApp`.
-  Il core attuale espone SDK_VERSION 1, `__orkasApp` nel messaggio iframe e
-  `ORKAS_NODE`/`ORKAS_PC_DIR` per il runner. Questi alias sono ABI locali e
-  non significano dipendenza da servizi remoti Orkas.
+  Il core integrato espone `SDK_VERSION = 1` per entrambi i manifest, legge
+  prima `talia-app.json` e poi `orkas-app.json`, e conserva il marker legacy
+  `__orkasApp: 1` nel messaggio iframe. Il runner espone i nuovi nomi `TALIA_*`
+  insieme agli alias `ORKAS_*`. Questi alias sono ABI locali e non significano
+  dipendenza da servizi remoti Orkas.
 - LICENSE, NOTICE, ricevute di installazione, contenuti dell'utente e
   conversazioni storiche mantengono attribuzioni e dati originali.
 
 ## Contratto host proposto
 
-1. Il nuovo host serve anche `/__talia/sdk.js`, con `window.taliaApp`. Mantiene
+1. L'host ora serve anche `/__talia/sdk.js`, con `window.taliaApp`. Mantiene
    `/__orkas/sdk.js` e `window.orkasApp` per pacchetti v1 già installati.
    Entrambi usano lo stesso dispatch di metodi, origine iframe, controlli di
    capability, grant, limite payload, AbortSignal e cancellazione. Un alias
    non deve bypassare permessi o creare due store per la stessa app.
-2. Il protocollo `postMessage` v1 `__orkasApp` resta accettato per app v1; il
-   nuovo SDK usa un discriminante `__taliaApp` v2. Il dispatcher distingue
-   versioni e mantiene gli stessi controlli di frame/origine e ID richiesta.
+2. Il protocollo `postMessage` legacy `__orkasApp: 1` resta accettato per le
+   app installate; il nuovo SDK usa `__taliaApp: 2`. **Il 2 è la versione del
+   trasporto, non `sdkVersion` del manifesto**, che resta 1 per entrambi.
+   Il dispatcher distingue i marker e mantiene gli stessi controlli di
+   frame/origine e ID richiesta.
    Non rispondere a frame estranei. Testare che un doppio caricamento non
    esegua due volte la stessa mutazione.
 3. Per il runner, l'host esporta `TALIA_NODE` e `TALIA_PC_DIR` (e l'eventuale
@@ -38,18 +42,19 @@ artifact che le usano.
    Il runner Talia accetta il medesimo package/skill ID e i medesimi argomenti.
    Le variabili legacy restano solo nell'ambiente confinato degli skill
    installati e non diventano credenziali, endpoint o servizio remoto.
-4. Il nuovo manifesto app può chiamarsi `talia-app.json` con `sdkVersion: 2`.
-   Fino alla sua implementazione nel validator del core **e** nel packer Store,
-   le release devono continuare a usare `orkas-app.json` v1. Il nuovo filename
-   non è prerequisito per correggere il testo visibile: prima si può usare il
-   nuovo SDK con manifesto v1, dopo un minHostVersion adeguato.
+4. Il core ora legge `talia-app.json` con `sdkVersion: 1` e ripiega su
+   `orkas-app.json` con lo stesso schema; se entrambi esistono, prevale il
+   primo. Il packer Store ancora richiede `orkas-app.json`: prima di firmare
+   pacchetti con il nuovo filename occorre aggiornare e testare anche il
+   packer. Il nuovo SDK può già essere usato con manifesto v1, dopo un
+   `minHostVersion` adeguato.
 
 ## Percorso di upgrade senza perdita di dati
 
 | Caso | Comportamento richiesto |
 | --- | --- |
 | App v1 già installata su host aggiornato | Si apre tramite alias SDK; dati, grant e file restano nello stesso namespace di package ID. |
-| App v2 installata o aggiornata | L'host legge versione e capability prima di sostituire i file; usa lo stesso namespace dati. Se l'host è troppo vecchio, Store non propone installazione. |
+| Nuova versione del pacchetto app | L'host legge versione e capability prima di sostituire i file; usa lo stesso namespace dati. Se l'host è troppo vecchio, Store non propone installazione. `sdkVersion` resta 1 anche quando il file è `talia-app.json`. |
 | Update fallito | Conservare pacchetto, ricevuta e dati precedenti. Non scrivere parzialmente nel percorso attivo. |
 | Downgrade esplicito | Riattivare i vecchi file senza cancellare dati. Le app devono tollerare chiavi più nuove o dichiarare una migrazione dati reversibile. |
 | Skill/agente v1 | Continua a ricevere `ORKAS_*` nell'ambiente confinato. Le nuove versioni usano `TALIA_*`, mantenendo ID skill/agente. |
@@ -96,7 +101,7 @@ del maintainer non è configurata. Non pubblicare il catalogo prima dei gate.
 
 1. App Store v1 installate prima dell'update si aprono in profilo normale;
    `storage.get`, `data.query`, file e grant restituiscono i valori precedenti.
-2. App v2 usano il nuovo SDK; entrambe le versioni rispettano gli stessi
+2. App aggiornate usano il nuovo SDK; entrambi i trasporti rispettano gli stessi
    errori `E_*`, capability e permessi. Test negativo su frame estraneo.
 3. Skill v1 e v2 invocano il runner su macOS, Windows e Linux. Nessun fallback
    raggiunge servizi Orkas; osservare traffico durante il test Electron.
