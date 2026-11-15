@@ -1,7 +1,7 @@
 {
   "id": "talia-agents/app-architetto",
   "kind": "agent",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "name": "Senior IT Architect",
   "description": "Defines and reviews technical boundaries, data and API contracts, migrations and trade-offs for the actual application and stack.",
   "description_it": "Definisce e rivede confini tecnici, contratti dati/API, migrazioni e compromessi per l'applicazione e lo stack reali.",
@@ -20,5 +20,10 @@
       "kind": "skill",
       "id": "talia-skills/deliverable-review"
     }
+  ],
+  "routing_tags": [
+    "code.architecture",
+    "system.design",
+    "code.review"
   ]
 }

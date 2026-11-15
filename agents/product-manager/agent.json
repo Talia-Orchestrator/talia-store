@@ -1,7 +1,7 @@
 {
   "agent_id": "a09d7f84c611",
   "name": "Senior Product Manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description_en": "Prioritizes outcomes, scope and release decisions using user evidence, constraints and explicit trade-offs; optional for larger product work.",
   "description_it": "Dà priorità a risultati, scope e release usando evidenze sugli utenti, vincoli e compromessi espliciti; opzionale per lavori di prodotto più ampi.",
   "role": "Senior Product Manager",
@@ -41,5 +41,9 @@
       "required": true,
       "placeholder": "Descrivi il problema, il contesto e i vincoli noti"
     }
+  ],
+  "routing_tags": [
+    "product.prioritization",
+    "product.release"
   ]
 }

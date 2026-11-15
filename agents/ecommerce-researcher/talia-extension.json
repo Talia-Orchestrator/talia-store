@@ -1,7 +1,7 @@
 {
   "id": "talia-agents/ecommerce-researcher",
   "kind": "agent",
-  "version": "1.0.0",
+  "version": "1.1.5",
   "name": "ECommerceResearcher",
   "description": "Combines e-commerce product research, listing and review analysis, analytics, creative direction, and operations planning.",
   "description_it": "Combina ricerca prodotti e-commerce, analisi di listing e recensioni, analytics, direzione creativa e pianificazione operativa.",
@@ -40,5 +40,9 @@
       "kind": "skill",
       "id": "talia-skills/ecommerce-operations"
     }
+  ],
+  "routing_tags": [
+    "commerce.research",
+    "research.products"
   ]
 }

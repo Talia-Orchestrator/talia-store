@@ -1,7 +1,7 @@
 {
   "id": "talia-agents/pptmaker",
   "kind": "agent",
-  "version": "1.2.30",
+  "version": "1.2.31",
   "name": "PptMaker",
   "description": "Creates, edits and reviews native editable PPTX presentations or deck outlines from topics, documents, data, visual references or existing decks. Follows supplied visual direction or develops an audience-led design and checks rendered results.",
   "description_it": "Crea, modifica e revisiona presentazioni PPTX native modificabili o outline di deck da argomenti, documenti, dati, riferimenti visivi o deck esistenti. Segue la direzione visiva fornita o sviluppa un design guidato dal pubblico e verifica i risultati renderizzati.",
@@ -12,5 +12,9 @@
       "kind": "skill",
       "id": "talia-skills/office-ppt"
     }
+  ],
+  "routing_tags": [
+    "presentation.slides",
+    "office.presentations"
   ]
 }

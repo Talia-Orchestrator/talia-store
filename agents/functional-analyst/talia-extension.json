@@ -1,7 +1,7 @@
 {
   "id": "talia-agents/functional-analyst",
   "kind": "agent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Senior Functional Analyst",
   "description": "Turns business goals, existing behavior and user problems into testable requirements and acceptance criteria without inventing scope.",
   "description_it": "Traduce obiettivi, comportamento esistente e problemi utente in requisiti e criteri di accettazione verificabili senza inventare lo scope.",
@@ -20,5 +20,9 @@
       "kind": "skill",
       "id": "talia-skills/deliverable-review"
     }
+  ],
+  "routing_tags": [
+    "analysis.requirements",
+    "analysis.acceptance"
   ]
 }

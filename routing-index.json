@@ -1,0 +1,148 @@
+{
+  "format": "talia-agent-routing-v1",
+  "catalog_sha256": "sha256:365902b98b4f0bd636c9453fca5cd0cdc5e21b3480d3df847b147184f3b23009",
+  "agents": [
+    {
+      "id": "talia-agents/app-architetto",
+      "version": "1.1.1",
+      "tags": [
+        "code.architecture",
+        "system.design",
+        "code.review"
+      ]
+    },
+    {
+      "id": "talia-agents/app-backend",
+      "version": "1.1.1",
+      "tags": [
+        "code.backend",
+        "api.implementation",
+        "data.model"
+      ]
+    },
+    {
+      "id": "talia-agents/app-devops",
+      "version": "1.1.1",
+      "tags": [
+        "release.pipeline",
+        "build.environment",
+        "deployment.operations"
+      ]
+    },
+    {
+      "id": "talia-agents/app-e2e-tester",
+      "version": "1.1.1",
+      "tags": [
+        "quality.verification",
+        "quality.e2e",
+        "bug.reproduction"
+      ]
+    },
+    {
+      "id": "talia-agents/app-frontend",
+      "version": "1.1.1",
+      "tags": [
+        "code.frontend",
+        "ui.implementation",
+        "bug.frontend"
+      ]
+    },
+    {
+      "id": "talia-agents/contentwriter",
+      "version": "1.0.40",
+      "tags": [
+        "content.writing",
+        "content.editing"
+      ]
+    },
+    {
+      "id": "talia-agents/deepresearcher",
+      "version": "1.0.66",
+      "tags": [
+        "research.deep",
+        "research.sources"
+      ]
+    },
+    {
+      "id": "talia-agents/ecommerce-researcher",
+      "version": "1.1.5",
+      "tags": [
+        "commerce.research",
+        "research.products"
+      ]
+    },
+    {
+      "id": "talia-agents/functional-analyst",
+      "version": "1.0.1",
+      "tags": [
+        "analysis.requirements",
+        "analysis.acceptance"
+      ]
+    },
+    {
+      "id": "talia-agents/imagestudio",
+      "version": "1.3.50",
+      "tags": [
+        "media.images",
+        "media.illustration"
+      ]
+    },
+    {
+      "id": "talia-agents/officeworker",
+      "version": "1.0.18",
+      "tags": [
+        "office.documents",
+        "office.spreadsheets"
+      ]
+    },
+    {
+      "id": "talia-agents/pptmaker",
+      "version": "1.2.31",
+      "tags": [
+        "presentation.slides",
+        "office.presentations"
+      ]
+    },
+    {
+      "id": "talia-agents/product-manager",
+      "version": "1.0.1",
+      "tags": [
+        "product.prioritization",
+        "product.release"
+      ]
+    },
+    {
+      "id": "talia-agents/productdeveloper",
+      "version": "1.0.15",
+      "tags": [
+        "product.development",
+        "product.prototyping"
+      ]
+    },
+    {
+      "id": "talia-agents/seogeoagent",
+      "version": "1.0.54",
+      "tags": [
+        "web.seo",
+        "content.discovery"
+      ]
+    },
+    {
+      "id": "talia-agents/uidesigner",
+      "version": "1.3.45",
+      "tags": [
+        "design.ux",
+        "design.ui",
+        "design.accessibility"
+      ]
+    },
+    {
+      "id": "talia-agents/videostudio",
+      "version": "1.6.102",
+      "tags": [
+        "media.video",
+        "media.editing"
+      ]
+    }
+  ]
+}

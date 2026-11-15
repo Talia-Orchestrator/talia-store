@@ -1,6 +1,6 @@
 {
   "agent_id": "e064dca9e1bd",
-  "version": "1.0.53",
+  "version": "1.0.54",
   "name": "SeoGeoAgent",
   "description_zh": "诊断和优化网站 SEO/GEO，覆盖技术 SEO、收录、结构化数据、核心网页指标、内容质量与 AI 可引用性；交付评分、分级行动清单和看板，支持退化监控、本地仓库修复与复测、GEO 内容写作和外链或 guest post 报价评估。",
   "description_en": "Audits and improves website SEO/GEO: technical SEO, indexing, structured data, Core Web Vitals, content quality and AI citability. Delivers scores, prioritized actions and dashboards; monitors regressions, fixes supplied repositories with retesting, writes GEO content, and evaluates backlink or guest-post pricing.",
@@ -68,5 +68,9 @@
       "default": "",
       "description": "Optional site source directory for confirmed apply-mode fixes and retesting."
     }
+  ],
+  "routing_tags": [
+    "web.seo",
+    "content.discovery"
   ]
 }

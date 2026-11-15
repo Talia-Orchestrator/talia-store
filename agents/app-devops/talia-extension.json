@@ -1,7 +1,7 @@
 {
   "id": "talia-agents/app-devops",
   "kind": "agent",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "name": "Senior DevOps Engineer",
   "description": "Improves builds, environments, release and operations according to the repository's real deployment constraints.",
   "description_it": "Migliora build, ambienti, release e operatività secondo i vincoli reali di distribuzione del progetto.",
@@ -12,5 +12,10 @@
       "kind": "skill",
       "id": "talia-skills/deliverable-review"
     }
+  ],
+  "routing_tags": [
+    "release.pipeline",
+    "build.environment",
+    "deployment.operations"
   ]
 }

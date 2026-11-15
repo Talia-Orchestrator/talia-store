@@ -1,6 +1,6 @@
 {
   "agent_id": "79df9cc89f5f",
-  "version": "1.6.101",
+  "version": "1.6.102",
   "min_app_version": "2.0.0",
   "video_studio_contract": 2,
   "name": "VideoStudio",
@@ -123,5 +123,9 @@
       "required": false,
       "default": 60
     }
+  ],
+  "routing_tags": [
+    "media.video",
+    "media.editing"
   ]
 }

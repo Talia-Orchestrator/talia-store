@@ -1,7 +1,7 @@
 {
   "id": "talia-agents/officeworker",
   "kind": "agent",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "name": "OfficeWorker",
   "description": "Creates, reads, edits, checks and batch-processes Word/DOCX, Excel/XLSX, PowerPoint/PPTX, WPS-compatible files and PDFs, including CSV conversion, formulas, charts and formatting. Not for high-design presentations from scratch or non-office deliverables.",
   "description_it": "Crea, legge, modifica, controlla ed elabora in batch file Word/DOCX, Excel/XLSX, PowerPoint/PPTX, compatibili WPS e PDF, incluse conversioni CSV, formule, grafici e formattazione. Non per presentazioni di alto design da zero o deliverable non office.",
@@ -28,5 +28,9 @@
       "kind": "skill",
       "id": "talia-skills/pdf-editing"
     }
+  ],
+  "routing_tags": [
+    "office.documents",
+    "office.spreadsheets"
   ]
 }

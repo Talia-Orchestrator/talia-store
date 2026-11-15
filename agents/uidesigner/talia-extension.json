@@ -1,7 +1,7 @@
 {
   "id": "talia-agents/uidesigner",
   "kind": "agent",
-  "version": "1.3.44",
+  "version": "1.3.45",
   "name": "Senior UX/UI Designer",
   "description": "Designs and critiques usable, accessible product flows and visual systems, applying Impeccable anti-pattern checks with contextual judgment.",
   "description_it": "Progetta e valuta flussi e sistemi visivi accessibili e usabili, usando i controlli antipattern di Impeccable con giudizio sul contesto.",
@@ -12,5 +12,10 @@
       "kind": "skill",
       "id": "talia-skills/impeccable-ui"
     }
+  ],
+  "routing_tags": [
+    "design.ux",
+    "design.ui",
+    "design.accessibility"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "agent_id": "a316881746f9",
   "name": "ProductDeveloper",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description_zh": "将明确的需求、PRD、issue、bug 或设计稿落成仓库代码变更、测试与验证结果；支持技术方案、架构决策、重构、代码评审、性能排查和 CI/测试修复。",
   "description_en": "Implements clear requirements, PRDs, issues, bugs or designs in a repository, delivering code changes, tests and verification. Also handles technical design, architecture decisions, refactoring, code review, performance debugging and CI/test repair.",
   "description_it": "Implementa requisiti chiari, PRD, issue, bug o design in un repository, consegnando modifiche al codice, test e verifiche. Gestisce anche design tecnico, decisioni di architettura, refactoring, code review, debug di performance e riparazione di CI/test.",
@@ -59,5 +59,9 @@
   "created_at": "2026-06-04T14:27:14",
   "updated_at": "2026-09-17T10:45:25.051Z",
   "category": "rnd",
-  "min_app_version": "1.6.2"
+  "min_app_version": "1.6.2",
+  "routing_tags": [
+    "product.development",
+    "product.prototyping"
+  ]
 }
