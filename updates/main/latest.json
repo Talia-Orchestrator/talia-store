@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "version": "0.11.1-main.25.1+c0d2a13c7f7f",
-  "releaseUrl": "https://github.com/Talia-Orchestrator/talia-store/releases/tag/v0.11.1-main.25.1",
-  "publishedAt": "2026-11-16T12:44:27.343Z",
+  "version": "0.10.0-main.24.1+0ec184ff60f8",
+  "releaseUrl": "https://github.com/Talia-Orchestrator/talia-store/releases/tag/v0.10.0-main.24.1",
+  "publishedAt": "2026-11-14T20:22:06.517Z",
   "targets": {
     "darwin-arm64": {
-      "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.11.1-main.25.1/Talia-0.11.1-main.25.1-mac-arm64.dmg",
+      "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.10.0-main.24.1/Talia-0.10.0-main.24.1-mac-arm64.dmg",
       "automaticUpdate": false
     },
     "win32-x64": {
-      "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.11.1-main.25.1/Talia-0.11.1-main.25.1-win-x64-portable.exe",
+      "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.10.0-main.24.1/Talia-0.10.0-main.24.1-win-x64-portable.exe",
       "automaticUpdate": false
     },
     "linux-x64": {
-      "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.11.1-main.25.1/Talia-0.11.1-main.25.1-linux-x86_64.AppImage",
+      "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.10.0-main.24.1/Talia-0.10.0-main.24.1-linux-x86_64.AppImage",
       "automaticUpdate": true
     }
   }
