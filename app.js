@@ -68,7 +68,7 @@ function makePlatformCard(release, target) {
   link.className = 'download-button';
   link.href = file.url;
   link.textContent = `Scarica ${target.extension.slice(1).toUpperCase()}`;
-  link.setAttribute('aria-label', `Scarica Talia ${release.version} per ${target.title}`);
+  link.setAttribute('aria-label', `Scarica Talia ${release.baseVersion} per ${target.title}`);
   card.append(link);
 
   const metadata = document.createElement('p');
@@ -96,7 +96,7 @@ function makeReleaseCard(release, index) {
   top.className = 'release-top';
   const title = document.createElement('h3');
   title.className = 'release-version';
-  title.textContent = release.version;
+  title.textContent = `Talia ${release.baseVersion}`;
   top.append(title);
 
   const badge = document.createElement('span');
@@ -116,11 +116,20 @@ function makeReleaseCard(release, index) {
   metadata.className = 'release-meta';
   const date = new Date(release.publishedAt);
   const dateText = Number.isNaN(date.valueOf()) ? 'Data non disponibile' : new Intl.DateTimeFormat('it-IT', { dateStyle: 'long', timeZone: 'UTC' }).format(date);
-  metadata.append(document.createTextNode(`${dateText} · ${release.buildSource === 'local' ? 'compilazione locale' : `build ${release.runNumber}.${release.runAttempt}`} · commit `));
+  metadata.textContent = dateText;
+  card.append(metadata);
+
+  const technical = document.createElement('details');
+  technical.className = 'release-technical';
+  const technicalSummary = document.createElement('summary');
+  technicalSummary.textContent = 'Dettagli tecnici della release';
+  const technicalText = document.createElement('p');
+  technicalText.append(document.createTextNode(`${release.buildSource === 'local' ? 'Compilazione locale' : `Build ${release.runNumber}.${release.runAttempt}`} · commit `));
   const commit = document.createElement('code');
   commit.textContent = String(release.commit).slice(0, 12);
-  metadata.append(commit);
-  card.append(metadata);
+  technicalText.append(commit);
+  technical.append(technicalSummary, technicalText);
+  card.append(technical);
 
   const grid = document.createElement('div');
   grid.className = 'platform-grid';
@@ -141,7 +150,8 @@ async function renderDownloads() {
     const data = await response.json();
     if (!data || data.schemaVersion !== 1 || !Array.isArray(data.releases)) throw new Error('release index invalid');
     const releases = data.releases.filter(release => release && release.channel === 'main'
-      && typeof release.version === 'string' && safeReleaseUrl(release.releaseUrl));
+      && typeof release.version === 'string' && /^\d+\.\d+\.\d+$/.test(release.baseVersion)
+      && safeReleaseUrl(release.releaseUrl));
     list.replaceChildren();
     if (releases.length === 0) {
       const empty = document.createElement('p');
