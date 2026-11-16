@@ -7,3 +7,7 @@ Third-party license notices accompany their respective source and vendor directo
 
 The source repositories do not contain personal profiles, credentials, installed dependencies,
 local release snapshots or QA artifacts. Resource packages retain their own licenses and provenance.
+
+The OpenRouter thinking metadata snapshot is derived from Models.dev.
+Copyright (c) 2025 models.dev. MIT License.
+Source: https://github.com/anomalyco/models.dev/tree/dev/providers/openrouter/models
