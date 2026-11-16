@@ -1,5 +1,14 @@
 # Talia Store
 
+`model-capabilities/openrouter-thinking.json` è uno snapshot compatto dei soli
+livelli `reasoning_options` di tipo `effort` dichiarati per modelli OpenRouter
+esatti da [Models.dev](https://github.com/anomalyco/models.dev/tree/dev/providers/openrouter/models).
+`npm run build:catalog` prova ad aggiornarlo prima di rigenerare il catalogo
+delle estensioni. Il feed originale è pubblico e non riceve chiavi o chat.
+Il file è metadato di inferenza, non un pacchetto installabile; le policy locali
+già verificate del client hanno precedenza. Un modello senza livelli enumerati
+non ottiene una scala per analogia.
+
 Public, anonymous HTTPS distribution for signed Talia resources. This repository is the source of truth for selected packages under `agents/`, `skills/`, `connectors/`, `apps/`, and `library/`. The signed v3 index and v2 artifacts are generated from these local directories. Talia desktop bundles Assistant, General Researcher, ContentWriter, six starter skills, and the complete manual for offline first use; the Store supplies all optional packages and updates.
 
 ## Anonymous desktop source
