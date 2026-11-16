@@ -14,10 +14,14 @@ function normalize(source) {
     if (row?.id !== id || row.reasoning !== true || !Array.isArray(row.reasoning_options)) continue;
     const effort = row.reasoning_options.find(option => option?.type === 'effort');
     const values = effort?.values;
-    if (!Array.isArray(values) || !values.length || values.length > LEVELS.length
-      || !values.every(value => typeof value === 'string' && LEVELS.includes(value))
+    if (!Array.isArray(values) || !values.length || values.length > LEVELS.length + 1
+      || !values.every(value => typeof value === 'string' && (value === 'none' || LEVELS.includes(value)))
       || new Set(values).size !== values.length) continue;
-    models[id] = [...values].sort((a, b) => LEVELS.indexOf(a) - LEVELS.indexOf(b));
+    // `none` è Off, non uno step del cursore. Non deve eliminare gli effort
+    // validi dichiarati nello stesso record; Off resta fuori dalla policy UI.
+    const effortLevels = values.filter(value => value !== 'none');
+    if (!effortLevels.length) continue;
+    models[id] = effortLevels.sort((a, b) => LEVELS.indexOf(a) - LEVELS.indexOf(b));
   }
   if (!Object.keys(models).length) throw new Error('Nessun effort esatto nel catalogo');
   return { schemaVersion: 1, provider: 'openrouter', source: SOURCE,
