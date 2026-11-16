@@ -10,6 +10,7 @@ test('lo snapshot contiene solo effort esatti e Carbon ha tre livelli', () => {
   assert.equal(snapshot.schemaVersion, 1);
   assert.equal(snapshot.provider, 'openrouter');
   assert.deepEqual(snapshot.models['google/gemini-4-carbon'], ['low', 'medium', 'high']);
+  assert.deepEqual(snapshot.models['qwen/qwen4-max'], ['low', 'high', 'xhigh']);
   assert.ok(Object.keys(snapshot.models).length >= 50);
   for (const [id, values] of Object.entries(snapshot.models)) {
     assert.match(id, /^[^\s]+\/[^\s]+$/);
@@ -21,9 +22,10 @@ test('lo snapshot contiene solo effort esatti e Carbon ha tre livelli', () => {
 test('reasoning generico, livelli ambigui e valori duplicati restano fuori', () => {
   const output = normalize({ openrouter: { models: {
     'vendor/exact': { id: 'vendor/exact', reasoning: true, reasoning_options: [{ type: 'effort', values: ['high', 'low'] }] },
+    'vendor/with-off': { id: 'vendor/with-off', reasoning: true, reasoning_options: [{ type: 'effort', values: ['none', 'low', 'xhigh'] }] },
     'vendor/boolean': { id: 'vendor/boolean', reasoning: true },
     'vendor/unknown': { id: 'vendor/unknown', reasoning: true, reasoning_options: [{ type: 'effort', values: ['turbo'] }] },
     'vendor/duplicate': { id: 'vendor/duplicate', reasoning: true, reasoning_options: [{ type: 'effort', values: ['low', 'low'] }] },
   } } });
-  assert.deepEqual(output.models, { 'vendor/exact': ['low', 'high'] });
+  assert.deepEqual(output.models, { 'vendor/exact': ['low', 'high'], 'vendor/with-off': ['low', 'xhigh'] });
 });
