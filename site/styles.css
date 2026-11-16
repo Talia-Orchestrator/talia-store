@@ -33,8 +33,11 @@ h2 { margin-bottom: 0; font-size: clamp(1.65rem, 4vw, 2.25rem); letter-spacing: 
 .release-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 18px; }
 .release-version { margin: 0; font-size: 1.18rem; font-weight: 700; }
 .badge { padding: 5px 9px; border: 1px solid #587c78; border-radius: 99px; color: var(--accent); font-size: .75rem; }
-.release-meta { margin: 0 0 18px; color: var(--muted); font-size: .86rem; }
-.release-meta code { color: #d4dbea; }
+.release-meta { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.release-technical { margin-bottom: 18px; color: var(--muted); font-size: .78rem; }
+.release-technical summary { width: fit-content; color: var(--accent); cursor: pointer; }
+.release-technical p { margin: 8px 0 0; }
+.release-technical code { color: #d4dbea; }
 .platform-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .platform-card { min-width: 0; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
 .platform-title { margin: 0 0 12px; font-size: 1rem; }
