@@ -182,3 +182,12 @@ h1, h2, h3, .site-nav a { overflow-wrap: anywhere; }
 .download-page .install-notes { padding-block: 24px; }
 .install-notes summary { cursor: pointer; color: #6e501c; }
 .site-footer { flex-wrap: wrap; gap: 18px; }
+
+/* Percorso giornaliero: racconto editoriale, non una simulazione dell’app. */
+.daily-cycle { list-style: none; padding: 0; margin: 0 0 24px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.daily-cycle li { border-top: 2px solid #b38a3d; padding-top: 22px; min-width: 0; }
+.daily-cycle .step-number { color: #6e501c; }
+.daily-cycle p { color: #515158; line-height: 1.65; margin: 0; overflow-wrap: anywhere; }
+.cycle-note { margin-bottom: 40px; }
+@media(max-width: 900px) { .daily-cycle { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media(max-width: 600px) { .daily-cycle { grid-template-columns: 1fr; gap: 20px; } }

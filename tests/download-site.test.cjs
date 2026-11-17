@@ -247,3 +247,19 @@ test('editorial landing keeps three honest screenshot slots and the download ent
   assert.doesNotMatch(html, /id="release-list"|app.js|releases\/download\//);
   assert.match(html, /not simulated interfaces/);
 });
+
+test('team landing preserves the agreed headline and distinguishes scheduling from execution', () => {
+  const site = path.join(__dirname, '../site');
+  const html = fs.readFileSync(path.join(site, 'index.html'), 'utf8');
+  const it = JSON.parse(fs.readFileSync(path.join(site, 'locales/it.json'), 'utf8'));
+  assert.equal(it.hero, 'La tua squadra. Non un altro chatbot.');
+  assert.match(it.b1body, /indice è pronto/);
+  assert.match(it.b2body, /Kanban/);
+  assert.match(it.b3body, /modelli, skill e connettori/);
+  assert.match(it.cycleNote, /creare un’attività non la avvia/);
+  assert.match(it.cycleNote, /non una demo live/);
+  for (const key of ['cycle1', 'cycle2', 'cycle3', 'cycle4', 'cycleNote']) {
+    assert.equal((html.match(new RegExp(`data-i18n="${key}"`, 'g')) || []).length, 1);
+  }
+  assert.match(html, /<ol class="daily-cycle">/);
+});

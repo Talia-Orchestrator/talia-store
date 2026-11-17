@@ -51,3 +51,20 @@ Screenshot documenti e squadra: preferire ora 16:10 e adattare la cornice all'im
 Verifiche: `npm run test:site` (12 test), `npm test` (validazione e 18 test). Chromium reale 1440/390/320: zero overflow, CTA, checksum, stati vuoto/errore e 27 nomi accessibili verificati. Axe 4.14.1: zero violazioni WCAG 2.5.3; scansione completa a 320 px senza violazioni automatiche. Non sostituisce un audit assistivo manuale.
 
 Anteprima verificata e aperta nel browser interno: http://127.0.0.1:8765. Screenshot prima/dopo in /tmp/talia-premium (evidenza temporanea). app.js, releases.json, manifest e URL invariati. Installer esterni non scaricati. Nessun deploy o merge. Nuova accettazione visiva utente ancora necessaria.
+
+## Squadra, documenti e lavoro ricorrente — 17 novembre 2026
+
+Ripresa diretta da Commander dopo ripetuti fallimenti di avvio della sessione frontend. Base ispezionata: b78cd956; unica modifica preesistente `.DS_Store`, preservata. Nessuna modifica al checkout core.
+
+- Headline italiana esatta: «La tua squadra. Non un altro chatbot.». Sottotitolo su agenti, documenti e attività ricorrenti.
+- Benefici: ricerca nei documenti con indice pronto e riferimenti; Kanban con assegnazioni e avanzamento; scelta di specialisti, modelli, skill e connettori.
+- Percorso editoriale in quattro passaggi: automazione mattutina → creazione attività → esecuzione backlog abilitata → briefing verificabile. Esempio configurabile, esplicitamente non demo live; creare un’attività non la avvia. Nessuna automazione reale creata o eseguita.
+- Fonti controllate: Manuale Talia, sezioni 3, 4, 6, 8 e 9; intestazioni e guardrail di `desktop/src/main/features/project_driver.ts` e `project_driver_runner.ts` nel checkout core, consultato soltanto in lettura. Il driver è opt-in e soggetto a limiti. La catena completa nell’app non è stata collaudata in questo intervento.
+- Tre placeholder, non screenshot simulati, mantenuti. Pagina download, app.js, releases.json e manifest aggiornamenti invariati rispetto alla base. Manuale e link SolidCraft preservati.
+- Copy aggiornato nelle 19 lingue, fallback inglese sincronizzato; traduzioni non revisionate da madrelingua.
+- `npm run test:site`: 37/37, inclusa nuova regressione su headline, fonti, Kanban e separazione pianificazione/esecuzione. `npm test`: 18/18 con validazione catalogo e routing; `git diff --check` superato. Il repository non espone un grafo dei simboli versionato utilizzabile: verifica svolta sui sorgenti e riferimenti effettivi.
+- `scripts/check-download-browser.cjs` eseguito in Chromium con dipendenze QA locali esistenti: 19 lingue, persistenza, RTL arabo, larghezze 1440/390/320, zero overflow; CTA e checksum azionati, 27 URL invariati, stati vuoto/errore e zero violazioni Axe. Prefisso `/talia-store/` verificato.
+- Controllo aggiuntivo sulla preview root `http://127.0.0.1:8765/`: headline italiana, quattro passaggi, tre placeholder, CTA esplora/download, 27 installer e skip-link da tastiera verificati ai tre viewport; nessun errore JavaScript. HTML servito coerente con il file corrente. Aperta la preview nel browser interno.
+- Evidenze temporanee, non consegne: `/tmp/talia-team-landing-check/`. Nessun installer scaricato o eseguito; nessuna verifica screen reader, produzione o successo live della catena automatica. QA indipendente e accettazione visiva dell’utente ancora necessarie.
+
+Nessun merge, deploy, build applicativa o rimozione worktree. Task lasciato `progress`.
