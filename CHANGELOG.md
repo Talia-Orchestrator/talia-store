@@ -3,40 +3,147 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
-## 0.11.1-main.25.1+c0d2a13c7f7f
+## 0.12.0-main.26.1+4fbf2a721697
 
-- Un team pronto dallo Store: puoi installare un team con gli agenti e le
-  dipendenze dichiarate, poi personalizzare team e agenti. Lo Store Talia
-  firmato raccoglie anche skill, connettori, app e il Manuale Talia.
-- Specialisti più facili da trovare: Commander confronta gli agenti già in
-  chat, quelli installati e quelli dello Store. Quando propone uno specialista
-  da installare, la scelta resta tua. Per lavori composti suggerisce ruoli,
-  dipendenze e verifiche senza avviare automaticamente nuovi agenti.
-- Partecipanti e Team Builder più leggibili: la chat raccoglie i partecipanti
-  in un pannello con ricerca e controlli per modello e Pensiero. Le card del
-  Team Builder mostrano descrizione e avatar invece degli ID tecnici e aprono
-  la configurazione nello stesso modo.
-- Pensiero legato al modello scelto: i controlli mostrano gli effort nativi
-  attestati per quel modello; Auto non invia un override. Se la capacità non è
-  nota, l'app non inventa livelli. Il catalogo OpenRouter esclude le varianti
-  asincrone con suffisso :batch dalla scelta per la chat.
-- Lavoro in chat e Tasks più chiaro: Commander può ricevere nuovi messaggi
-  mentre altri agenti lavorano. I Tasks includono assegnazioni a team e una
-  vista Kanban con spostamento e ordine persistente. La sidebar segnala i
-  lavori completati che non hai ancora aperto.
-- Impostazioni e strumenti: la pagina dei modelli si chiama «Providers» e
-  guida il collegamento degli account. Inner Browser è disponibile come
-  connettore nativo; il workspace a schede resta una scelta sperimentale da
-  attivare nelle impostazioni.
+- **Contesto per destinatario e compattazione manuale**: Commander e agenti
+  mostrano stime separate. Il popover permette di leggere i valori disponibili
+  e avviare una compattazione con checkpoint persistente, con annullamento e
+  ripristino del focus.
+- **Prompt personali nel popup @**: ricerca, variabili e inserimento nella
+  bozza restano disponibili senza invio automatico e senza occupare la barra
+  inferiore del composer.
+- **Modelli e agenti nel nuovo task**: il catalogo è filtrabile e mostra
+  descrizioni e capacità di reasoning; la configurazione del modello si può
+  copiare tra agenti. I conflitti di revisione chiedono conferma invece di
+  forzare la creazione.
+- **Inner Browser con certificati personalizzati**: il consenso vale per
+  origine e certificato in una sessione temporanea; chiusura della scheda e
+  scadenza revocano la fiducia.
+- **Diagnostica più circoscritta**: i rifiuti HTTP 400 di openai-codex
+  registrano soltanto la forma della richiesta già inviata, senza testo o
+  credenziali. La causa dei rifiuti osservati resta da determinare.
 
-Limiti: le proposte di Commander non garantiscono una delega completata;
-capacità modello sconosciute restano non configurabili. Le prove automatizzate
-usano profili e provider simulati; gli account reali e l'aggiornamento di una
-installazione Windows o Linux non sono stati qualificati in questa tranche.
+Limiti: i test usano prevalentemente profili e provider sintetici; account
+reali, collaudo assistivo completo e sostituzione di installazioni Windows o
+Linux restano da verificare. Le note tecniche seguenti precisano le prove per
+ciascuna modifica.
 
 ## Non rilasciato
 
-Nessuna modifica successiva alla preparazione della 0.11.1.
+Nessuna modifica successiva alla preparazione della 0.12.0.
+
+## 0.12.0 — contesto e strumenti più chiari
+
+- **Contesto per destinatario e compattazione manuale**: Commander e agenti
+  mostrano stime separate. Il popover permette di leggere i valori disponibili
+  e avviare una compattazione con checkpoint persistente, con annullamento e
+  ripristino del focus.
+- **Prompt personali nel popup @**: ricerca, variabili e inserimento nella
+  bozza restano disponibili senza invio automatico e senza occupare la barra
+  inferiore del composer.
+- **Modelli e agenti nel nuovo task**: il catalogo è filtrabile e mostra
+  descrizioni e capacità di reasoning; la configurazione del modello si può
+  copiare tra agenti. I conflitti di revisione chiedono conferma invece di
+  forzare la creazione.
+- **Inner Browser con certificati personalizzati**: il consenso vale per
+  origine e certificato in una sessione temporanea; chiusura della scheda e
+  scadenza revocano la fiducia.
+- **Diagnostica più circoscritta**: i rifiuti HTTP 400 di openai-codex
+  registrano soltanto la forma della richiesta già inviata, senza testo o
+  credenziali. La causa dei rifiuti osservati resta da determinare.
+
+Limiti: i test usano prevalentemente profili e provider sintetici; account
+reali, collaudo assistivo completo e sostituzione di installazioni Windows o
+Linux restano da verificare. Le note tecniche seguenti precisano le prove per
+ciascuna modifica.
+
+## Registro tecnico delle modifiche confluite nella 0.12.0
+
+Le note cronologiche conservano verifiche e limiti delle singole tranche. Le
+frasi sulla mancata build descrivono lo stato al momento degli interventi.
+
+- Contesto e compattazione: il composer mostra sempre la stima di Commander,
+  anche quando `To` cambia; ogni subagente ha il proprio indicatore compatto
+  nell'header del balloon. Il refresh preserva il focus e l'annullamento della
+  compattazione; Escape chiude il popover e ripristina il focus al trigger.
+  Verificati Electron mirato 8/8, riproduttori 2/2 e typecheck E2E con IPC
+  sintetico; nessun provider live né confronto col mock originale.
+
+- Diagnostica interna per i rifiuti HTTP 400 di `openai-codex`: il log registra
+  solo numero e tipi degli elementi della richiesta già inviata. Nessun testo,
+  ID, argomento o credenziale viene conservato. La richiesta e il comportamento
+  di retry restano invariati; la causa dei 400 osservati e la correzione restano
+  da determinare dopo un nuovo caso reale. Nessuna nuova funzione utente o build.
+
+- Progetto/Nuova attività: catalogo modelli standard filtrabile, descrizione su
+  riga dedicata, reasoning a capacità reali e copia/incolla per agente incluso
+  Commander. Aggiunta agenti corretta prima della creazione e persistente al
+  riavvio. Risolti INFERENCE_TARGET_INVALID da metadati UI e STALE_REVISION:
+  confronto e conferma esplicita recuperano la revisione senza creazioni forzate.
+  QA indipendente Electron macOS 10/10, fixture sintetiche; nessun provider live,
+  nuova build o verifica CLI/ACP dedicata.
+
+- Corretto lo sfondo trasparente del popover del contesto: superficie opaca
+  e testo usano i token semantici dei tre temi supportati. Verificati
+  typecheck E2E, Electron isolato 6/6 e screenshot sopra il composer;
+  provider sintetico, nessuna nuova build.
+
+- La libreria dei prompt personali è disponibile nella scheda **Prompt** del
+  popup aperto con **@**; non occupa più la barra inferiore dei composer.
+  Ricerca, variabili e inserimento nella bozza sono mantenuti senza invio
+  automatico. Escape e X chiudono il popup con focus al composer; Escape su una
+  conferma chiude solo la conferma. Verificati journey Electron macOS isolato,
+  test renderer e picker desktop/mobile, con ricollaudo QA indipendente
+  completato. Verificata anche la consegna dello snapshot finale dei turni
+  prima della chiusura IPC. Windows/Linux non verificati; la suite backend
+  completa mantiene fallimenti riprodotti anche nella baseline.
+
+Indicatore di stima del contesto per destinatario e compattazione manuale con checkpoint persistente, senza soglia minima. Il cerchio statico da 24 px si riempie dal basso; budget ignoto e stima incompleta sono espliciti. Commander e agenti hanno contesti separati; le righe team non sommano i budget. Cronologia condivisa e soglie automatiche preservate; solo un flush riuscito conferma il salvataggio.
+
+Follow-up UI non rilasciato: il cerchio accanto a To è cliccabile e apre un popover sopra il composer con valori disponibili e compattazione manuale. Verificati typecheck, renderer 531/531, host 5/5, core 134/134 e E2E Electron 6/6; un E2E usa IPC/host/storage reali con provider sintetico e gli altri cinque IPC sintetico. Screenshot runtime acquisito; confronto diretto col mock non verificato perché il suo artefatto originale non era accessibile.
+
+Ricollaudo indipendente: host **227/227**, core/sessione/checkpoint **134/134**, renderer **531/531**, Electron effimero **6/6**, typecheck desktop/E2E e diff check superati. Il primo run host ha avuto un timeout di quiescenza Codex, poi passato isolato e nella suite ripetuta: flakiness residua non risolta. Un caso Electron usa UI→IPC→host e storage reali con provider sintetico, cancel attivo e riavvio con transcript da disco; gli altri cinque usano IPC sintetico. Il caso annullato non salva un nuovo checkpoint. Nessun provider live, collaudo assistivo completo, packaging o nuova distribuzione verificati. Gli avvisi nativi precedenti non si sono riprodotti: causa non accertata; preflight bundled Node non certificato. Nessun bump versione. Dettagli in `docs/context-compaction-checkpoint.md`.
+
+- Inner Browser: le pagine con certificato personalizzato/self-signed possono
+  essere aperte dopo consenso esplicito in una sessione temporanea isolata,
+  vincolata a origine e certificato. Nessuna fiducia globale o salvata: chiusura
+  della scheda per revoca e scadenza automatica dopo cinque minuti.
+  Cookie del profilo, popup e risorse di altre origini non sono disponibili.
+  Integrazione sorgente autorizzata dal proprietario con limiti manuali noti.
+  Typecheck, 62 test mirati ed E2E Electron automatico superati su macOS;
+  il consenso nei test è simulato. Prova umana completa e revoca al cambio
+  account restano non attestate; nessuna nuova build o distribuzione.
+- Gli agenti senza dipendenze strumenti esplicite caricano progressivamente le
+  capacità disponibili, senza precaricarle tutte. Il caricamento resta limitato
+  al turno e non amplia permessi o dominio dell'agente; le dipendenze esplicite
+  e la compatibilità Commander sono conservate.
+- Le app rifiutano un contesto di modifica danneggiato o privato del tipo app:
+  occorre riaprire la modifica dall'app. La visualizzazione resta tollerante,
+  senza trasformare il recupero dei metadati in autorizzazione di modifica.
+- Verifiche catalogo e binding: suite mirata 331/331, saved_apps 120/120 e
+  typecheck main/core ed E2E superati su macOS, con recheck indipendente.
+  Non attestati runtime Inner Browser, provider live, suite ampia e smoke EPERM.
+  Nessuna nuova build inclusa.
+
+- Team e Partecipanti: azioni compatte «Copia config.» e «Incolla config.»
+  trasferiscono modello/provider, selezione runtime e Pensiero tra agenti e tra
+  le due superfici nella stessa finestra. Non copiano prompt, identità, risorse
+  o credenziali; configurazioni incompatibili sono rifiutate senza applicazioni
+  parziali. Auto resta senza override.
+- Editor Team ridisegnato con configurazione membri espandibile e azioni su
+  riga separata: le descrizioni lunghe restano leggibili anche a 1024×645.
+  Se il cambio modello invalida il Pensiero, avviso e reset ad Auto vengono
+  persistiti insieme al modello anche nei Partecipanti.
+- Prerequisito già presente sul main locale: capacità API/CLI versionate non
+  scadono durante l'editing; TTL ACP conservati. Registrato il controllo delle
+  deleghe nel catalogo strumenti Commander.
+
+Verifiche locali su macOS: 18 percorsi Electron con profili effimeri e fixture,
+5 test renderer Team Builder e typecheck. Non attestano provider live, Qwen Max,
+Windows/Linux o il CSS della finestra QA manuale precedentemente aperta.
+Il confronto i18n resta 46/47 anche sulla base immutata (2.210 differenze nelle
+tabelle esistenti); nessuna nuova regressione rilevata nel confronto QA.
+Nessuna nuova build o distribuzione inclusa.
 
 ## 0.11.1 — il team e i modelli, più facili da gestire
 
