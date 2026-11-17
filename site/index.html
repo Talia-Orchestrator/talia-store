@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#101522">
-    <meta name="description" content="Scarica Talia per macOS, Windows e Linux. Controlla versione, piattaforme disponibili e checksum.">
+    <meta name="description" content="Dalle idee al lavoro concreto: organizza progetti, documenti e agenti con Talia. Scopri il tuo ambiente AI desktop e i download disponibili.">
     <title>Scarica Talia</title>
     <link rel="icon" href="assets/talia-symbol.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20261116-1">
+    <link rel="stylesheet" href="styles.css?v=marketing-1">
     <script src="app.js?v=20261116-1" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Vai al contenuto</a>
     <header class="site-header">
       <a class="brand" href="./" aria-label="Talia, home">
         <img src="assets/talia-symbol.svg" width="38" height="38" alt="">
@@ -19,13 +20,36 @@
       <a class="header-link" href="https://github.com/Talia-Orchestrator/talia-store/releases">Release su GitHub</a>
     </header>
 
-    <main>
+    <main id="main-content">
       <section class="hero" aria-labelledby="page-title">
-        <p class="eyebrow">Assistente desktop, al tuo ritmo</p>
-        <h1 id="page-title">Scarica Talia</h1>
-        <p class="intro">Conversazioni con agenti, strumenti e app locali. Scegli il pacchetto per il tuo computer e controlla sempre versione e checksum prima di installarlo.</p>
+        <div class="hero-copy">
+          <p class="eyebrow">Il tuo spazio di lavoro con l’AI</p>
+          <h1 id="page-title">Meno contesto da ripetere.<br><span>Più spazio alle idee.</span></h1>
+          <p class="intro">Porta conversazioni, documenti e agenti nello stesso progetto. Con Talia, il lavoro non finisce in una risposta: prende forma nel tuo ambiente desktop.</p>
+          <div class="hero-actions"><a class="download-button" href="#downloads-title">Scarica Talia <span aria-hidden="true">↓</span></a><a class="text-link" href="#workflow-title">Scopri come lavorare</a></div>
+          <p class="availability">macOS, Windows e Linux · disponibilità per release<br>Software in anteprima. Consulta requisiti e avvisi prima di installare.</p>
+        </div>
+        <figure class="screenshot-placeholder hero-preview">
+          <div class="preview-bar" aria-hidden="true"><span>TALIA / WORKSPACE</span><span>01</span></div>
+          <div class="placeholder-body"><img src="assets/talia-symbol.svg" width="72" height="72" alt=""><p class="eyebrow">Il lavoro, in un solo spazio</p><p class="placeholder-title">Qui vedrai Talia in azione.</p><p>Spazio per lo screenshot del progetto: chat con Commander, squadra e documenti.</p><span class="placeholder-label">Screenshot da aggiungere · 16:10</span></div>
+          <figcaption>Anteprima da inserire: schermata reale, non una simulazione dell’interfaccia.</figcaption>
+        </figure>
         <p class="release-summary" id="release-summary" aria-live="polite">Caricamento delle release disponibili…</p>
         <p><a href="https://github.com/Talia-Orchestrator/talia-store/blob/main/CHANGELOG.md">Leggi il changelog completo su GitHub</a>. La disponibilità dei pacchetti è indicata nell’elenco download.</p>
+      </section>
+
+      <section class="workflow" aria-labelledby="workflow-title">
+        <div class="section-heading"><div><p class="eyebrow">Dalla domanda al risultato</p><h2 id="workflow-title">Un progetto. Il contesto giusto.<br>Una squadra da costruire.</h2></div></div>
+        <div class="benefit-list">
+          <article><span class="step-number">01 / CONTESTO</span><h3>Riparti dal lavoro, non da zero.</h3><p>Raccogli fonti e documenti nel progetto. Chiedi a Talia di consultarli e di distinguere le informazioni disponibili da quelle che mancano.</p></article>
+          <article><span class="step-number">02 / SQUADRA</span><h3>Affida ogni passaggio al ruolo giusto.</h3><p>Parla con Commander e coinvolgi gli agenti specializzati che scegli. Organizza ricerca, scrittura e revisione nello stesso ambiente.</p></article>
+          <article><span class="step-number">03 / STRUMENTI</span><h3>Fai spazio al tuo modo di lavorare.</h3><p>Scegli modelli, skill e connettori. Collega i servizi utili e lavora con i file nelle cartelle autorizzate, in base ai permessi concessi.</p></article>
+        </div>
+        <p class="capability-note">Le capacità dipendono dal modello, dalle risorse installate, dai servizi configurati e dai permessi. Provider e servizi esterni possono richiedere account e costi separati.</p>
+        <div class="story-grid">
+          <figure class="screenshot-placeholder"><div class="placeholder-body"><span class="step-number">02 / DOCUMENTI</span><p class="placeholder-title">Le tue fonti, accanto alla chat.</p><p>Inserire uno screenshot con documenti di progetto e una risposta con riferimenti alle fonti.</p><span class="placeholder-label">Screenshot da aggiungere · 4:3</span></div><figcaption>Usare contenuti dimostrativi, senza dati personali.</figcaption></figure>
+          <figure class="screenshot-placeholder"><div class="placeholder-body"><span class="step-number">03 / SQUADRA</span><p class="placeholder-title">Dai un ruolo alle competenze.</p><p>Inserire uno screenshot della selezione degli agenti e dei modelli nella chat.</p><span class="placeholder-label">Screenshot da aggiungere · 4:3</span></div><figcaption>Mostrare soltanto risorse realmente disponibili.</figcaption></figure>
+        </div>
       </section>
 
       <section class="downloads" aria-labelledby="downloads-title">
@@ -36,6 +60,8 @@
           </div>
           <a class="all-releases" href="https://github.com/Talia-Orchestrator/talia-store/releases">Tutte le release</a>
         </div>
+        <p class="download-intro">Pronto a dare un posto alle tue idee? Scegli un pacchetto disponibile e controlla le note della release.</p>
+        <noscript><p>Per l’elenco dei pacchetti serve JavaScript. <a href="https://github.com/Talia-Orchestrator/talia-store/releases">Scarica dalle release su GitHub</a>.</p></noscript>
         <div class="release-list" id="release-list" aria-live="polite">
           <p class="empty-state">Sto caricando i pacchetti disponibili…</p>
         </div>

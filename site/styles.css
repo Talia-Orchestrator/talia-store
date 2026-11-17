@@ -7,12 +7,12 @@
   text-rendering: optimizeLegibility;
   --muted: #a9b2c4;
   --line: #323b4e;
-  --accent: #a9e6d3;
+  --accent: #F4BC53;
   --panel: #171e2d;
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; background: radial-gradient(ellipse at 50% -20%, #273246 0, #101522 60%); }
+body { margin: 0; min-width: 320px; background: #101522; }
 a { color: inherit; }
 .site-header, main, .site-footer { width: min(100% - 40px, 1040px); margin: 0 auto; }
 .site-header { display: flex; align-items: center; justify-content: space-between; min-height: 76px; border-bottom: 1px solid var(--line); }
@@ -42,7 +42,7 @@ h2 { margin-bottom: 0; font-size: clamp(1.65rem, 4vw, 2.25rem); letter-spacing: 
 .platform-card { min-width: 0; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
 .platform-title { margin: 0 0 12px; font-size: 1rem; }
 .download-button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 15px; border-radius: 8px; background: var(--accent); color: #111923; font-weight: 750; text-decoration: none; }
-.download-button:hover { background: #c8f4e8; }
+.download-button:hover { background: #ffd386; }
 .download-button:focus-visible, a:focus-visible { outline: 3px solid #f1ce80; outline-offset: 3px; }
 .unavailable { margin: 0; color: var(--muted); font-size: .9rem; }
 .file-meta { margin: 11px 0 0; color: var(--muted); font-size: .78rem; line-height: 1.5; }
@@ -72,3 +72,37 @@ h2 { margin-bottom: 0; font-size: clamp(1.65rem, 4vw, 2.25rem); letter-spacing: 
   .site-footer { flex-direction: column; }
   .header-link { font-size: .8rem; }
 }
+
+/* Presentazione marketing: i componenti di download mantengono il contratto esistente. */
+.skip-link { position: absolute; top: -80px; left: 20px; padding: 12px; background: var(--accent); color: #101522; z-index: 10; }
+.skip-link:focus { top: 12px; }
+.hero { max-width: none; display: grid; grid-template-columns: 1.1fr 1fr; gap: 36px; align-items: center; padding: 84px 0 50px; }
+h1 { font-size: clamp(2.7rem, 5.2vw, 4.5rem); line-height: 1.06; letter-spacing: -.055em; }
+h1 span { color: var(--accent); }
+.hero .intro { font-size: 1.1rem; }
+.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 20px; }
+.hero-actions .download-button { min-height: 48px; gap: 22px; }
+.text-link { text-underline-offset: 5px; }
+.availability { color: var(--muted); font-size: .8rem; line-height: 1.7; margin: 18px 0 0; }
+.hero > .release-summary, .hero > p { grid-column: 1 / -1; margin: 0; font-size: .85rem; line-height: 1.6; color: var(--muted); }
+.screenshot-placeholder { margin: 0; border: 1px solid #586176; background: #171e2d; min-width: 0; }
+.preview-bar { display: flex; justify-content: space-between; padding: 16px 22px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .7rem; letter-spacing: .12em; }
+.placeholder-body { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 30px; min-height: 260px; }
+.hero-preview .placeholder-body { min-height: 330px; }
+.placeholder-body img { margin-bottom: 28px; }
+.placeholder-title { font-size: 1.5rem; line-height: 1.2; letter-spacing: -.03em; margin-bottom: 14px; color: #eff2f8; }
+.placeholder-body p:not(.placeholder-title):not(.eyebrow) { font-size: .9rem; line-height: 1.6; color: var(--muted); }
+.placeholder-label { font-size: .7rem; color: var(--accent); border-top: 1px dashed #586176; padding-top: 14px; width: 100%; }
+figcaption { padding: 12px 22px; font-size: .72rem; line-height: 1.5; color: var(--muted); border-top: 1px solid var(--line); }
+.workflow { padding: 65px 0 80px; border-top: 1px solid var(--line); }
+.benefit-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; margin-top: 36px; }
+.step-number { display: block; color: var(--accent); font-size: .7rem; letter-spacing: .1em; margin-bottom: 20px; }
+.benefit-list h3 { font-size: 1.3rem; line-height: 1.3; }
+.benefit-list p, .capability-note, .download-intro { color: var(--muted); line-height: 1.7; }
+.capability-note { font-size: .8rem; margin: 25px 0 36px; }
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.file-meta, .release-technical { overflow-wrap: anywhere; }
+summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.notes + .notes { padding-top: 20px; }
+@media (max-width: 800px) { .hero { grid-template-columns: 1fr; padding-top: 50px; gap: 28px; } .benefit-list { grid-template-columns: 1fr; gap: 20px; } .benefit-list article { border-bottom: 1px solid var(--line); padding-bottom: 15px; } .hero-preview .placeholder-body { min-height: 260px; } }
+@media (max-width: 560px) { .story-grid { grid-template-columns: 1fr; } .placeholder-body { padding: 24px; } .workflow { padding: 45px 0; } }
