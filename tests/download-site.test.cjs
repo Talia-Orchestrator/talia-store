@@ -242,8 +242,8 @@ test('local exception rejects unsupported platforms, updater, wrong tag and fabr
 test('editorial landing keeps three honest screenshot slots and the download entry point', () => {
   const html = fs.readFileSync(path.join(__dirname, '../site/index.html'), 'utf8');
   assert.equal((html.match(/<figure class="screenshot-placeholder/g) || []).length, 3);
-  assert.equal((html.match(/Screenshot da aggiungere/g) || []).length, 3);
-  assert.match(html, /href="#downloads-title"/);
-  assert.match(html, /id="release-list"/);
-  assert.match(html, /schermata reale, non una simulazione/);
+  assert.equal((html.match(/data-i18n="shotLabel"/g) || []).length, 3);
+  assert.equal((html.match(/class="download-button" href="download-app\/"/g) || []).length, 2);
+  assert.doesNotMatch(html, /id="release-list"|app.js|releases\/download\//);
+  assert.match(html, /not simulated interfaces/);
 });

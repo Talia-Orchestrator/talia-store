@@ -69,8 +69,19 @@ let browser;
     const links = await page.locator('.platform-card a').evaluateAll(nodes => nodes.map(node => ({ href: node.href, text: node.textContent, name: node.getAttribute('aria-label') })));
     assert.deepEqual(links.map(link => link.href), baseline);
     assert.ok(links.every(link => link.name.includes(link.text)));
-    await page.locator('.hero-actions .download-button').click();
-    assert.equal(new URL(page.url()).hash, '#downloads-title');
+    await page.goto(base);
+    await page.waitForFunction(code => TaliaI18n.language === code, locale.code);
+    assert.equal(await page.locator('#release-list, .platform-card, .checksum').count(), 0);
+    assert.equal(await page.locator('.screenshot-placeholder').count(), 3);
+    assert.deepEqual(await page.locator('.download-button').evaluateAll(nodes => nodes.map(node => new URL(node.href).pathname)), ['/talia-store/download-app/', '/talia-store/download-app/']);
+    for (const width of [1440, 390, 320]) {
+      await page.setViewportSize({ width, height: 1000 });
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${locale.code}: landing overflow ${width}`);
+    }
+    await page.addScriptTag({ path: axePath });
+    assert.deepEqual(await page.evaluate(async () => (await axe.run()).violations.map(item => item.id)), [], `${locale.code}: landing axe`);
+    await page.locator('.download-button').last().click();
+    await page.waitForFunction(code => TaliaI18n.language === code && document.querySelectorAll('.platform-card a').length === 27, locale.code);
     const checksum = page.locator('.checksum').first();
     await checksum.locator('summary').click();
     assert.equal(await checksum.getAttribute('open'), '');

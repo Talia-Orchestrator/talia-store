@@ -32,7 +32,7 @@ for (const locale of meta) {
       assert.ok(value.trim(), key);
       assert.deepEqual(value.match(/\{\w+\}/g), english[key].match(/\{\w+\}/g), key);
     }
-    for (const match of html.matchAll(/data-i18n(?:-content)?="([^"]+)"/g)) assert.ok(table[match[1]], match[1]);
+    for (const match of (html + read('index.html')).matchAll(/data-i18n(?:-content)?="([^"]+)"/g)) assert.ok(table[match[1]], match[1]);
     const document = fakeDocument();
     const context = vm.createContext({ document, Intl, URL, TaliaI18n: {
       locale: locale.intlLocale,
@@ -59,8 +59,8 @@ for (const locale of meta) {
 
 test('static Download app entry preserves the home and works beneath a Pages prefix', () => {
   assert.match(read('index.html'), /href="download-app\/"/);
-  assert.equal((html.match(/<figure class="screenshot-placeholder/g) || []).length, 3);
-  assert.equal((html.match(/data-i18n="shotLabel"/g) || []).length, 3);
+  assert.equal((read('index.html').match(/<figure class="screenshot-placeholder/g) || []).length, 3);
+  assert.equal((read('index.html').match(/data-i18n="shotLabel"/g) || []).length, 3);
   for (const match of html.matchAll(/(?:href|src)="([^"#]+)"/g)) {
     const target = match[1];
     if (/^https:/.test(target)) continue;
