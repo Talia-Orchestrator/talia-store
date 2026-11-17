@@ -58,5 +58,6 @@
   "bits": "64 bits",
   "build": "Compilation",
   "commit": "commit",
-  "sessionOnly": "Langue sélectionnée pour cette session uniquement : stockage du navigateur indisponible."
+  "sessionOnly": "Langue sélectionnée pour cette session uniquement : stockage du navigateur indisponible.",
+  "manualLink": "Manuel Talia"
 }

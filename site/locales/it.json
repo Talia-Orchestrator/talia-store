@@ -58,5 +58,6 @@
   "bits": "64 bit",
   "build": "Build",
   "commit": "commit",
-  "sessionOnly": "Lingua selezionata solo per questa sessione: memoria del browser non disponibile."
+  "sessionOnly": "Lingua selezionata solo per questa sessione: memoria del browser non disponibile.",
+  "manualLink": "Manuale Talia"
 }

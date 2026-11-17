@@ -58,5 +58,6 @@
   "bits": "64 位",
   "build": "构建",
   "commit": "提交",
-  "sessionOnly": "语言仅在本次会话生效：浏览器存储不可用。"
+  "sessionOnly": "语言仅在本次会话生效：浏览器存储不可用。",
+  "manualLink": "Talia 使用手册"
 }

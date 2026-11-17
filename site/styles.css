@@ -170,3 +170,15 @@ h1, h2, h3, .site-nav a { overflow-wrap: anywhere; }
  .language-control select { max-width: 70%; }
  .section-heading { flex-wrap: wrap; }
 }
+
+/* La pagina download privilegia i pacchetti; i dettagli restano espandibili. */
+.download-page .hero { padding: 40px 24px 8px; }
+.download-page h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin: 12px auto; }
+.download-page .downloads { padding-top: 24px; }
+.download-page .section-heading h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+.download-page .release-card { padding-block: 22px; }
+.download-page .platform-card { padding: 18px; }
+.download-page .release-technical { margin-block: 12px; }
+.download-page .install-notes { padding-block: 24px; }
+.install-notes summary { cursor: pointer; color: #6e501c; }
+.site-footer { flex-wrap: wrap; gap: 18px; }

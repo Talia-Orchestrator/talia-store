@@ -58,5 +58,6 @@
   "bits": "64 Bit",
   "build": "Build",
   "commit": "Commit",
-  "sessionOnly": "Sprache nur für diese Sitzung gewählt: Browserspeicher nicht verfügbar."
+  "sessionOnly": "Sprache nur für diese Sitzung gewählt: Browserspeicher nicht verfügbar.",
+  "manualLink": "Talia-Handbuch"
 }

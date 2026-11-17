@@ -58,5 +58,6 @@
   "bits": "64 bit",
   "build": "Build",
   "commit": "commit",
-  "sessionOnly": "Language selected for this session only: browser storage is unavailable."
+  "sessionOnly": "Language selected for this session only: browser storage is unavailable.",
+  "manualLink": "Talia manual"
 }

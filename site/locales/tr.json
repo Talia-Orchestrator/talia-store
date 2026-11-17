@@ -58,5 +58,6 @@
   "bits": "64 bit",
   "build": "Derleme",
   "commit": "işleme",
-  "sessionOnly": "Tarayıcı depolaması kullanılamıyor; dil yalnızca bu oturum için seçildi."
+  "sessionOnly": "Tarayıcı depolaması kullanılamıyor; dil yalnızca bu oturum için seçildi.",
+  "manualLink": "Talia kılavuzu"
 }

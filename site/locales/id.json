@@ -58,5 +58,6 @@
   "bits": "64 bit",
   "build": "Build",
   "commit": "komit",
-  "sessionOnly": "Bahasa hanya untuk sesi ini: penyimpanan browser tidak tersedia."
+  "sessionOnly": "Bahasa hanya untuk sesi ini: penyimpanan browser tidak tersedia.",
+  "manualLink": "Panduan Talia"
 }

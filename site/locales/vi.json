@@ -58,5 +58,6 @@
   "bits": "64 bit",
   "build": "Bản dựng",
   "commit": "commit",
-  "sessionOnly": "Ngôn ngữ chỉ áp dụng cho phiên này: bộ nhớ trình duyệt không khả dụng."
+  "sessionOnly": "Ngôn ngữ chỉ áp dụng cho phiên này: bộ nhớ trình duyệt không khả dụng.",
+  "manualLink": "Hướng dẫn Talia"
 }

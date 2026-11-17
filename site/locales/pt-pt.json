@@ -58,5 +58,6 @@
   "bits": "64 bits",
   "build": "Compilação",
   "commit": "commit",
-  "sessionOnly": "Idioma selecionado apenas nesta sessão: armazenamento do navegador indisponível."
+  "sessionOnly": "Idioma selecionado apenas nesta sessão: armazenamento do navegador indisponível.",
+  "manualLink": "Manual do Talia"
 }

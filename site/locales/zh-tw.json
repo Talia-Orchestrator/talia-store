@@ -58,5 +58,6 @@
   "bits": "64 位元",
   "build": "建置",
   "commit": "提交",
-  "sessionOnly": "語言僅於本次工作階段生效：瀏覽器儲存空間無法使用。"
+  "sessionOnly": "語言僅於本次工作階段生效：瀏覽器儲存空間無法使用。",
+  "manualLink": "Talia 使用手冊"
 }

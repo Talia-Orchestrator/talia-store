@@ -11,7 +11,7 @@
   <script src="../i18n.js" defer></script>
   <script src="../app.js?v=multilingual-1" defer></script>
 </head>
-<body>
+<body class="download-page">
   <a class="skip-link" href="#main-content" data-i18n="skip">Skip to content</a>
   <header class="site-header">
     <a class="brand" href="../"><img src="../assets/talia-symbol.svg" width="38" height="38" alt=""><span>Talia</span><span class="visually-hidden" data-i18n="home">Home</span></a>
@@ -24,20 +24,16 @@
   <main id="main-content">
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy">
-        <p class="eyebrow" data-i18n="desktop">Talia for desktop</p>
         <h1 id="page-title" data-i18n="nav">Download app</h1>
-        <p class="intro" data-i18n="choose">Choose your system</p>
-        <p class="availability" data-i18n="availability">macOS, Windows and Linux · availability varies by release. Preview software.</p>
       </div>
       <p class="release-summary" id="release-summary" aria-live="polite" data-i18n="loading">Loading available releases…</p>
-      <p><a href="https://github.com/Talia-Orchestrator/talia-store/releases" data-i18n="releases">GitHub releases</a></p>
     </section>
     <section class="downloads" aria-labelledby="downloads-title">
       <div class="section-heading"><h2 id="downloads-title" data-i18n="choose">Choose your system</h2><a class="all-releases" href="https://github.com/Talia-Orchestrator/talia-store/releases" data-i18n="all">All releases</a></div>
       <noscript><p lang="en">JavaScript is required for language selection and package listing. <a href="https://github.com/Talia-Orchestrator/talia-store/releases">GitHub releases</a></p></noscript>
       <div class="release-list" id="release-list" aria-live="polite"><p class="empty-state" data-i18n="loading">Loading available releases…</p></div>
     </section>
-    <section class="notes" aria-labelledby="notes-title"><h2 id="notes-title" data-i18n="notes">Before you install</h2><p data-i18n="warning">Current macOS packages are ad hoc signed and not notarized; installation is manual. Windows and Linux packages lack Authenticode or AppImage signatures. Security warnings may appear. Automatic updates apply only to packages marked below.</p><p class="integrity-note" data-i18n="integrity">SHA-256 checks file integrity, not author identity or software safety.</p></section>
+    <details class="notes install-notes"><summary id="notes-title" data-i18n="notes">Before you install</summary><p data-i18n="warning">Current macOS packages are ad hoc signed and not notarized; installation is manual. Windows and Linux packages lack Authenticode or AppImage signatures. Security warnings may appear. Automatic updates apply only to packages marked below.</p><p class="integrity-note" data-i18n="integrity">SHA-256 checks file integrity, not author identity or software safety.</p></details>
   </main>
   <footer class="site-footer"><span>© Talia</span><a href="https://github.com/Talia-Orchestrator/talia-store" data-i18n="source">Public code and resources</a></footer>
 </body>

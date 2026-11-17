@@ -107,7 +107,6 @@ function makePlatformCard(release, target) {
   const usage = target.extension === '.zip' ? translate('portable')
     : platform.automaticUpdate ? translate('automatic') : translate('manual');
   metadata.textContent = `${file.name} · ${formatSize(file.size)} · ${usage}`;
-  card.append(metadata);
 
   const checksum = document.createElement('details');
   checksum.className = 'checksum';
@@ -115,7 +114,7 @@ function makePlatformCard(release, target) {
   summary.textContent = translate('checksum');
   const digest = document.createElement('code');
   digest.textContent = file.sha256;
-  checksum.append(summary, digest);
+  checksum.append(summary, metadata, digest);
   card.append(checksum);
   return card;
 }
@@ -140,7 +139,7 @@ function makeReleaseCard(release, index) {
   notes.textContent = translate('assets');
   notes.target = '_blank';
   notes.rel = 'noopener noreferrer';
-  top.append(notes);
+
   card.append(top);
 
   const metadata = document.createElement('p');
@@ -148,7 +147,6 @@ function makeReleaseCard(release, index) {
   const date = new Date(release.publishedAt);
   const dateText = Number.isNaN(date.valueOf()) ? translate('date') : new Intl.DateTimeFormat(numberLocale(), { dateStyle: 'long', timeZone: 'UTC' }).format(date);
   metadata.textContent = dateText;
-  card.append(metadata);
 
   const technical = document.createElement('details');
   technical.className = 'release-technical';
@@ -159,7 +157,7 @@ function makeReleaseCard(release, index) {
   const commit = document.createElement('code');
   commit.textContent = String(release.commit).slice(0, 12);
   technicalText.append(commit);
-  technical.append(technicalSummary, technicalText);
+  technical.append(technicalSummary, metadata, technicalText, notes);
   card.append(technical);
 
   const grid = document.createElement('div');
