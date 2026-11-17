@@ -238,3 +238,12 @@ test('local exception rejects unsupported platforms, updater, wrong tag and fabr
   missing.release.assets = [];
   assert.throws(() => buildDownloadIndex([missing]), /missing or mismatched/);
 });
+
+test('editorial landing keeps three honest screenshot slots and the download entry point', () => {
+  const html = fs.readFileSync(path.join(__dirname, '../site/index.html'), 'utf8');
+  assert.equal((html.match(/<figure class="screenshot-placeholder/g) || []).length, 3);
+  assert.equal((html.match(/Screenshot da aggiungere/g) || []).length, 3);
+  assert.match(html, /href="#downloads-title"/);
+  assert.match(html, /id="release-list"/);
+  assert.match(html, /schermata reale, non una simulazione/);
+});

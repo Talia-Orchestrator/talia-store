@@ -41,3 +41,13 @@ La nota iniziale su `app.js` invariato descrive la prima consegna. Ora il percor
 Riproduzione indipendente: eseguire i comandi test sopra; servire `site/` via HTTP e attendere le schede release. Per tutti i `.platform-card .download-button`, verificare `element.getAttribute('aria-label').startsWith(element.textContent)`, quindi eseguire Axe con `runOnly: {type: 'rule', values: ['label-content-name-mismatch']}`. Ripetere CTA e apertura checksum ai viewport 1440, 390 e 320 px. Script temporaneo di esecuzione locale: `/tmp/store-download-a11y-recheck.cjs` (dipende dai moduli QA temporanei, non è una dipendenza del progetto).
 
 Limiti invariati: nessun audit WCAG completo o screen reader, installer esterni non scaricati. Nessun merge, pubblicazione o rimozione worktree; task non aggiornato.
+
+## Redesign editoriale — 17 novembre 2026
+
+Accettazione riaperta: direzione ispirata alle pagine prodotto Apple, senza copiarne asset o interfaccia. Hero centrale chiara, titolo fino a 112 px, CTA isolata, narrazione verticale e tre grandi cornici scure. Eliminata la griglia affiancata delle immagini. Header scuro con logo chiaro, accento #F4BC53 preservato.
+
+Screenshot documenti e squadra: preferire ora 16:10 e adattare la cornice all'immagine finale senza ritagliarne dati essenziali. Nessuna schermata simulata.
+
+Verifiche: `npm run test:site` (12 test), `npm test` (validazione e 18 test). Chromium reale 1440/390/320: zero overflow, CTA, checksum, stati vuoto/errore e 27 nomi accessibili verificati. Axe 4.14.1: zero violazioni WCAG 2.5.3; scansione completa a 320 px senza violazioni automatiche. Non sostituisce un audit assistivo manuale.
+
+Anteprima verificata e aperta nel browser interno: http://127.0.0.1:8765. Screenshot prima/dopo in /tmp/talia-premium (evidenza temporanea). app.js, releases.json, manifest e URL invariati. Installer esterni non scaricati. Nessun deploy o merge. Nuova accettazione visiva utente ancora necessaria.
