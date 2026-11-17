@@ -6,12 +6,42 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
+const vm = require('node:vm');
 const { buildDownloadIndex, fetchReleaseRecordsWithGh, parseManifest } = require('../scripts/build-download-site.cjs');
 
 const REPOSITORY = 'Talia-Orchestrator/talia-store';
 const COMMIT = '0123456789abcdef0123456789abcdef01234567';
 const TAG = 'v0.7.0-main.6.1';
 const ROOT_URL = `https://github.com/${REPOSITORY}/releases/download/${TAG}`;
+
+test('download accessible names include the visible format for every published installer', () => {
+  const document = {
+    createElement(tag) {
+      return { tag, children: [], attributes: {}, append(...children) { this.children.push(...children); },
+        setAttribute(name, value) { this.attributes[name] = value; } };
+    },
+  };
+  const context = vm.createContext({ document, URL, Intl });
+  const script = fs.readFileSync(path.join(__dirname, '../site/app.js'), 'utf8');
+  vm.runInContext(script.replace(/\brenderDownloads\(\);\s*$/, ''), context);
+  const index = JSON.parse(fs.readFileSync(path.join(__dirname, '../site/releases.json'), 'utf8'));
+  let checked = 0;
+  const formats = new Set();
+  for (const release of index.releases) {
+    context.release = release;
+    const cards = vm.runInContext('TARGETS.map(target => makePlatformCard(release, target))', context);
+    for (const card of cards.filter(Boolean)) {
+      const link = card.children.find(child => child.tag === 'a');
+      if (!link) continue;
+      assert.ok(link.attributes['aria-label'].startsWith(`${link.textContent} — Talia ${release.baseVersion} per `));
+      assert.ok(Object.values(release.platforms).some(platform => platform.files.some(file => file.url === link.href)));
+      formats.add(link.textContent);
+      checked += 1;
+    }
+  }
+  assert.ok(checked > 0);
+  for (const format of ['DMG', 'EXE', 'ZIP', 'APPIMAGE']) assert.ok(formats.has(`Scarica ${format}`));
+});
 
 function file(name, size = 1024) {
   return { name, url: `${ROOT_URL}/${name}`, size, sha256: 'a'.repeat(64) };

@@ -68,7 +68,7 @@ function makePlatformCard(release, target) {
   link.className = 'download-button';
   link.href = file.url;
   link.textContent = `Scarica ${target.extension.slice(1).toUpperCase()}`;
-  link.setAttribute('aria-label', `Scarica Talia ${release.baseVersion} per ${target.title}`);
+  link.setAttribute('aria-label', `${link.textContent} — Talia ${release.baseVersion} per ${target.title}`);
   card.append(link);
 
   const metadata = document.createElement('p');
