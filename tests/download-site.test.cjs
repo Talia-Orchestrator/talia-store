@@ -23,7 +23,7 @@ test('download accessible names include the visible format for every published i
   };
   const context = vm.createContext({ document, URL, Intl });
   const script = fs.readFileSync(path.join(__dirname, '../site/app.js'), 'utf8');
-  vm.runInContext(script.replace(/\brenderDownloads\(\);\s*$/, ''), context);
+  vm.runInContext(script.split('// Avvio dopo la selezione della lingua')[0], context);
   const index = JSON.parse(fs.readFileSync(path.join(__dirname, '../site/releases.json'), 'utf8'));
   let checked = 0;
   const formats = new Set();
