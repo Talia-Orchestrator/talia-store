@@ -3,34 +3,167 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
-## 0.12.0-main.26.1+4fbf2a721697
+## 0.13.0-main.28.1+908bbb12c3f8
 
-- **Contesto per destinatario e compattazione manuale**: Commander e agenti
-  mostrano stime separate. Il popover permette di leggere i valori disponibili
-  e avviare una compattazione con checkpoint persistente, con annullamento e
-  ripristino del focus.
-- **Prompt personali nel popup @**: ricerca, variabili e inserimento nella
-  bozza restano disponibili senza invio automatico e senza occupare la barra
-  inferiore del composer.
-- **Modelli e agenti nel nuovo task**: il catalogo è filtrabile e mostra
-  descrizioni e capacità di reasoning; la configurazione del modello si può
-  copiare tra agenti. I conflitti di revisione chiedono conferma invece di
-  forzare la creazione.
-- **Inner Browser con certificati personalizzati**: il consenso vale per
-  origine e certificato in una sessione temporanea; chiusura della scheda e
-  scadenza revocano la fiducia.
-- **Diagnostica più circoscritta**: i rifiuti HTTP 400 di openai-codex
-  registrano soltanto la forma della richiesta già inviata, senza testo o
-  credenziali. La causa dei rifiuti osservati resta da determinare.
+- **Chat e progetti**: nuova attività in bozza, partecipanti e modelli più facili da scegliere; pannello progetto riunito e spazio di lavoro adattivo.
+- **Team e agenti**: configurazione del team più compatta, trasferimento delle impostazioni di inferenza e copie personali degli agenti Store modificabili.
+- **Accessi locali**: consensi motivati per file e cartelle, grant revocabili, sandbox di lettura più stretta e correzioni per Git SSH e `gh`.
+- **Store e browser**: controlli più precisi sulle sorgenti del catalogo e consenso temporaneo per certificati personalizzati nell'Inner Browser.
+- **Affidabilità**: recupero dei checkpoint Antigravity, anteprime file esplicite e correzioni per chat, contesto e navigazione.
 
-Limiti: i test usano prevalentemente profili e provider sintetici; account
-reali, collaudo assistivo completo e sostituzione di installazioni Windows o
-Linux restano da verificare. Le note tecniche seguenti precisano le prove per
-ciascuna modifica.
+La versione mostrata accanto al logo è `v0.13.0`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+
+- Beta Git/SSH: in Piena fiducia la shell usa direttamente i file SSH esatti
+  necessari a Git, incluse le identità locali se l'agente SSH è vuoto. Nelle
+  altre modalità chiede un solo consenso per repository, remoto e risorse,
+  riutilizzabile nella stessa attività. `git push` e le operazioni locali
+  conservano i loro controlli distinti; una lettura diretta della chiave non
+  eredita il consenso Git. Nessuna lettura generale di `.ssh`. Su macOS il `PATH`
+  preferisce Homebrew Git ad Apple Git anche quando entrambi erano già
+  elencati, preservando le voci custom dell'utente. Il gate copre anche
+  `git -C repo ls-remote` da una chat con cartella diversa e i metadati dei
+  worktree Git esterni alla cartella selezionata. Anche `gh` diretto riceve
+  il solo file del portachiavi login necessario al token; nelle modalità con
+  consenso la richiesta vale per il comando esatto. Git SSH e `gh api` reali
+  sono passati nel profilo Seatbelt. Nell'app beta riavviata, Git `ls-remote`
+  e `fetch` e `gh api user` sono riusciti dopo i consensi monouso. Dettagli in
+  `doc/sandbox-autorizzazioni-filesystem.md`.
+
+- Inner Browser: modale standard Talia per certificati personalizzati;
+  casella di rischio e scelta umana **Procedi comunque** /
+  **Annulla**. Errori di caricamento spiegati al posto della vista vuota.
+  HTTPS senza certificato resta non apribile, senza downgrade automatico.
+  Pin origine/porta/certificato, sessione isolata e limite di cinque minuti
+  preservati. Candidato locale: prove e limiti in
+  `desktop/docs/inner-browser-tls-warning-handoff.md`; nessuna nuova build.
+
+- Privacy filesystem — rafforzamento post-QA (non distribuito): fail-closed
+  se il confinamento letture non è disponibile (sandbox-exec assente o
+  piattaforma senza sandbox equivalente: il comando viene rifiutato, mai
+  eseguito non confinato); allowlist ristretta (niente `subpath /private`
+  per metadata, `/Library` non più leggibile come dati, PATH preso solo
+  dall'env della sandbox); motivo concreto obbligatorio in ogni contesto
+  (richieste segnaposto tipo "motivo non specificato" sono bloccate prima
+  del popup); grant di cartella persistenti e visibili per progetto e chat
+  (`folderGrants.list/request/revoke`), solo lettura, revoca con stop
+  confermato dei processi sessione attivi. Dettagli e limiti:
+  desktop/docs/filesystem-privacy-audit.md.
+
+- Privacy filesystem: la sandbox shell su macOS ora confina anche le letture
+  (deny-by-default con allowlist esplicita) oltre alle scritture: workspace,
+  allegati, grant espliciti e percorsi runtime di sistema e app; symlink e
+  traversal risolti dal kernel fuori dalle radici sono negati. Le richieste
+  di accesso esterno richiedono consenso motivato; i riferimenti a percorsi
+  in file del workspace non autorizzano l'accesso. Limiti: non applicato alle
+  modalità globali all_files_* (autorizzazione esplicita utente), solo macOS
+  con sandbox-exec. Dettagli: desktop/docs/filesystem-privacy-audit.md.
+- Privacy filesystem: la policy predefinita include Music, Pictures e Movies
+  fuori dal workspace esplicito. La verifica del materiale pubblico non legge
+  file già bloccati da regole non esentabili; le librerie multimediali esterne
+  non vengono sondate per preparare grant di cartella. Correzione locale,
+  non distribuita; origine del popup Apple Music attribuito a Warp non provata.
+  Evidenze e limiti: desktop/docs/filesystem-privacy-audit.md.
+- Candidato locale: avatar flottanti degli agenti al lavoro sopra il composer,
+  con salto discreto disattivabile tramite movimento ridotto e navigazione
+  al balloon con click o tastiera. Supportati più attori e rimozione degli
+  indicatori al termine dell’attività. Verificati 30 controlli Chromium su
+  fixture, 48 regressioni e typecheck; QA indipendente Electron 7/7 e stress
+  layout 3/3 superati con backend reale e trasporti locali controllati.
+  Provider commerciali, Windows/Linux e packaging non verificati.
+  [Dettagli](desktop/docs/active-agent-avatars.md).
+
+- Correzione indicatore contesto subagente: il popover si apre ancorato al
+  balloon dell'attore cliccato, non più al composer di Commander in basso. Le
+  percentuali frazionarie non vengono più arrotondate a zero dall'host
+  (es. 73/55.808 token ora mostra ~0,13% invece di 0%). Sotto l'1% il pannello
+  mostra fino a due decimali; il riempimento resta proporzionale senza soglie
+  artificiali, quindi percentuali sub-pixel (es. 0,24% su 14 px) restano
+  visivamente impercettibili. Verificati con host/storage reali e provider
+  sintetico: probe 1/1, Electron 8/8, typecheck desktop/E2E; QA indipendente
+  con misure proporzionali su più livelli. Nessun provider live né confronto
+  col mock originale.
 
 ## Non rilasciato
 
-Nessuna modifica successiva alla preparazione della 0.12.0.
+## 0.13.0 — lavoro in chat e accessi più chiari
+
+- **Chat e progetti**: nuova attività in bozza, partecipanti e modelli più facili da scegliere; pannello progetto riunito e spazio di lavoro adattivo.
+- **Team e agenti**: configurazione del team più compatta, trasferimento delle impostazioni di inferenza e copie personali degli agenti Store modificabili.
+- **Accessi locali**: consensi motivati per file e cartelle, grant revocabili, sandbox di lettura più stretta e correzioni per Git SSH e `gh`.
+- **Store e browser**: controlli più precisi sulle sorgenti del catalogo e consenso temporaneo per certificati personalizzati nell'Inner Browser.
+- **Affidabilità**: recupero dei checkpoint Antigravity, anteprime file esplicite e correzioni per chat, contesto e navigazione.
+
+La versione mostrata accanto al logo è `v0.13.0`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+
+- Beta Git/SSH: in Piena fiducia la shell usa direttamente i file SSH esatti
+  necessari a Git, incluse le identità locali se l'agente SSH è vuoto. Nelle
+  altre modalità chiede un solo consenso per repository, remoto e risorse,
+  riutilizzabile nella stessa attività. `git push` e le operazioni locali
+  conservano i loro controlli distinti; una lettura diretta della chiave non
+  eredita il consenso Git. Nessuna lettura generale di `.ssh`. Su macOS il `PATH`
+  preferisce Homebrew Git ad Apple Git anche quando entrambi erano già
+  elencati, preservando le voci custom dell'utente. Il gate copre anche
+  `git -C repo ls-remote` da una chat con cartella diversa e i metadati dei
+  worktree Git esterni alla cartella selezionata. Anche `gh` diretto riceve
+  il solo file del portachiavi login necessario al token; nelle modalità con
+  consenso la richiesta vale per il comando esatto. Git SSH e `gh api` reali
+  sono passati nel profilo Seatbelt. Nell'app beta riavviata, Git `ls-remote`
+  e `fetch` e `gh api user` sono riusciti dopo i consensi monouso. Dettagli in
+  `doc/sandbox-autorizzazioni-filesystem.md`.
+
+- Inner Browser: modale standard Talia per certificati personalizzati;
+  casella di rischio e scelta umana **Procedi comunque** /
+  **Annulla**. Errori di caricamento spiegati al posto della vista vuota.
+  HTTPS senza certificato resta non apribile, senza downgrade automatico.
+  Pin origine/porta/certificato, sessione isolata e limite di cinque minuti
+  preservati. Candidato locale: prove e limiti in
+  `desktop/docs/inner-browser-tls-warning-handoff.md`; nessuna nuova build.
+
+- Privacy filesystem — rafforzamento post-QA (non distribuito): fail-closed
+  se il confinamento letture non è disponibile (sandbox-exec assente o
+  piattaforma senza sandbox equivalente: il comando viene rifiutato, mai
+  eseguito non confinato); allowlist ristretta (niente `subpath /private`
+  per metadata, `/Library` non più leggibile come dati, PATH preso solo
+  dall'env della sandbox); motivo concreto obbligatorio in ogni contesto
+  (richieste segnaposto tipo "motivo non specificato" sono bloccate prima
+  del popup); grant di cartella persistenti e visibili per progetto e chat
+  (`folderGrants.list/request/revoke`), solo lettura, revoca con stop
+  confermato dei processi sessione attivi. Dettagli e limiti:
+  desktop/docs/filesystem-privacy-audit.md.
+
+- Privacy filesystem: la sandbox shell su macOS ora confina anche le letture
+  (deny-by-default con allowlist esplicita) oltre alle scritture: workspace,
+  allegati, grant espliciti e percorsi runtime di sistema e app; symlink e
+  traversal risolti dal kernel fuori dalle radici sono negati. Le richieste
+  di accesso esterno richiedono consenso motivato; i riferimenti a percorsi
+  in file del workspace non autorizzano l'accesso. Limiti: non applicato alle
+  modalità globali all_files_* (autorizzazione esplicita utente), solo macOS
+  con sandbox-exec. Dettagli: desktop/docs/filesystem-privacy-audit.md.
+- Privacy filesystem: la policy predefinita include Music, Pictures e Movies
+  fuori dal workspace esplicito. La verifica del materiale pubblico non legge
+  file già bloccati da regole non esentabili; le librerie multimediali esterne
+  non vengono sondate per preparare grant di cartella. Correzione locale,
+  non distribuita; origine del popup Apple Music attribuito a Warp non provata.
+  Evidenze e limiti: desktop/docs/filesystem-privacy-audit.md.
+- Candidato locale: avatar flottanti degli agenti al lavoro sopra il composer,
+  con salto discreto disattivabile tramite movimento ridotto e navigazione
+  al balloon con click o tastiera. Supportati più attori e rimozione degli
+  indicatori al termine dell’attività. Verificati 30 controlli Chromium su
+  fixture, 48 regressioni e typecheck; QA indipendente Electron 7/7 e stress
+  layout 3/3 superati con backend reale e trasporti locali controllati.
+  Provider commerciali, Windows/Linux e packaging non verificati.
+  [Dettagli](desktop/docs/active-agent-avatars.md).
+
+- Correzione indicatore contesto subagente: il popover si apre ancorato al
+  balloon dell'attore cliccato, non più al composer di Commander in basso. Le
+  percentuali frazionarie non vengono più arrotondate a zero dall'host
+  (es. 73/55.808 token ora mostra ~0,13% invece di 0%). Sotto l'1% il pannello
+  mostra fino a due decimali; il riempimento resta proporzionale senza soglie
+  artificiali, quindi percentuali sub-pixel (es. 0,24% su 14 px) restano
+  visivamente impercettibili. Verificati con host/storage reali e provider
+  sintetico: probe 1/1, Electron 8/8, typecheck desktop/E2E; QA indipendente
+  con misure proporzionali su più livelli. Nessun provider live né confronto
+  col mock originale.
 
 ## 0.12.0 — contesto e strumenti più chiari
 
