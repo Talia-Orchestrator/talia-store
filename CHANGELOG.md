@@ -3,27 +3,49 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
-## 0.14.0-main.30.1+e4af928c30e6
+## 0.14.1-main.31.1+aa6b692002da
 
-- **Automazioni nella stessa chat**: ogni esecuzione di un'automazione, pianificata o manuale, continua nella chat già usata invece di aprirne una nuova; si può scegliere per ogni automazione se riusare la chat (predefinito) o partire da zero.
-- **Antigravity senza tool interni**: i comandi e gli strumenti propri del runtime Antigravity sono disattivati alla fonte, così i lavori lunghi non si fermano più con «tool nativo rifiutato».
-- **Scopri Talia**: la home mostra insieme tutti e sei i suggerimenti.
+- **Antigravity non perde più la risposta riparata**: quando Gemini sbaglia il formato dopo aver già mostrato il testo, la correzione nella stessa sessione non viene più scartata se riformula la frase; il testo già letto resta in chat e gli strumenti richiesti partono.
+- **Chat più pulita**: le offerte di approvazione dei singoli lavori compaiono nella cronologia della chat invece che in un pannello fisso sopra i messaggi; una chat senza offerte non mostra nulla.
 
-La versione mostrata accanto al logo è `v0.14.0`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+La versione mostrata accanto al logo è `v0.14.1`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
 
-- Antigravity: i tool interni del runtime (comandi, lettura e modifica file,
-  ricerca web e altri) sono disattivati alla creazione della sessione con
-  `enabledTools: []`. Il modello può agire solo con i tool di Talia. Prova live
-  con account free: richiesta esplicita di usare i tool propri, filtro vecchio
-  3/3 `view_file` eseguito, filtro nuovo 0/3. Controllo fail-closed invariato.
-  Non ancora riprodotto sui compiti di progetto reali.
-- Automazioni: binding persistente della chat di esecuzione per ogni task,
-  modalità `persistent` (predefinita) o `fresh`, creazione serializzata per
-  evitare chat duplicate e attribuzione del terminale per singola esecuzione.
-- Scopri Talia: i sei suggerimenti sono visibili contemporaneamente; il clic
-  inserisce la bozza senza invio automatico.
+- Antigravity (#154): la richiesta di correzione riporta il testo già mostrato
+  e chiede di iniziare con esso. Se il modello lo riformula comunque,
+  `reconcileRepairedContent` conserva il testo mostrato (bozza completa) o
+  accoda quello corretto (bozza parziale) invece di chiudere il turno con
+  `ANTIGRAVITY_INVALID_HOST_RESPONSE` (`incompatible`). Log
+  `ACP host response repaired` con `shown_text_kept: true`. Verificato con test
+  che riproduce il caso reale e fallisce senza la correzione; non ancora
+  provato dal vivo.
+- Chat (#151): offerte host montate nella cronologia scorrevole e rimontate
+  dopo il caricamento, senza intestazione globale né lista vuota; azioni per
+  lavoro e controlli IPC/host invariati.
+- CI (#153): packaging Windows più rapido (esclusioni Defender sul runner
+  effimero); nessun effetto sull'app installata.
 
 ## Non rilasciato
+
+## 0.14.1 — risposte Antigravity riparate senza perdere il turno
+
+- **Antigravity non perde più la risposta riparata**: quando Gemini sbaglia il formato dopo aver già mostrato il testo, la correzione nella stessa sessione non viene più scartata se riformula la frase; il testo già letto resta in chat e gli strumenti richiesti partono.
+- **Chat più pulita**: le offerte di approvazione dei singoli lavori compaiono nella cronologia della chat invece che in un pannello fisso sopra i messaggi; una chat senza offerte non mostra nulla.
+
+La versione mostrata accanto al logo è `v0.14.1`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+
+- Antigravity (#154): la richiesta di correzione riporta il testo già mostrato
+  e chiede di iniziare con esso. Se il modello lo riformula comunque,
+  `reconcileRepairedContent` conserva il testo mostrato (bozza completa) o
+  accoda quello corretto (bozza parziale) invece di chiudere il turno con
+  `ANTIGRAVITY_INVALID_HOST_RESPONSE` (`incompatible`). Log
+  `ACP host response repaired` con `shown_text_kept: true`. Verificato con test
+  che riproduce il caso reale e fallisce senza la correzione; non ancora
+  provato dal vivo.
+- Chat (#151): offerte host montate nella cronologia scorrevole e rimontate
+  dopo il caricamento, senza intestazione globale né lista vuota; azioni per
+  lavoro e controlli IPC/host invariati.
+- CI (#153): packaging Windows più rapido (esclusioni Defender sul runner
+  effimero); nessun effetto sull'app installata.
 
 ## 0.14.0 — automazioni nella stessa chat e Antigravity senza interruzioni
 
