@@ -6,12 +6,42 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
+const vm = require('node:vm');
 const { buildDownloadIndex, fetchReleaseRecordsWithGh, parseManifest } = require('../scripts/build-download-site.cjs');
 
 const REPOSITORY = 'Talia-Orchestrator/talia-store';
 const COMMIT = '0123456789abcdef0123456789abcdef01234567';
 const TAG = 'v0.7.0-main.6.1';
 const ROOT_URL = `https://github.com/${REPOSITORY}/releases/download/${TAG}`;
+
+test('download accessible names include the visible format for every published installer', () => {
+  const document = {
+    createElement(tag) {
+      return { tag, children: [], attributes: {}, append(...children) { this.children.push(...children); },
+        setAttribute(name, value) { this.attributes[name] = value; } };
+    },
+  };
+  const context = vm.createContext({ document, URL, Intl });
+  const script = fs.readFileSync(path.join(__dirname, '../site/app.js'), 'utf8');
+  vm.runInContext(script.split('// Avvio dopo la selezione della lingua')[0], context);
+  const index = JSON.parse(fs.readFileSync(path.join(__dirname, '../site/releases.json'), 'utf8'));
+  let checked = 0;
+  const formats = new Set();
+  for (const release of index.releases) {
+    context.release = release;
+    const cards = vm.runInContext('TARGETS.map(target => makePlatformCard(release, target))', context);
+    for (const card of cards.filter(Boolean)) {
+      const link = card.children.find(child => child.tag === 'a');
+      if (!link) continue;
+      assert.ok(link.attributes['aria-label'].startsWith(`${link.textContent} — Talia ${release.baseVersion} per `));
+      assert.ok(Object.values(release.platforms).some(platform => platform.files.some(file => file.url === link.href)));
+      formats.add(link.textContent);
+      checked += 1;
+    }
+  }
+  assert.ok(checked > 0);
+  for (const format of ['DMG', 'EXE', 'ZIP', 'APPIMAGE']) assert.ok(formats.has(`Scarica ${format}`));
+});
 
 function file(name, size = 1024) {
   return { name, url: `${ROOT_URL}/${name}`, size, sha256: 'a'.repeat(64) };
@@ -207,4 +237,29 @@ test('local exception rejects unsupported platforms, updater, wrong tag and fabr
   const missing = localRecord();
   missing.release.assets = [];
   assert.throws(() => buildDownloadIndex([missing]), /missing or mismatched/);
+});
+
+test('editorial landing keeps three honest screenshot slots and the download entry point', () => {
+  const html = fs.readFileSync(path.join(__dirname, '../site/index.html'), 'utf8');
+  assert.equal((html.match(/<figure class="screenshot-placeholder/g) || []).length, 3);
+  assert.equal((html.match(/data-i18n="shotLabel"/g) || []).length, 3);
+  assert.equal((html.match(/class="download-button" href="download-app\/"/g) || []).length, 2);
+  assert.doesNotMatch(html, /id="release-list"|app.js|releases\/download\//);
+  assert.match(html, /not simulated interfaces/);
+});
+
+test('team landing preserves the agreed headline and distinguishes scheduling from execution', () => {
+  const site = path.join(__dirname, '../site');
+  const html = fs.readFileSync(path.join(site, 'index.html'), 'utf8');
+  const it = JSON.parse(fs.readFileSync(path.join(site, 'locales/it.json'), 'utf8'));
+  assert.equal(it.hero, 'La tua squadra. Non un altro chatbot.');
+  assert.match(it.b1body, /indice è pronto/);
+  assert.match(it.b2body, /Kanban/);
+  assert.match(it.b3body, /modelli, skill e connettori/);
+  assert.match(it.cycleNote, /creare un’attività non la avvia/);
+  assert.match(it.cycleNote, /non una demo live/);
+  for (const key of ['cycle1', 'cycle2', 'cycle3', 'cycle4', 'cycleNote']) {
+    assert.equal((html.match(new RegExp(`data-i18n="${key}"`, 'g')) || []).length, 1);
+  }
+  assert.match(html, /<ol class="daily-cycle">/);
 });

@@ -1,85 +1,58 @@
 <!doctype html>
-<html lang="it">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#101522">
-    <meta name="description" content="Scarica Talia per macOS, Windows e Linux. Controlla versione, piattaforme disponibili e checksum.">
-    <title>Scarica Talia</title>
-    <link rel="icon" href="assets/talia-symbol.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20261116-1">
-    <script src="app.js?v=20261116-1" defer></script>
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="./" aria-label="Talia, home">
-        <img src="assets/talia-symbol.svg" width="38" height="38" alt="">
-        <span>Talia</span>
-      </a>
-      <a class="header-link" href="https://github.com/Talia-Orchestrator/talia-store/releases">Release su GitHub</a>
-    </header>
-
-    <main>
-      <section class="hero" aria-labelledby="page-title">
-        <p class="eyebrow">Assistente desktop, al tuo ritmo</p>
-        <h1 id="page-title">Scarica Talia</h1>
-        <p class="intro">Conversazioni con agenti, strumenti e app locali. Scegli il pacchetto per il tuo computer e controlla sempre versione e checksum prima di installarlo.</p>
-        <p class="release-summary" id="release-summary" aria-live="polite">Caricamento delle release disponibili…</p>
-        <p><a href="https://github.com/Talia-Orchestrator/talia-store/blob/main/CHANGELOG.md">Leggi il changelog completo su GitHub</a>. La disponibilità dei pacchetti è indicata nell’elenco download.</p>
-      </section>
-
-      <section class="downloads" aria-labelledby="downloads-title">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Download</p>
-            <h2 id="downloads-title">Scegli il tuo sistema</h2>
-          </div>
-          <a class="all-releases" href="https://github.com/Talia-Orchestrator/talia-store/releases">Tutte le release</a>
-        </div>
-        <div class="release-list" id="release-list" aria-live="polite">
-          <p class="empty-state">Sto caricando i pacchetti disponibili…</p>
-        </div>
-      </section>
-
-      <section class="notes" aria-labelledby="manual-title">
-        <p class="eyebrow">Documenti dello store</p>
-        <h2 id="manual-title">Manuale Talia</h2>
-        <p>La guida completa a documenti e RAG, chat, progetti, cartelle, modelli, impostazioni, skill, agenti e connettori. Puoi leggerla come Markdown e importarla nei Documenti se l’hai eliminata.</p>
-        <p><a href="docs/Manuale-Talia.md" download="Manuale-Talia.md">Scarica il manuale Markdown</a> · Versione 1.0.0</p>
-        <p>Nell’app il ripristino del manuale incluso funziona anche offline. Il documento e la guida informativa sono rimovibili: non vengono reinstallati automaticamente dopo la rimozione.</p>
-      </section>
-
-      <section class="notes" aria-labelledby="solidcraft-title">
-        <p class="eyebrow">Connettori dello store</p>
-        <h2 id="solidcraft-title">SolidCraft MCP</h2>
-        <p>Integrazione con il server MCP ufficiale di SolidCraft per il CAD 3D parametrico. Il pacchetto contiene solo il template di connessione e richiede SolidCraft installato separatamente; non configura né avvia server durante l’installazione.</p>
-        <p><a href="https://github.com/Talia-Orchestrator/talia-connectors/tree/main/packages/solidcraft">Sorgenti e guida del connettore</a> · <a href="https://docs.solidcraft.io/guide/mcp.html">Documentazione ufficiale SolidCraft</a></p>
-      </section>
-
-      <section class="notes" aria-labelledby="notes-title">
-        <p class="eyebrow">Prima di installare</p>
-        <h2 id="notes-title">Firma e aggiornamenti</h2>
-        <div class="note-grid">
-          <article class="note-card">
-            <h3>macOS</h3>
-            <p>I pacchetti attuali usano una firma ad hoc e non sono notarizzati da Apple. macOS può mostrare un avviso al primo avvio. Il download e l’installazione restano manuali.</p>
-          </article>
-          <article class="note-card">
-            <h3>Windows e Linux</h3>
-            <p>I pacchetti attuali non hanno firma Authenticode o firma AppImage. Windows può mostrare un avviso SmartScreen. Confronta il checksum SHA-256 pubblicato con il file scaricato.</p>
-          </article>
-          <article class="note-card">
-            <h3>Aggiornamenti</h3>
-            <p>Gli aggiornamenti automatici sono supportati dai pacchetti Windows e Linux che lo indicano nella scheda della release. Su macOS il download e l’installazione sono manuali.</p>
-          </article>
-        </div>
-        <p class="integrity-note">Il checksum aiuta a verificare che il file corrisponda alla release pubblicata; da solo non certifica l’identità dell’autore o la sicurezza del programma.</p>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <span>© Talia</span>
-      <a href="https://github.com/Talia-Orchestrator/talia-store">Codice e risorse pubbliche</a>
-    </footer>
-  </body>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="Coordinate AI agents, use your documents and turn recurring tasks into organized work." data-i18n-content="description">
+  <title data-i18n="hero">Your team. Not another chatbot.</title>
+  <link rel="icon" href="assets/talia-symbol.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=team-workflow-2">
+  <script src="i18n.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content" data-i18n="skip">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./"><img src="assets/talia-symbol.svg" width="38" height="38" alt=""><span>Talia</span><span class="visually-hidden" data-i18n="home">Home</span></a>
+    <nav class="site-nav" aria-label="Talia">
+      <a href="./" data-i18n="home">Home</a>
+      <a href="download-app/" data-i18n="nav">Download app</a>
+    </nav>
+    <label class="language-control"><span data-i18n="language">Language</span><select id="language-select" dir="ltr" disabled><option>English</option></select></label>
+  </header>
+  <main id="main-content">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="desktop">Talia for desktop</p>
+        <h1 id="page-title" data-i18n="hero">Your team. Not another chatbot.</h1>
+        <p class="intro" data-i18n="intro">Coordinate AI agents, use your documents and turn recurring tasks into organized work.</p>
+        <div class="hero-actions"><a class="download-button" href="download-app/" data-i18n="download">Download Talia</a><a class="text-link" href="#workflow-title" data-i18n="learn">Explore the workflow</a></div>
+        <p class="availability" data-i18n="availability">macOS, Windows and Linux · availability varies by release. Preview software.</p>
+      </div>
+      <figure class="screenshot-placeholder hero-preview">
+        <div class="preview-bar" aria-hidden="true"><span>TALIA</span><span>01</span></div>
+        <div class="placeholder-body"><img src="assets/talia-symbol.svg" width="72" height="72" alt=""><p class="placeholder-title" data-i18n="shot1">Your next project, here.</p><p data-i18n="shot1body">Show a project with Commander, your team and documents.</p><span class="placeholder-label" data-i18n="shotLabel">Screenshot to add · 16:10</span></div>
+        <figcaption data-i18n="shotCaption">Add real screenshots, not simulated interfaces. Use demo content without personal data.</figcaption>
+      </figure>
+    </section>
+    <section class="workflow" aria-labelledby="workflow-title">
+      <div class="section-heading"><h2 id="workflow-title" data-i18n="workflow">From documents to work delivered.</h2></div>
+      <div class="benefit-list">
+        <article><span class="step-number" aria-hidden="true">01</span><h3 data-i18n="benefit1">Your documents become context.</h3><p data-i18n="b1body">Keep sources in your project. Once the index is ready, retrieve relevant passages and ask for answers with document references.</p></article>
+        <article><span class="step-number" aria-hidden="true">02</span><h3 data-i18n="benefit2">Work does not get lost in chat.</h3><p data-i18n="b2body">Track tasks, assignments and progress on the Kanban board. See what needs doing, what is in progress and what needs checking.</p></article>
+        <article><span class="step-number" aria-hidden="true">03</span><h3 data-i18n="benefit3">Your team. Your choice of models.</h3><p data-i18n="b3body">Bring in specialists for research, writing and development. Choose models, skills and connectors compatible with the work and granted permissions.</p></article>
+      </div>
+      <p class="capability-note" data-i18n="capabilities">Capabilities depend on models, installed resources, configured services and permissions. External services may require separate accounts and fees.</p>
+      <div class="story-grid">
+        <div class="story-intro"><h2 data-i18n="story2">Your sources. Not a blank start.</h2></div>
+        <figure class="screenshot-placeholder"><div class="placeholder-body"><span class="step-number" aria-hidden="true">02</span><p class="placeholder-title" data-i18n="story2">Your sources. Not a blank start.</p><p data-i18n="shot2body">Show project documents and a response with source references.</p><span class="placeholder-label" data-i18n="shotLabel">Screenshot to add · 16:10</span></div><figcaption data-i18n="shotCaption">Add real screenshots, not simulated interfaces. Use demo content without personal data.</figcaption></figure>
+        <div class="story-intro"><h2 data-i18n="story3">Plan it once. Follow the work every day.</h2></div>
+        <ol class="daily-cycle"><li><span class="step-number" aria-hidden="true">01</span><p data-i18n="cycle1">Schedule — An automation requests tasks for the project briefing every morning.</p></li><li><span class="step-number" aria-hidden="true">02</span><p data-i18n="cycle2">Organize — The request creates daily Kanban tasks, with expected outputs and sources to consult.</p></li><li><span class="step-number" aria-hidden="true">03</span><p data-i18n="cycle3">Advance — With backlog execution enabled, available agents work on authorized tasks.</p></li><li><span class="step-number" aria-hidden="true">04</span><p data-i18n="cycle4">Review — Open the briefing, check references and handle any approval requests.</p></li></ol><p class="capability-note cycle-note" data-i18n="cycleNote">Example of a configurable workflow, not a live demo. Scheduling and backlog execution are separate: creating a task does not start it. The app must be available, documents indexed, and resources and permissions ready; blockers and approvals need your input.</p>
+        <figure class="screenshot-placeholder"><div class="placeholder-body"><span class="step-number" aria-hidden="true">03</span><p class="placeholder-title" data-i18n="story3">Plan it once. Follow the work every day.</p><p data-i18n="shot3body">Show a demo project Kanban: daily tasks, assignments and a briefing you can open.</p><span class="placeholder-label" data-i18n="shotLabel">Screenshot to add · 16:10</span></div><figcaption data-i18n="shotCaption">Add real screenshots, not simulated interfaces. Use demo content without personal data.</figcaption></figure>
+      </div>
+    </section>
+    <section class="notes" aria-labelledby="start-title"><h2 id="start-title" data-i18n="download">Download Talia</h2><p data-i18n="intro">Coordinate AI agents, use your documents and turn recurring tasks into organized work.</p><a class="download-button" href="download-app/" data-i18n="download">Download Talia</a><p class="availability" data-i18n="availability">macOS, Windows and Linux · availability varies by release. Preview software.</p></section>
+  </main>
+  <footer class="site-footer"><span>© Talia</span><a href="docs/Manuale-Talia.md" data-i18n="manualLink">Talia manual</a><a href="https://docs.solidcraft.io/guide/mcp.html">SolidCraft MCP</a><a href="https://github.com/Talia-Orchestrator/talia-connectors/tree/main/packages/solidcraft">SolidCraft · GitHub</a><a href="https://github.com/Talia-Orchestrator/talia-store" data-i18n="source">Public code and resources</a></footer>
+</body>
 </html>
