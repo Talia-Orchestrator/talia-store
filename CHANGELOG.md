@@ -3,37 +3,47 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
-## 0.13.1-main.29.1+9822455229b4
+## 0.14.0-main.30.1+e4af928c30e6
 
-- **Risposte Antigravity riparate**: un JSON imperfetto di Gemini o l'avviso di capacità esaurita non interrompono più la chat con «risposta host non valida»; Talia chiede una sola correzione nella stessa sessione e attende brevemente quando il modello è occupato.
-- **Primo messaggio più rapido**: all'avvio Talia prepara in background processo, accesso e sessione Antigravity, così la prima chat nuova non attende circa 4 secondi di preparazione.
-- **Accesso scaduto chiaro**: un login Antigravity non più valido mostra un messaggio di autenticazione invece di tre tentativi di rete.
+- **Automazioni nella stessa chat**: ogni esecuzione di un'automazione, pianificata o manuale, continua nella chat già usata invece di aprirne una nuova; si può scegliere per ogni automazione se riusare la chat (predefinito) o partire da zero.
+- **Antigravity senza tool interni**: i comandi e gli strumenti propri del runtime Antigravity sono disattivati alla fonte, così i lavori lunghi non si fermano più con «tool nativo rifiutato».
+- **Scopri Talia**: la home mostra insieme tutti e sei i suggerimenti.
 
-La versione mostrata accanto al logo è `v0.13.1`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+La versione mostrata accanto al logo è `v0.14.0`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
 
-- Antigravity: preriscaldamento del processo ACP. All'avvio, e dopo ogni chat
-  che lo adotta, Talia prepara in background processo, login e una sessione
-  vuota per il modello chat prioritario, senza alcun prompt. La prima chat
-  nuova lo adotta senza rifare avvio, login e `session/new`. Prova live con
-  account free: primo messaggio da circa 4 s di preparazione a 0 s, primo testo
-  in circa 5 s. Riserva unica per profilo, durata 30 minuti; login scaduto
-  scartato in silenzio. Dettagli in `desktop/docs/antigravity-provider-api.md`.
-
-- Antigravity: le risposte host con a capo letterali o recinzioni markdown
-  chiuse male vengono riparate senza perdita. Un envelope ancora invalido riceve
-  una sola richiesta di correzione nella stessa sessione ACP, senza rispedire il
-  prompt e senza duplicare il testo già mostrato; il veto al replay automatico
-  resta per gli effetti incerti. Il log registra solo la categoria del difetto.
-  Un `authenticate` -32603 senza marcatore, fuori dal login, diventa «accesso
-  richiesto» senza tre tentativi di rete. L'avviso testuale «No capacity
-  available for model …» non è più scambiato per JSON malformato: due nuovi
-  tentativi brevi nella stessa sessione, poi errore temporaneo ripetibile. Anche
-  uno strumento inesistente riceve la correzione. Prova live con account free:
-  17 prompt, 2 risposte rotte (capacità esaurita e JSON con token spurio)
-  riparate senza errori in chat. Enterprise non verificato. Dettagli in
-  `desktop/docs/antigravity-provider-api.md`.
+- Antigravity: i tool interni del runtime (comandi, lettura e modifica file,
+  ricerca web e altri) sono disattivati alla creazione della sessione con
+  `enabledTools: []`. Il modello può agire solo con i tool di Talia. Prova live
+  con account free: richiesta esplicita di usare i tool propri, filtro vecchio
+  3/3 `view_file` eseguito, filtro nuovo 0/3. Controllo fail-closed invariato.
+  Non ancora riprodotto sui compiti di progetto reali.
+- Automazioni: binding persistente della chat di esecuzione per ogni task,
+  modalità `persistent` (predefinita) o `fresh`, creazione serializzata per
+  evitare chat duplicate e attribuzione del terminale per singola esecuzione.
+- Scopri Talia: i sei suggerimenti sono visibili contemporaneamente; il clic
+  inserisce la bozza senza invio automatico.
 
 ## Non rilasciato
+
+## 0.14.0 — automazioni nella stessa chat e Antigravity senza interruzioni
+
+- **Automazioni nella stessa chat**: ogni esecuzione di un'automazione, pianificata o manuale, continua nella chat già usata invece di aprirne una nuova; si può scegliere per ogni automazione se riusare la chat (predefinito) o partire da zero.
+- **Antigravity senza tool interni**: i comandi e gli strumenti propri del runtime Antigravity sono disattivati alla fonte, così i lavori lunghi non si fermano più con «tool nativo rifiutato».
+- **Scopri Talia**: la home mostra insieme tutti e sei i suggerimenti.
+
+La versione mostrata accanto al logo è `v0.14.0`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+
+- Antigravity: i tool interni del runtime (comandi, lettura e modifica file,
+  ricerca web e altri) sono disattivati alla creazione della sessione con
+  `enabledTools: []`. Il modello può agire solo con i tool di Talia. Prova live
+  con account free: richiesta esplicita di usare i tool propri, filtro vecchio
+  3/3 `view_file` eseguito, filtro nuovo 0/3. Controllo fail-closed invariato.
+  Non ancora riprodotto sui compiti di progetto reali.
+- Automazioni: binding persistente della chat di esecuzione per ogni task,
+  modalità `persistent` (predefinita) o `fresh`, creazione serializzata per
+  evitare chat duplicate e attribuzione del terminale per singola esecuzione.
+- Scopri Talia: i sei suggerimenti sono visibili contemporaneamente; il clic
+  inserisce la bozza senza invio automatico.
 
 ## 0.13.1 — Antigravity più affidabile e più rapido
 

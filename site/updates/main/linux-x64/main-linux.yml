@@ -1,14 +1,14 @@
 {
-  "version": "0.13.1-main.29.1",
+  "version": "0.14.0-main.30.1",
   "files": [
     {
-      "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.13.1-main.29.1/Talia-0.13.1-main.29.1-linux-x86_64.AppImage",
-      "sha512": "p+2hzPR0Pd5fEm6793GU3SM+hgbwBCJz/OeU6ld5L8zl0Kd7T29YpvL4ZuJBeyQ1cQIfSu19KtO/43ZS+GjIbw==",
-      "size": 539111063,
-      "blockMapSize": 560811
+      "url": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.14.0-main.30.1/Talia-0.14.0-main.30.1-linux-x86_64.AppImage",
+      "sha512": "pikiDKPRTGW8PJl2IUyC4kINJLymM2t9uVWSy6agv1avWPoiy41IvA6xwpQ/Bs6wfANuG+tl4iR8F7jQfmIs5Q==",
+      "size": 539115487,
+      "blockMapSize": 561139
     }
   ],
-  "path": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.13.1-main.29.1/Talia-0.13.1-main.29.1-linux-x86_64.AppImage",
-  "sha512": "p+2hzPR0Pd5fEm6793GU3SM+hgbwBCJz/OeU6ld5L8zl0Kd7T29YpvL4ZuJBeyQ1cQIfSu19KtO/43ZS+GjIbw==",
-  "releaseDate": "2026-11-18T17:07:36.589Z"
+  "path": "https://github.com/Talia-Orchestrator/talia-store/releases/download/v0.14.0-main.30.1/Talia-0.14.0-main.30.1-linux-x86_64.AppImage",
+  "sha512": "pikiDKPRTGW8PJl2IUyC4kINJLymM2t9uVWSy6agv1avWPoiy41IvA6xwpQ/Bs6wfANuG+tl4iR8F7jQfmIs5Q==",
+  "releaseDate": "2026-11-18T20:12:20.072Z"
 }
