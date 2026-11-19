@@ -3,35 +3,33 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
-## 0.15.0-main.34.1+b2a706a759a7
+## 0.15.1-main.35.1+1c7829c63640
 
-- **Connettori dallo Store senza aggiornare l'app**: un connettore MCP pubblicato nello Store dichiara i campi che servono (token, indirizzo, cartelle) e Talia mostra un modulo per compilarli. I segreti restano cifrati sul dispositivo e niente parte finché non premi «Connetti».
-- **Connettori tutti eliminabili, primo avvio pulito**: un profilo nuovo non mostra più connettori predefiniti come DingTalk, Lark, WeCom o la suite Craft. Quelli che aggiungi dallo Store, o che hai già collegato, restano e si tolgono con «Rimuovi»; lo Store resta la fonte da cui riaggiungerli.
-- **Confluence, Jira e Bitbucket dallo Store**: pacchetti firmati per Cloud e Data Center, limitati agli spazi, progetti o repository scelti, con conferma prima di ogni scrittura. Si aggiornano dallo Store e si può tornare alla versione precedente.
-- **Antigravity regge i lavori lunghi**: Talia ricorda a Gemini il formato di risposta a ogni turno, non chiude più il processo per un backslash fuori posto (percorsi Windows, regex) e prova fino a due correzioni prima di fermarsi. Prima, nei processi lunghi, il lavoro si interrompeva con `ANTIGRAVITY_INVALID_HOST_RESPONSE`.
-- **Chat in blocco nella barra laterale**: Maiusc+clic seleziona un intervallo, Cmd/Ctrl+clic aggiunge o toglie; con il tasto destro archivi o ripristini più chat insieme.
-- **Barra laterale più comoda**: tasto destro su chat e progetti con lo stesso menu del «⋯», archivio delle chat, progetti fissati riordinabili trascinandoli sull'intera lista.
-- **Partecipanti e team nella chat**: tendina dei partecipanti con i team come preset, aggiunta e rimozione senza chiudere la tendina; pannello del progetto rivisto.
-- **Task avviati in blocco**: una casella per selezionare tutti i task visibili di una colonna e avviarli insieme.
-- **Ricerca agenti dello Store più affidabile**: gli agenti rimossi non compaiono più nei risultati e la tendina @ del composer è più larga.
+- **Dopo l'installazione si apre la configurazione**: installando un connettore o un agente dallo Store, Talia apre subito il suo modulo di configurazione o la sua card, invece di tornare all'elenco delle fonti.
+- **Connettori installati sempre visibili**: i connettori dello Store non ancora configurati, come SolidCraft o i pacchetti Atlassian, compaiono nella pagina Connettori in «Installati dallo Store», con «Configura» e «Rimuovi».
 
-La versione mostrata accanto al logo è `v0.15.0`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+La versione mostrata accanto al logo è `v0.15.1`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
 
-- Connettori template (#173): campi dichiarati dal pacchetto (env, header,
-  flag), `connectors.add_from_store`, modulo generico, rimozione con
-  `store_package`. Elenco iniziale vuoto e `connectors.remove_listing`.
-  Non provati con un pacchetto template pubblicato.
-- Pacchetti connettore indipendenti (#170): manifest dichiarativi firmati,
-  credenziali cifrate per versione, aggiornamento e ripristino; pacchetti
-  Atlassian nello Store con `minHostVersion` 0.15.0. Non provati con istanze
-  Atlassian reali.
-- Connettori a token Atlassian (#167), ricerca agenti Store (#172), tendina @
-  (#171), Antigravity (#168), barra laterale (#162, #164, #165, #166), chat e
-  progetto (#163), task in blocco (#162).
-- Le versioni precedenti mostrano i nuovi pacchetti dello Store come non
-  compatibili finché non si aggiornano.
+- Store (#177): `ResourceStore.openInstalled` usato da «Apri» e dopo una
+  nuova installazione; `store_connectors` in `connectors.catalog`; tutti i
+  template passano dal modulo generico con `store_package`.
+- Build (#175, #176): manifest dei contenuti incorporati rigenerato.
+  Non provato nell'app avviata.
 
 ## Non rilasciato
+
+## 0.15.1 — dallo Store alla configurazione in un passo
+
+- **Dopo l'installazione si apre la configurazione**: installando un connettore o un agente dallo Store, Talia apre subito il suo modulo di configurazione o la sua card, invece di tornare all'elenco delle fonti.
+- **Connettori installati sempre visibili**: i connettori dello Store non ancora configurati, come SolidCraft o i pacchetti Atlassian, compaiono nella pagina Connettori in «Installati dallo Store», con «Configura» e «Rimuovi».
+
+La versione mostrata accanto al logo è `v0.15.1`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+
+- Store (#177): `ResourceStore.openInstalled` usato da «Apri» e dopo una
+  nuova installazione; `store_connectors` in `connectors.catalog`; tutti i
+  template passano dal modulo generico con `store_package`.
+- Build (#175, #176): manifest dei contenuti incorporati rigenerato.
+  Non provato nell'app avviata.
 
 ## 0.15.0 — Store unico per i connettori, Antigravity più stabile e chat in blocco
 
