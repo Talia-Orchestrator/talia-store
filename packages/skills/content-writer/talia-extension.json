@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/content-writer",
+  "kind": "skill",
+  "version": "1.0.53",
+  "name": "content-writer",
+  "description": "Plan, research, draft, revise, humanize, adapt or audit social posts and long-form content, delivering channel-ready writing or reviews with preserved voice, evidence and citations.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

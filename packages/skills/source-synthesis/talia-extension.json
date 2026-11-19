@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/source-synthesis",
+  "kind": "skill",
+  "version": "0.1.0",
+  "name": "source-synthesis",
+  "description": "Synthesize supplied materials with traceable references, disagreements and missing information. No autonomous web research.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

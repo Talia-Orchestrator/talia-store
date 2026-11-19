@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/product-test",
+  "kind": "skill",
+  "version": "1.0.6",
+  "name": "product-test",
+  "description": "Turn PRDs, stories or feature slices into stable-ID Given/When/Then acceptance scenarios covering edges, recovery and non-functional criteria; not implementation or test automation.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

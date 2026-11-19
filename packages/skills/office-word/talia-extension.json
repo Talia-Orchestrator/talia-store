@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/office-word",
+  "kind": "skill",
+  "version": "1.0.7",
+  "name": "office-word",
+  "description": "Create, read, edit, and check Word/DOCX reports and templates: preserve styles, numbering, revisions, comments, fields, tables, sections, headers, footers, and layout.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

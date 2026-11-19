@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/ecommerce-analytics",
+  "kind": "skill",
+  "version": "1.0.2",
+  "name": "ecommerce-analytics",
+  "description": "Analyze cross-platform sales, fees, refunds, ads and inventory exports to deliver reproducible operating metrics, drivers and priorities. Use for store performance, contribution profit and channel analysis, not product selection or live changes.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

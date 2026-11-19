@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/product-ui",
+  "kind": "skill",
+  "version": "1.0.11",
+  "name": "product-ui",
+  "description": "Design and implement screens, components, landing pages, dashboards or design systems from product needs, flows or design sources, with responsive behavior, accessibility, UI polish and rendered checks.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

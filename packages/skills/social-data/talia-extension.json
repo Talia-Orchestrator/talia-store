@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/social-data",
+  "kind": "skill",
+  "version": "1.0.9",
+  "name": "social-data",
+  "description": "Fetch public Xiaohongshu, X/Twitter, Reddit, YouTube and Bilibili posts, or analyze supplied social/campaign data for sentiment, engagement, CTR, ROI, comparisons and experiments; not publishing.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

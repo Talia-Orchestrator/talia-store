@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/ecommerce-operations",
+  "kind": "skill",
+  "version": "1.0.4",
+  "name": "ecommerce-operations",
+  "description": "Prepare concrete ecommerce catalog, price, promotion, stock and order-exception changes; apply and verify them only through available connected tools supporting the action. Use for operating changes and previews, not selection, copywriting or analytical diagnosis.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

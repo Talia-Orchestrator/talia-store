@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/deep-research",
+  "kind": "skill",
+  "version": "1.0.56",
+  "name": "deep-research",
+  "description": "Support deep research, literature reviews and citation checks with retrieval budgets, academic search, evidence compression and source/quote/DOI verification, producing comparison and evidence tables.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

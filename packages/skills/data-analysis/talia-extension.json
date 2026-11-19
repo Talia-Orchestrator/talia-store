@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/data-analysis",
+  "kind": "skill",
+  "version": "1.2.6",
+  "name": "data-analysis",
+  "description": "Analyze quantitative evidence: exact totals, comparisons, experiments and causal uncertainty. Excludes formatting-only work.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

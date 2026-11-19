@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/ecommerce-product-research",
+  "kind": "skill",
+  "version": "1.1.10",
+  "name": "ecommerce-product-research",
+  "description": "Select ecommerce products and assess category opportunities across channels using demand, competition, contribution profit, sourcing and validation costs. Use for product selection, competitor comparison and supplier evaluation, not purchasing or operating-performance reporting.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

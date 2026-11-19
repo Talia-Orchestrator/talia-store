@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/brand-research",
+  "kind": "skill",
+  "version": "1.0.5",
+  "name": "brand-research",
+  "description": "Research public company, product or brand information for sourced Brand DNA: positioning, audience, competitors, voice, pricing, social proof and content gaps for GTM preparation.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

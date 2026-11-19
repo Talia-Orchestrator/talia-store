@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/project-brief",
+  "kind": "skill",
+  "version": "0.1.0",
+  "name": "project-brief",
+  "description": "Turn an objective and supplied materials into a project brief with scope, constraints and observable acceptance criteria.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/ecommerce-listing",
+  "kind": "skill",
+  "version": "1.2.17",
+  "name": "ecommerce-listing",
+  "description": "Turn product facts into cross-platform titles, benefits, descriptions, keyword placement, FAQs and A+ modules, including page audits and localization. Use for listing writing and optimization, not selection, media generation or live publishing.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "talia-skills/pdf-editing",
+  "kind": "skill",
+  "version": "1.0.8",
+  "name": "pdf-editing",
+  "description": "Read, create and edit PDFs, including scanned-page reading, page organization, watermarks, text/image overlays, form filling and layout checks.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}
