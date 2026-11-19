@@ -3,20 +3,41 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
-## 0.15.1-main.35.1+1c7829c63640
+## 0.15.2-main.36.1+ce4f29443655
 
-- **Dopo l'installazione si apre la configurazione**: installando un connettore o un agente dallo Store, Talia apre subito il suo modulo di configurazione o la sua card, invece di tornare all'elenco delle fonti.
-- **Connettori installati sempre visibili**: i connettori dello Store non ancora configurati, come SolidCraft o i pacchetti Atlassian, compaiono nella pagina Connettori in «Installati dallo Store», con «Configura» e «Rimuovi».
+- **Connettori Store riconosciuti dopo la configurazione**: un pacchetto dello Store configurato, come Confluence, non resta più «Da configurare», mostra «Gestisci» e compare nella tendina `@` insieme agli altri connettori.
+- **Configurazione con memoria**: riaprendo un connettore i dati salvati sono già compilati e il token resta nascosto; salvando senza riscriverlo Talia riusa quello salvato, anche nei connettori MCP personalizzati e nei template.
+- **Chat trascinabili nella barra laterale**: trascina una chat tra le fissate per fissarla in quella posizione, o sull'Archivio per archiviarla; con una selezione multipla si spostano tutte insieme.
+- **Uscita protetta con agenti al lavoro**: se un agente sta lavorando Talia chiede conferma prima di chiudersi; Cmd-Q su macOS e Ctrl-Q su Windows e Linux vanno tenuti premuti un secondo e mezzo. Un puntino verde accanto al pulsante di invio segnala che l'agente è al lavoro.
+- **Build Windows più rapida**: il pacchetto portable usa una compressione veloce; il file scaricato è un po' più grande.
 
-La versione mostrata accanto al logo è `v0.15.1`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+La versione mostrata accanto al logo è `v0.15.2`. Il trascinamento delle chat funziona con il mouse e dentro la stessa lista; l'Archivio accetta chat solo se ne contiene già almeno una. I connettori non sono stati provati con un servizio Atlassian reale.
 
-- Store (#177): `ResourceStore.openInstalled` usato da «Apri» e dopo una
-  nuova installazione; `store_connectors` in `connectors.catalog`; tutti i
-  template passano dal modulo generico con `store_package`.
-- Build (#175, #176): manifest dei contenuti incorporati rigenerato.
-  Non provato nell'app avviata.
+- Connettori (#179, #180): stato del pacchetto letto dal collegamento cifrato;
+  strumenti `*_store_connector_*` nella tendina `@`; segreti mascherati
+  riusati al salvataggio; E2E `talia_store_connector_e2e_user_flow`.
+- Sidebar (#181): `conversations.placePins` e `pin_order`.
+- Uscita (#182): `quit_guard`, scorciatoia prolungata e submenu nativo macOS.
+- CI (#183): `ELECTRON_BUILDER_COMPRESSION_LEVEL=1` per il portable Windows.
 
 ## Non rilasciato
+
+## 0.15.2 — connettori Store che ricordano la configurazione, chat trascinabili e uscita protetta
+
+- **Connettori Store riconosciuti dopo la configurazione**: un pacchetto dello Store configurato, come Confluence, non resta più «Da configurare», mostra «Gestisci» e compare nella tendina `@` insieme agli altri connettori.
+- **Configurazione con memoria**: riaprendo un connettore i dati salvati sono già compilati e il token resta nascosto; salvando senza riscriverlo Talia riusa quello salvato, anche nei connettori MCP personalizzati e nei template.
+- **Chat trascinabili nella barra laterale**: trascina una chat tra le fissate per fissarla in quella posizione, o sull'Archivio per archiviarla; con una selezione multipla si spostano tutte insieme.
+- **Uscita protetta con agenti al lavoro**: se un agente sta lavorando Talia chiede conferma prima di chiudersi; Cmd-Q su macOS e Ctrl-Q su Windows e Linux vanno tenuti premuti un secondo e mezzo. Un puntino verde accanto al pulsante di invio segnala che l'agente è al lavoro.
+- **Build Windows più rapida**: il pacchetto portable usa una compressione veloce; il file scaricato è un po' più grande.
+
+La versione mostrata accanto al logo è `v0.15.2`. Il trascinamento delle chat funziona con il mouse e dentro la stessa lista; l'Archivio accetta chat solo se ne contiene già almeno una. I connettori non sono stati provati con un servizio Atlassian reale.
+
+- Connettori (#179, #180): stato del pacchetto letto dal collegamento cifrato;
+  strumenti `*_store_connector_*` nella tendina `@`; segreti mascherati
+  riusati al salvataggio; E2E `talia_store_connector_e2e_user_flow`.
+- Sidebar (#181): `conversations.placePins` e `pin_order`.
+- Uscita (#182): `quit_guard`, scorciatoia prolungata e submenu nativo macOS.
+- CI (#183): `ELECTRON_BUILDER_COMPRESSION_LEVEL=1` per il portable Windows.
 
 ## 0.15.1 — dallo Store alla configurazione in un passo
 
