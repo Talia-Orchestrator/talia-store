@@ -3,33 +3,63 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
-## 0.14.2-main.32.1+9a8cdd8c8dd5
+## 0.15.0-main.34.1+b2a706a759a7
 
-- **L'esito di ogni task**: quando un agente porta un task in revisione o lo completa scrive cosa ha fatto; la prima riga compare sulla card e il testo completo nel pannello del task, con il link alla conversazione.
-- **Commenti sui task**: apri il pannello accanto alla board, leggi esiti e note, scrivi un commento; con «Commenta e rimetti in lavorazione» l'agente riprende nella stessa conversazione tenendo conto del tuo commento. Un clic su un'altra card mostra i suoi commenti; il doppio clic apre la modifica.
-- **Task «Fermi»**: se un'esecuzione finisce senza esito il task lo dice, invece di restare in lavorazione in silenzio.
-- **Più task insieme, sotto controllo**: scegli quanti task lavorano contemporaneamente e quanti avvii al giorno, per il progetto e in generale (anche «Nessun limite»). Prima l'avanzamento automatico poteva avviare un nuovo task ogni due minuti anche con il precedente ancora in corso.
-- **Board più leggibile**: filtri rapidi con contatori (da revisionare, risposte nuove, fermi, in scadenza, assegnati a me), altri filtri a scomparsa, ordinamento e viste salvate; selezione multipla per cambiare stato, spostare in un altro progetto, assegnare, categorizzare, impostare la scadenza o eliminare più task insieme.
-- **Stop sempre disponibile**: il pulsante di arresto compare quando lavora un agente qualsiasi, e un nuovo messaggio dopo un'interruzione non fallisce più con «sessione occupata».
+- **Connettori dallo Store senza aggiornare l'app**: un connettore MCP pubblicato nello Store dichiara i campi che servono (token, indirizzo, cartelle) e Talia mostra un modulo per compilarli. I segreti restano cifrati sul dispositivo e niente parte finché non premi «Connetti».
+- **Connettori tutti eliminabili, primo avvio pulito**: un profilo nuovo non mostra più connettori predefiniti come DingTalk, Lark, WeCom o la suite Craft. Quelli che aggiungi dallo Store, o che hai già collegato, restano e si tolgono con «Rimuovi»; lo Store resta la fonte da cui riaggiungerli.
+- **Confluence, Jira e Bitbucket dallo Store**: pacchetti firmati per Cloud e Data Center, limitati agli spazi, progetti o repository scelti, con conferma prima di ogni scrittura. Si aggiornano dallo Store e si può tornare alla versione precedente.
+- **Antigravity regge i lavori lunghi**: Talia ricorda a Gemini il formato di risposta a ogni turno, non chiude più il processo per un backslash fuori posto (percorsi Windows, regex) e prova fino a due correzioni prima di fermarsi. Prima, nei processi lunghi, il lavoro si interrompeva con `ANTIGRAVITY_INVALID_HOST_RESPONSE`.
+- **Chat in blocco nella barra laterale**: Maiusc+clic seleziona un intervallo, Cmd/Ctrl+clic aggiunge o toglie; con il tasto destro archivi o ripristini più chat insieme.
+- **Barra laterale più comoda**: tasto destro su chat e progetti con lo stesso menu del «⋯», archivio delle chat, progetti fissati riordinabili trascinandoli sull'intera lista.
+- **Partecipanti e team nella chat**: tendina dei partecipanti con i team come preset, aggiunta e rimozione senza chiudere la tendina; pannello del progetto rivisto.
+- **Task avviati in blocco**: una casella per selezionare tutti i task visibili di una colonna e avviarli insieme.
+- **Ricerca agenti dello Store più affidabile**: gli agenti rimossi non compaiono più nei risultati e la tendina @ del composer è più larga.
 
-La versione mostrata accanto al logo è `v0.14.2`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+La versione mostrata accanto al logo è `v0.15.0`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
 
-- Task (#158): thread per task in `task_comments/<tid>/`, esito obbligatorio
-  per review/done nel tool `todo_tasks` con azioni `comment` e
-  `list_comments`, ripresa da commento con stato atteso, eventi
-  `run_ended_without_outcome`/`run_failed`. Driver con slot reali,
-  parallelismo e limite giornaliero per lista e globali, motivo dello stop
-  visibile. Filtri, viste salvate, selezione multipla e spostamento tra
-  progetti con copia verificata. Verificato con test e percorso Electron su
-  profilo di prova; rimessa in lavorazione e parallelismo non ancora provati
-  con un modello reale. L'eliminazione non usa il cestino.
-- Chat (#156): stop visibile con qualunque attore occupato; la sessione
-  attende fino a 30 secondi il rilascio del turno interrotto invece di
-  rispondere `SESSION_BUSY`. Messaggio a un agente occupato non ancora provato
-  a mano.
-- Test (#157): suite renderer riallineata su beta; nessun effetto sull'app.
+- Connettori template (#173): campi dichiarati dal pacchetto (env, header,
+  flag), `connectors.add_from_store`, modulo generico, rimozione con
+  `store_package`. Elenco iniziale vuoto e `connectors.remove_listing`.
+  Non provati con un pacchetto template pubblicato.
+- Pacchetti connettore indipendenti (#170): manifest dichiarativi firmati,
+  credenziali cifrate per versione, aggiornamento e ripristino; pacchetti
+  Atlassian nello Store con `minHostVersion` 0.15.0. Non provati con istanze
+  Atlassian reali.
+- Connettori a token Atlassian (#167), ricerca agenti Store (#172), tendina @
+  (#171), Antigravity (#168), barra laterale (#162, #164, #165, #166), chat e
+  progetto (#163), task in blocco (#162).
+- Le versioni precedenti mostrano i nuovi pacchetti dello Store come non
+  compatibili finché non si aggiornano.
 
 ## Non rilasciato
+
+## 0.15.0 — Store unico per i connettori, Antigravity più stabile e chat in blocco
+
+- **Connettori dallo Store senza aggiornare l'app**: un connettore MCP pubblicato nello Store dichiara i campi che servono (token, indirizzo, cartelle) e Talia mostra un modulo per compilarli. I segreti restano cifrati sul dispositivo e niente parte finché non premi «Connetti».
+- **Connettori tutti eliminabili, primo avvio pulito**: un profilo nuovo non mostra più connettori predefiniti come DingTalk, Lark, WeCom o la suite Craft. Quelli che aggiungi dallo Store, o che hai già collegato, restano e si tolgono con «Rimuovi»; lo Store resta la fonte da cui riaggiungerli.
+- **Confluence, Jira e Bitbucket dallo Store**: pacchetti firmati per Cloud e Data Center, limitati agli spazi, progetti o repository scelti, con conferma prima di ogni scrittura. Si aggiornano dallo Store e si può tornare alla versione precedente.
+- **Antigravity regge i lavori lunghi**: Talia ricorda a Gemini il formato di risposta a ogni turno, non chiude più il processo per un backslash fuori posto (percorsi Windows, regex) e prova fino a due correzioni prima di fermarsi. Prima, nei processi lunghi, il lavoro si interrompeva con `ANTIGRAVITY_INVALID_HOST_RESPONSE`.
+- **Chat in blocco nella barra laterale**: Maiusc+clic seleziona un intervallo, Cmd/Ctrl+clic aggiunge o toglie; con il tasto destro archivi o ripristini più chat insieme.
+- **Barra laterale più comoda**: tasto destro su chat e progetti con lo stesso menu del «⋯», archivio delle chat, progetti fissati riordinabili trascinandoli sull'intera lista.
+- **Partecipanti e team nella chat**: tendina dei partecipanti con i team come preset, aggiunta e rimozione senza chiudere la tendina; pannello del progetto rivisto.
+- **Task avviati in blocco**: una casella per selezionare tutti i task visibili di una colonna e avviarli insieme.
+- **Ricerca agenti dello Store più affidabile**: gli agenti rimossi non compaiono più nei risultati e la tendina @ del composer è più larga.
+
+La versione mostrata accanto al logo è `v0.15.0`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+
+- Connettori template (#173): campi dichiarati dal pacchetto (env, header,
+  flag), `connectors.add_from_store`, modulo generico, rimozione con
+  `store_package`. Elenco iniziale vuoto e `connectors.remove_listing`.
+  Non provati con un pacchetto template pubblicato.
+- Pacchetti connettore indipendenti (#170): manifest dichiarativi firmati,
+  credenziali cifrate per versione, aggiornamento e ripristino; pacchetti
+  Atlassian nello Store con `minHostVersion` 0.15.0. Non provati con istanze
+  Atlassian reali.
+- Connettori a token Atlassian (#167), ricerca agenti Store (#172), tendina @
+  (#171), Antigravity (#168), barra laterale (#162, #164, #165, #166), chat e
+  progetto (#163), task in blocco (#162).
+- Le versioni precedenti mostrano i nuovi pacchetti dello Store come non
+  compatibili finché non si aggiornano.
 
 ## 0.14.2 — task con esito, commenti e lavoro in parallelo
 
