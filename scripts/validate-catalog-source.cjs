@@ -2,6 +2,7 @@
 'use strict';
 const fs = require('node:fs');
 const path = require('node:path');
+const { includeConnectorPackage } = require('./connector-selection.cjs');
 const storeRoot = path.resolve(__dirname, '..');
 const packer = require(path.join(storeRoot, 'tools', 'talia-catalog-pack.cjs'));
 const { validateRetainedArtifacts } = require('./retained-artifacts.cjs');
@@ -14,7 +15,7 @@ function packageDirs(category, names) {
 const packages = [
   ...packageDirs('agents', featuredAgents),
   ...packageDirs('skills'),
-  ...packageDirs('connectors'),
+  ...packageDirs('connectors').filter(includeConnectorPackage),
   ...packageDirs('apps'),
   ...packageDirs('library'),
 ];

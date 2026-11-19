@@ -1,0 +1,24 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-connectors/atlassian-confluence",
+      "kind": "connector",
+      "version": "1.1.0",
+      "name": "Confluence (read pilot)",
+      "description": "Pilot read-only connector for Confluence, limited to selected space resources.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\nCopyright (c) 2026 Talia contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Talia Confluence Store reference. The package contains only declarative configuration metadata.\nProvider and implementation reference: https://github.com/sooperset/mcp-atlassian\n",
+        "README.md": "# Confluence\n\nRead-only pilot. For Cloud use the site URL ending in /wiki. For Data Center use the HTTPS instance URL including its context path. Configure the account token and permitted resources in Talia.\n",
+        "connector.json": "{\n  \"schemaVersion\": 1,\n  \"independent_connector\": {\n    \"schemaVersion\": 1,\n    \"id\": \"talia-connectors/atlassian-confluence\",\n    \"auth\": \"user_choice\",\n    \"scope\": \"space\",\n    \"operations\": [\n      {\n        \"id\": \"space\",\n        \"method\": \"GET\",\n        \"route\": \"/rest/api/space/{scope}\"\n      },\n      {\n        \"id\": \"pages\",\n        \"method\": \"GET\",\n        \"route\": \"/rest/api/space/{scope}/content/page\"\n      }\n    ]\n  }\n}\n"
+      },
+      "digest": "sha256:3526469622a2a87468b52ed45c1e38d4cec990c06b04451ee6d8011585cd27c4",
+      "description_it": "Connettore pilota in sola lettura per Confluence, limitato alle risorse selezionate.",
+      "minHostVersion": "0.15.0"
+    }
+  ]
+}

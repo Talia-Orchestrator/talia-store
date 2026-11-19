@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "independent_connector": {
+    "schemaVersion": 1,
+    "id": "talia-connectors/atlassian-jira",
+    "auth": "user_choice",
+    "scope": "project",
+    "operations": [
+      {
+        "id": "project",
+        "method": "GET",
+        "route": "/rest/api/2/project/{scope}"
+      },
+      {
+        "id": "statuses",
+        "method": "GET",
+        "route": "/rest/api/2/project/{scope}/statuses"
+      },
+      {
+        "id": "search",
+        "method": "GET",
+        "route": "/rest/api/2/search",
+        "scopeQuery": {
+          "name": "jql",
+          "field": "project"
+        }
+      },
+      {
+        "id": "create",
+        "method": "POST",
+        "route": "/rest/api/2/issue",
+        "scopeWrite": "jira_issue"
+      },
+      {
+        "id": "read_item",
+        "method": "GET",
+        "route": "/rest/api/2/issue/{scope}-{item}",
+        "scopeRead": "jira_issue"
+      }
+    ]
+  }
+}
