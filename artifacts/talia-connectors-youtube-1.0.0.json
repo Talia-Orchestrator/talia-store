@@ -1,0 +1,24 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-connectors/youtube",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "YouTube",
+      "description": "Catalog listing for YouTube. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\nCopyright (c) 2026 Talia contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Catalog listing maintained by Talia. YouTube is a third-party service; this package is not endorsed by its provider.\n",
+        "README.md": "# YouTube\n\nCatalog listing for Talia. This package contains no credentials or executable code.\n\nDirect authentication is not available yet. Installing this listing does not connect YouTube; Talia will show it as unavailable until the integration is implemented and verified.\n",
+        "connector.json": "{\n  \"schemaVersion\": 1,\n  \"catalog_listing\": {\n    \"id\": \"youtube\",\n    \"display_name\": \"YouTube\",\n    \"category\": \"communication\",\n    \"description_en\": \"Search videos, view captions and metrics, and manage playlists, uploads, and comments.\",\n    \"description_it\": \"Cerca video, visualizza sottotitoli e metriche e gestisci playlist, caricamenti e commenti.\",\n    \"integration_state\": \"requires_direct_auth\"\n  }\n}\n"
+      },
+      "digest": "sha256:68aa45ddb3a9446ea2af424bab2144c2ac7bca4ea1c9a4d6910432e3f5e25c3d",
+      "description_it": "Scheda di YouTube. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0"
+    }
+  ]
+}

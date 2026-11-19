@@ -1,0 +1,70 @@
+# Pagina download: consegna per revisione
+
+## Ambito
+Task t_734b2ad16870. Nuova hero, benefici, CTA verso i download, tre placeholder espliciti. Brand #F4BC53 e logo chiaro esistente. Nessuna dipendenza aggiunta. Copy basato sul manuale versionato; capacità subordinate a modelli, risorse, account e permessi.
+
+Modifiche: `site/index.html`, `site/styles.css`. Logica `site/app.js`, manifest, versioni, indice release e link preesistenti non modificati. Nessun grafo del codice disponibile nel checkout: analizzati sorgenti, riferimenti e test del sito direttamente.
+
+## Screenshot da produrre
+1. Workspace, 16:10, suggerito 1600×1000: progetto dimostrativo con chat Commander, squadra e documenti.
+2. Fonti, 4:3, suggerito 1200×900: documenti di progetto e risposta con riferimenti verificabili.
+3. Squadra, 4:3, suggerito 1200×900: selezione agenti e modelli della chat.
+
+Usare dati dimostrativi, nessuna credenziale o dato personale. Non simulare funzioni assenti. Sostituire il contenuto di ogni `.placeholder-body` con un'immagine in `site/assets/`, mantenere la figura, aggiornare didascalia e testo alternativo, rimuovere etichette «da aggiungere». Per le immagini usare larghezza 100%, altezza automatica e dimensioni intrinseche. I placeholder sono parte della consegna richiesta, non screenshot reali.
+
+## Verifiche eseguite
+- `npm test`: 18 test superati, validazione catalogo e routing inclusa.
+- `npm run test:site`: 10 test superati.
+- `npm run validate`: superato.
+- `git diff --check`: superato.
+- Browser Chromium: 1440, 390 e 320 px; nessun overflow orizzontale, 11 release renderizzate, nessun errore JavaScript.
+- CTA hero raggiunge il download; checksum espandibile; 27 link installer corrispondono all'indice versionato, senza sostituzioni.
+- Indice vuoto e risposta HTTP 503 simulati: messaggi empty/error visibili.
+- Download manuale via server HTTP locale: file byte-identico all'originale.
+- Preview desktop/mobile: nessuna immagine mancante, sovrapposizione o contrasto insufficiente rilevati. Navigazione Tab: 18 focus distinti osservati e visibili, nessun errore segnalato. Non equivale a un audit completo WCAG o screen reader.
+
+## Limiti e note QA
+La preview iniziale non osservava il download manuale nel proprio ambiente isolato; verifica separata via HTTP locale superata. La preview visiva finale passa; resta un avviso sulla scala tipografica (15 dimensioni, comprese le schede download preesistenti). Installer esterni non scaricati né eseguiti; disponibilità remota degli asset non certificata. Nessun test assistivo con screen reader. Nessuna build applicativa richiesta per questo sito statico.
+
+## Git e distribuzione
+`beta` creato da `origin/main` a 15e36fe e pubblicato su origin con autorizzazione. Worktree separato `worktrees/store-download-marketing`, ramo `feature/download_marketing`. Checkout utente e modifiche pregresse preservati. Nessun merge, rimozione worktree o pubblicazione live. Il workflow Pages pubblica da main, non da questa feature. L'endpoint protezione ramo segnala beta non protetto; nessuna protezione modificata. La PR deve essere verificata indipendentemente prima della richiesta di approvazione al merge.
+
+
+## Correzione successiva alla QA — 17 novembre 2026
+La nota iniziale su `app.js` invariato descrive la prima consegna. Ora il percorso comune `makePlatformCard` deriva aria-label dal testo visibile del link e aggiunge versione e piattaforma: «Scarica DMG — Talia … per …». Nessuna modifica a HTML/CSS marketing, placeholder, URL, indice o versioni.
+
+- Regressione in `tests/download-site.test.cjs`: esegue il generatore reale in Node VM con DOM minimo, verifica il prefisso visibile e URL per tutti gli installer dell'indice versionato, coprendo DMG/EXE/ZIP/APPIMAGE. Non sostituisce il controllo browser.
+- `npm run test:site`: 11/11; `npm test`: 18/18 e validazione superata; `git diff --check`: superato.
+- Chromium reale tramite Playwright: 1440/390/320 px, 11 release, overflow orizzontale 0; CTA verso #downloads-title e checksum azionati a ogni larghezza; nessuna eccezione JS. Stati indice vuoto e HTTP 503 verificati.
+- A 320 px verificati tutti i 27 nomi: aria-label inizia con textContent; tutti i 27 URL appartengono all'indice invariato. Axe-core 4.14.1, regola `label-content-name-mismatch`: 0 violazioni, 28 nodi passati (inclusi i 27 installer).
+
+Riproduzione indipendente: eseguire i comandi test sopra; servire `site/` via HTTP e attendere le schede release. Per tutti i `.platform-card .download-button`, verificare `element.getAttribute('aria-label').startsWith(element.textContent)`, quindi eseguire Axe con `runOnly: {type: 'rule', values: ['label-content-name-mismatch']}`. Ripetere CTA e apertura checksum ai viewport 1440, 390 e 320 px. Script temporaneo di esecuzione locale: `/tmp/store-download-a11y-recheck.cjs` (dipende dai moduli QA temporanei, non è una dipendenza del progetto).
+
+Limiti invariati: nessun audit WCAG completo o screen reader, installer esterni non scaricati. Nessun merge, pubblicazione o rimozione worktree; task non aggiornato.
+
+## Redesign editoriale — 17 novembre 2026
+
+Accettazione riaperta: direzione ispirata alle pagine prodotto Apple, senza copiarne asset o interfaccia. Hero centrale chiara, titolo fino a 112 px, CTA isolata, narrazione verticale e tre grandi cornici scure. Eliminata la griglia affiancata delle immagini. Header scuro con logo chiaro, accento #F4BC53 preservato.
+
+Screenshot documenti e squadra: preferire ora 16:10 e adattare la cornice all'immagine finale senza ritagliarne dati essenziali. Nessuna schermata simulata.
+
+Verifiche: `npm run test:site` (12 test), `npm test` (validazione e 18 test). Chromium reale 1440/390/320: zero overflow, CTA, checksum, stati vuoto/errore e 27 nomi accessibili verificati. Axe 4.14.1: zero violazioni WCAG 2.5.3; scansione completa a 320 px senza violazioni automatiche. Non sostituisce un audit assistivo manuale.
+
+Anteprima verificata e aperta nel browser interno: http://127.0.0.1:8765. Screenshot prima/dopo in /tmp/talia-premium (evidenza temporanea). app.js, releases.json, manifest e URL invariati. Installer esterni non scaricati. Nessun deploy o merge. Nuova accettazione visiva utente ancora necessaria.
+
+## Squadra, documenti e lavoro ricorrente — 17 novembre 2026
+
+Ripresa diretta da Commander dopo ripetuti fallimenti di avvio della sessione frontend. Base ispezionata: b78cd956; unica modifica preesistente `.DS_Store`, preservata. Nessuna modifica al checkout core.
+
+- Headline italiana esatta: «La tua squadra. Non un altro chatbot.». Sottotitolo su agenti, documenti e attività ricorrenti.
+- Benefici: ricerca nei documenti con indice pronto e riferimenti; Kanban con assegnazioni e avanzamento; scelta di specialisti, modelli, skill e connettori.
+- Percorso editoriale in quattro passaggi: automazione mattutina → creazione attività → esecuzione backlog abilitata → briefing verificabile. Esempio configurabile, esplicitamente non demo live; creare un’attività non la avvia. Nessuna automazione reale creata o eseguita.
+- Fonti controllate: Manuale Talia, sezioni 3, 4, 6, 8 e 9; intestazioni e guardrail di `desktop/src/main/features/project_driver.ts` e `project_driver_runner.ts` nel checkout core, consultato soltanto in lettura. Il driver è opt-in e soggetto a limiti. La catena completa nell’app non è stata collaudata in questo intervento.
+- Tre placeholder, non screenshot simulati, mantenuti. Pagina download, app.js, releases.json e manifest aggiornamenti invariati rispetto alla base. Manuale e link SolidCraft preservati.
+- Copy aggiornato nelle 19 lingue, fallback inglese sincronizzato; traduzioni non revisionate da madrelingua.
+- `npm run test:site`: 37/37, inclusa nuova regressione su headline, fonti, Kanban e separazione pianificazione/esecuzione. `npm test`: 18/18 con validazione catalogo e routing; `git diff --check` superato. Il repository non espone un grafo dei simboli versionato utilizzabile: verifica svolta sui sorgenti e riferimenti effettivi.
+- `scripts/check-download-browser.cjs` eseguito in Chromium con dipendenze QA locali esistenti: 19 lingue, persistenza, RTL arabo, larghezze 1440/390/320, zero overflow; CTA e checksum azionati, 27 URL invariati, stati vuoto/errore e zero violazioni Axe. Prefisso `/talia-store/` verificato.
+- Controllo aggiuntivo sulla preview root `http://127.0.0.1:8765/`: headline italiana, quattro passaggi, tre placeholder, CTA esplora/download, 27 installer e skip-link da tastiera verificati ai tre viewport; nessun errore JavaScript. HTML servito coerente con il file corrente. Aperta la preview nel browser interno.
+- Evidenze temporanee, non consegne: `/tmp/talia-team-landing-check/`. Nessun installer scaricato o eseguito; nessuna verifica screen reader, produzione o successo live della catena automatica. QA indipendente e accettazione visiva dell’utente ancora necessarie.
+
+Nessun merge, deploy, build applicativa o rimozione worktree. Task lasciato `progress`.

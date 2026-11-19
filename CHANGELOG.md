@@ -3,6 +3,559 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
+## 0.12.0-main.26.1+4fbf2a721697
+
+- **Contesto per destinatario e compattazione manuale**: Commander e agenti
+  mostrano stime separate. Il popover permette di leggere i valori disponibili
+  e avviare una compattazione con checkpoint persistente, con annullamento e
+  ripristino del focus.
+- **Prompt personali nel popup @**: ricerca, variabili e inserimento nella
+  bozza restano disponibili senza invio automatico e senza occupare la barra
+  inferiore del composer.
+- **Modelli e agenti nel nuovo task**: il catalogo è filtrabile e mostra
+  descrizioni e capacità di reasoning; la configurazione del modello si può
+  copiare tra agenti. I conflitti di revisione chiedono conferma invece di
+  forzare la creazione.
+- **Inner Browser con certificati personalizzati**: il consenso vale per
+  origine e certificato in una sessione temporanea; chiusura della scheda e
+  scadenza revocano la fiducia.
+- **Diagnostica più circoscritta**: i rifiuti HTTP 400 di openai-codex
+  registrano soltanto la forma della richiesta già inviata, senza testo o
+  credenziali. La causa dei rifiuti osservati resta da determinare.
+
+Limiti: i test usano prevalentemente profili e provider sintetici; account
+reali, collaudo assistivo completo e sostituzione di installazioni Windows o
+Linux restano da verificare. Le note tecniche seguenti precisano le prove per
+ciascuna modifica.
+
+## Non rilasciato
+
+Nessuna modifica successiva alla preparazione della 0.12.0.
+
+## 0.12.0 — contesto e strumenti più chiari
+
+- **Contesto per destinatario e compattazione manuale**: Commander e agenti
+  mostrano stime separate. Il popover permette di leggere i valori disponibili
+  e avviare una compattazione con checkpoint persistente, con annullamento e
+  ripristino del focus.
+- **Prompt personali nel popup @**: ricerca, variabili e inserimento nella
+  bozza restano disponibili senza invio automatico e senza occupare la barra
+  inferiore del composer.
+- **Modelli e agenti nel nuovo task**: il catalogo è filtrabile e mostra
+  descrizioni e capacità di reasoning; la configurazione del modello si può
+  copiare tra agenti. I conflitti di revisione chiedono conferma invece di
+  forzare la creazione.
+- **Inner Browser con certificati personalizzati**: il consenso vale per
+  origine e certificato in una sessione temporanea; chiusura della scheda e
+  scadenza revocano la fiducia.
+- **Diagnostica più circoscritta**: i rifiuti HTTP 400 di openai-codex
+  registrano soltanto la forma della richiesta già inviata, senza testo o
+  credenziali. La causa dei rifiuti osservati resta da determinare.
+
+Limiti: i test usano prevalentemente profili e provider sintetici; account
+reali, collaudo assistivo completo e sostituzione di installazioni Windows o
+Linux restano da verificare. Le note tecniche seguenti precisano le prove per
+ciascuna modifica.
+
+## Registro tecnico delle modifiche confluite nella 0.12.0
+
+Le note cronologiche conservano verifiche e limiti delle singole tranche. Le
+frasi sulla mancata build descrivono lo stato al momento degli interventi.
+
+- Contesto e compattazione: il composer mostra sempre la stima di Commander,
+  anche quando `To` cambia; ogni subagente ha il proprio indicatore compatto
+  nell'header del balloon. Il refresh preserva il focus e l'annullamento della
+  compattazione; Escape chiude il popover e ripristina il focus al trigger.
+  Verificati Electron mirato 8/8, riproduttori 2/2 e typecheck E2E con IPC
+  sintetico; nessun provider live né confronto col mock originale.
+
+- Diagnostica interna per i rifiuti HTTP 400 di `openai-codex`: il log registra
+  solo numero e tipi degli elementi della richiesta già inviata. Nessun testo,
+  ID, argomento o credenziale viene conservato. La richiesta e il comportamento
+  di retry restano invariati; la causa dei 400 osservati e la correzione restano
+  da determinare dopo un nuovo caso reale. Nessuna nuova funzione utente o build.
+
+- Progetto/Nuova attività: catalogo modelli standard filtrabile, descrizione su
+  riga dedicata, reasoning a capacità reali e copia/incolla per agente incluso
+  Commander. Aggiunta agenti corretta prima della creazione e persistente al
+  riavvio. Risolti INFERENCE_TARGET_INVALID da metadati UI e STALE_REVISION:
+  confronto e conferma esplicita recuperano la revisione senza creazioni forzate.
+  QA indipendente Electron macOS 10/10, fixture sintetiche; nessun provider live,
+  nuova build o verifica CLI/ACP dedicata.
+
+- Corretto lo sfondo trasparente del popover del contesto: superficie opaca
+  e testo usano i token semantici dei tre temi supportati. Verificati
+  typecheck E2E, Electron isolato 6/6 e screenshot sopra il composer;
+  provider sintetico, nessuna nuova build.
+
+- La libreria dei prompt personali è disponibile nella scheda **Prompt** del
+  popup aperto con **@**; non occupa più la barra inferiore dei composer.
+  Ricerca, variabili e inserimento nella bozza sono mantenuti senza invio
+  automatico. Escape e X chiudono il popup con focus al composer; Escape su una
+  conferma chiude solo la conferma. Verificati journey Electron macOS isolato,
+  test renderer e picker desktop/mobile, con ricollaudo QA indipendente
+  completato. Verificata anche la consegna dello snapshot finale dei turni
+  prima della chiusura IPC. Windows/Linux non verificati; la suite backend
+  completa mantiene fallimenti riprodotti anche nella baseline.
+
+Indicatore di stima del contesto per destinatario e compattazione manuale con checkpoint persistente, senza soglia minima. Il cerchio statico da 24 px si riempie dal basso; budget ignoto e stima incompleta sono espliciti. Commander e agenti hanno contesti separati; le righe team non sommano i budget. Cronologia condivisa e soglie automatiche preservate; solo un flush riuscito conferma il salvataggio.
+
+Follow-up UI non rilasciato: il cerchio accanto a To è cliccabile e apre un popover sopra il composer con valori disponibili e compattazione manuale. Verificati typecheck, renderer 531/531, host 5/5, core 134/134 e E2E Electron 6/6; un E2E usa IPC/host/storage reali con provider sintetico e gli altri cinque IPC sintetico. Screenshot runtime acquisito; confronto diretto col mock non verificato perché il suo artefatto originale non era accessibile.
+
+Ricollaudo indipendente: host **227/227**, core/sessione/checkpoint **134/134**, renderer **531/531**, Electron effimero **6/6**, typecheck desktop/E2E e diff check superati. Il primo run host ha avuto un timeout di quiescenza Codex, poi passato isolato e nella suite ripetuta: flakiness residua non risolta. Un caso Electron usa UI→IPC→host e storage reali con provider sintetico, cancel attivo e riavvio con transcript da disco; gli altri cinque usano IPC sintetico. Il caso annullato non salva un nuovo checkpoint. Nessun provider live, collaudo assistivo completo, packaging o nuova distribuzione verificati. Gli avvisi nativi precedenti non si sono riprodotti: causa non accertata; preflight bundled Node non certificato. Nessun bump versione. Dettagli in `docs/context-compaction-checkpoint.md`.
+
+- Inner Browser: le pagine con certificato personalizzato/self-signed possono
+  essere aperte dopo consenso esplicito in una sessione temporanea isolata,
+  vincolata a origine e certificato. Nessuna fiducia globale o salvata: chiusura
+  della scheda per revoca e scadenza automatica dopo cinque minuti.
+  Cookie del profilo, popup e risorse di altre origini non sono disponibili.
+  Integrazione sorgente autorizzata dal proprietario con limiti manuali noti.
+  Typecheck, 62 test mirati ed E2E Electron automatico superati su macOS;
+  il consenso nei test è simulato. Prova umana completa e revoca al cambio
+  account restano non attestate; nessuna nuova build o distribuzione.
+- Gli agenti senza dipendenze strumenti esplicite caricano progressivamente le
+  capacità disponibili, senza precaricarle tutte. Il caricamento resta limitato
+  al turno e non amplia permessi o dominio dell'agente; le dipendenze esplicite
+  e la compatibilità Commander sono conservate.
+- Le app rifiutano un contesto di modifica danneggiato o privato del tipo app:
+  occorre riaprire la modifica dall'app. La visualizzazione resta tollerante,
+  senza trasformare il recupero dei metadati in autorizzazione di modifica.
+- Verifiche catalogo e binding: suite mirata 331/331, saved_apps 120/120 e
+  typecheck main/core ed E2E superati su macOS, con recheck indipendente.
+  Non attestati runtime Inner Browser, provider live, suite ampia e smoke EPERM.
+  Nessuna nuova build inclusa.
+
+- Team e Partecipanti: azioni compatte «Copia config.» e «Incolla config.»
+  trasferiscono modello/provider, selezione runtime e Pensiero tra agenti e tra
+  le due superfici nella stessa finestra. Non copiano prompt, identità, risorse
+  o credenziali; configurazioni incompatibili sono rifiutate senza applicazioni
+  parziali. Auto resta senza override.
+- Editor Team ridisegnato con configurazione membri espandibile e azioni su
+  riga separata: le descrizioni lunghe restano leggibili anche a 1024×645.
+  Se il cambio modello invalida il Pensiero, avviso e reset ad Auto vengono
+  persistiti insieme al modello anche nei Partecipanti.
+- Prerequisito già presente sul main locale: capacità API/CLI versionate non
+  scadono durante l'editing; TTL ACP conservati. Registrato il controllo delle
+  deleghe nel catalogo strumenti Commander.
+
+Verifiche locali su macOS: 18 percorsi Electron con profili effimeri e fixture,
+5 test renderer Team Builder e typecheck. Non attestano provider live, Qwen Max,
+Windows/Linux o il CSS della finestra QA manuale precedentemente aperta.
+Il confronto i18n resta 46/47 anche sulla base immutata (2.210 differenze nelle
+tabelle esistenti); nessuna nuova regressione rilevata nel confronto QA.
+Nessuna nuova build o distribuzione inclusa.
+
+## 0.11.1 — il team e i modelli, più facili da gestire
+
+- Un team pronto dallo Store: puoi installare un team con gli agenti e le
+  dipendenze dichiarate, poi personalizzare team e agenti. Lo Store Talia
+  firmato raccoglie anche skill, connettori, app e il Manuale Talia.
+- Specialisti più facili da trovare: Commander confronta gli agenti già in
+  chat, quelli installati e quelli dello Store. Quando propone uno specialista
+  da installare, la scelta resta tua. Per lavori composti suggerisce ruoli,
+  dipendenze e verifiche senza avviare automaticamente nuovi agenti.
+- Partecipanti e Team Builder più leggibili: la chat raccoglie i partecipanti
+  in un pannello con ricerca e controlli per modello e Pensiero. Le card del
+  Team Builder mostrano descrizione e avatar invece degli ID tecnici e aprono
+  la configurazione nello stesso modo.
+- Pensiero legato al modello scelto: i controlli mostrano gli effort nativi
+  attestati per quel modello; Auto non invia un override. Se la capacità non è
+  nota, l'app non inventa livelli. Il catalogo OpenRouter esclude le varianti
+  asincrone con suffisso :batch dalla scelta per la chat.
+- Lavoro in chat e Tasks più chiaro: Commander può ricevere nuovi messaggi
+  mentre altri agenti lavorano. I Tasks includono assegnazioni a team e una
+  vista Kanban con spostamento e ordine persistente. La sidebar segnala i
+  lavori completati che non hai ancora aperto.
+- Impostazioni e strumenti: la pagina dei modelli si chiama «Providers» e
+  guida il collegamento degli account. Inner Browser è disponibile come
+  connettore nativo; il workspace a schede resta una scelta sperimentale da
+  attivare nelle impostazioni.
+
+Limiti: le proposte di Commander non garantiscono una delega completata;
+capacità modello sconosciute restano non configurabili. Le prove automatizzate
+usano profili e provider simulati; gli account reali e l'aggiornamento di una
+installazione Windows o Linux non sono stati qualificati in questa tranche.
+
+## Registro tecnico delle modifiche confluite nella 0.11.1
+
+Le note cronologiche seguenti conservano le verifiche e i limiti delle singole
+tranche. Le frasi sulla mancata build descrivono lo stato al momento di ciascun
+intervento.
+
+- OpenRouter: il catalogo per la chat esclude le varianti asincrone con suffisso
+  `:batch`, anche quando provengono da una cache precedente. La scelta manuale
+  di questi ID è rifiutata; i modelli interattivi corrispondenti restano visibili.
+
+- Team Builder e Partecipanti: le card degli agenti condividono identità,
+  descrizione e pannello espandibile. Nel Team Builder gli ID tecnici degli
+  agenti sono sostituiti da descrizioni, gli avatar sono quelli configurati e
+  il Pensiero mostra gli effort nativi attestati dal modello. L'applicazione
+  di un team a una chat esistente usa la transazione atomica del backend.
+  Verificati 45 test renderer e 10 percorsi Electron su macOS con profili
+  sintetici; provider live e altri sistemi operativi non verificati.
+
+- Commander: l'indice prompt degli agenti con `routing_tags` usa i tag brevi
+  invece di descrizione e profilo estesi. Gli agenti legacy senza tag
+  conservano le informazioni precedenti; il workflow completo resta
+  recuperabile su richiesta.
+
+- Commander: per richieste utente composte, il runtime aggiunge una nota breve
+  con specialisti già nella chat, dipendenze e prove richieste. Riusa il roster
+  caricato per il prompt e non consulta lo Store né avvia agenti in automatico.
+  I turni di ripresa dopo una delega non ricevono un nuovo preflight.
+
+- Commander: `agent_match` propone una collaborazione compatta per competenze
+  complementari, con dipendenze e controlli minimi di verifica. I requisiti
+  di interazione nell'app non sono attestati da soli test statici o da preview
+  simulate. Il piano è consultivo: non avvia agenti e non abilita istanze
+  duplicate per modifiche al progetto. La prova nell'app resta da eseguire.
+
+- Sviluppo: uno script collega `desktop/node_modules` del worktree a quello di
+  `main` solo con lockfile identico e installazione verificata, evitando copie
+  da gigabyte senza cambiare package manager o dipendenze dell'app.
+
+- CI: la validazione Core non parte più automaticamente sulle pull request;
+  resta disponibile manualmente e come prerequisito delle build. Le verifiche
+  delle feature si eseguono in locale prima dell'integrazione.
+
+- Chat: la gestione dei partecipanti della singola conversazione è nel pannello
+  laterale «Partecipanti», aperto dal trigger nell'header. Il pannello elenca i
+  partecipanti con lo stile compatto del roster, permette ricerca e invito tra
+  gli agenti disponibili per la chat, scelta del modello e configurazione del
+  thinking quando il runtime li supporta. Il controllo Thinking espone Auto
+  e gli effort nativi attestati per l'esatto provider/modello: Auto non invia
+  override; capacità sconosciute, non regolabili o non supportate restano
+  esplicitate senza deduzioni sugli step del provider. Il
+  pannello permette anche la rimozione accessibile del solo membro dalla chat.
+  Rimuovere un partecipante non modifica il catalogo
+  globale. Il pannello raccoglie anche le due policy «Commander può invitare
+  altri membri» e «Consenti lavori in parallelo». Le policy restano modificabili
+  solo dal proprietario; il gate backend del Commander resta vincolato alla prima
+  policy. Catalogo e impostazioni globali degli agenti restano separati dalla
+  gestione della singola chat. Il pulsante «Agenti» resta nella navigazione
+  sinistra per il catalogo e la gestione globale, ripristinato dopo una
+  regressione di navigazione. Prova GUI manuale e qualifica multipiattaforma da
+  eseguire.
+
+- Commander confronta gli agenti della chat, quelli installati e gli specialisti
+  dello Store tramite tag sintetici firmati, con punteggi separati per idoneità
+  e disponibilità. Per PR/merge/pull può lavorare direttamente; per richieste
+  miste distingue implementazione e integrazione. Un agente Store richiede
+  sempre la scelta dell’utente prima dell’installazione. L’indice è separato
+  dal catalogo per conservare la compatibilità con Talia 0.11.0. Verifica
+  automatica completata; prova nell’app e nuova build ancora da eseguire.
+
+- Spostate nello Store le 29 schede Atlassian, Google, Microsoft e sviluppo
+  selezionate. Il core mostra solo Figma e i quattro ID CLI incorporati; le
+  schede installate dallo Store appaiono in Connettori come non disponibili
+  finché non esiste autenticazione diretta. Nessun token, transport o codice
+  eseguibile viene distribuito da queste schede. Il catalogo Store sale a 95
+  pacchetti. Le definizioni storiche nel sorgente core non sono ancora state
+  eliminate; il runtime Talia non le indicizza.
+
+- Ridotto il catalogo Talia a 34 voci selezionate: servizi Google e Microsoft
+  in tutte le categorie, Atlassian, Bitbucket, GitLab, GitHub, Hugging Face,
+  Figma e i quattro ID CLI. Le 29 voci con autenticazione originale non ancora
+  sostituita sono visibili ma disabilitate. I 16 preset MCP *Craft restano
+  configurabili separatamente. Esclusi dal pacchetto Electron 34 contratti
+  ecommerce non usati da Talia (54.109.132 byte di sorgenti); i sorgenti
+  storici restano nel repository per una rimozione successiva. Nessuna build.
+
+- Preparata su branch la versione sorgente 0.11.0 per lo Store unificato:
+  agenti, skill, connettori, app e Manuale Talia 1.2.0 in Biblioteca. Primo
+  avvio con tre agenti e sei skill; i preset MCP *Craft restano opzionali.
+  Installazione CLI esplicita con SHA-256 per l'asset ufficiale FigCraft macOS;
+  sugli altri target e sugli altri *Craft resta la procedura manuale. Nessun
+  download automatico del CLI né stato connesso prima dell'handshake. Catalogo
+  Store firmato e test mirati superati; runtime GUI e piattaforme non ancora
+  qualificati. Nessuna build o pubblicazione.
+- Team: rimosso dall'header della chat il pulsante «Team della chat». Un team
+  può essere scelto solo prima della creazione di una nuova chat libera o di
+  progetto: al primo invio aggiunge i suoi membri non già presenti. I membri
+  restano normali partecipanti della chat e possono essere rimossi senza
+  reinserimento automatico; l'aggiornamento o il distacco retroattivo del team
+  da una chat esistente non è più disponibile dalla UI. Nessuna build.
+
+- Inner Browser: connettore nativo permanente disponibile nei profili nuovi ed
+  esistenti, selezionabile dalla scheda «Usa» e dai compositori chat. La scelta
+  abilita il vero `inner_browser` condiviso con l'utente, non un server MCP:
+  stato `native_available`, nessun trasporto o credenziale inventati.
+  Rimozione/disabilitazione negate da UI e backend; gli altri connettori
+  mantengono le proprie regole. Nessuna build o incremento versione.
+  Contratto, QA locale e limiti: desktop/docs/inner-browser-connector.md.
+  Recheck OAuth: isolato il mock API-key per evitare la gara fra due factory
+  Vitest dello stesso modulo; nessuna modifica al runtime OAuth.
+
+- Riconciliati i branch pendenti di pianificazione/form, modelli squadra,
+  launcher isolati e recovery ACP preparatoria. Conservati Team Builder r9
+  e materiali già in main. Versione sorgente invariata 0.10.0; nessuna build.
+  Inventario, verifiche e residui esclusi: docs/integration-branches-2026-11-15.md.
+
+- Materiali Talia: nucleo backend locale `.talia/` con classificazione esplicita,
+  anteprima vincolata al target, protezione sconosciuti/riferimenti/chat attive e
+  pulizia recuperabile con journal. Archivio conversazioni e documenti canonici
+  non spostati. Pannello accessibile nel menu workspace di progetto, anteprima
+  e conferme distinte, recupero locale, 19 cataloghi, nuovi materiali dichiarati
+  via write_file e manifest shell classificati; hook delete/restore effettivi.
+  QA indipendente macOS arm64 superato: 411 test e 17 scenari Electron,
+  inclusi percorsi desktop/mobile; 2 test Windows-only saltati.
+  Windows/Linux e scalabilità ancora da qualificare. Nessuna build.
+  Contratti e limiti: desktop/docs/project-materials-api.md e project-materials-ui.md.
+  Riparazione PM-QA-001: storage materiali non disponibile o `.talia` preesistente
+  non classificata non impediscono bash ordinario; manifest tecnico effimero
+  classificato o sola scansione workspace, senza adottare dati ignoti. Pulizie e
+  scritture materiali esplicite restano fail-closed. Recheck indipendente superato;
+  copertura e limiti in desktop/docs/project-materials-qa.md.
+
+- Team Builder: il pannello per attore è ora fedele al mockup r9 approvato:
+  modello value-first con valore corrente e chevron (stessa modale standard del
+  catalogo), nessun select Pensiero duplicato, hero Pensiero centrato con reset
+  e slider a quattro stop, una sola riga di stato, nessun pulsante di
+  conferma/staging: ogni scelta valida si applica subito alla bozza e «Salva
+  team» è l'unico commit. Il salvataggio blocca elencando attore e problema,
+  aprendo le card coinvolte; riepiloghi sempre localizzati; card con avatar,
+  badge runtime e rimozione circolare; layout responsive 320/390 px e zoom
+  200%. Etichette in 19 lingue. Dettagli e limiti:
+  desktop/docs/team-builder-model-thinking-ui.md.
+- Team Builder: nel pannello per-agente la scelta del Pensiero usa il controllo
+  value-first a quattro stop (Auto · Rapido · Bilanciato · Profondo) dell'anteprima
+  approvata: valore corrente in evidenza con ripristino esplicito, stop mappati
+  soltanto sui livelli attestati dalla capability del modello esatto, stop non
+  disponibili visibili ma non selezionabili e saltati da tastiera, valore
+  confermato divenuto non applicabile mostrato in avviso con salvataggio
+  bloccato e nessuna correzione automatica. La scelta del modello continua ad
+  aprire la modale standard del catalogo già usata nell'app (ricerca, filtri,
+  account, stati selezionabili/non selezionabili). I default del team restano
+  usati nelle nuove chat e restano modificabili per chat. Etichette in 19 lingue.
+  Dettagli e limiti: desktop/docs/team-builder-model-thinking-ui.md.
+
+- Team Builder: pannello compatto per attore. Ogni agente in «Agenti» mostra il
+  riepilogo «Modello: … · Pensiero: …» e il pulsante «Configura», che apre il
+  pannello unico modello + Pensiero dello stesso attore: il modello usa la
+  modale standard del catalogo e il Pensiero il controllo a quattro stop, senza
+  nuovi dialoghi. La sezione separata «Modelli e thinking» non esiste più; la
+  scheda di Commander vive in «Coordinamento», accanto al prompt. L'espansione
+  dei pannelli resta attiva tra i salvataggi e le card con scelte non confermate
+  restano evidenziate. Tastiera (pulsanti nativi con aria-expanded/aria-controls),
+  responsive e 19 lingue. Nessun cambiamento backend o dei default per chat.
+  Dettagli: desktop/docs/team-builder-model-thinking-ui.md.
+
+- Antigravity: recuperato il modulo sperimentale di diniego selettivo ACP,
+  con correlazione e budget per prompt, senza replay o comandi nativi.
+  Il gate resta hardcoded chiuso: nessun recupero nuovo attivo per l’utente
+  finché non è qualificato il runtime reale. Nessuna build o bump.
+  Contratti e limiti: desktop/docs/antigravity-native-recovery-notes.md.
+- Workflow: documentate regole worktree/PR, note canoniche e promozione
+  esplicita su build con SemVer crescente; nessuna nuova funzione utente.
+  Il riesame del workspace rev4 conferma che i residui locali sono superati
+  dai sorgenti già integrati, che vengono conservati senza regressioni.
+
+- Flusso locale main/beta/build: due avvii sorgente isolati `talia-main` e
+  `talia-beta`, copia iniziale opzionale e opaca della configurazione provider,
+  anteprima terminale dei commit inclusi. Packaging solo con dispatch esplicito
+  su build; validazione PR verso main/beta/build. Schermata novità beta e
+  protezioni remote ancora da completare. Nessuna nuova distribuzione.
+  Setup, verifiche e rollback: docs/contributing/beta-build-workflow.md.
+
+- Team: nella creazione/modifica il modello per membro si configura nella
+  sezione 3 «Modelli e thinking», subito dopo «Agenti» e visibile senza
+  lunghi scroll (prima la sezione compariva senza numero dopo «Connettori»,
+  oltre il bordo della finestra tipica); ogni riga agente mostra il modello
+  configurato o «Eredita / predefinito». Nessuna modifica backend, IPC o
+  storage; dettagli: desktop/docs/team-default-modelli-ui.md.
+
+- Team: il default modello per membro configurato nel Team Builder («Modelli
+  e thinking») è ora visibile nel pannello «Squadra di questa chat» della
+  bozza nuova e di progetto, con nome team, revisione del template e modello
+  di partenza di Commander e di ogni membro; la presenza manuale di un agente
+  senza override continua a preservare la chat (il template non si applica in
+  silenzio) e il pannello lo dichiara. Il modello predefinito della chat
+  mostra il template del Commander quando non c'è scelta esplicita. Per gli
+  agenti runtime ACP (Antigravity/Hermes) il Team Builder dichiara che la
+  scelta modello resta dentro la chat con sessione attiva: nessun default
+  simulato a livello team. Team eliminato con bozza allegata: avviso esplicito.
+  Nessuna modifica backend, IPC o storage; nessun provider live.
+  Dettagli, prove e limiti: desktop/docs/team-default-modelli-ui.md.
+
+- Deleghe agenti: il cooldown conserva la causa account (credito/billing,
+  rate limit temporaneo, autenticazione, permessi), invece di convertirla in
+  selezione modello indisponibile. Il coordinatore riceve una causa sanitizzata
+  e l’indicazione di non cambiare agente sullo stesso credito esaurito;
+  alternative indipendenti già autorizzate preservate. Causa ignota esplicita.
+  Verifica sintetica e limiti: desktop/docs/provider-error-propagation.md.
+  Nessuna verifica del saldo reale, nuova build o modifica dei provider.
+
+- Impostazioni: la pagina «Modelli» ora si chiama «Providers». Collegamento
+  API/OAuth ed endpoint personalizzati senza obbligo di modello;
+  il modello si sceglie nel catalogo della chat, anche tramite ID manuale per
+  endpoint personalizzati e OpenRouter. Per custom senza catalogo (Ollama,
+  LM Studio e simili), nome/ID modello facoltativo anche nel form provider,
+  persistente e selezionabile in chat senza perdere le altre voci salvate.
+  Profili senza modello persistenti e
+  configurazioni precedenti preservate. Nessuna nuova build.
+  Dettagli e limiti: desktop/docs/provider-settings.md.
+
+- Tasks: la sezione italiana si chiama Tasks; terminologia, categorie e aiuto
+  aggiornati nei 19 cataloghi. Categorie facoltative condivise per account,
+  gestione di nome/colore, archiviazione e ripristino non distruttivi.
+  Bacheca ed Elenco riusano gli stessi task, con ricerca e filtri categoria/agente
+  combinati, conteggi, reset e preferenze per account; + apre l'editor nello
+  stato della colonna. Invariati stati, conferme, Human, allegati, chat e driver.
+  Le traduzioni non sono certificate da madrelingua. Nessuna build o
+  sincronizzazione cloud aggiunta. Prove e limiti: desktop/docs/tasks-categories-ui.md.
+- Workspace a schede: le istanze divise conservano tutte le informazioni e i
+  controlli dell'header. Le bozze «Nuova attività» hanno una barra con modello,
+  destinatario, squadra, agenti/modelli, avanzate, costi e guida; l'header
+  delle chat va a capo nei pannelli stretti senza troncare titolo, progetto,
+  membri, costi o azioni; il pannello dettagli resta affiancato e non copre
+  più il toggle. Rinomina ed eliminazione aggiornano subito le linguette e il
+  link progetto apre la pagina nella finestra principale. Attivazione invariata
+  solo da Impostazioni → Generali → «Workspace a schede (sperimentale)».
+  Dettagli in desktop/docs/adaptive-workspace.md.
+- Kanban: trascinamento tra colonne, ordine verticale persistente, alternativa
+  da tastiera, responsabile Human e filtro Tutti/Human/Agenti. Play visibile
+  sostituisce il comando nel menu; matita per Modifica/Elimina. Human non è
+  avviabile e il server impedisce le modifiche degli agenti ai suoi task.
+  Due nuovi percorsi Electron globali/progetto verificati anche a viewport stretto.
+  Corretto anche l'avvio dei task assegnati: entra nella chat soltanto l'agente
+  responsabile, senza iscrivere gli altri agenti del progetto o del catalogo.
+  Tutti i 18 percorsi Electron board/Human superati dopo riproduzione del difetto.
+  Dettagli in desktop/docs/kanban-human-ui.md; nessuna nuova build.
+- Parità agente/team (backend): un team globale può essere assegnatario di un
+  task di progetto o Todos (`owner_team`/`owner_team_id`/`owner_team_revision`
+  con CAS esplicito sulla revisione), di una riga della task board/Kanban di
+  conversazione (riferimento tipizzato `assignee_team`, esecuzione resta di
+  Commander coordinatore) e destinatario di un'attività pianificata
+  (`TaskRecipient` kind `team` con apply esplicito alla conversazione creata).
+  Le menzioni `@team` nei messaggi utente instradano a Commander con
+  applicazione esplicita del team alla chat (membri, modello/thinking e
+  risorse con i contratti esistenti); nessun nuovo attore, nessun broadcast
+  implicito, inviti/permessi/approvazioni invariati. Team eliminato o risorse
+  mancanti → errore esplicito (`owner_team_invalid`, `GROUP_NOT_FOUND`,
+  `CHAT_BUSY`, `GROUP_ALREADY_BOUND`), nessun degrado silenzioso. Contratto
+  per il frontend in `desktop/docs/team-parita-backend.md`. La delega di
+  Commander supporta anche il team come bersaglio: `dispatch_to` con
+  `team:<id>` (o nome univoco) applica il team alla chat e nomina Commander
+  coordinatore (ricevuta, mai risposta di un worker fittizio, mai broadcast);
+  `hand_off_to` verso un team è rifiutato con errore tipizzato
+  (`TEAM_TARGET_UNSUPPORTED`, nessun attore esecutore); nel composer
+  `@team:<id>` indirizza il team esplicitamente anche in omonimia con un
+  agente.
+
+- Parità agente/team (frontend): ovunque si sceglie un assegnatario o un
+  destinatario è ora selezionabile anche un team, con la semantica conservativa
+  del backend (team template, Commander coordinatore, nessun broadcast). Todos
+  e task di progetto: menu assegnatario con sezione team, chip dedicata,
+  selettore `team:<id>` nell'editor con CAS sulla revisione del catalogo e
+  messaggi dedicati per `owner_team_invalid`/`owner_team_stale`/`owner_not_bound`.
+  Kanban/task board: righe team raggruppate a sé con nome persistito e badge,
+  avviso «Team non trovato» solo con catalogo letto, pulsante «Riassegna» sulle
+  righe in coda (Commander, agenti membri, team) con mappa esplicita degli
+  errori di apply e resync. Attività pianificate: destinatario team
+  (`TaskRecipient` kind `team`) con chip dedicata ed errore dedicato se il team
+  non esiste più. Composer: tab «Team» nel picker (quattro anchor) che inserisce
+  sempre il riferimento tipizzato `@team:<id>` (contratto §8.4: non ambiguo con
+  agenti omonimi o nomi team duplicati, stabile a rinomine), mostrato come chip
+  leggibile col nome del team nel composer; il bus instrada a Commander, applica
+  il team e coordina — nessun worker avviato né broadcast, e l'hand-off
+  terminale a un team non è supportato (`TEAM_TARGET_UNSUPPORTED`). UI IT/EN e
+  test renderer dedicati (board, Todos, picker, automazioni, chip menzione).
+  Dettagli e limiti in `desktop/docs/team-parita-frontend.md`;
+  QA E2E indipendente superata il 14 novembre 2026; integrazione in `main`
+  tramite pull request autorizzata dall'utente.
+
+- Team Builder: area ragionamento Commander sempre riconoscibile, anche con
+  ereditarietà/automatico. Slider discreto sui livelli canonici (3 o più quando
+  supportati), valore ereditato del modello esplicito risolto in sola lettura;
+  nessun cursore fittizio per default ignoto. Personalizzazione confermata nella
+  bozza, Default/Spento separati dai livelli; limite a due livelli dichiarato.
+  Budget token e runtime non ordinali conservano i controlli nativi. Prove locali
+  Electron IT/EN desktop/mobile, nessuna attestazione provider live.
+
+- Team Builder: i testi modello/thinking sono presenti in tutte le 19 tabelle
+  locali. L'italiano resta l'unica traduzione completa; le altre lingue ricevono
+  gli stessi testi inglesi come fallback esplicito, secondo la convenzione del
+  repository, con placeholder preservati e inserimento al medesimo punto
+  ordinale di `en.json`. Il confronto automatico delle chiavi con `main` mostra
+  solo i gap preesistenti, estranei alla feature. Nessuna traduzione certificata
+  nelle altre lingue; prove e hash nel diario di completamento i18n.
+
+- Team Builder, backend: preferenze modello e thinking per membro, incluso
+  Commander, persistite nei template e negli snapshot. Bozze esplicite e
+  impostazioni dei membri esistenti hanno precedenza; commit inferenza/roster
+  recuperabile, catalogo e capability canonici senza nuovi permessi o login.
+  Controlli frontend dinamici per attore disponibili nel pannello Team, con
+  conferma nella bozza distinta dal salvataggio del team, ereditarietà esplicita,
+  anteprima effetti e preservazione delle impostazioni già presenti. Il
+  compositore non promuove il fallback a override in una bozza team senza
+  modello esplicito. Prove locali Electron; QA indipendente del delta superata
+  localmente, nessuna certificazione provider live o regressione globale verde.
+
+- Team Builder: recovery dei nuovi journal isolato per chat. Un journal
+  corrotto non blocca le chat sane; la chat coinvolta resta protetta da
+  `RECOVERY_REQUIRED`, senza scartare dati incerti. Compatibilità conservativa
+  con i journal precedenti; se il vecchio file non contiene più un'identità
+  ricostruibile il blocco resta esteso al profilo. Recheck QA indipendente aperto.
+
+- Team Builder nel pannello Agenti: crea squadre globali al profilo con agenti,
+  skill e istanze connettore e, se serve, istruzioni solo per Commander. Salva
+  il modello senza modificare chat, poi controlla l'anteprima prima di usarlo
+  in una chat esistente o nella bozza libera/di progetto. Gli aggiornamenti
+  sono espliciti; scollegare conserva membri e cronologia. Selezionare risorse
+  non concede permessi e non connette servizi. UI IT/EN, temi e layout stretto.
+  Verifiche dedicate Electron con fixture sintetiche; QA indipendente
+  superata il 14 novembre 2026; regressioni complete ancora aperte, nessuna
+  compatibilità CLI con risorse o servizio live certificata. I dati v1 sono leggibili; il downgrade a vecchi
+  writer non è supportato. Nessuna build o modifica di versione in questa tranche.
+
+- Nella sidebar, le chat con un lavoro completato ma non ancora visualizzato
+  mostrano una spunta cerchiata accanto al titolo, con etichetta accessibile.
+  Il segnale persiste al riavvio e si rimuove quando la cronologia viene
+  effettivamente caricata fino all'ultima pagina e la fine del risultato è
+  visibile con finestra attiva, non aprendo un messaggio storico né se il
+  caricamento fallisce. Dopo un errore si può ritentare cliccando la stessa
+  chat, senza duplicare richieste pendenti. Gli altri esiti conservano il
+  puntino di attenzione esistente. Nessuna nuova build prodotta.
+
+## 0.11.0 — Store unificato e team di agenti
+
+- Il sorgente Electron usa lo Store Talia firmato per agenti, skill, connettori,
+  app e Biblioteca. Il Manuale Talia è disponibile offline e installabile.
+- I team dello Store installano agenti e dipendenze dichiarate; team e agenti
+  restano personalizzabili. Commander può proporre uno specialista con scelta
+  esplicita di installazione nella chat.
+- Il confronto degli agenti usa tag firmati separati dal catalogo e distingue
+  idoneità da disponibilità. PR, merge e pull possono restare a Commander;
+  richieste miste possono dividere implementazione e integrazione.
+- Questa sezione descrive il sorgente 0.11.0. Nessuna nuova build o verifica
+  multipiattaforma è inclusa in questo aggiornamento.
+
+## 0.10.0 — workspace a schede nelle Impostazioni
+
+- In Impostazioni → Generali è disponibile «Workspace a schede (sperimentale)».
+  La scelta è persistente sul dispositivo/profilo di installazione e ha effetto
+  solo al prossimo avvio manuale. Nessun riavvio automatico o ricreazione delle
+  viste/chat nella sessione corrente.
+- `TALIA_ADAPTIVE_WORKSPACE=1` continua a forzare l'attivazione e prevale sulla
+  preferenza; la UI spiega come rimuovere questa forzatura. Default disattivato.
+- Verificati sorgenti Electron macOS arm64, persistenza, entrambi i versi del
+  cambio al riavvio e controllo UI desktop/390 px. Packaging e collaudo del
+  pacchetto restano da eseguire: le app già installate non acquisiscono questo
+  controllo prima di una distribuzione successiva.
+  Dettagli e limiti: `desktop/docs/workspace-settings.md`.
+- Rimossa la card fissa «Manuale Talia» sopra la Biblioteca. Il documento resta
+  nell'albero dei file con indicizzazione invariata; apertura e ripristino
+  esplicito restano disponibili nello Store.
+
+- «Piano guidato» riusa il contesto, raccoglie solo i dati mancanti nei form
+  e distingue raccolta informazioni, revisione, rinvio e approvazione del piano.
+- Form chat con schede radio per domini brevi, selezione multipla, testo libero,
+  focus ed errori accessibili, stato di invio e layout responsive nei tre temi.
+- Select lunghi: ID interni preservati e nomi accessibili della domanda
+  associati al controllo e alla lista, anche durante apertura e selezione.
+- Risorsa opzionale `guided-plan` 0.2.0 nei sorgenti ready/builtin e nel worktree
+  risorse. Nessun aggiornamento di skill installate o pubblicazione Store.
+
 ## 0.9.4 — novità e miglioramenti
 
 - Le chat di progetto possono scegliere direttamente gli agenti globali installati

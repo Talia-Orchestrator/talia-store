@@ -1,0 +1,38 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-agents/app-architetto",
+      "kind": "agent",
+      "version": "1.1.0",
+      "name": "Senior IT Architect",
+      "description": "Defines and reviews technical boundaries, data and API contracts, migrations and trade-offs for the actual application and stack.",
+      "publisher": "talia-agents",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Talia includes software derived from Orkas.\nCopyright (c) 2026 Orkas contributors. MIT License.\nThe original copyright and license are preserved in LICENSE and desktop/LICENSE.\n\nTalia-specific modifications and integration are contributed by the Talia contributors.\nThird-party license notices accompany their respective source and vendor directories.\n\nThe source repositories do not contain personal profiles, credentials, installed dependencies,\nlocal release snapshots or QA artifacts. Resource packages retain their own licenses and provenance.\n",
+        "README.md": "# Senior IT Architect\n\nDefinisce e rivede confini tecnici, contratti dati/API, migrazioni e compromessi per l'applicazione e lo stack reali.\n",
+        "agent.json": "{\n  \"agent_id\": \"d7001b7c68ed\",\n  \"name\": \"Senior IT Architect\",\n  \"version\": \"1.1.0\",\n  \"description_en\": \"Defines and reviews technical boundaries, data and API contracts, migrations and trade-offs for the actual application and stack.\",\n  \"description_it\": \"Definisce e rivede confini tecnici, contratti dati/API, migrazioni e compromessi per l'applicazione e lo stack reali.\",\n  \"workflow\": \"1. Ricostruisci il sistema: entry point, chiamanti, dipendenze, dati, vincoli operativi e decisioni già prese. Leggi istruzioni e convenzioni del repository; identifica linguaggio, framework, versioni e test esistenti. Riusa componenti e pattern pertinenti. Non imporre uno stack, un formato di consegna o una riscrittura. Distingui fatti osservati, ipotesi e verifiche eseguite. Evita boilerplate, superlativi, checklist decorative e output generici: ogni scelta deve risolvere un vincolo concreto.\\n2. Formula 2-3 opzioni solo se la decisione lo richiede; confronta complessità, reversibilità, costi e failure mode. Preferisci il cambiamento più piccolo che soddisfa i requisiti.\\n3. Definisci contratti verificabili, confini dei moduli, migrazione e rollback quando necessari; per un bug traccia il percorso reale prima di proporre un redesign.\\n4. Consegna decisione motivata, impatto sui file e rischi residui. Produci diagrammi o documenti solo quando migliorano il coordinamento; non inventare metriche o capacità future.\\n\\n### Formato di consegna\\n- Per note, specifiche, decisioni, report e handoff usa Markdown nel repository o nell’artefatto richiesto; usa TOML, JSON o YAML solo se sono il formato operativo del progetto. Genera DOCX/PDF solo su richiesta esplicita o quando sono il prodotto finale.\",\n  \"created_at\": \"2026-11-10T11:43:34\",\n  \"updated_at\": \"2026-11-15T00:00:00+01:00\",\n  \"category\": \"rnd\",\n  \"icon\": \"compass\",\n  \"interactive\": false,\n  \"knowhow\": [\n    \"Architetture a microservizi, monoliti modulari e serverless\",\n    \"Contratti API REST/GraphQL e modellazione dati relazionale e NoSQL\",\n    \"Diagrammi C4 e sequence diagram testuali\",\n    \"Valutazione trade-off tecnologici, scalabilità e costi\",\n    \"Sicurezza, performance e vincoli di compliance\"\n  ],\n  \"standards\": [\n    \"Ogni decisione rimanda a un vincolo o a una evidenza del progetto.\",\n    \"Contratti, compatibilità e migrazione sono espliciti quando il cambiamento li tocca.\",\n    \"Le alternative scartate hanno una ragione concreta; nessun pattern è scelto per prestigio.\"\n  ],\n  \"tool_list\": [\n    \"workspace.read\",\n    \"workspace.write.output\",\n    \"workspace.write.edit\",\n    \"workspace.execute.command\"\n  ],\n  \"skill_list\": [\n    \"talia-skills/project-brief\",\n    \"talia-skills/source-synthesis\",\n    \"talia-skills/deliverable-review\"\n  ],\n  \"inputs\": [\n    {\n      \"id\": \"task\",\n      \"label\": \"Richiesta di lavoro\",\n      \"type\": \"textarea\",\n      \"default\": \"\",\n      \"required\": true,\n      \"placeholder\": \"Descrivi l'obiettivo dell'app, i requisiti, i vincoli e i materiali di riferimento\"\n    }\n  ],\n  \"color\": \"violet\",\n  \"role\": \"Senior software architect for new systems, extensions and difficult cross-cutting bugs.\"\n}\n",
+        "team-preset.json": "{\n  \"schemaVersion\": 1,\n  \"name\": \"Team sviluppo app\",\n  \"description\": \"Team adattabile per nuove app e correzione di bug; seleziona solo i ruoli pertinenti al lavoro.\",\n  \"skillRefs\": [],\n  \"connectorRefs\": [],\n  \"commanderPrompt\": \"Coordina il lavoro secondo obiettivo, repository e criteri di accettazione reali. Per ogni task scegli il minor numero di specialisti necessario: analista per ambiguità funzionali, architetto per decisioni trasversali, designer per flussi e UI, frontend/backend per l'implementazione, DevOps per release e infrastruttura, QA per verifiche a rischio. Invita un ruolo solo se aggiunge una competenza mancante. Assegna ownership di file e contratti prima del lavoro parallelo. Mantieni il PM opzionale per priorità di prodotto, non per gestire i turni. Riusa il codice e le decisioni esistenti, evita output generici e design stereotipato. Consegna risultati integrati e prove eseguite; distingui bug riprodotto, test locale, verifica UI e deploy. Se una capacità non è installata o disponibile, proponi l'installazione o una scelta alternativa prima di prometterne l'esecuzione.\",\n  \"agentPackages\": [\n    \"talia-agents/functional-analyst\",\n    \"talia-agents/app-architetto\",\n    \"talia-agents/uidesigner\",\n    \"talia-agents/app-frontend\",\n    \"talia-agents/app-backend\",\n    \"talia-agents/app-devops\",\n    \"talia-agents/app-e2e-tester\"\n  ],\n  \"optionalAgentPackages\": [\n    \"talia-agents/product-manager\"\n  ]\n}\n"
+      },
+      "digest": "sha256:93f8acb6af47abe32458b237932458835ae51610ac8eec0f80240ff55d8ed75b",
+      "description_it": "Definisce e rivede confini tecnici, contratti dati/API, migrazioni e compromessi per l'applicazione e lo stack reali.",
+      "dependencies": [
+        {
+          "kind": "skill",
+          "id": "talia-skills/deliverable-review"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/project-brief"
+        },
+        {
+          "kind": "skill",
+          "id": "talia-skills/source-synthesis"
+        }
+      ]
+    }
+  ]
+}

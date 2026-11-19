@@ -1,0 +1,24 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-connectors/google-workspace",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Google Workspace",
+      "description": "Catalog listing for Google Workspace. Direct authentication is not yet available in Talia; installation does not connect the service.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\nCopyright (c) 2026 Talia contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Catalog listing maintained by Talia. Google Workspace is a third-party service; this package is not endorsed by its provider.\n",
+        "README.md": "# Google Workspace\n\nCatalog listing for Talia. This package contains no credentials or executable code.\n\nDirect authentication is not available yet. Installing this listing does not connect Google Workspace; Talia will show it as unavailable until the integration is implemented and verified.\n",
+        "connector.json": "{\n  \"schemaVersion\": 1,\n  \"catalog_listing\": {\n    \"id\": \"google-workspace\",\n    \"display_name\": \"Google Workspace\",\n    \"category\": \"productivity\",\n    \"description_en\": \"Connect Gmail, Calendar, Docs, Sheets, and Tasks in one consent; individual services can also be connected separately.\",\n    \"description_it\": \"Collega Gmail, Calendar, Docs, Sheets e Tasks con un unico consenso; i singoli servizi possono anche essere collegati separatamente.\",\n    \"integration_state\": \"requires_direct_auth\"\n  }\n}\n"
+      },
+      "digest": "sha256:7a0ec73875fc641a437d1fd9f20e4936b2f728775e0f69da3a5f2398d82e265e",
+      "description_it": "Scheda di Google Workspace. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
+      "minHostVersion": "0.11.0"
+    }
+  ]
+}

@@ -21,7 +21,7 @@ valido: non ricostruire `catalog.json` e non rigenerare `catalog.signature.json`
 
 ## 2. Aggiornare il catalogo delle risorse, quando necessario
 
-1. Integrare e verificare i pacchetti sotto  nello stesso repository Store.
+1. Integrare e verificare i pacchetti nello stesso repository Store.
 2. Preparare un checkout pulito e aggiornato di `talia-store`; la CI non usa
    altri repository come sorgente del catalogo.
 3. Eseguire `npm run build:catalog`. Esaminare il diff completo
