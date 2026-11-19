@@ -1,0 +1,24 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-connectors/atlassian-jira",
+      "kind": "connector",
+      "version": "1.1.0",
+      "name": "Jira (read pilot)",
+      "description": "Pilot read-only connector for Jira, limited to selected project resources.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\nCopyright (c) 2026 Talia contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Talia Jira Store reference. The package contains only declarative configuration metadata.\nProvider and implementation reference: https://github.com/sooperset/mcp-atlassian\n",
+        "README.md": "# Jira\n\nRead-only pilot. Use the HTTPS Jira URL including its context path on Data Center. Configure the account token and permitted resources in Talia.\n",
+        "connector.json": "{\n  \"schemaVersion\": 1,\n  \"independent_connector\": {\n    \"schemaVersion\": 1,\n    \"id\": \"talia-connectors/atlassian-jira\",\n    \"auth\": \"user_choice\",\n    \"scope\": \"project\",\n    \"operations\": [\n      {\n        \"id\": \"project\",\n        \"method\": \"GET\",\n        \"route\": \"/rest/api/2/project/{scope}\"\n      },\n      {\n        \"id\": \"statuses\",\n        \"method\": \"GET\",\n        \"route\": \"/rest/api/2/project/{scope}/statuses\"\n      },\n      {\n        \"id\": \"search\",\n        \"method\": \"GET\",\n        \"route\": \"/rest/api/2/search\",\n        \"scopeQuery\": {\n          \"name\": \"jql\",\n          \"field\": \"project\"\n        }\n      }\n    ]\n  }\n}\n"
+      },
+      "digest": "sha256:109c4c43c8904119c66939c03914c08ee6e47612f7f7be30e6dfb8c7f8b12376",
+      "description_it": "Connettore pilota in sola lettura per Jira, limitato alle risorse selezionate.",
+      "minHostVersion": "0.15.0"
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 {
   "id": "talia-connectors/atlassian-jira",
   "kind": "connector",
-  "version": "1.0.0",
-  "name": "Atlassian Jira",
-  "description": "Connect Jira Cloud or Data Center with a token and restrict access to selected projects. Choose read-only or read and write.",
-  "description_it": "Collega Jira Cloud o Data Center con un token, limita l’accesso ai progetti selezionati e scegli tra sola lettura e lettura e scrittura.",
+  "version": "1.1.0",
+  "name": "Jira (read pilot)",
+  "description": "Pilot read-only connector for Jira, limited to selected project resources.",
+  "description_it": "Connettore pilota in sola lettura per Jira, limitato alle risorse selezionate.",
   "publisher": "talia-connectors",
   "license": "MIT",
   "minHostVersion": "0.15.0"

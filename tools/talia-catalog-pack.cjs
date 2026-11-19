@@ -16,6 +16,43 @@ const MAX_V2_PACKAGE_BYTES = 4 * 1024 * 1024;
 const MAX_V2_TOTAL_BYTES = 8 * 1024 * 1024;
 const RESERVED_FILE = '_install.json';
 
+function validIndependentConnector(manifest, id) {
+  const hasKeys = (value, keys) => value && typeof value === 'object' && !Array.isArray(value)
+    && Object.keys(value).sort().join(',') === keys;
+  if (!hasKeys(manifest, 'auth,id,operations,schemaVersion,scope') || manifest.schemaVersion !== 1
+      || manifest.id !== id || !/^[a-z][a-z0-9-]{0,48}\/[a-z][a-z0-9-]{0,48}$/.test(id)
+      || !['bearer', 'basic', 'user_choice'].includes(manifest.auth) || !['space', 'project', 'repository'].includes(manifest.scope)
+      || !Array.isArray(manifest.operations) || manifest.operations.length < 1 || manifest.operations.length > 64) return false;
+  const ids = new Set();
+  for (const operation of manifest.operations) {
+    if (!(hasKeys(operation, 'id,method,route') || hasKeys(operation, 'id,method,route,scopeQuery') || hasKeys(operation, 'bodyTextPath,id,method,route')) || typeof operation.id !== 'string'
+        || !/^[a-z][a-z0-9_]{0,63}$/.test(operation.id) || ids.has(operation.id)
+        || !['GET', 'POST', 'PUT', 'PATCH'].includes(operation.method)
+        || typeof operation.route !== 'string' || operation.route.length > 512 || !operation.route.startsWith('/')) return false;
+    const segments = operation.route.slice(1).split('/');
+    const body = operation.bodyTextPath;
+    if (body !== undefined && (operation.method !== 'POST' || !Array.isArray(body) || body.length < 1 || body.length > 3
+        || body.some(part => typeof part !== 'string' || !/^[a-zA-Z][a-zA-Z0-9_]{0,39}$/.test(part)
+          || ['constructor', 'prototype', 'project', 'space', 'repository'].includes(part.toLowerCase())))) return false;
+    const itemCount = segments.filter(segment => segment === '{item}').length;
+    if (itemCount > 1 || (itemCount === 1 && !body)) return false;
+    const scopeCount = segments.filter(segment => segment === '{scope}').length;
+    const ownerCount = segments.filter(segment => segment === '{owner}').length;
+    const repositoryCount = segments.filter(segment => segment === '{repository}').length;
+    const query = operation.scopeQuery;
+    const validQuery = query === undefined || (hasKeys(query, 'field,name') && operation.method === 'GET'
+      && ((query.name === 'jql' && query.field === 'project') || (query.name === 'cql' && query.field === 'space'))
+      && query.field === manifest.scope);
+    if (!validQuery || !((query && scopeCount === 0 && ownerCount === 0 && repositoryCount === 0)
+        || (!query && scopeCount === 1 && ownerCount === 0 && repositoryCount === 0)
+        || (!query && manifest.scope === 'repository' && scopeCount === 0 && ownerCount === 1 && repositoryCount === 1))
+        || segments.some(segment => !['{scope}', '{owner}', '{repository}', '{item}'].includes(segment)
+          && !/^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,79}$/.test(segment))) return false;
+    ids.add(operation.id);
+  }
+  return true;
+}
+
 function fail(message) {
   throw new Error(message);
 }
@@ -300,7 +337,10 @@ function readPackage(packageDirectory, formatVersion = 1) {
     if (!connector || typeof connector !== 'object' || Array.isArray(connector) || connector.schemaVersion !== 1) {
       fail(`${id}: connector.json must use schemaVersion 1`);
     }
-    if (connector.catalog_listing !== undefined && connector.preset === undefined && connector.template === undefined && connector.catalog_reference === undefined) {
+    if (Object.hasOwn(connector, 'independent_connector')) {
+      if (Object.keys(connector).sort().join(',') !== 'independent_connector,schemaVersion'
+          || !validIndependentConnector(connector.independent_connector, id)) fail(`${id}: invalid independent connector manifest`);
+    } else if (connector.catalog_listing !== undefined && connector.preset === undefined && connector.template === undefined && connector.catalog_reference === undefined) {
       const listing = connector.catalog_listing;
       const selected = new Set(['atlassian','bitbucket','excel','gcal','gdocs','gdrive','github','gitlab','gmail','google-ads','google-analytics','google-bigquery','google-classroom','google-maps','google-meet','google-photos','google-slides','google-tasks','google-workspace','gsearch-console','gsheets','gtasks','hugging-face','m365-calendar','m365-mail','microsoft-teams','onedrive','outlook','youtube']);
       if (Object.keys(connector).sort().join(',') !== 'catalog_listing,schemaVersion'

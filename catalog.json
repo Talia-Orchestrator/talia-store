@@ -775,52 +775,69 @@
     {
       "id": "talia-connectors/atlassian-bitbucket",
       "kind": "connector",
-      "version": "1.0.0",
-      "name": "Atlassian Bitbucket",
-      "description": "Connect Bitbucket Cloud or Data Center with a token and restrict access to selected repositories. Choose read-only or read and write.",
+      "version": "1.1.0",
+      "name": "Bitbucket Cloud (read pilot)",
+      "description": "Pilot connector for Bitbucket Cloud, limited to selected repository resources. Supports pull request comments with confirmation.",
       "publisher": "talia-connectors",
       "license": "MIT",
-      "digest": "sha256:879bddc10e7bb48cfe0c31a40d8c5137869d38307e93b3c813cd44ee3135dcca",
-      "description_it": "Collega Bitbucket Cloud o Data Center con un token, limita l’accesso ai repository selezionati e scegli tra sola lettura e lettura e scrittura.",
+      "digest": "sha256:27c59658dda8495fff41a31ca1a51134fab842c69fa316443ccac502cffb6a4e",
+      "description_it": "Connettore pilota per Bitbucket Cloud, limitato alle risorse selezionate. Consente commenti alle pull request previa conferma.",
       "minHostVersion": "0.15.0",
       "artifact": {
-        "url": "artifacts/talia-connectors-atlassian-bitbucket-1.0.0.json",
-        "sha256": "sha256:ad01fac8fb264c1aa44c048f86544cc12b7efbf2c579d7d329e0c03859e88654",
-        "size": 2737
+        "url": "artifacts/talia-connectors-atlassian-bitbucket-1.1.0.json",
+        "sha256": "sha256:db8aad49513ca1fbcdf119d4d7f3d60dd170c271ed9999e97f0ea066f5751893",
+        "size": 3184
+      }
+    },
+    {
+      "id": "talia-connectors/atlassian-bitbucket-datacenter",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Bitbucket Data Center (read pilot)",
+      "description": "Pilot connector for Bitbucket Data Center, limited to selected repository resources. Supports pull request comments with confirmation.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:88179f00f1a812f0c89c2d877c2d413b2e002ff126fe02583c361b6e14611881",
+      "description_it": "Connettore pilota per Bitbucket Data Center, limitato alle risorse selezionate. Consente commenti alle pull request previa conferma.",
+      "minHostVersion": "0.15.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-atlassian-bitbucket-datacenter-1.0.0.json",
+        "sha256": "sha256:7cf1f54e833ec053f7079d3ad5a19765474b61149f740110e820f68d7fbc6914",
+        "size": 3271
       }
     },
     {
       "id": "talia-connectors/atlassian-confluence",
       "kind": "connector",
-      "version": "1.0.0",
-      "name": "Atlassian Confluence",
-      "description": "Connect Confluence Cloud or Data Center with a token and restrict access to selected spaces. Choose read-only or read and write.",
+      "version": "1.1.0",
+      "name": "Confluence (read pilot)",
+      "description": "Pilot read-only connector for Confluence, limited to selected space resources.",
       "publisher": "talia-connectors",
       "license": "MIT",
-      "digest": "sha256:a66b15511ac7913648e80e2d56b5781b4df13529f0eedeebfa8c6315d8be3b53",
-      "description_it": "Collega Confluence Cloud o Data Center con un token, limita l’accesso agli spazi selezionati e scegli tra sola lettura e lettura e scrittura.",
+      "digest": "sha256:3526469622a2a87468b52ed45c1e38d4cec990c06b04451ee6d8011585cd27c4",
+      "description_it": "Connettore pilota in sola lettura per Confluence, limitato alle risorse selezionate.",
       "minHostVersion": "0.15.0",
       "artifact": {
-        "url": "artifacts/talia-connectors-atlassian-confluence-1.0.0.json",
-        "sha256": "sha256:02b29397c8a1bcce04e90c1a93d0e62003015bef9a22c94ab3ddcae9299cee69",
-        "size": 2723
+        "url": "artifacts/talia-connectors-atlassian-confluence-1.1.0.json",
+        "sha256": "sha256:106585320581b2f9749382f36e7ad32a1e7b8a8935fb5825983c0cfd97b58f66",
+        "size": 2797
       }
     },
     {
       "id": "talia-connectors/atlassian-jira",
       "kind": "connector",
-      "version": "1.0.0",
-      "name": "Atlassian Jira",
-      "description": "Connect Jira Cloud or Data Center with a token and restrict access to selected projects. Choose read-only or read and write.",
+      "version": "1.1.0",
+      "name": "Jira (read pilot)",
+      "description": "Pilot read-only connector for Jira, limited to selected project resources.",
       "publisher": "talia-connectors",
       "license": "MIT",
-      "digest": "sha256:622215843b4daa39084323351bb256033ec54e935a0a29089156c33e5a3da0b3",
-      "description_it": "Collega Jira Cloud o Data Center con un token, limita l’accesso ai progetti selezionati e scegli tra sola lettura e lettura e scrittura.",
+      "digest": "sha256:109c4c43c8904119c66939c03914c08ee6e47612f7f7be30e6dfb8c7f8b12376",
+      "description_it": "Connettore pilota in sola lettura per Jira, limitato alle risorse selezionate.",
       "minHostVersion": "0.15.0",
       "artifact": {
-        "url": "artifacts/talia-connectors-atlassian-jira-1.0.0.json",
-        "sha256": "sha256:a06d1c6724cd9a11098a41a850f435d873fe7bd65fcba4e04e2ea5de6061cc37",
-        "size": 2674
+        "url": "artifacts/talia-connectors-atlassian-jira-1.1.0.json",
+        "sha256": "sha256:927084fcc7528c21756e7822fa07e9b09ef37b6bbb9bc7337c2ef2a9fbd14fd6",
+        "size": 2943
       }
     },
     {

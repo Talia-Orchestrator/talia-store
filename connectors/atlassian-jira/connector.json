@@ -1,7 +1,30 @@
 {
   "schemaVersion": 1,
-  "catalog_reference": {
+  "independent_connector": {
+    "schemaVersion": 1,
     "id": "talia-connectors/atlassian-jira",
-    "catalog_id": "atlassian-jira"
+    "auth": "user_choice",
+    "scope": "project",
+    "operations": [
+      {
+        "id": "project",
+        "method": "GET",
+        "route": "/rest/api/2/project/{scope}"
+      },
+      {
+        "id": "statuses",
+        "method": "GET",
+        "route": "/rest/api/2/project/{scope}/statuses"
+      },
+      {
+        "id": "search",
+        "method": "GET",
+        "route": "/rest/api/2/search",
+        "scopeQuery": {
+          "name": "jql",
+          "field": "project"
+        }
+      }
+    ]
   }
 }

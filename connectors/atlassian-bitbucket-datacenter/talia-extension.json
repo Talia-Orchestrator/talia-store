@@ -1,0 +1,11 @@
+{
+  "id": "talia-connectors/atlassian-bitbucket-datacenter",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "Bitbucket Data Center (read pilot)",
+  "description": "Pilot connector for Bitbucket Data Center, limited to selected repository resources. Supports pull request comments with confirmation.",
+  "description_it": "Connettore pilota per Bitbucket Data Center, limitato alle risorse selezionate. Consente commenti alle pull request previa conferma.",
+  "publisher": "talia-connectors",
+  "license": "MIT",
+  "minHostVersion": "0.15.0"
+}

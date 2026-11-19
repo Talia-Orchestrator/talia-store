@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "independent_connector": {
+    "schemaVersion": 1,
+    "id": "talia-connectors/atlassian-bitbucket-datacenter",
+    "auth": "bearer",
+    "scope": "repository",
+    "operations": [
+      {
+        "id": "pull_requests",
+        "method": "GET",
+        "route": "/rest/api/1.0/projects/{owner}/repos/{repository}/pull-requests"
+      },
+      {
+        "id": "commits",
+        "method": "GET",
+        "route": "/rest/api/1.0/projects/{owner}/repos/{repository}/commits"
+      },
+      {
+        "id": "comment_pull_request",
+        "method": "POST",
+        "route": "/rest/api/1.0/projects/{owner}/repos/{repository}/pull-requests/{item}/comments",
+        "bodyTextPath": [
+          "text"
+        ]
+      }
+    ]
+  }
+}

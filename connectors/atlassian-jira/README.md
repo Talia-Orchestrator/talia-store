@@ -1,5 +1,3 @@
-# Atlassian Jira
+# Jira
 
-Open the built-in Jira token setup from Talia Store. Configure the instance and token in Talia. Scope access to selected projects. Data Center uses a personal access token. Installing this reference records the package without opening a connection.
-
-[Provider and implementation reference](https://github.com/sooperset/mcp-atlassian)
+Read-only pilot. Use the HTTPS Jira URL including its context path on Data Center. Configure the account token and permitted resources in Talia.
