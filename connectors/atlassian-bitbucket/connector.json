@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "catalog_reference": {
+    "id": "talia-connectors/atlassian-bitbucket",
+    "catalog_id": "atlassian-bitbucket"
+  }
+}

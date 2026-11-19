@@ -1,0 +1,24 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-connectors/atlassian-jira",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "Atlassian Jira",
+      "description": "Connect Jira Cloud or Data Center with a token and restrict access to selected projects. Choose read-only or read and write.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\nCopyright (c) 2026 Talia contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Talia Jira Store reference. The package contains only declarative configuration metadata.\nProvider and implementation reference: https://github.com/sooperset/mcp-atlassian\n",
+        "README.md": "# Atlassian Jira\n\nOpen the built-in Jira token setup from Talia Store. Configure the instance and token in Talia. Scope access to selected projects. Data Center uses a personal access token. Installing this reference records the package without opening a connection.\n\n[Provider and implementation reference](https://github.com/sooperset/mcp-atlassian)\n",
+        "connector.json": "{\n  \"schemaVersion\": 1,\n  \"catalog_reference\": {\n    \"id\": \"talia-connectors/atlassian-jira\",\n    \"catalog_id\": \"atlassian-jira\"\n  }\n}\n"
+      },
+      "digest": "sha256:622215843b4daa39084323351bb256033ec54e935a0a29089156c33e5a3da0b3",
+      "description_it": "Collega Jira Cloud o Data Center con un token, limita l’accesso ai progetti selezionati e scegli tra sola lettura e lettura e scrittura.",
+      "minHostVersion": "0.15.0"
+    }
+  ]
+}

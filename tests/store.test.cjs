@@ -60,7 +60,7 @@ test('packer accepts only coordinated built-in CLI references', () => {
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);
   const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app', 'library'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
-  assert.deepEqual(counts, { agent: 17, skill: 28, connector: 49, app: 3, library: 1 });
+  assert.deepEqual(counts, { agent: 17, skill: 28, connector: 52, app: 3, library: 1 });
   const agents = new Set(catalog.packages.filter((pkg) => pkg.kind === 'agent').map((pkg) => pkg.id));
   assert.deepEqual([...agents].sort(), [
     'talia-agents/app-architetto',
@@ -122,7 +122,7 @@ test('selected service listings are inert and complete', () => {
     assert.equal(connector.catalog_listing.integration_state,'requires_direct_auth');
     assert.equal(item.minHostVersion,'0.11.0');
   }
-  assert.equal(catalog.packages.filter(pkg=>pkg.kind==='connector' && pkg.id.startsWith('talia-connectors/')).length,selected.length+4);
+  assert.equal(catalog.packages.filter(pkg=>pkg.kind==='connector' && pkg.id.startsWith('talia-connectors/')).length,selected.length+7);
 });
 
 test('CLI Store entries reference only the matching built-in setup', () => {
@@ -136,6 +136,17 @@ test('CLI Store entries reference only the matching built-in setup', () => {
   }
   assert.equal(catalog.packages.some(pkg => pkg.id === 'talia-connectors/lark'), false);
   assert.equal(catalog.packages.some(pkg => pkg.id === 'talia-connectors/xero'), false);
+});
+test('Atlassian references target the matching built-in token setup', () => {
+  for (const slug of ['atlassian-confluence', 'atlassian-jira', 'atlassian-bitbucket']) {
+    const id = `talia-connectors/${slug}`;
+    const item = catalog.packages.find(pkg => pkg.id === id);
+    assert.equal(item?.minHostVersion, '0.15.0');
+    const { packages: [pkg] } = JSON.parse(fs.readFileSync(path.join(root, item.artifact.url), 'utf8'));
+    assert.deepEqual(JSON.parse(pkg.files['connector.json']), {
+      schemaVersion: 1, catalog_reference: { id, catalog_id: slug },
+    });
+  }
 });
 test('the complete Library manual has one canonical source and a signed artifact', () => {
   const item = catalog.packages.find(pkg => pkg.id === 'talia-library/manuale-talia');

@@ -315,11 +315,11 @@ function readPackage(packageDirectory, formatVersion = 1) {
       }
     } else if (connector.catalog_reference !== undefined && connector.preset === undefined && connector.template === undefined) {
       const reference = connector.catalog_reference;
-      const allowed = {wecom: 'talia-connectors/wecom', feishu: 'talia-connectors/feishu', dingtalk: 'talia-connectors/dingtalk'};
+      const allowed = new Set(['wecom', 'feishu', 'dingtalk', 'atlassian-confluence', 'atlassian-jira', 'atlassian-bitbucket']);
       if (Object.keys(connector).sort().join(',') !== 'catalog_reference,schemaVersion'
         || !reference || typeof reference !== 'object' || Array.isArray(reference)
         || Object.keys(reference).sort().join(',') !== 'catalog_id,id'
-        || allowed[reference.catalog_id] !== id || reference.id !== id) fail(`${id}: invalid catalog reference`);
+        || !allowed.has(reference.catalog_id) || id !== `talia-connectors/${reference.catalog_id}` || reference.id !== id) fail(`${id}: invalid catalog reference`);
     } else if (connector.preset !== undefined && connector.template === undefined) {
       if (!connector.preset || typeof connector.preset !== 'object' || Array.isArray(connector.preset)) fail(`${id}: connector preset must be an object`);
       if (Object.keys(connector).some(key => !['schemaVersion','preset','runtime'].includes(key))) fail(`${id}: connector preset has unknown fields`);
