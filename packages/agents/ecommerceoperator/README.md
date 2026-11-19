@@ -1,0 +1,5 @@
+# ECommerceOperator
+
+Source status: Legacy specialist reference; retained for existing installs and reference, not seeded for new profiles. Existing installs are preserved; legacy package remains available for reference and is not part of the fresh-profile seed.
+
+See LICENSE and NOTICE for license and provenance.

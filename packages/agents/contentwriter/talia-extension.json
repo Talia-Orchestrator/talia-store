@@ -1,0 +1,15 @@
+{
+  "id": "talia-agents/contentwriter",
+  "kind": "agent",
+  "version": "1.0.38",
+  "name": "ContentWriter",
+  "description": "Drafts and revises publication-ready social posts, articles, newsletters, tutorials and case studies from goals, sources or drafts; adapts voice and structure, humanizes prose, and checks evidence and citations.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/content-writer"
+    }
+  ]
+}

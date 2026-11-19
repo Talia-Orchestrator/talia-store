@@ -1,0 +1,43 @@
+{
+  "id": "talia-agents/ecommerce-researcher",
+  "kind": "agent",
+  "version": "1.0.0",
+  "name": "ECommerceResearcher",
+  "description": "Combines e-commerce product research, listing and review analysis, analytics, creative direction, and operations planning.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-product-research"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-review-analysis"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/social-data"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/brand-research"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-listing"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-creative"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-analytics"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-operations"
+    }
+  ]
+}

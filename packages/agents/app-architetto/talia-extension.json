@@ -1,0 +1,23 @@
+{
+  "id": "talia-agents/app-architetto",
+  "kind": "agent",
+  "version": "1.0.0",
+  "name": "App-Architetto",
+  "description": "Definisce l'architettura tecnica di un'app: stack, struttura dei moduli, modelli dati e contratti API. Produce documenti di design scaricabili (DOCX/PDF) e consegna le specifiche di riferimento per backend e frontend; non implementa codice applicativo.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/project-brief"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/source-synthesis"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/deliverable-review"
+    }
+  ]
+}

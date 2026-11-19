@@ -1,0 +1,9 @@
+{
+  "id": "talia-agents/seogeoagent",
+  "kind": "agent",
+  "version": "1.0.53",
+  "name": "SeoGeoAgent",
+  "description": "Audits and improves website SEO/GEO: technical SEO, indexing, structured data, Core Web Vitals, content quality and AI citability. Delivers scores, prioritized actions and dashboards; monitors regressions, fixes supplied repositories with retesting, writes GEO content, and evaluates backlink or guest-post pricing.",
+  "publisher": "talia-agents",
+  "license": "MIT"
+}

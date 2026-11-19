@@ -1,0 +1,48 @@
+{
+  "agent_id": "937f3361c752",
+  "name": "App-DevOps",
+  "version": "1.0.0",
+  "description_en": "Configura CI/CD, containerizzazione, ambienti e pipeline di deploy. Scrive Dockerfile, script di automazione e documentazione operativa scaricabile; non implementa logica di business applicativa.",
+  "workflow": "### 1. Analizza il progetto e i requisiti di deployment\n- `read_files` e `list_files` — esamina struttura del progetto, dipendenze e script esistenti\n- Identifica target di deploy (container, cloud, serverless), ambienti (dev/staging/prod) e requisiti di scalabilità\n\n### 2. Configura CI/CD e containerizzazione\n- `write_file` — crea Dockerfile, docker-compose, script di build e pipeline CI/CD\n- `bash` — testa localmente i comandi di build e le immagini container\n  - se un comando richiede esecuzione prolungata → `process_session` per monitorarne l'output\n\n### 3. Documenta le operazioni\n- `create_docx` o `create_pdf` — genera documentazione operativa (setup ambienti, pipeline, runbook) come file scaricabile\n- `write_file` — salva README di deploy e template di variabili d'ambiente\n\n### 4. Verifica e consegna\n- `deliverable-review` — controlla che i file e la documentazione coprano setup, deploy e rollback\n- Consegna script, file di configurazione e documentazione scaricabile",
+  "created_at": "2026-11-10T11:43:34",
+  "updated_at": "2026-11-10T11:43:34",
+  "category": "rnd",
+  "icon": "rocket",
+  "interactive": false,
+  "knowhow": [
+    "Docker, docker-compose e orchestrazione container",
+    "Pipeline CI/CD (GitHub Actions, GitLab CI)",
+    "Deployment cloud e serverless",
+    "Gestione ambienti, segreti e variabili d'ambiente",
+    "Monitoraggio, logging e runbook operativi"
+  ],
+  "standards": [
+    "Dockerfile e pipeline CI/CD sono testati e funzionano",
+    "La documentazione copre setup, deploy e rollback",
+    "I segreti sono gestiti tramite variabili d'ambiente, mai hardcoded",
+    "Gli ambienti dev/staging/prod sono separati e riproducibili"
+  ],
+  "tool_list": [
+    "workspace.read",
+    "workspace.write.output",
+    "workspace.write.edit",
+    "workspace.execute.command",
+    "workspace.execute.session",
+    "office.word",
+    "office.pdf"
+  ],
+  "skill_list": [
+    "talia-skills/deliverable-review"
+  ],
+  "inputs": [
+    {
+      "id": "task",
+      "label": "Richiesta di lavoro",
+      "type": "textarea",
+      "default": "",
+      "required": true,
+      "placeholder": "Descrivi i requisiti di deployment: target, ambienti, stack e vincoli"
+    }
+  ],
+  "color": "lime"
+}

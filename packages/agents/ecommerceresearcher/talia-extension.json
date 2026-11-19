@@ -1,0 +1,27 @@
+{
+  "id": "talia-agents/ecommerceresearcher",
+  "kind": "agent",
+  "version": "1.1.4",
+  "name": "ECommerceResearcher",
+  "description": "Selects ecommerce products for merchant budgets, markets and sourcing constraints; compares demand, competition and unit economics to deliver candidates, rejection reasons and validation plans; not for operating-performance analysis, deep VOC or copywriting; For: \"choose my next product\", \"compare these product opportunities\", \"validate this category\"; Triggers: product selection, category opportunity, competitors, sourcing, unit economics",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-product-research"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-review-analysis"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/social-data"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/brand-research"
+    }
+  ]
+}

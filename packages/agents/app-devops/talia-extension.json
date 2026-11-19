@@ -1,0 +1,15 @@
+{
+  "id": "talia-agents/app-devops",
+  "kind": "agent",
+  "version": "1.0.0",
+  "name": "App-DevOps",
+  "description": "Configura CI/CD, containerizzazione, ambienti e pipeline di deploy. Scrive Dockerfile, script di automazione e documentazione operativa scaricabile; non implementa logica di business applicativa.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/deliverable-review"
+    }
+  ]
+}

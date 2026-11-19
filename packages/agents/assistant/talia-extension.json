@@ -1,0 +1,27 @@
+{
+  "id": "talia-agents/assistant",
+  "kind": "agent",
+  "version": "1.0.0",
+  "name": "Assistant",
+  "description": "General-purpose assistant for planning, writing, analysis, and practical follow-through.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/source-synthesis"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/material-organizer"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/project-brief"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/deliverable-review"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "talia-agents/general-researcher",
+  "kind": "agent",
+  "version": "1.0.0",
+  "name": "General Researcher",
+  "description": "General researcher who gathers and compares evidence, tracks source provenance, and reports uncertainty.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/source-synthesis"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/material-organizer"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/project-brief"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/deliverable-review"
+    }
+  ]
+}

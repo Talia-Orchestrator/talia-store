@@ -1,0 +1,15 @@
+{
+  "id": "talia-agents/pptmaker",
+  "kind": "agent",
+  "version": "1.2.30",
+  "name": "PptMaker",
+  "description": "Creates, edits and reviews native editable PPTX presentations or deck outlines from topics, documents, data, visual references or existing decks. Follows supplied visual direction or develops an audience-led design and checks rendered results.",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/office-ppt"
+    }
+  ]
+}
