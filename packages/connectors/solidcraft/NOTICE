@@ -1,0 +1,12 @@
+SolidCraft MCP connector metadata for Talia.
+Copyright (c) 2026 Talia contributors. MIT License (see LICENSE).
+
+This package contains declarative integration metadata and documentation only.
+It does not include, download or redistribute SolidCraft or its binaries.
+SolidCraft is an independent project by Tangency Labs and its contributors:
+https://github.com/tangency-labs/solidcraft
+SolidCraft source licensing: MIT OR Apache-2.0; consult upstream notices.
+This Talia integration is not an endorsement by Tangency Labs.
+
+Configuration source: https://docs.solidcraft.io/guide/mcp.html
+Documentation checked on 2026-11-12.

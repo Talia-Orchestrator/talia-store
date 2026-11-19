@@ -1,0 +1,9 @@
+{
+  "id": "artcraft/craft-anything",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "Craft Anything MCP",
+  "description": "Configure the official Craft Anything MCP command for this device. Configure only on the user device.",
+  "publisher": "artcraft",
+  "license": "MIT"
+}

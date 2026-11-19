@@ -1,0 +1,9 @@
+{
+  "id": "artcraft/cadcraft",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "CADCraft MCP",
+  "description": "Configure the official CADCraft MCP command for this device. Configure only on the user device.",
+  "publisher": "artcraft",
+  "license": "MIT"
+}

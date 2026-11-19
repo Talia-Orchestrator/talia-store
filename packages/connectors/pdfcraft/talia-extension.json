@@ -1,0 +1,9 @@
+{
+  "id": "artcraft/pdfcraft",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "PDFCraft MCP",
+  "description": "Configure the official PDFCraft MCP command for this device. Configure only on the user device.",
+  "publisher": "artcraft",
+  "license": "MIT"
+}

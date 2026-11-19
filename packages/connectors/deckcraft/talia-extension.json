@@ -1,0 +1,9 @@
+{
+  "id": "artcraft/deckcraft",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "DeckCraft MCP",
+  "description": "Configure the official DeckCraft MCP command for this device. Configure only on the user device.",
+  "publisher": "artcraft",
+  "license": "MIT"
+}

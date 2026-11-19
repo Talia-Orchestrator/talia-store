@@ -1,0 +1,9 @@
+{
+  "id": "artcraft/soundcraft",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "SoundCraft MCP",
+  "description": "Configure the official SoundCraft MCP command for this device. Configure only on the user device.",
+  "publisher": "artcraft",
+  "license": "MIT"
+}
