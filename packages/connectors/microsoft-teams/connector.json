@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "microsoft-teams",
+    "display_name": "Microsoft Teams",
+    "category": "communication",
+    "description_en": "Search team messages, send chats and replies, and view meeting resources, subject to organization permissions.",
+    "description_it": "Cerca messaggi del team, invia messaggi in chat e risposte e visualizza risorse delle riunioni, in base alle autorizzazioni dell'organizzazione.",
+    "integration_state": "requires_direct_auth"
+  }
+}

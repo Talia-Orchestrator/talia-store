@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "name": "project-brief",
   "description": "Turn an objective and supplied materials into a project brief with scope, constraints and observable acceptance criteria.",
+  "description_it": "Trasforma un obiettivo e materiali forniti in un brief di progetto con ambito, vincoli e criteri di accettazione osservabili.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

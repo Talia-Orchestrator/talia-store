@@ -1,6 +1,7 @@
 ---
 name: impeccable-ui
 description_en: "Apply Impeccable UI/UX design vocabulary, critique, audit, typography, layout, responsive behavior and design-system refinement through Talia's available tools."
+description_it: "Applica il vocabolario di design UI/UX di Impeccable — critica, audit, tipografia, layout, comportamento responsive e raffinamento del design system — tramite i tool disponibili di Talia."
 ---
 
 # Impeccable UI for Talia

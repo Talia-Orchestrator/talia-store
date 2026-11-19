@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "google-meet",
+    "display_name": "Google Meet",
+    "category": "communication",
+    "description_en": "Create meeting spaces; view participants, recordings, and transcripts where your account permits.",
+    "description_it": "Crea spazi per riunioni; visualizza partecipanti, registrazioni e trascrizioni dove consentito dal tuo account.",
+    "integration_state": "requires_direct_auth"
+  }
+}

@@ -4,6 +4,7 @@
   "version": "1.0.7",
   "name": "swiftui-dev",
   "description": "Review or refactor SwiftUI architecture, state, rendering, scrolling and layout, or diagnose native macOS/iOS hotspots from profiling evidence; not web or server profiling.",
+  "description_it": "Revisiona o rifattorizza architettura SwiftUI, stato, rendering, scrolling e layout, o diagnostica hotspot nativi macOS/iOS da evidenze di profiling; non profiling web o server.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

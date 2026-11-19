@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "name": "PhotoCraft MCP",
   "description": "Configure the official PhotoCraft MCP command for this device. Configure only on the user device.",
+  "description_it": "Configura il comando MCP ufficiale di PhotoCraft per questo dispositivo. Configurare solo sul dispositivo dell'utente.",
   "publisher": "artcraft",
   "license": "MIT"
 }

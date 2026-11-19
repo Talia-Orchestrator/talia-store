@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "name": "Impeccable UI",
   "description": "UI/UX design, scored critique, accessibility audit, typography, layout, responsive behavior and design-system refinement using Impeccable 4.8.2 references. Includes optional upstream CLI launchers; Talia hook automation requires host integration.",
+  "description_it": "Design UI/UX, critica con punteggio, audit di accessibilità, tipografia, layout, comportamento responsive e raffinamento del design system con riferimenti Impeccable 4.8.2. Include launcher CLI opzionali upstream; l'automazione hook Talia richiede integrazione host.",
   "publisher": "talia-skills",
   "license": "Apache-2.0"
 }

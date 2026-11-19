@@ -1,9 +1,14 @@
 {
   "id": "talia-agents/seogeoagent",
   "kind": "agent",
-  "version": "1.0.53",
+  "version": "1.0.54",
   "name": "SeoGeoAgent",
   "description": "Audits and improves website SEO/GEO: technical SEO, indexing, structured data, Core Web Vitals, content quality and AI citability. Delivers scores, prioritized actions and dashboards; monitors regressions, fixes supplied repositories with retesting, writes GEO content, and evaluates backlink or guest-post pricing.",
+  "description_it": "Audita e migliora SEO/GEO del sito: SEO tecnica, indicizzazione, dati strutturati, Core Web Vitals, qualità dei contenuti e citabilità AI. Consegna punteggi, azioni prioritarie e dashboard; monitora regressioni, corregge repository forniti con ritest, scrive contenuti GEO e valuta prezzi di backlink o guest post.",
   "publisher": "talia-agents",
-  "license": "MIT"
+  "license": "MIT",
+  "routing_tags": [
+    "web.seo",
+    "content.discovery"
+  ]
 }

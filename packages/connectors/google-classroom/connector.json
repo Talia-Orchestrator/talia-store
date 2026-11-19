@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "google-classroom",
+    "display_name": "Google Classroom",
+    "category": "productivity",
+    "description_en": "View courses and submissions; manage assignments, materials, and announcements.",
+    "description_it": "Visualizza corsi ed elaborati consegnati; gestisci compiti, materiali e annunci.",
+    "integration_state": "requires_direct_auth"
+  }
+}

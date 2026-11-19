@@ -1,6 +1,7 @@
 ---
 name: project-brief
 description_en: "Turn an objective and supplied materials into a project brief with scope, constraints and observable acceptance criteria."
+description_it: "Trasforma un obiettivo e materiali forniti in un brief di progetto con ambito, vincoli e criteri di accettazione osservabili."
 description_zh: "将目标和提供的资料整理为项目简报，明确范围、约束和可观察的验收标准。"
 ---
 

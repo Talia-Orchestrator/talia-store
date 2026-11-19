@@ -4,6 +4,7 @@
   "version": "1.0.7",
   "name": "wps",
   "description": "Prepare WPS-compatible DOCX, XLSX, PPTX and PDF deliverables, checking Chinese fonts, A4 layout, numbering, printing and export compatibility.",
+  "description_it": "Prepara deliverable DOCX, XLSX, PPTX e PDF compatibili WPS, verificando font cinesi, layout A4, numerazioni, stampa e compatibilità di export.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

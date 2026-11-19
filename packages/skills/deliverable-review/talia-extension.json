@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "name": "deliverable-review",
   "description": "Review a supplied deliverable against requirements and available evidence, distinguishing defects from unverified assumptions.",
+  "description_it": "Revisiona un deliverable fornito rispetto a requisiti ed evidenze disponibili, distinguendo difetti da assunzioni non verificate.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

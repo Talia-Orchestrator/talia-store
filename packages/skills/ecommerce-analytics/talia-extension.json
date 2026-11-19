@@ -4,6 +4,7 @@
   "version": "1.0.2",
   "name": "ecommerce-analytics",
   "description": "Analyze cross-platform sales, fees, refunds, ads and inventory exports to deliver reproducible operating metrics, drivers and priorities. Use for store performance, contribution profit and channel analysis, not product selection or live changes.",
+  "description_it": "Analizza export cross-platform di vendite, commissioni, rimborsi, ads e inventario per consegnare metriche operative riproducibili, driver e priorità. Usala per performance dello store, profitto di contributo e analisi di canale, non per selezione prodotti o modifiche live.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

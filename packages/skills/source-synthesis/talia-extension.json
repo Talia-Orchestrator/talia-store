@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "name": "source-synthesis",
   "description": "Synthesize supplied materials with traceable references, disagreements and missing information. No autonomous web research.",
+  "description_it": "Sintetizza materiali forniti con riferimenti tracciabili, disaccordi e informazioni mancanti. Nessuna ricerca web autonoma.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

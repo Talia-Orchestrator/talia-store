@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "google-analytics",
+    "display_name": "Google Analytics",
+    "category": "commerce",
+    "description_en": "Analyze traffic, conversions, funnels, and realtime data; manage custom dimensions, metrics, datasets, and event collection.",
+    "description_it": "Analizza traffico, conversioni, percorsi di conversione e dati in tempo reale; gestisci dimensioni personalizzate, metriche, set di dati e raccolta degli eventi.",
+    "integration_state": "requires_direct_auth"
+  }
+}

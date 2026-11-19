@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "atlassian",
+    "display_name": "Atlassian",
+    "category": "productivity",
+    "description_en": "Connect Jira, Confluence, and other Atlassian work data to search, read, and update issues, pages, and project context.",
+    "description_it": "Collega Jira, Confluence e altri dati di lavoro di Atlassian per cercare, leggere e aggiornare segnalazioni, pagine e informazioni di contesto dei progetti.",
+    "integration_state": "requires_direct_auth"
+  }
+}

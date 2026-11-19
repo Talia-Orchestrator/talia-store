@@ -4,6 +4,7 @@
   "version": "1.0.4",
   "name": "ecommerce-operations",
   "description": "Prepare concrete ecommerce catalog, price, promotion, stock and order-exception changes; apply and verify them only through available connected tools supporting the action. Use for operating changes and previews, not selection, copywriting or analytical diagnosis.",
+  "description_it": "Prepara modifiche concrete a catalogo, prezzi, promozioni, stock ed eccezioni ordini e-commerce; applicale e verificalo solo tramite i tool connessi che supportano l'azione. Usala per modifiche operative e preview, non per selezione, copywriting o diagnosi analitica.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

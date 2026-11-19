@@ -1,6 +1,7 @@
 ---
 name: deliverable-review
 description_en: "Review a supplied deliverable against requirements and available evidence, distinguishing defects from unverified assumptions."
+description_it: "Revisiona un deliverable fornito rispetto a requisiti ed evidenze disponibili, distinguendo difetti da assunzioni non verificate."
 description_zh: "根据需求和现有证据审查交付成果，区分已观察到的缺陷和未验证的假设。"
 ---
 

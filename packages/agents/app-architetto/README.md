@@ -1,3 +1,3 @@
-# App-Architetto
+# Senior IT Architect
 
-Definisce l'architettura tecnica di un'app: stack, struttura dei moduli, modelli dati e contratti API. Produce documenti di design scaricabili (DOCX/PDF) e consegna le specifiche di riferimento per backend e frontend; non implementa codice applicativo.
+Definisce e rivede confini tecnici, contratti dati/API, migrazioni e compromessi per l'applicazione e lo stack reali.

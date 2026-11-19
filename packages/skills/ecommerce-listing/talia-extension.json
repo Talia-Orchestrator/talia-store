@@ -4,6 +4,7 @@
   "version": "1.2.17",
   "name": "ecommerce-listing",
   "description": "Turn product facts into cross-platform titles, benefits, descriptions, keyword placement, FAQs and A+ modules, including page audits and localization. Use for listing writing and optimization, not selection, media generation or live publishing.",
+  "description_it": "Trasforma fatti di prodotto in titoli, benefit, descrizioni, posizionamento keyword, FAQ e moduli A+ cross-platform, inclusi audit di pagina e localizzazione. Usala per scrittura e ottimizzazione di listing, non per selezione, generazione media o pubblicazione live.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

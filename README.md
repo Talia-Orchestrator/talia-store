@@ -1,6 +1,16 @@
 # Talia Store
 
-Public, anonymous HTTPS distribution for signed Talia resources. The store contains the source packages, the v3 index, one v2 JSON artifact per selected package, and the public verification key. Its agent catalog contains fifteen specialists, including the six-role development team under `packages/agents`. Two general-purpose agents are bundled for fresh-profile seeding by Talia desktop and do not appear in the public catalog. Legacy specialist packages remain under `packages/agents` and are intentionally absent from the official catalog.
+`model-capabilities/openrouter-thinking.json` è uno snapshot compatto dei soli
+livelli `reasoning_options` di tipo `effort` dichiarati per modelli OpenRouter
+esatti da [Models.dev](https://github.com/anomalyco/models.dev/tree/dev/providers/openrouter/models).
+`npm run build:catalog` prova ad aggiornarlo prima di rigenerare il catalogo
+delle estensioni. Il feed originale è pubblico e non riceve chiavi o chat.
+Il file è metadato di inferenza, non un pacchetto installabile; le policy locali
+già verificate del client hanno precedenza. Un modello senza livelli enumerati
+non ottiene una scala per analogia. `none` indica Off e non è uno step dello
+slider: il generatore lo esclude senza scartare gli altri effort validi.
+
+Public, anonymous HTTPS distribution for signed Talia resources. This repository is the source of truth for selected packages under `agents/`, `skills/`, `connectors/`, `apps/`, and `library/`. The signed v3 index and v2 artifacts are generated from these local directories. Talia desktop bundles Assistant, General Researcher, ContentWriter, six starter skills, and the complete manual for offline first use; the Store supplies all optional packages and updates.
 
 ## Anonymous desktop source
 
@@ -10,7 +20,7 @@ The configured anonymous source URL is:
 
 Unauthenticated downloads require the repository and its `main` branch contents to be public. Relative artifact URLs resolve under the same `main/` origin. Talia verifies the signed index and the selected artifact bytes; package installation still requires explicit review and approval. No GitHub account, token, or sign-in is required by clients. The URL is configured in the Talia desktop source; this workspace checkout does not publish it or prove that the remote URL is live. Publication requires pushing the reviewed files to the public repository.
 
-`public-key.txt` contains the verification key shipped by Talia desktop. The corresponding private key is never stored here. `catalog.signature.json` is generated separately from `catalog.json` after catalog QA.
+`public-key.txt` contains the verification key shipped by Talia desktop. The corresponding private key is never stored here or in the other resource repositories. `catalog.signature.json` is generated separately from `catalog.json` after catalog QA.
 
 ## Build
 
@@ -22,9 +32,31 @@ node scripts/build-catalog.cjs
 
 This writes `catalog.json` and the referenced `artifacts/` files. Sign the exact catalog bytes with the release signing process; do not put a private key in this repository or CI logs.
 
-The builder selects fifteen specialist agents explicitly and selects the current skills, connectors, and apps from `packages/`. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing.
+The builder selects seventeen specialist agents explicitly and reads skills, connectors, apps, Library, and team packages from . It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing.
 
-Run `npm test` to compare the committed catalog and artifacts with the selected packages, verify artifact digests and sizes, scan package text for personal paths and credentials, and validate the detached signature with the public key. This check does not regenerate or sign files. After rebuilding, the committed signature no longer represents the new catalog until the release owner signs the reviewed `catalog.json`; do not publish a mismatched index/signature pair.
+## Team bundles
+
+`skills/app-development-team` is the signed bundle descriptor for the Team tab.
+It stays a valid skill package so older Talia clients can still read the catalog.
+`team.json` names the required agents and optional roles; each agent's signed
+package declares its own skill dependencies. The host previews every package
+and installs the required resources through the existing installer. Optional
+roles are not installed by default. A failed installation can be retried; the
+team becomes available only once all required agents are present. The bundle
+never downloads or executes arbitrary URLs from `team.json`.
+
+The connector catalog now includes WeCom, Feishu/Lark, and DingTalk CLI
+references for Talia 0.10.0 or newer, alongside the existing MCP packages.
+These references open Talia's built-in setup and do not run or authorize a CLI
+during Store installation. Lark shares the Feishu package.
+
+The Store also distributes 29 declarative listings for the selected Atlassian,
+Google, Microsoft, Bitbucket, GitLab, GitHub, and Hugging Face services. These
+listings contain no executable transport or credentials. Installing one adds
+an unavailable card to Talia's connector catalog; direct authentication must
+be implemented and verified before it can connect.
+
+Run `npm test` to compare the committed catalog and artifacts with the selected sources, verify artifact digests and sizes, scan package text for personal paths and credentials, and validate the detached signature with the public key. This check does not regenerate or sign files. After rebuilding, the committed signature no longer represents the new catalog until the release owner signs the reviewed `catalog.json`; do not publish a mismatched index/signature pair.
 
 Il procedimento completo per aggiornare catalogo, release dell'app e pagina download è in [`docs/store-update-runbook.md`](docs/store-update-runbook.md).
 
@@ -58,3 +90,27 @@ in `tests/download-site.test.cjs`: inclusione locale, assenza dati CI fittizi,
 rifiuto di piattaforme aggiuntive, updater, tag errati e asset mancanti.
 Si tratta solo di metadati/renderer statici sostituibili, senza IPC Electron,
 provider, credenziali o dipendenze dal futuro backend Rust.
+
+## Recupero guided-plan e manuale — 14 novembre 2026
+
+L'aggiornamento coordinato con `talia-skills` aggiunge guided-plan 0.1.0: il
+catalogo passa a 62 risorse (27 skill), senza cambiare le 61 voci precedenti.
+La skill raccoglie requisiti, presenta il piano ed esegue solo dopo conferma;
+il testo SKILL coincide con il seed già nel core. La firma usa la chiave
+Ed25519 esistente: nessuna rotazione della trust root.
+
+Il manuale scaricabile è allineato byte per byte al documento canonico core
+1.1.0, incluse le correzioni Providers già su main core. Non si tratta di una nuova versione dell'app né di una build. Le correzioni
+Windows dei vecchi commit non vengono importate in questa PR documentale.
+Per setup, aggiornamento del catalogo e pubblicazione del sito vedere
+[il runbook](docs/store-update-runbook.md). Per rollback preparare una PR che
+rimuova solo il nuovo pacchetto e rigeneri e firmi il catalogo con la stessa
+chiave, senza ripristinare vecchi feed o installer. Il manuale può essere
+ripristinato separatamente tramite PR; nessuna chiave o credenziale è in Git.
+
+## Team sviluppo app
+
+Il preset del team è incluso nel pacchetto firmato Senior IT Architect.
+Installando i sette specialisti richiesti su un host compatibile, il team
+viene creato automaticamente e resta modificabile. Il PM è opzionale.
+Vedere [`teams/README.md`](teams/README.md) per limiti e comportamento.

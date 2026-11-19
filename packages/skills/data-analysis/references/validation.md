@@ -82,4 +82,3 @@ Classify only when the user or decision benefits from a readiness judgment:
 Report blockers separately from caveats. For each blocker, give the evidence,
 decision impact, and smallest correction or additional check needed. Label
 unverified items and never turn readiness labels into numeric probabilities.
-

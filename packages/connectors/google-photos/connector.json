@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "google-photos",
+    "display_name": "Google Photos",
+    "category": "productivity",
+    "description_en": "Upload and manage app-created photos and albums; the full personal library is unavailable.",
+    "description_it": "Carica e gestisci foto e album creati dall'app; la biblioteca personale completa non è disponibile.",
+    "integration_state": "requires_direct_auth"
+  }
+}

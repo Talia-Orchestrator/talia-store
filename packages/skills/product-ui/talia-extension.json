@@ -4,6 +4,7 @@
   "version": "1.0.11",
   "name": "product-ui",
   "description": "Design and implement screens, components, landing pages, dashboards or design systems from product needs, flows or design sources, with responsive behavior, accessibility, UI polish and rendered checks.",
+  "description_it": "Progetta e implementa schermate, componenti, landing page, dashboard o design system da esigenze di prodotto, flussi o sorgenti di design, con comportamento responsive, accessibilità, rifinitura UI e verifiche renderizzate.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

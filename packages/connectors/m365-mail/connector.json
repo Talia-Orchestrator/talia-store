@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "m365-mail",
+    "display_name": "Microsoft 365 Mail",
+    "category": "communication",
+    "description_en": "Search, read, draft, and send Microsoft 365 mail.",
+    "description_it": "Cerca, leggi, prepara bozze e invia email di Microsoft 365.",
+    "integration_state": "requires_direct_auth"
+  }
+}

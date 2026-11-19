@@ -4,6 +4,7 @@
   "version": "1.0.5",
   "name": "brand-research",
   "description": "Research public company, product or brand information for sourced Brand DNA: positioning, audience, competitors, voice, pricing, social proof and content gaps for GTM preparation.",
+  "description_it": "Ricerca informazioni pubbliche su azienda, prodotto o brand per una Brand DNA documentata: posizionamento, pubblico, concorrenti, voce, pricing, social proof e gap di contenuti per la preparazione GTM.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

@@ -4,6 +4,7 @@
   "version": "1.0.53",
   "name": "content-writer",
   "description": "Plan, research, draft, revise, humanize, adapt or audit social posts and long-form content, delivering channel-ready writing or reviews with preserved voice, evidence and citations.",
+  "description_it": "Pianifica, ricerca, redige, revisiona, umanizza, adatta o audita post social e contenuti long-form, consegnando testi pronti per canale o revisioni con voce, evidenze e citazioni preservate.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

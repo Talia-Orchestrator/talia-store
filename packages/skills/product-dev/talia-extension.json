@@ -4,6 +4,7 @@
   "version": "1.0.13",
   "name": "product-dev",
   "description": "Deliver verified features, bug fixes, refactors and technical decisions in an existing repository from clear requirements; not vague discovery, disposable demos or repository operations.",
+  "description_it": "Consegna feature verificate, fix di bug, refactoring e decisioni tecniche in un repository esistente da requisiti chiari; non discovery vaga, demo monouso o operazioni di repository.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

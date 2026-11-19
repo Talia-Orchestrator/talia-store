@@ -1,0 +1,11 @@
+{
+  "id": "talia-library/manuale-talia",
+  "kind": "library",
+  "version": "1.2.2",
+  "name": "Manuale Talia completo",
+  "description": "Complete Talia desktop manual, available offline in the personal Library.",
+  "description_it": "Manuale completo di Talia desktop, disponibile offline nella Biblioteca personale.",
+  "publisher": "talia-library",
+  "license": "MIT",
+  "minHostVersion": "0.11.0"
+}

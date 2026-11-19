@@ -4,6 +4,7 @@
   "version": "1.1.6",
   "name": "ecommerce-creative",
   "description": "Create ecommerce image copy, product image prompts, video scripts and storyboards grounded in product facts and source assets. Use for cross-channel creative briefs and experiments, not actual media generation or ad publication.",
+  "description_it": "Crea copy per immagini e-commerce, prompt per immagini prodotto, script video e storyboard fondati su fatti di prodotto e asset di origine. Usala per brief creativi cross-channel ed esperimenti, non per generazione media effettiva o pubblicazione ads.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

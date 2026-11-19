@@ -4,6 +4,7 @@
   "version": "1.0.8",
   "name": "pdf-editing",
   "description": "Read, create and edit PDFs, including scanned-page reading, page organization, watermarks, text/image overlays, form filling and layout checks.",
+  "description_it": "Legge, crea e modifica PDF, incluse lettura di pagine scansionate, organizzazione pagine, watermark, overlay testo/immagine, compilazione moduli e controlli di layout.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

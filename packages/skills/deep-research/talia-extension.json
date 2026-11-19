@@ -4,6 +4,7 @@
   "version": "1.0.56",
   "name": "deep-research",
   "description": "Support deep research, literature reviews and citation checks with retrieval budgets, academic search, evidence compression and source/quote/DOI verification, producing comparison and evidence tables.",
+  "description_it": "Supporta ricerca approfondita, review di letteratura e verifiche di citazioni con budget di retrieval, ricerca accademica, compressione delle evidenze e verifica di fonti/citazioni/DOI, producendo confronti e tabelle di evidenze.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

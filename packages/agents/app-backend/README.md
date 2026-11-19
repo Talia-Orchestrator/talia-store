@@ -1,3 +1,3 @@
-# App-Backend
+# Senior Backend Engineer
 
-Implementa API, logica di business, modelli dati e integrazioni server-side. Scrive codice testabile e documentazione API scaricabile; non definisce l'architettura generale né l'interfaccia utente.
+Implementa logica server, modifiche ai dati e integrazioni con gestione esplicita di errori, sicurezza e compatibilità.

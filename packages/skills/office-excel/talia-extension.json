@@ -4,6 +4,7 @@
   "version": "1.0.15",
   "name": "office-excel",
   "description": "Create, read, edit and check Excel/XLSX reports, formula models and templates, including CSV conversion, data cleanup, charts and format-preserving changes.",
+  "description_it": "Crea, legge, modifica e controlla report, modelli di formule e template Excel/XLSX, incluse conversioni CSV, pulizia dati, grafici e modifiche a conservazione del formato.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

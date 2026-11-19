@@ -1,9 +1,10 @@
 {
   "id": "talia-agents/deepresearcher",
   "kind": "agent",
-  "version": "1.0.65",
+  "version": "1.0.66",
   "name": "DeepResearcher",
   "description": "Researches complex topics using web, scholarly and user-provided sources; produces industry, literature and trend reviews and verifies claims. Delivers auditable reports with citations, confidence, conflicting evidence and limitations.",
+  "description_it": "Ricerca argomenti complessi usando fonti web, accademiche e fornite dall'utente; produce review di settore, letteratura e trend e verifica le affermazioni. Consegna report verificabili con citazioni, livello di confidenza, evidenze contrastanti e limiti.",
   "publisher": "talia-agents",
   "license": "MIT",
   "dependencies": [
@@ -23,5 +24,9 @@
       "kind": "skill",
       "id": "talia-skills/brand-research"
     }
+  ],
+  "routing_tags": [
+    "research.deep",
+    "research.sources"
   ]
 }

@@ -4,6 +4,7 @@
   "version": "1.0.9",
   "name": "social-data",
   "description": "Fetch public Xiaohongshu, X/Twitter, Reddit, YouTube and Bilibili posts, or analyze supplied social/campaign data for sentiment, engagement, CTR, ROI, comparisons and experiments; not publishing.",
+  "description_it": "Recupera post pubblici da Xiaohongshu, X/Twitter, Reddit, YouTube e Bilibili, o analizza dati social/campagne forniti per sentiment, engagement, CTR, ROI, confronti ed esperimenti; non pubblica.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

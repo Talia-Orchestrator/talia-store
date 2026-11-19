@@ -4,6 +4,7 @@
   "version": "1.0.7",
   "name": "office-word",
   "description": "Create, read, edit, and check Word/DOCX reports and templates: preserve styles, numbering, revisions, comments, fields, tables, sections, headers, footers, and layout.",
+  "description_it": "Crea, legge, modifica e controlla report e template Word/DOCX: preserva stili, numerazioni, revisioni, commenti, campi, tabelle, sezioni, intestazioni, piè di pagina e layout.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

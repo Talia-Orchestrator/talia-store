@@ -1,6 +1,7 @@
 ---
 name: source-synthesis
 description_en: "Synthesize supplied materials with traceable references, disagreements and missing information. No autonomous web research."
+description_it: "Sintetizza materiali forniti con riferimenti tracciabili, disaccordi e informazioni mancanti. Nessuna ricerca web autonoma."
 description_zh: "综合提供的资料，给出可追溯的来源、分歧和缺失信息；不代表自动执行网络研究。"
 ---
 

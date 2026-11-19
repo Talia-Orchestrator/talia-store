@@ -31,5 +31,24 @@
         "help_it": "Facoltativa. Se lasciata vuota, vale il comportamento di accesso predefinito dell’app."
       }
     ]
+  },
+  "runtime": {
+    "version": "0.17.0",
+    "assets": {
+      "darwin-arm64": {
+        "url": "https://github.com/storytold/figcraft/releases/download/v0.17.0/figcraft-cli-0.17.0-macos-universal.zip",
+        "size": 90629967,
+        "sha256": "42ca7e870c7e9c2dd574de176f1e0640e016123f83d3244b501e60f905f3a50a",
+        "format": "zip",
+        "binary": "figcraft-cli-0.17.0-macos-universal/figcraft-cli"
+      },
+      "darwin-x64": {
+        "url": "https://github.com/storytold/figcraft/releases/download/v0.17.0/figcraft-cli-0.17.0-macos-universal.zip",
+        "size": 90629967,
+        "sha256": "42ca7e870c7e9c2dd574de176f1e0640e016123f83d3244b501e60f905f3a50a",
+        "format": "zip",
+        "binary": "figcraft-cli-0.17.0-macos-universal/figcraft-cli"
+      }
+    }
   }
 }

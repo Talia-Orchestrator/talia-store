@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "presetAgentPackage": "talia-agents/app-architetto",
+  "agentPackages": [
+    "talia-agents/functional-analyst",
+    "talia-agents/app-architetto",
+    "talia-agents/uidesigner",
+    "talia-agents/app-frontend",
+    "talia-agents/app-backend",
+    "talia-agents/app-devops",
+    "talia-agents/app-e2e-tester"
+  ],
+  "optionalAgentPackages": ["talia-agents/product-manager"],
+  "skillPackages": [],
+  "connectorPackages": []
+}

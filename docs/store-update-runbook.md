@@ -5,14 +5,14 @@ Questo documento distingue tre oggetti che hanno controlli diversi:
 | Oggetto | Dove si pubblica | Firma richiesta |
 | --- | --- | --- |
 | Pacchetti dell'app Talia | GitHub Release e pagina download | Firma del bundle secondo la procedura della piattaforma; su macOS le release locali attuali sono ad-hoc e non notarizzate |
-| Catalogo di agenti, skill, connettori e app | `catalog.json`, `artifacts/`, `catalog.signature.json` su `main` | Ed25519 con la chiave privata del maintainer già associata a `public-key.txt` |
+| Catalogo di agenti, skill, connettori, app e Biblioteca | `catalog.json`, `artifacts/`, `catalog.signature.json` su `main` | Ed25519 con la chiave privata del maintainer già associata a `public-key.txt` |
 | Sito, manuale e changelog | `site/` e branch Pages generato | Nessuna firma Ed25519 del catalogo se `catalog.json` non cambia |
 
 ## 1. Identificare il delta
 
 Prima di intervenire, controllare `git status`, `git diff`, branch, tag e
-contenuti già pubblicati. Usare soltanto i pacchetti pubblicati su `main` in
-`packages/agents`, `packages/skills`, `packages/connectors` e `packages/apps`.
+contenuti già pubblicati. Usare soltanto i pacchetti presenti nelle cartelle
+`agents/`, `skills/`, `connectors/`, `apps/` e `library/` di questo repository.
 Non incorporare file locali non committati o pacchetti ancora in bozza.
 Conservare i lavori altrui.
 
@@ -21,11 +21,10 @@ valido: non ricostruire `catalog.json` e non rigenerare `catalog.signature.json`
 
 ## 2. Aggiornare il catalogo delle risorse, quando necessario
 
-1. Integrare e verificare prima i pacchetti nel rispettivo dominio sotto
-   `packages/`.
-2. Preparare un checkout pulito e aggiornato di `main`. Tenere separati gli
-   indici e i lavori locali.
-3. Da `talia-store`, eseguire `npm run build:catalog`. Esaminare il diff completo
+1. Integrare e verificare i pacchetti sotto  nello stesso repository Store.
+2. Preparare un checkout pulito e aggiornato di `talia-store`; la CI non usa
+   altri repository come sorgente del catalogo.
+3. Eseguire `npm run build:catalog`. Esaminare il diff completo
    di `catalog.json` e `artifacts/`: ID, versioni, licenze, hash, dimensioni,
    eventuali rimozioni e modifiche inattese. Non firmare un catalogo inatteso.
 4. Eseguire `npm run validate` usando gli stessi sorgenti puliti. La verifica
@@ -53,12 +52,27 @@ valido: non ricostruire `catalog.json` e non rigenerare `catalog.signature.json`
    ```
 
 8. Eseguire `git diff --check`, revisionare i file generati e proporre una PR.
-   La CI della PR non riceve la chiave privata: verifica la firma già presente.
-   Integrare solo dopo CI verde. Su `main`, verificare che l'envelope remoto
+   La validazione dello Store è locale; non c'è una GitHub Action su ogni PR o
+   push. Su `main`, verificare che l'envelope remoto
    contenga esattamente `catalog.json`, che la firma passi con `public-key.txt`
    e che ogni artifact nuovo sia accessibile anonimamente con hash e dimensioni
    corrispondenti. Verificare poi nell'app il percorso Store → anteprima →
    installazione, distinguendo installazione da avvio del servizio esterno.
+
+### Gate locale prima di `talia-core:main` → `build`
+
+Prima della PR che promuove il core a `build`, aggiornare un checkout pulito
+di `talia-store` al commit di `main` che sarà usato per la build. Eseguire:
+
+```sh
+npm run validate:before-build
+```
+
+Il comando rifiuta modifiche locali, esegue validazione del catalogo, firma e
+artifact tramite `npm test`, controlla che i test non abbiano modificato i
+sorgenti e stampa il commit verificato. Registrare quel commit nella checklist
+della PR `main` → `build`. Se fallisce, fermare la promozione; ripetere dopo
+la correzione su un checkout pulito. Questo gate non avvia una build Electron.
 
 ## 3. Pubblicare una nuova versione dell'app sul sito
 

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "gsearch-console",
+    "display_name": "Google Search Console",
+    "category": "data",
+    "description_en": "View search traffic — queries, clicks/impressions/position, indexing and sitemap status.",
+    "description_it": "Visualizza il traffico di ricerca: query, clic/impressioni/posizione, indicizzazione e stato delle sitemap.",
+    "integration_state": "requires_direct_auth"
+  }
+}

@@ -4,6 +4,7 @@
   "version": "1.0.8",
   "name": "github",
   "description": "Read GitHub issues, pull requests, CI, releases, and repository metadata; perform exact writes authorized by the current request and reconfirm target or scope changes.",
+  "description_it": "Legge issue, pull request, CI, release e metadati dei repository GitHub; esegue scritture esatte autorizzate dalla richiesta corrente e richiede riconferma per cambi di target o di ambito.",
   "publisher": "talia-skills",
   "license": "MIT"
 }

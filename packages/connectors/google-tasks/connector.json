@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "catalog_listing": {
+    "id": "google-tasks",
+    "display_name": "Google Tasks",
+    "category": "productivity",
+    "description_en": "Manage task lists, to-dos, and completion status.",
+    "description_it": "Gestisci elenchi di attività, cose da fare e stato di completamento.",
+    "integration_state": "requires_direct_auth"
+  }
+}
