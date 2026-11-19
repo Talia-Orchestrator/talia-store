@@ -17,7 +17,6 @@ const packages = [
   ...packageDirs('connectors'),
   ...packageDirs('apps'),
   ...packageDirs('library'),
-  ...packageDirs('teams'),
 ];
 const built = packer.buildCatalogV3(packages);
 const committed = fs.readFileSync(path.join(storeRoot, 'catalog.json'));

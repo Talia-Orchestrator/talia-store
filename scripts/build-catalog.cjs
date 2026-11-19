@@ -27,7 +27,6 @@ const packages = [
   ...packageDirs('connectors'),
   ...packageDirs('apps'),
   ...packageDirs('library'),
-  ...packageDirs('teams'),
 ];
 const artifactsRoot = path.join(storeRoot, 'artifacts');
 if (fs.existsSync(artifactsRoot)) validateRetainedArtifacts(artifactsRoot, new Set(), require(packer));

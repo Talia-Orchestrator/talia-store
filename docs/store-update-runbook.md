@@ -12,7 +12,8 @@ Questo documento distingue tre oggetti che hanno controlli diversi:
 
 Prima di intervenire, controllare `git status`, `git diff`, branch, tag e
 contenuti già pubblicati. Usare soltanto i pacchetti presenti nelle cartelle
-`agents/`, `skills/`, `connectors/`, `apps/` e `library/` di questo repository.
+`packages/agents/`, `packages/skills/`, `packages/connectors/`, `packages/apps/`
+e `packages/library/` di questo repository.
 Non incorporare file locali non committati o pacchetti ancora in bozza.
 Conservare i lavori altrui.
 
@@ -21,7 +22,7 @@ valido: non ricostruire `catalog.json` e non rigenerare `catalog.signature.json`
 
 ## 2. Aggiornare il catalogo delle risorse, quando necessario
 
-1. Integrare e verificare i pacchetti nello stesso repository Store.
+1. Integrare e verificare i pacchetti sotto `packages/` nello stesso repository Store.
 2. Preparare un checkout pulito e aggiornato di `talia-store`; la CI non usa
    altri repository come sorgente del catalogo.
 3. Eseguire `npm run build:catalog`. Esaminare il diff completo

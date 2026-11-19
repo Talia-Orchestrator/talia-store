@@ -1,6 +1,6 @@
 # Contributing
 
-The store is a generated distribution. Change source packages in the relevant `talia-agents`, `talia-skills`, `talia-connectors`, or `talia-apps` repository, then regenerate `catalog.json` and `artifacts/` with `npm run build:catalog`. Review the complete generated diff, especially artifact deletion, before signing. The build does not create or update `catalog.signature.json`.
+The store is a generated distribution. Change source packages under `packages/agents`, `packages/skills`, `packages/connectors`, `packages/apps`, or `packages/library`, then regenerate `catalog.json` and `artifacts/` with `npm run build:catalog`. Review the complete generated diff, especially artifact deletion, before signing. The build does not create or update `catalog.signature.json`.
 
 Keep every package declarative. Do not add secrets, private account data, absolute machine paths, install-time commands, or generated binaries. ArtCraft and other referenced software retain their own licenses and must be installed separately. Every published package artifact must include its `LICENSE` and `NOTICE` files.
 

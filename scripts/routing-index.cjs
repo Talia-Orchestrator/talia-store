@@ -15,7 +15,7 @@ function build() {
   const catalog = JSON.parse(catalogBytes);
   const agents = catalog.packages.filter(item => item.kind === 'agent').map(item => {
     const slug = item.id.split('/')[1];
-    const manifest = JSON.parse(fs.readFileSync(path.join(root, 'agents', slug, 'talia-extension.json')));
+    const manifest = JSON.parse(fs.readFileSync(path.join(root, 'packages', 'agents', slug, 'talia-extension.json')));
     const tags = manifest.routing_tags;
     if (manifest.id !== item.id || manifest.version !== item.version || !Array.isArray(tags)
       || tags.length < 1 || tags.length > 16 || new Set(tags).size !== tags.length

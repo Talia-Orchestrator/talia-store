@@ -10,7 +10,7 @@ già verificate del client hanno precedenza. Un modello senza livelli enumerati
 non ottiene una scala per analogia. `none` indica Off e non è uno step dello
 slider: il generatore lo esclude senza scartare gli altri effort validi.
 
-Public, anonymous HTTPS distribution for signed Talia resources. This repository is the source of truth for selected packages under `agents/`, `skills/`, `connectors/`, `apps/`, and `library/`. The signed v3 index and v2 artifacts are generated from these local directories. Talia desktop bundles Assistant, General Researcher, ContentWriter, six starter skills, and the complete manual for offline first use; the Store supplies all optional packages and updates.
+Public, anonymous HTTPS distribution for signed Talia resources. This repository is the source of truth for selected packages under `packages/agents/`, `packages/skills/`, `packages/connectors/`, `packages/apps/`, and `packages/library/`. The signed v3 index and v2 artifacts are generated from these local directories. Talia desktop bundles Assistant, General Researcher, ContentWriter, six starter skills, and the complete manual for offline first use; the Store supplies all optional packages and updates.
 
 ## Anonymous desktop source
 
@@ -32,11 +32,11 @@ node scripts/build-catalog.cjs
 
 This writes `catalog.json` and the referenced `artifacts/` files. Sign the exact catalog bytes with the release signing process; do not put a private key in this repository or CI logs.
 
-The builder selects seventeen specialist agents explicitly and reads skills, connectors, apps, and Library packages from this repository. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing.
+The builder selects seventeen specialist agents explicitly and reads skills, connectors, apps, and Library packages from `packages/`. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing.
 
 ## Team bundles
 
-`skills/app-development-team` is the signed bundle descriptor for the Team tab.
+`packages/skills/app-development-team` is the signed bundle descriptor for the Team tab.
 It stays a valid skill package so older Talia clients can still read the catalog.
 `team.json` names the required agents and optional roles; each agent's signed
 package declares its own skill dependencies. The host previews every package
