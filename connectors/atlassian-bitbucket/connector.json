@@ -24,6 +24,11 @@
           "content",
           "raw"
         ]
+      },
+      {
+        "id": "read_pull_request",
+        "method": "GET",
+        "route": "/2.0/repositories/{scope}/pullrequests/{item}"
       }
     ]
   }

@@ -15,6 +15,18 @@
         "id": "pages",
         "method": "GET",
         "route": "/rest/api/space/{scope}/content/page"
+      },
+      {
+        "id": "create",
+        "method": "POST",
+        "route": "/rest/api/content",
+        "scopeWrite": "confluence_page"
+      },
+      {
+        "id": "read_item",
+        "method": "GET",
+        "route": "/rest/api/content/{item}",
+        "scopeRead": "confluence_page"
       }
     ]
   }

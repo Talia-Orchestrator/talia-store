@@ -23,6 +23,11 @@
         "bodyTextPath": [
           "text"
         ]
+      },
+      {
+        "id": "read_pull_request",
+        "method": "GET",
+        "route": "/rest/api/1.0/projects/{owner}/repos/{repository}/pull-requests/{item}"
       }
     ]
   }

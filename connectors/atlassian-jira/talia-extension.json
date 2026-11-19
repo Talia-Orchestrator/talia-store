@@ -1,10 +1,10 @@
 {
   "id": "talia-connectors/atlassian-jira",
   "kind": "connector",
-  "version": "1.1.0",
-  "name": "Jira (read pilot)",
-  "description": "Pilot read-only connector for Jira, limited to selected project resources.",
-  "description_it": "Connettore pilota in sola lettura per Jira, limitato alle risorse selezionate.",
+  "version": "1.2.0",
+  "name": "Jira",
+  "description": "Pilot connector for Jira, limited to selected project resources. Supports creation with confirmation.",
+  "description_it": "Connettore pilota per Jira, limitato alle risorse selezionate. Consente la creazione previa conferma.",
   "publisher": "talia-connectors",
   "license": "MIT",
   "minHostVersion": "0.15.0"

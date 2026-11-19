@@ -1,0 +1,24 @@
+{
+  "format": "talia-extension-catalog",
+  "version": 2,
+  "packages": [
+    {
+      "id": "talia-connectors/atlassian-bitbucket",
+      "kind": "connector",
+      "version": "1.2.0",
+      "name": "Bitbucket Cloud",
+      "description": "Pilot connector for Bitbucket Cloud, limited to selected repository resources. Supports pull request comments with confirmation.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "files": {
+        "LICENSE": "MIT License\n\nCopyright (c) 2026 Orkas contributors\nCopyright (c) 2026 Talia contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "NOTICE": "Talia Bitbucket Store reference. The package contains only declarative configuration metadata.\nProvider and implementation reference: https://support.atlassian.com/bitbucket-cloud/\n",
+        "README.md": "# Bitbucket Cloud\n\nPilot with read operations and pull request comments requiring confirmation. Use https://api.bitbucket.org and workspace/repository. Configure the account token and permitted resources in Talia.\n",
+        "connector.json": "{\n  \"schemaVersion\": 1,\n  \"independent_connector\": {\n    \"schemaVersion\": 1,\n    \"id\": \"talia-connectors/atlassian-bitbucket\",\n    \"auth\": \"user_choice\",\n    \"scope\": \"repository\",\n    \"operations\": [\n      {\n        \"id\": \"pull_requests\",\n        \"method\": \"GET\",\n        \"route\": \"/2.0/repositories/{scope}/pullrequests\"\n      },\n      {\n        \"id\": \"commits\",\n        \"method\": \"GET\",\n        \"route\": \"/2.0/repositories/{scope}/commits\"\n      },\n      {\n        \"id\": \"comment_pull_request\",\n        \"method\": \"POST\",\n        \"route\": \"/2.0/repositories/{scope}/pullrequests/{item}/comments\",\n        \"bodyTextPath\": [\n          \"content\",\n          \"raw\"\n        ]\n      },\n      {\n        \"id\": \"read_pull_request\",\n        \"method\": \"GET\",\n        \"route\": \"/2.0/repositories/{scope}/pullrequests/{item}\"\n      }\n    ]\n  }\n}\n"
+      },
+      "digest": "sha256:a5d7dcdf115294e4bf1cf4062101c1dacfeb2da4d7091dba254263791576f227",
+      "description_it": "Connettore pilota per Bitbucket Cloud, limitato alle risorse selezionate. Consente commenti alle pull request previa conferma.",
+      "minHostVersion": "0.15.0"
+    }
+  ]
+}

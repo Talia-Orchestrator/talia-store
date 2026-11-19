@@ -1,10 +1,10 @@
 {
   "id": "talia-connectors/atlassian-confluence",
   "kind": "connector",
-  "version": "1.1.0",
-  "name": "Confluence (read pilot)",
-  "description": "Pilot read-only connector for Confluence, limited to selected space resources.",
-  "description_it": "Connettore pilota in sola lettura per Confluence, limitato alle risorse selezionate.",
+  "version": "1.2.0",
+  "name": "Confluence",
+  "description": "Pilot connector for Confluence, limited to selected space resources. Supports creation with confirmation.",
+  "description_it": "Connettore pilota per Confluence, limitato alle risorse selezionate. Consente la creazione previa conferma.",
   "publisher": "talia-connectors",
   "license": "MIT",
   "minHostVersion": "0.15.0"

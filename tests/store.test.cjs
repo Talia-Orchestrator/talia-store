@@ -172,7 +172,7 @@ test('Atlassian pilots use independent read-only manifests', () => {
     const manifest = JSON.parse(pkg.files['connector.json']).independent_connector;
     assert.equal(manifest.id, id);
     assert.ok(manifest.operations.some(operation => operation.method === 'GET'));
-    assert.ok(manifest.operations.every(operation => operation.method === 'GET' || operation.bodyTextPath));
+    assert.ok(manifest.operations.every(operation => operation.method === 'GET' || operation.bodyTextPath || operation.scopeWrite));
   }
 });
 test('the complete Library manual has one canonical source and a signed artifact', () => {

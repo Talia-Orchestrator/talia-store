@@ -24,6 +24,18 @@
           "name": "jql",
           "field": "project"
         }
+      },
+      {
+        "id": "create",
+        "method": "POST",
+        "route": "/rest/api/2/issue",
+        "scopeWrite": "jira_issue"
+      },
+      {
+        "id": "read_item",
+        "method": "GET",
+        "route": "/rest/api/2/issue/{scope}-{item}",
+        "scopeRead": "jira_issue"
       }
     ]
   }

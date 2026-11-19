@@ -25,17 +25,27 @@ function validIndependentConnector(manifest, id) {
       || !Array.isArray(manifest.operations) || manifest.operations.length < 1 || manifest.operations.length > 64) return false;
   const ids = new Set();
   for (const operation of manifest.operations) {
-    if (!(hasKeys(operation, 'id,method,route') || hasKeys(operation, 'id,method,route,scopeQuery') || hasKeys(operation, 'bodyTextPath,id,method,route')) || typeof operation.id !== 'string'
+    if (!(hasKeys(operation, 'id,method,route') || hasKeys(operation, 'id,method,route,scopeQuery') || hasKeys(operation, 'bodyTextPath,id,method,route') || hasKeys(operation, 'id,method,route,scopeWrite') || hasKeys(operation, 'id,method,route,scopeRead')) || typeof operation.id !== 'string'
         || !/^[a-z][a-z0-9_]{0,63}$/.test(operation.id) || ids.has(operation.id)
         || !['GET', 'POST', 'PUT', 'PATCH'].includes(operation.method)
         || typeof operation.route !== 'string' || operation.route.length > 512 || !operation.route.startsWith('/')) return false;
     const segments = operation.route.slice(1).split('/');
+    const scopeRead = operation.scopeRead;
+    if (scopeRead !== undefined && !(operation.method === 'GET' && (
+      (scopeRead === 'jira_issue' && operation.route === '/rest/api/2/issue/{scope}-{item}' && manifest.scope === 'project')
+      || (scopeRead === 'confluence_page' && operation.route === '/rest/api/content/{item}' && manifest.scope === 'space')
+    ))) return false;
+    const scopeWrite = operation.scopeWrite;
+    if (scopeWrite !== undefined && !(operation.method === 'POST' && (
+      (scopeWrite === 'jira_issue' && operation.route === '/rest/api/2/issue' && manifest.scope === 'project')
+      || (scopeWrite === 'confluence_page' && operation.route === '/rest/api/content' && manifest.scope === 'space')
+    ))) return false;
     const body = operation.bodyTextPath;
     if (body !== undefined && (operation.method !== 'POST' || !Array.isArray(body) || body.length < 1 || body.length > 3
         || body.some(part => typeof part !== 'string' || !/^[a-zA-Z][a-zA-Z0-9_]{0,39}$/.test(part)
           || ['constructor', 'prototype', 'project', 'space', 'repository'].includes(part.toLowerCase())))) return false;
     const itemCount = segments.filter(segment => segment === '{item}').length;
-    if (itemCount > 1 || (itemCount === 1 && !body)) return false;
+    if (itemCount > 1 || (itemCount === 1 && operation.method !== 'GET' && !body)) return false;
     const scopeCount = segments.filter(segment => segment === '{scope}').length;
     const ownerCount = segments.filter(segment => segment === '{owner}').length;
     const repositoryCount = segments.filter(segment => segment === '{repository}').length;
@@ -43,10 +53,11 @@ function validIndependentConnector(manifest, id) {
     const validQuery = query === undefined || (hasKeys(query, 'field,name') && operation.method === 'GET'
       && ((query.name === 'jql' && query.field === 'project') || (query.name === 'cql' && query.field === 'space'))
       && query.field === manifest.scope);
-    if (!validQuery || !((query && scopeCount === 0 && ownerCount === 0 && repositoryCount === 0)
+    if (!validQuery || !(((query || scopeWrite || scopeRead) && scopeCount === 0 && ownerCount === 0 && repositoryCount === 0)
         || (!query && scopeCount === 1 && ownerCount === 0 && repositoryCount === 0)
         || (!query && manifest.scope === 'repository' && scopeCount === 0 && ownerCount === 1 && repositoryCount === 1))
-        || segments.some(segment => !['{scope}', '{owner}', '{repository}', '{item}'].includes(segment)
+        || segments.some(segment => !(scopeRead === 'jira_issue' && segment === '{scope}-{item}')
+          && !['{scope}', '{owner}', '{repository}', '{item}'].includes(segment)
           && !/^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,79}$/.test(segment))) return false;
     ids.add(operation.id);
   }
