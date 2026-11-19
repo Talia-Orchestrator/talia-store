@@ -11,25 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-        with:
-          repository: Talia-Orchestrator/talia-agents
-          path: .ci/sources/talia-agents
-      - uses: actions/checkout@v4
-        with:
-          repository: Talia-Orchestrator/talia-skills
-          path: .ci/sources/talia-skills
-      - uses: actions/checkout@v4
-        with:
-          repository: Talia-Orchestrator/talia-connectors
-          path: .ci/sources/talia-connectors
-      - uses: actions/checkout@v4
-        with:
-          repository: Talia-Orchestrator/talia-apps
-          path: .ci/sources/talia-apps
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - run: npm test
-        env:
-          TALIA_SOURCE_ROOT: ${{ github.workspace }}/.ci/sources

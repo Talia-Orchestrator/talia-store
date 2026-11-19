@@ -11,20 +11,20 @@ Questo documento distingue tre oggetti che hanno controlli diversi:
 ## 1. Identificare il delta
 
 Prima di intervenire, controllare `git status`, `git diff`, branch, tag e
-contenuti già pubblicati. Usare soltanto i sorgenti pubblicati su `main` nei
-quattro repository `talia-agents`, `talia-skills`, `talia-connectors` e
-`talia-apps`. Non incorporare file locali non committati o pacchetti ancora in
-bozza. Conservare i lavori altrui.
+contenuti già pubblicati. Usare soltanto i pacchetti pubblicati su `main` in
+`packages/agents`, `packages/skills`, `packages/connectors` e `packages/apps`.
+Non incorporare file locali non committati o pacchetti ancora in bozza.
+Conservare i lavori altrui.
 
 Se cambia solo il sito o una GitHub Release, il catalogo già firmato rimane
 valido: non ricostruire `catalog.json` e non rigenerare `catalog.signature.json`.
 
 ## 2. Aggiornare il catalogo delle risorse, quando necessario
 
-1. Integrare e verificare prima i pacchetti nei rispettivi repository sorgente.
-2. Preparare checkout puliti e aggiornati dei quattro `main` come directory
-   sorelle. Impostare `TALIA_SOURCE_ROOT` se sono in una directory diversa da
-   quella di `talia-store`. Tenere separati gli indici e i lavori locali.
+1. Integrare e verificare prima i pacchetti nel rispettivo dominio sotto
+   `packages/`.
+2. Preparare un checkout pulito e aggiornato di `main`. Tenere separati gli
+   indici e i lavori locali.
 3. Da `talia-store`, eseguire `npm run build:catalog`. Esaminare il diff completo
    di `catalog.json` e `artifacts/`: ID, versioni, licenze, hash, dimensioni,
    eventuali rimozioni e modifiche inattese. Non firmare un catalogo inatteso.
