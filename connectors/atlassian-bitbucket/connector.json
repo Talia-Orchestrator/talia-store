@@ -1,7 +1,35 @@
 {
   "schemaVersion": 1,
-  "catalog_reference": {
+  "independent_connector": {
+    "schemaVersion": 1,
     "id": "talia-connectors/atlassian-bitbucket",
-    "catalog_id": "atlassian-bitbucket"
+    "auth": "user_choice",
+    "scope": "repository",
+    "operations": [
+      {
+        "id": "pull_requests",
+        "method": "GET",
+        "route": "/2.0/repositories/{scope}/pullrequests"
+      },
+      {
+        "id": "commits",
+        "method": "GET",
+        "route": "/2.0/repositories/{scope}/commits"
+      },
+      {
+        "id": "comment_pull_request",
+        "method": "POST",
+        "route": "/2.0/repositories/{scope}/pullrequests/{item}/comments",
+        "bodyTextPath": [
+          "content",
+          "raw"
+        ]
+      },
+      {
+        "id": "read_pull_request",
+        "method": "GET",
+        "route": "/2.0/repositories/{scope}/pullrequests/{item}"
+      }
+    ]
   }
 }

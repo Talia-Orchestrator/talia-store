@@ -1,10 +1,10 @@
 {
   "id": "talia-connectors/atlassian-bitbucket",
   "kind": "connector",
-  "version": "1.0.0",
-  "name": "Atlassian Bitbucket",
-  "description": "Connect Bitbucket Cloud or Data Center with a token and restrict access to selected repositories. Choose read-only or read and write.",
-  "description_it": "Collega Bitbucket Cloud o Data Center con un token, limita l’accesso ai repository selezionati e scegli tra sola lettura e lettura e scrittura.",
+  "version": "1.2.0",
+  "name": "Bitbucket Cloud",
+  "description": "Pilot connector for Bitbucket Cloud, limited to selected repository resources. Supports pull request comments with confirmation.",
+  "description_it": "Connettore pilota per Bitbucket Cloud, limitato alle risorse selezionate. Consente commenti alle pull request previa conferma.",
   "publisher": "talia-connectors",
   "license": "MIT",
   "minHostVersion": "0.15.0"

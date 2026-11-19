@@ -1,5 +1,3 @@
-# Atlassian Confluence
+# Confluence
 
-Open the built-in Confluence token setup from Talia Store. Configure the instance and token in Talia. Scope access to selected spaces. Data Center uses a personal access token. Installing this reference records the package without opening a connection.
-
-[Provider and implementation reference](https://github.com/sooperset/mcp-atlassian)
+Pilot with read and create operations requiring confirmation. For Cloud use the site URL ending in /wiki. For Data Center use the HTTPS instance URL including its context path. Configure the account token and permitted resources in Talia.

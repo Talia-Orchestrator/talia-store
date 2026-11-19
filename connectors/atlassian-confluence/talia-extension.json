@@ -1,10 +1,10 @@
 {
   "id": "talia-connectors/atlassian-confluence",
   "kind": "connector",
-  "version": "1.0.0",
-  "name": "Atlassian Confluence",
-  "description": "Connect Confluence Cloud or Data Center with a token and restrict access to selected spaces. Choose read-only or read and write.",
-  "description_it": "Collega Confluence Cloud o Data Center con un token, limita l’accesso agli spazi selezionati e scegli tra sola lettura e lettura e scrittura.",
+  "version": "1.2.0",
+  "name": "Confluence",
+  "description": "Pilot connector for Confluence, limited to selected space resources. Supports creation with confirmation.",
+  "description_it": "Connettore pilota per Confluence, limitato alle risorse selezionate. Consente la creazione previa conferma.",
   "publisher": "talia-connectors",
   "license": "MIT",
   "minHostVersion": "0.15.0"
