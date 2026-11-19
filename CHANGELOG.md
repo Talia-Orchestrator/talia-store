@@ -3,28 +3,59 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
-## 0.14.1-main.31.1+aa6b692002da
+## 0.14.2-main.32.1+9a8cdd8c8dd5
 
-- **Antigravity non perde più la risposta riparata**: quando Gemini sbaglia il formato dopo aver già mostrato il testo, la correzione nella stessa sessione non viene più scartata se riformula la frase; il testo già letto resta in chat e gli strumenti richiesti partono.
-- **Chat più pulita**: le offerte di approvazione dei singoli lavori compaiono nella cronologia della chat invece che in un pannello fisso sopra i messaggi; una chat senza offerte non mostra nulla.
+- **L'esito di ogni task**: quando un agente porta un task in revisione o lo completa scrive cosa ha fatto; la prima riga compare sulla card e il testo completo nel pannello del task, con il link alla conversazione.
+- **Commenti sui task**: apri il pannello accanto alla board, leggi esiti e note, scrivi un commento; con «Commenta e rimetti in lavorazione» l'agente riprende nella stessa conversazione tenendo conto del tuo commento. Un clic su un'altra card mostra i suoi commenti; il doppio clic apre la modifica.
+- **Task «Fermi»**: se un'esecuzione finisce senza esito il task lo dice, invece di restare in lavorazione in silenzio.
+- **Più task insieme, sotto controllo**: scegli quanti task lavorano contemporaneamente e quanti avvii al giorno, per il progetto e in generale (anche «Nessun limite»). Prima l'avanzamento automatico poteva avviare un nuovo task ogni due minuti anche con il precedente ancora in corso.
+- **Board più leggibile**: filtri rapidi con contatori (da revisionare, risposte nuove, fermi, in scadenza, assegnati a me), altri filtri a scomparsa, ordinamento e viste salvate; selezione multipla per cambiare stato, spostare in un altro progetto, assegnare, categorizzare, impostare la scadenza o eliminare più task insieme.
+- **Stop sempre disponibile**: il pulsante di arresto compare quando lavora un agente qualsiasi, e un nuovo messaggio dopo un'interruzione non fallisce più con «sessione occupata».
 
-La versione mostrata accanto al logo è `v0.14.1`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+La versione mostrata accanto al logo è `v0.14.2`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
 
-- Antigravity (#154): la richiesta di correzione riporta il testo già mostrato
-  e chiede di iniziare con esso. Se il modello lo riformula comunque,
-  `reconcileRepairedContent` conserva il testo mostrato (bozza completa) o
-  accoda quello corretto (bozza parziale) invece di chiudere il turno con
-  `ANTIGRAVITY_INVALID_HOST_RESPONSE` (`incompatible`). Log
-  `ACP host response repaired` con `shown_text_kept: true`. Verificato con test
-  che riproduce il caso reale e fallisce senza la correzione; non ancora
-  provato dal vivo.
-- Chat (#151): offerte host montate nella cronologia scorrevole e rimontate
-  dopo il caricamento, senza intestazione globale né lista vuota; azioni per
-  lavoro e controlli IPC/host invariati.
-- CI (#153): packaging Windows più rapido (esclusioni Defender sul runner
-  effimero); nessun effetto sull'app installata.
+- Task (#158): thread per task in `task_comments/<tid>/`, esito obbligatorio
+  per review/done nel tool `todo_tasks` con azioni `comment` e
+  `list_comments`, ripresa da commento con stato atteso, eventi
+  `run_ended_without_outcome`/`run_failed`. Driver con slot reali,
+  parallelismo e limite giornaliero per lista e globali, motivo dello stop
+  visibile. Filtri, viste salvate, selezione multipla e spostamento tra
+  progetti con copia verificata. Verificato con test e percorso Electron su
+  profilo di prova; rimessa in lavorazione e parallelismo non ancora provati
+  con un modello reale. L'eliminazione non usa il cestino.
+- Chat (#156): stop visibile con qualunque attore occupato; la sessione
+  attende fino a 30 secondi il rilascio del turno interrotto invece di
+  rispondere `SESSION_BUSY`. Messaggio a un agente occupato non ancora provato
+  a mano.
+- Test (#157): suite renderer riallineata su beta; nessun effetto sull'app.
 
 ## Non rilasciato
+
+## 0.14.2 — task con esito, commenti e lavoro in parallelo
+
+- **L'esito di ogni task**: quando un agente porta un task in revisione o lo completa scrive cosa ha fatto; la prima riga compare sulla card e il testo completo nel pannello del task, con il link alla conversazione.
+- **Commenti sui task**: apri il pannello accanto alla board, leggi esiti e note, scrivi un commento; con «Commenta e rimetti in lavorazione» l'agente riprende nella stessa conversazione tenendo conto del tuo commento. Un clic su un'altra card mostra i suoi commenti; il doppio clic apre la modifica.
+- **Task «Fermi»**: se un'esecuzione finisce senza esito il task lo dice, invece di restare in lavorazione in silenzio.
+- **Più task insieme, sotto controllo**: scegli quanti task lavorano contemporaneamente e quanti avvii al giorno, per il progetto e in generale (anche «Nessun limite»). Prima l'avanzamento automatico poteva avviare un nuovo task ogni due minuti anche con il precedente ancora in corso.
+- **Board più leggibile**: filtri rapidi con contatori (da revisionare, risposte nuove, fermi, in scadenza, assegnati a me), altri filtri a scomparsa, ordinamento e viste salvate; selezione multipla per cambiare stato, spostare in un altro progetto, assegnare, categorizzare, impostare la scadenza o eliminare più task insieme.
+- **Stop sempre disponibile**: il pulsante di arresto compare quando lavora un agente qualsiasi, e un nuovo messaggio dopo un'interruzione non fallisce più con «sessione occupata».
+
+La versione mostrata accanto al logo è `v0.14.2`. I pacchetti vengono verificati separatamente per ogni piattaforma; i test locali non equivalgono a una prova con account reali.
+
+- Task (#158): thread per task in `task_comments/<tid>/`, esito obbligatorio
+  per review/done nel tool `todo_tasks` con azioni `comment` e
+  `list_comments`, ripresa da commento con stato atteso, eventi
+  `run_ended_without_outcome`/`run_failed`. Driver con slot reali,
+  parallelismo e limite giornaliero per lista e globali, motivo dello stop
+  visibile. Filtri, viste salvate, selezione multipla e spostamento tra
+  progetti con copia verificata. Verificato con test e percorso Electron su
+  profilo di prova; rimessa in lavorazione e parallelismo non ancora provati
+  con un modello reale. L'eliminazione non usa il cestino.
+- Chat (#156): stop visibile con qualunque attore occupato; la sessione
+  attende fino a 30 secondi il rilascio del turno interrotto invece di
+  rispondere `SESSION_BUSY`. Messaggio a un agente occupato non ancora provato
+  a mano.
+- Test (#157): suite renderer riallineata su beta; nessun effetto sull'app.
 
 ## 0.14.1 — risposte Antigravity riparate senza perdere il turno
 
