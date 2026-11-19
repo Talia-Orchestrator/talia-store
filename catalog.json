@@ -756,23 +756,6 @@
       }
     },
     {
-      "id": "talia-connectors/atlassian",
-      "kind": "connector",
-      "version": "1.0.0",
-      "name": "Atlassian",
-      "description": "Catalog listing for Atlassian. Direct authentication is not yet available in Talia; installation does not connect the service.",
-      "publisher": "talia-connectors",
-      "license": "MIT",
-      "digest": "sha256:aaab6c9a3d113b455bfb19865e383f8e79a05e6cbfe5793d997f3cc94fc00e80",
-      "description_it": "Scheda di Atlassian. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
-      "minHostVersion": "0.11.0",
-      "artifact": {
-        "url": "artifacts/talia-connectors-atlassian-1.0.0.json",
-        "sha256": "sha256:81a16c4ab55e0d6c13d0ee34ca89fb7a0be9a2f0d7773e11a51a77ea71da3588",
-        "size": 2925
-      }
-    },
-    {
       "id": "talia-connectors/atlassian-bitbucket",
       "kind": "connector",
       "version": "1.2.0",
@@ -838,23 +821,6 @@
         "url": "artifacts/talia-connectors-atlassian-jira-1.2.0.json",
         "sha256": "sha256:b71865931f29e297438f9616f6a56dd7752a0f9d97267b3f1054a9dc247e4f54",
         "size": 3365
-      }
-    },
-    {
-      "id": "talia-connectors/bitbucket",
-      "kind": "connector",
-      "version": "1.0.0",
-      "name": "Bitbucket",
-      "description": "Catalog listing for Bitbucket. Direct authentication is not yet available in Talia; installation does not connect the service.",
-      "publisher": "talia-connectors",
-      "license": "MIT",
-      "digest": "sha256:baa86cf224e3c500a4006c28520cae82e3dcf8d69078b36aa8365e6414dbbf5b",
-      "description_it": "Scheda di Bitbucket. L'autenticazione diretta non è ancora disponibile in Talia; l'installazione non connette il servizio.",
-      "minHostVersion": "0.11.0",
-      "artifact": {
-        "url": "artifacts/talia-connectors-bitbucket-1.0.0.json",
-        "sha256": "sha256:cc6b864bc7587ebeb5d5c176ecf07ca3071292033e475b833b5702e119840361",
-        "size": 2782
       }
     },
     {
