@@ -59,8 +59,10 @@ for (const locale of meta) {
 
 test('static Download app entry preserves the home and works beneath a Pages prefix', () => {
   assert.match(read('index.html'), /href="download-app\/"/);
-  assert.equal((read('index.html').match(/<figure class="screenshot-placeholder/g) || []).length, 3);
-  assert.equal((read('index.html').match(/data-i18n="shotLabel"/g) || []).length, 3);
+  // La landing non usa screenshot statici: verifica equivalente delle scene HTML animate.
+  assert.equal((read('index.html').match(/<figure class="screenshot-placeholder/g) || []).length, 0);
+  assert.match(read('index.html'), /class="[^"]*\bteam-scene\b/);
+  assert.match(read('index.html'), /data-i18n="demoMicrocopy"/);
   for (const match of html.matchAll(/(?:href|src)="([^"#]+)"/g)) {
     const target = match[1];
     if (/^https:/.test(target)) continue;
