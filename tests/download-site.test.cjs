@@ -239,27 +239,81 @@ test('local exception rejects unsupported platforms, updater, wrong tag and fabr
   assert.throws(() => buildDownloadIndex([missing]), /missing or mismatched/);
 });
 
-test('editorial landing keeps three honest screenshot slots and the download entry point', () => {
+test('editorial landing keeps the interactive scenes and the download entry point', () => {
   const html = fs.readFileSync(path.join(__dirname, '../site/index.html'), 'utf8');
-  assert.equal((html.match(/<figure class="screenshot-placeholder/g) || []).length, 3);
-  assert.equal((html.match(/data-i18n="shotLabel"/g) || []).length, 3);
-  assert.equal((html.match(/class="download-button" href="download-app\/"/g) || []).length, 2);
-  assert.doesNotMatch(html, /id="release-list"|app.js|releases\/download\//);
-  assert.match(html, /not simulated interfaces/);
+  // Gli screenshot statici restano esclusi: la landing usa scene HTML animate con badge di simulazione onesto.
+  assert.equal((html.match(/<figure class="screenshot-placeholder/g) || []).length, 0);
+  // Le scene dimostrative sono inline e dichiarate, non una replica dell'app a schermo intero.
+  assert.match(html, /class="[^"]*\bteam-scene\b/);
+  assert.match(html, /class="[^"]*\bsources-scene\b/);
+  assert.match(html, /class="[^"]*\bkanban-scene\b/);
+  assert.match(html, /data-i18n="demoMicrocopy"/);
+  assert.match(html, /href="download-app\/"/);
+  assert.doesNotMatch(html, /id="release-list"|app\.js|releases\/download\//);
+  assert.match(html, /no real execution/);
 });
 
-test('team landing preserves the agreed headline and distinguishes scheduling from execution', () => {
+test('team landing preserves the agreed headline and the subscription promise', () => {
   const site = path.join(__dirname, '../site');
   const html = fs.readFileSync(path.join(site, 'index.html'), 'utf8');
   const it = JSON.parse(fs.readFileSync(path.join(site, 'locales/it.json'), 'utf8'));
   assert.equal(it.hero, 'La tua squadra. Non un altro chatbot.');
-  assert.match(it.b1body, /indice è pronto/);
-  assert.match(it.b2body, /Kanban/);
-  assert.match(it.b3body, /modelli, skill e connettori/);
-  assert.match(it.cycleNote, /creare un’attività non la avvia/);
-  assert.match(it.cycleNote, /non una demo live/);
-  for (const key of ['cycle1', 'cycle2', 'cycle3', 'cycle4', 'cycleNote']) {
-    assert.equal((html.match(new RegExp(`data-i18n="${key}"`, 'g')) || []).length, 1);
+  // Il messaggio "non solo API" deve essere ben visibile, non nascosto in una nota tecnica.
+  assert.match(it.accessHeadline, /Non solo API/);
+  assert.match(it.accessHeadline, /abbonamenti supportati/);
+  assert.match(html, /data-i18n="accessHeadline"/);
+  assert.match(html, /data-i18n="accessOauth"/);
+  assert.match(html, /data-i18n="accessApi"/);
+  assert.match(html, /data-i18n="accessCli"/);
+  // Nessuna promessa universale o di uso illimitato.
+  assert.match(it.accessNote, /Non universale né illimitato/);
+  // Nessuna promessa di pubblicazione delle app interne.
+  assert.doesNotMatch(JSON.stringify(it), /pubblicabil/i);
+  assert.match(it.dResultSaved, /ambiente Talia/);
+});
+
+test('landing is mobile-first with progressive animations and reduced-motion support', () => {
+  const site = path.join(__dirname, '../site');
+  const html = fs.readFileSync(path.join(site, 'index.html'), 'utf8');
+  const css = fs.readFileSync(path.join(site, 'landing.css'), 'utf8');
+  const js = fs.readFileSync(path.join(site, 'landing.js'), 'utf8');
+  // Impaginazione mobile-first: le griglie partono a colonna singola.
+  assert.match(css, /grid-template-columns:\s*1fr;/);
+  assert.match(css, /@media \(min-width: 900px\)/);
+  // Viewport mobile con supporto safe-area.
+  assert.match(html, /width=device-width, initial-scale=1/);
+  // Animazioni progressive: rivelazione allo scroll e transizioni su transform/opacity.
+  assert.match(css, /\.reveal\s*\{/);
+  assert.match(css, /\.reveal\.armed/);
+  assert.match(css, /\.reveal\.armed\.in/);
+  assert.match(js, /IntersectionObserver/);
+  assert.match(js, /prefers-reduced-motion/);
+  // Reduced-motion: le animazioni non devono impedire l'accesso al contenuto.
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /\.reveal \{ opacity: 1; transform: none; \}/);
+  // Nessun contenuto nascosto senza JavaScript: il fallback 'not(.armed)'
+  // deve tenere il testo visibile quando lo script non viene eseguito.
+  assert.match(css, /\.reveal:not\(\.armed\) \{ opacity: 1; transform: none; \}/);
+  assert.doesNotMatch(css, /\.reveal-ready/);
+  // Scroll naturale: nessuna altezza rigida e nessuno scroll-snap obbligatorio.
+  assert.doesNotMatch(css, /scroll-snap/);
+  assert.doesNotMatch(css, /100svh|100vh/);
+  // La scena persistente (sticky) vale solo da 900px in su: su mobile
+  // il layout resta a stacking naturale.
+  const stickyBlock = css.match(/@media \(min-width: 900px\) \{[\s\S]*?\.feature-scene \{ position: sticky;[^}]*\}/);
+  assert.ok(stickyBlock, 'la scena sticky deve stare dentro il breakpoint desktop');
+  // Target touch da 44px per i controlli interattivi principali.
+  assert.match(css, /@media \(pointer: coarse\), \(max-width: 640px\)/);
+  assert.match(css, /\.cite \{ min-width: 44px; min-height: 44px; \}/);
+  // Lo scroll-driven CSS e' solo un miglioramento opzionale.
+  assert.match(css, /@supports \(animation-timeline: view\(\)\)/);
+  // Nessuna animazione basata su width/height/top/left (solo transform e opacity).
+  const animated = css.match(/@keyframes[\s\S]*?\}/g) || [];
+  assert.ok(animated.length >= 3, 'attese almeno tre animazioni chiave');
+  for (const block of animated) {
+    assert.doesNotMatch(block, /transition:.*\b(width|height|top|left)\b/, block);
   }
-  assert.match(html, /<ol class="daily-cycle">/);
+  // Nessuna dipendenza esterna: il sito resta statico e autonomo.
+  assert.doesNotMatch(html, /<script[^>]+src="https?:/);
+  assert.doesNotMatch(css, /url\(https?:/);
 });
