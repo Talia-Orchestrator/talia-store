@@ -22,6 +22,21 @@ Unauthenticated downloads require the repository and its `main` branch contents 
 
 `public-key.txt` contains the verification key shipped by Talia desktop. The corresponding private key is never stored here or in the other resource repositories. `catalog.signature.json` is generated separately from `catalog.json` after catalog QA.
 
+## Compatibilità delle app già installate
+
+Le versioni Talia già rilasciate continuano a richiedere l'URL pubblico sopra:
+la migrazione dei sorgenti in `packages/` non è un endpoint client e non può
+diventare una dipendenza dell'app. `npm run check:legacy-client` blocca un
+catalogo candidato se cambia il formato v3, l'envelope di firma, la chiave
+Ed25519 già inclusa nel client, l'origine/percorso relativo degli artifact o i
+loro hash e dimensioni. Confronta inoltre ID, tipo, versione e artifact con
+`origin/main:catalog.json`, cioè l'ultimo catalogo pubblico da cui parte il
+rollout. Eventuali delisting sono riportati separatamente: non cambiano il
+protocollo v3 consumato dal client né rimuovono le risorse già installate, ma
+richiedono una decisione di prodotto prima della pubblicazione. Usare un file
+di catalogo esplicito come argomento solo per verificare un baseline archiviato:
+`node scripts/check-legacy-client-compatibility.cjs percorso/catalogo-precedente.json`.
+
 ## Build
 
 From this repository, run:

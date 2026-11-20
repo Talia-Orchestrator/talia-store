@@ -60,6 +60,33 @@ valido: non ricostruire `catalog.json` e non rigenerare `catalog.signature.json`
    corrispondenti. Verificare poi nell'app il percorso Store → anteprima →
    installazione, distinguendo installazione da avvio del servizio esterno.
 
+### Compatibilità retroattiva e rollout del catalogo
+
+Le app Talia già installate consumano sempre
+`https://raw.githubusercontent.com/Talia-Orchestrator/talia-store/main/catalog.signature.json`.
+La riorganizzazione dei sorgenti sotto `packages/` è interna allo Store: non
+pubblicare URL che puntano ai nuovi sorgenti e non cambiare la trust root senza
+una release coordinata del client.
+
+1. Prima della PR e prima della pubblicazione eseguire `npm run check:legacy-client`.
+   Il gate confronta il candidato con `origin/main:catalog.json` e richiede:
+   formato v3, envelope v1 e firma Ed25519 con la chiave già distribuita,
+   artifact relativi a `artifacts/` sulla stessa origine pubblica, hash,
+   dimensioni e compatibilità delle risorse che restano pubblicate. I delisting
+   sono riportati: non rompono il parser v3 né eliminano le risorse già
+   installate, ma richiedono una decisione di prodotto documentata.
+2. Pubblicare insieme `catalog.json`, `catalog.signature.json` e ogni nuovo
+   artifact solo dopo il gate; mantenere raggiungibili tutti gli artifact
+   referenziati dall'ultimo catalogo firmato.
+3. Con almeno una build Talia precedente già installata, aggiornare lo Store
+   dall'URL pubblico e verificare elenco, anteprima, installazione e
+   aggiornamento di un pacchetto. Registrare versione dell'app, URL, commit
+   pubblicato ed esito; il gate locale non sostituisce questa prova.
+4. In caso di errore post-pubblicazione, ripristinare su `main` l'ultima coppia
+   verificata `catalog.json` + `catalog.signature.json` e gli artifact da essa
+   referenziati. Non pubblicare un catalogo non firmato e non rimuovere gli
+   artifact storici finché una coppia firmata può ancora indicarli.
+
 ### Gate locale prima di `talia-core:main` → `build`
 
 Prima della PR che promuove il core a `build`, aggiornare un checkout pulito
