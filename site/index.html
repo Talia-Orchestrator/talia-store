@@ -1,85 +1,256 @@
 <!doctype html>
-<html lang="it">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#101522">
-    <meta name="description" content="Scarica Talia per macOS, Windows e Linux. Controlla versione, piattaforme disponibili e checksum.">
-    <title>Scarica Talia</title>
-    <link rel="icon" href="assets/talia-symbol.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20261116-1">
-    <script src="app.js?v=20261116-1" defer></script>
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="./" aria-label="Talia, home">
-        <img src="assets/talia-symbol.svg" width="38" height="38" alt="">
-        <span>Talia</span>
-      </a>
-      <a class="header-link" href="https://github.com/Talia-Orchestrator/talia-store/releases">Release su GitHub</a>
-    </header>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a1d23">
+  <meta name="description" content="Coordinate AI agents, use your documents and turn recurring tasks into organized work." data-i18n-content="description">
+  <title data-i18n="title">Talia — Your team. Not another chatbot.</title>
+  <link rel="icon" href="assets/talia-symbol.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="landing.css">
+  <script src="i18n.js" defer></script>
+  <script src="landing.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
 
-    <main>
-      <section class="hero" aria-labelledby="page-title">
-        <p class="eyebrow">Assistente desktop, al tuo ritmo</p>
-        <h1 id="page-title">Scarica Talia</h1>
-        <p class="intro">Conversazioni con agenti, strumenti e app locali. Scegli il pacchetto per il tuo computer e controlla sempre versione e checksum prima di installarlo.</p>
-        <p class="release-summary" id="release-summary" aria-live="polite">Caricamento delle release disponibili…</p>
-        <p><a href="https://github.com/Talia-Orchestrator/talia-store/blob/main/CHANGELOG.md">Leggi il changelog completo su GitHub</a>. La disponibilità dei pacchetti è indicata nell’elenco download.</p>
-      </section>
+  <header class="site-header" role="banner">
+    <a class="brand" href="./" aria-label="Talia — Home">
+      <img src="assets/talia-symbol.svg" width="32" height="32" alt="">
+      <span>Talia</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#download" data-i18n="navDownload">Download</a>
+    </nav>
+    <label class="language-control">
+      <span class="visually-hidden" data-i18n="language">Language</span>
+      <select id="language-select" dir="ltr" disabled><option>English</option></select>
+    </label>
+  </header>
 
-      <section class="downloads" aria-labelledby="downloads-title">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Download</p>
-            <h2 id="downloads-title">Scegli il tuo sistema</h2>
-          </div>
-          <a class="all-releases" href="https://github.com/Talia-Orchestrator/talia-store/releases">Tutte le release</a>
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy reveal" style="--delay:0ms">
+        <p class="eyebrow" data-i18n="desktop">Talia for desktop</p>
+        <h1 id="page-title"><span data-i18n="hero">Your team. Not another chatbot.</span></h1>
+        <p class="intro" data-i18n="intro">Coordinate AI agents, use your documents and turn recurring tasks into organized work.</p>
+        <div class="hero-cta">
+          <a class="btn-primary" href="#download" data-i18n="downloadCta">Download Talia</a>
+          <a class="btn-ghost" href="#team" data-i18n="exploreCta">See how it works</a>
         </div>
-        <div class="release-list" id="release-list" aria-live="polite">
-          <p class="empty-state">Sto caricando i pacchetti disponibili…</p>
+        <p class="demo-tag">
+          <span class="demo-dot" aria-hidden="true"></span>
+          <span data-i18n="demoMicrocopy">Interactive demo · sample data · no real execution</span>
+        </p>
+      </div>
+      <div class="hero-scene reveal" style="--delay:120ms" aria-hidden="true">
+        <div class="agent-card a1" style="--delay:0s">
+          <span class="agent-avatar" style="background:#5b57d6">C</span>
+          <div class="agent-meta"><b data-i18n="agentCommander">Commander</b><small data-i18n="agentCommanderRole">Coordination</small></div>
+          <span class="agent-status"></span>
         </div>
-      </section>
-
-      <section class="notes" aria-labelledby="manual-title">
-        <p class="eyebrow">Documenti dello store</p>
-        <h2 id="manual-title">Manuale Talia</h2>
-        <p>La guida completa a documenti e RAG, chat, progetti, cartelle, modelli, impostazioni, skill, agenti e connettori. Puoi leggerla come Markdown e importarla nei Documenti se l’hai eliminata.</p>
-        <p><a href="docs/Manuale-Talia.md" download="Manuale-Talia.md">Scarica il manuale Markdown</a> · Versione 1.0.0</p>
-        <p>Nell’app il ripristino del manuale incluso funziona anche offline. Il documento e la guida informativa sono rimovibili: non vengono reinstallati automaticamente dopo la rimozione.</p>
-      </section>
-
-      <section class="notes" aria-labelledby="solidcraft-title">
-        <p class="eyebrow">Connettori dello store</p>
-        <h2 id="solidcraft-title">SolidCraft MCP</h2>
-        <p>Integrazione con il server MCP ufficiale di SolidCraft per il CAD 3D parametrico. Il pacchetto contiene solo il template di connessione e richiede SolidCraft installato separatamente; non configura né avvia server durante l’installazione.</p>
-        <p><a href="https://github.com/Talia-Orchestrator/talia-connectors/tree/main/packages/solidcraft">Sorgenti e guida del connettore</a> · <a href="https://docs.solidcraft.io/guide/mcp.html">Documentazione ufficiale SolidCraft</a></p>
-      </section>
-
-      <section class="notes" aria-labelledby="notes-title">
-        <p class="eyebrow">Prima di installare</p>
-        <h2 id="notes-title">Firma e aggiornamenti</h2>
-        <div class="note-grid">
-          <article class="note-card">
-            <h3>macOS</h3>
-            <p>I pacchetti attuali usano una firma ad hoc e non sono notarizzati da Apple. macOS può mostrare un avviso al primo avvio. Il download e l’installazione restano manuali.</p>
-          </article>
-          <article class="note-card">
-            <h3>Windows e Linux</h3>
-            <p>I pacchetti attuali non hanno firma Authenticode o firma AppImage. Windows può mostrare un avviso SmartScreen. Confronta il checksum SHA-256 pubblicato con il file scaricato.</p>
-          </article>
-          <article class="note-card">
-            <h3>Aggiornamenti</h3>
-            <p>Gli aggiornamenti automatici sono supportati dai pacchetti Windows e Linux che lo indicano nella scheda della release. Su macOS il download e l’installazione sono manuali.</p>
-          </article>
+        <div class="agent-card a2" style="--delay:1.2s">
+          <span class="agent-avatar" style="background:#0a7350">R</span>
+          <div class="agent-meta"><b data-i18n="agentWriter">Research Writer</b><small data-i18n="agentWriterRole">Writing &amp; research</small></div>
+          <span class="agent-status typing"><span></span><span></span><span></span></span>
         </div>
-        <p class="integrity-note">Il checksum aiuta a verificare che il file corrisponda alla release pubblicata; da solo non certifica l’identità dell’autore o la sicurezza del programma.</p>
-      </section>
-    </main>
+        <div class="agent-card a3" style="--delay:2.4s">
+          <span class="agent-avatar" style="background:#8a4b06">D</span>
+          <div class="agent-meta"><b data-i18n="sDataAnalyst">Data Analyst</b><small data-i18n="sDataAnalystDesc">Turns tables into findings</small></div>
+          <span class="agent-status done" data-i18n="taskDone">Done</span>
+        </div>
+      </div>
+    </section>
 
-    <footer class="site-footer">
-      <span>© Talia</span>
-      <a href="https://github.com/Talia-Orchestrator/talia-store">Codice e risorse pubbliche</a>
-    </footer>
-  </body>
+    <!-- ABBONAMENTI (prominent band) -->
+    <section class="access" aria-labelledby="access-title">
+      <div class="access-inner reveal">
+        <p class="eyebrow access-eyebrow" data-i18n="accessEyebrow">Subscriptions</p>
+        <h2 id="access-title" data-i18n="accessHeadline">Not just API. Your subscriptions work too.</h2>
+        <p class="access-body" data-i18n="accessBody">Connect providers through your existing account, your own API key, or your local CLI tools — not just pay-per-use.</p>
+        <ul class="access-cards">
+          <li class="access-card">
+            <span class="access-icon" aria-hidden="true">⌬</span>
+            <strong data-i18n="accessOauth">Account sign-in (OAuth)</strong>
+            <span class="access-sub" data-i18n="accessOauthBody">Sign into an existing account (e.g. Claude Pro / ChatGPT).</span>
+          </li>
+          <li class="access-card">
+            <span class="access-icon" aria-hidden="true">⚷</span>
+            <strong data-i18n="accessApi">Your own API key</strong>
+            <span class="access-sub" data-i18n="accessApiBody">Paste the key you created in the provider's console.</span>
+          </li>
+          <li class="access-card">
+            <span class="access-icon" aria-hidden="true">⌖</span>
+            <strong data-i18n="accessCli">External CLI — existing account</strong>
+            <span class="access-sub" data-i18n="accessCliBody">Claude Code, Codex, OpenCode… use the account and settings already configured in that tool.</span>
+          </li>
+        </ul>
+        <p class="access-note" data-i18n="accessNote">Not universal or unlimited: each provider's own terms and fees apply.</p>
+      </div>
+    </section>
+
+    <!-- FEATURE 1: Squadra in azione -->
+    <section class="feature" id="team" aria-labelledby="feat1-title">
+      <div class="feature-copy reveal">
+        <p class="eyebrow" data-i18n="aiTeam">AI Team</p>
+        <h2 id="feat1-title" data-i18n="feat1Title">Your team, in motion.</h2>
+        <p data-i18n="feat1Body">Specialist agents pick up the work, divide it, and hand it off — with citations from your documents and clear approval gates for sensitive steps.</p>
+        <ul class="feature-bullets">
+          <li data-i18n="feat1Bullet1">One task, several specialists in parallel.</li>
+          <li data-i18n="feat1Bullet2">Each reply cites the documents it used.</li>
+          <li data-i18n="feat1Bullet3">Sensitive actions wait for your approval.</li>
+        </ul>
+      </div>
+      <div class="feature-scene team-scene reveal" aria-hidden="true">
+        <div class="bubble from-user" style="--delay:0ms"><b data-i18n="dYou">You</b><p data-i18n="dMsg1">Prepare the weekly briefing using the project documents.</p></div>
+        <div class="bubble from-bot" style="--delay:200ms"><b data-i18n="agentCommander">Commander</b><p data-i18n="dMsg2">Assigning the briefing to Research Writer and looking up sources in the Library.</p></div>
+        <div class="bubble from-bot writing" style="--delay:600ms"><b data-i18n="agentWriter">Research Writer</b><span class="typing-dots"><span></span><span></span><span></span></span></div>
+        <div class="bubble from-bot" style="--delay:1100ms"><b data-i18n="agentWriter">Research Writer</b><p data-i18n="dMsg3">Draft ready. I cited 3 sources from the Library.</p></div>
+      </div>
+    </section>
+
+    <!-- FEATURE 2: Niente si perde -->
+    <section class="feature feature-reverse" aria-labelledby="feat2-title">
+      <div class="feature-copy reveal">
+        <p class="eyebrow" data-i18n="workEyebrow">Tasks &amp; search</p>
+        <h2 id="feat2-title" data-i18n="workTitle">Nothing gets lost.</h2>
+        <p data-i18n="workBody">Tasks, projects, documents and automations share one space. A single keystroke finds any of them.</p>
+        <div class="kbd-row">
+          <span class="kbd">⌘</span><span class="kbd">K</span>
+          <span data-i18n="searchBody">Unified search across tasks, Library, agents, skills, automations.</span>
+        </div>
+      </div>
+      <div class="feature-scene kanban-scene reveal" aria-hidden="true">
+        <div class="kanban-col">
+          <span class="kanban-label" data-i18n="dKanbanTodo">To do</span>
+          <div class="kanban-card" style="--delay:0ms"><b data-i18n="dKanb3">Draft the intro</b></div>
+        </div>
+        <div class="kanban-col">
+          <span class="kanban-label" data-i18n="dKanbanDoing">In progress</span>
+          <div class="kanban-card" style="--delay:120ms"><b data-i18n="dKanb2">Index project documents</b><span class="kanban-tag" data-i18n="taskProgress">In progress</span></div>
+          <div class="kanban-card" style="--delay:200ms"><b data-i18n="dKanb4">Review citations</b><span class="kanban-tag" data-i18n="taskProgress">In progress</span></div>
+        </div>
+        <div class="kanban-col">
+          <span class="kanban-label" data-i18n="dKanbanReview">To review</span>
+          <div class="kanban-card done" style="--delay:320ms"><b data-i18n="dKanb1">Weekly briefing</b><span class="kanban-tag" data-i18n="taskDone">Done</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE 3: Risposte con fonti -->
+    <section class="feature" aria-labelledby="feat3-title">
+      <div class="feature-copy reveal">
+        <p class="eyebrow" data-i18n="sourcesEyebrow">Library &amp; citations</p>
+        <h2 id="feat3-title" data-i18n="sourcesTitle">Every reply carries its sources.</h2>
+        <p data-i18n="sourcesBody">When an agent cites a document, you can open the source, see the passage and decide whether to trust it.</p>
+        <p class="feature-note" data-i18n="ragNote">Responses can cite the documents you upload to the Library. (demo: synthetic citations, no live retrieval)</p>
+      </div>
+      <div class="feature-scene sources-scene reveal" aria-hidden="true">
+        <div class="src-bubble">
+          <div class="src-meta"><span class="src-avatar" style="background:#0a7350">R</span><b data-i18n="agentWriter">Research Writer</b></div>
+          <p class="src-text" data-i18n="dMsg3">Draft ready. I cited 3 sources from the Library.</p>
+          <p class="src-quote">
+            <button class="cite" type="button" data-cite="1">[1]</button>
+            <button class="cite" type="button" data-cite="2">[2]</button>
+            <button class="cite" type="button" data-cite="3">[3]</button>
+            <span class="src-quote-text" data-i18n="dSrc1">"Talia coordinates agents around shared documents and tasks."</span>
+          </p>
+        </div>
+        <div class="src-list">
+          <div class="src-row" data-id="1"><span class="src-id">[1]</span><b data-i18n="dDoc1">Product brief</b></div>
+          <div class="src-row" data-id="2"><span class="src-id">[2]</span><b data-i18n="dDoc2">Release notes</b></div>
+          <div class="src-row" data-id="3"><span class="src-id">[3]</span><b data-i18n="dDoc3">Interview transcripts</b></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE 4: Decidi tu il livello -->
+    <section class="feature feature-reverse" aria-labelledby="feat4-title">
+      <div class="feature-copy reveal">
+        <p class="eyebrow" data-i18n="trustEyebrow">Trust &amp; permissions</p>
+        <h2 id="feat4-title" data-i18n="trustTitle">You decide how much latitude to grant.</h2>
+        <p data-i18n="trustText">From confirmation on every sensitive action to full autonomy inside your rules: three levels, not all-or-nothing.</p>
+        <div class="trust-toggle" role="tablist" aria-label="Permission level">
+          <button type="button" role="tab" aria-selected="true" data-level="cautious" data-i18n="permCautious">Cautious</button>
+          <button type="button" role="tab" aria-selected="false" data-level="standard" data-i18n="permStandard">Standard</button>
+          <button type="button" role="tab" aria-selected="false" data-level="trusted" data-i18n="permTrusted">Trusted</button>
+        </div>
+        <p class="trust-detail" data-i18n="permCautiousBody">Ask before every sensitive action.</p>
+      </div>
+      <div class="feature-scene trust-scene reveal" aria-hidden="true">
+        <div class="trust-meter">
+          <div class="trust-bar" style="--fill:33%"></div>
+        </div>
+        <ul class="trust-list">
+          <li><span class="trust-dot dot-on"></span><span data-i18n="trustRead">Read documents</span></li>
+          <li><span class="trust-dot dot-on"></span><span data-i18n="trustDraft">Draft replies</span></li>
+          <li><span class="trust-dot dot-ask"></span><span data-i18n="trustSend">Send external actions</span></li>
+          <li><span class="trust-dot dot-off"></span><span data-i18n="trustDelete">Delete or overwrite</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- STORE: Componi la tua squadra -->
+    <section class="store-section" id="store" aria-labelledby="store-title">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="storeEyebrow">Store</p>
+        <h2 id="store-title" data-i18n="storeTitle">Build your team.</h2>
+        <p data-i18n="storeBody">Agents, skills, connectors and external CLIs. Each one optional, all of them local.</p>
+      </div>
+      <ul class="store-grid" id="store-grid" aria-live="polite"></ul>
+      <p class="store-cli-note" data-i18n="cliNote">External CLIs require the tool already installed and authenticated on your computer.</p>
+    </section>
+
+    <!-- LE APP RESTANO TUE -->
+    <section class="apps-section" aria-labelledby="apps-title">
+      <div class="apps-copy reveal">
+        <h2 id="apps-title" data-i18n="closeTitle">The apps you build stay with you.</h2>
+        <p data-i18n="closeText">Calculators, trackers, small dashboards: you build them, use them and save them in your Talia environment. They never become public links.</p>
+      </div>
+      <div class="apps-card reveal" aria-hidden="true">
+        <div class="apps-card-head">
+          <span class="apps-card-icon" aria-hidden="true">▣</span>
+          <strong data-i18n="dResultTitle">Weekly briefing tracker</strong>
+        </div>
+        <ul class="apps-list">
+          <li><span class="apps-tick"></span><span data-i18n="dResultItem1">Briefing drafted</span></li>
+          <li><span class="apps-tick"></span><span data-i18n="dResultItem2">Sources cited</span></li>
+          <li><span class="apps-tick apps-tick-pending"></span><span data-i18n="dResultItem3">Task tracked</span></li>
+        </ul>
+        <p class="apps-saved" data-i18n="dResultSaved">Saved in your Talia environment</p>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD -->
+    <section class="download" id="download" aria-labelledby="download-title">
+      <div class="download-inner reveal">
+        <p class="eyebrow" data-i18n="downloadEyebrow">Get Talia</p>
+        <h2 id="download-title" data-i18n="downloadTitle">Download Talia.</h2>
+        <p data-i18n="downloadSub">macOS, Windows and Linux · preview software.</p>
+        <div class="download-buttons">
+          <a class="dl-btn" href="download-app/" data-platform="mac"><b>macOS</b><span data-i18n="dlMac">Apple silicon · Intel</span></a>
+          <a class="dl-btn" href="download-app/" data-platform="win"><b>Windows</b><span data-i18n="dlWin">10 · 11 · installer &amp; portable</span></a>
+          <a class="dl-btn" href="download-app/" data-platform="linux"><b>Linux</b><span data-i18n="dlLinux">.deb · AppImage · tarball</span></a>
+        </div>
+        <p class="download-warning" data-i18n="warning">Current packages are ad-hoc signed, not notarized; Windows and Linux lack Authenticode/AppImage signatures. Security warnings may appear. Automatic updates apply only to packages marked below.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="footer-tag">
+      <span class="demo-dot" aria-hidden="true"></span>
+      <span data-i18n="demoMicrocopy">Interactive demo · sample data · no real execution</span>
+    </p>
+    <p class="footer-links">
+      <a href="download-app/" data-i18n="manualLink">Talia manual</a>
+    </p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+</body>
 </html>

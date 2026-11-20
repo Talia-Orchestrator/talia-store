@@ -6,12 +6,42 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
+const vm = require('node:vm');
 const { buildDownloadIndex, fetchReleaseRecordsWithGh, parseManifest } = require('../scripts/build-download-site.cjs');
 
 const REPOSITORY = 'Talia-Orchestrator/talia-store';
 const COMMIT = '0123456789abcdef0123456789abcdef01234567';
 const TAG = 'v0.7.0-main.6.1';
 const ROOT_URL = `https://github.com/${REPOSITORY}/releases/download/${TAG}`;
+
+test('download accessible names include the visible format for every published installer', () => {
+  const document = {
+    createElement(tag) {
+      return { tag, children: [], attributes: {}, append(...children) { this.children.push(...children); },
+        setAttribute(name, value) { this.attributes[name] = value; } };
+    },
+  };
+  const context = vm.createContext({ document, URL, Intl });
+  const script = fs.readFileSync(path.join(__dirname, '../site/app.js'), 'utf8');
+  vm.runInContext(script.split('// Avvio dopo la selezione della lingua')[0], context);
+  const index = JSON.parse(fs.readFileSync(path.join(__dirname, '../site/releases.json'), 'utf8'));
+  let checked = 0;
+  const formats = new Set();
+  for (const release of index.releases) {
+    context.release = release;
+    const cards = vm.runInContext('TARGETS.map(target => makePlatformCard(release, target))', context);
+    for (const card of cards.filter(Boolean)) {
+      const link = card.children.find(child => child.tag === 'a');
+      if (!link) continue;
+      assert.ok(link.attributes['aria-label'].startsWith(`${link.textContent} — Talia ${release.baseVersion} per `));
+      assert.ok(Object.values(release.platforms).some(platform => platform.files.some(file => file.url === link.href)));
+      formats.add(link.textContent);
+      checked += 1;
+    }
+  }
+  assert.ok(checked > 0);
+  for (const format of ['DMG', 'EXE', 'ZIP', 'APPIMAGE']) assert.ok(formats.has(`Scarica ${format}`));
+});
 
 function file(name, size = 1024) {
   return { name, url: `${ROOT_URL}/${name}`, size, sha256: 'a'.repeat(64) };
@@ -207,4 +237,83 @@ test('local exception rejects unsupported platforms, updater, wrong tag and fabr
   const missing = localRecord();
   missing.release.assets = [];
   assert.throws(() => buildDownloadIndex([missing]), /missing or mismatched/);
+});
+
+test('editorial landing keeps the interactive scenes and the download entry point', () => {
+  const html = fs.readFileSync(path.join(__dirname, '../site/index.html'), 'utf8');
+  // Gli screenshot statici restano esclusi: la landing usa scene HTML animate con badge di simulazione onesto.
+  assert.equal((html.match(/<figure class="screenshot-placeholder/g) || []).length, 0);
+  // Le scene dimostrative sono inline e dichiarate, non una replica dell'app a schermo intero.
+  assert.match(html, /class="[^"]*\bteam-scene\b/);
+  assert.match(html, /class="[^"]*\bsources-scene\b/);
+  assert.match(html, /class="[^"]*\bkanban-scene\b/);
+  assert.match(html, /data-i18n="demoMicrocopy"/);
+  assert.match(html, /href="download-app\/"/);
+  assert.doesNotMatch(html, /id="release-list"|app\.js|releases\/download\//);
+  assert.match(html, /no real execution/);
+});
+
+test('team landing preserves the agreed headline and the subscription promise', () => {
+  const site = path.join(__dirname, '../site');
+  const html = fs.readFileSync(path.join(site, 'index.html'), 'utf8');
+  const it = JSON.parse(fs.readFileSync(path.join(site, 'locales/it.json'), 'utf8'));
+  assert.equal(it.hero, 'La tua squadra. Non un altro chatbot.');
+  // Il messaggio "non solo API" deve essere ben visibile, non nascosto in una nota tecnica.
+  assert.match(it.accessHeadline, /Non solo API/);
+  assert.match(it.accessHeadline, /abbonamenti supportati/);
+  assert.match(html, /data-i18n="accessHeadline"/);
+  assert.match(html, /data-i18n="accessOauth"/);
+  assert.match(html, /data-i18n="accessApi"/);
+  assert.match(html, /data-i18n="accessCli"/);
+  // Nessuna promessa universale o di uso illimitato.
+  assert.match(it.accessNote, /Non universale né illimitato/);
+  // Nessuna promessa di pubblicazione delle app interne.
+  assert.doesNotMatch(JSON.stringify(it), /pubblicabil/i);
+  assert.match(it.dResultSaved, /ambiente Talia/);
+});
+
+test('landing is mobile-first with progressive animations and reduced-motion support', () => {
+  const site = path.join(__dirname, '../site');
+  const html = fs.readFileSync(path.join(site, 'index.html'), 'utf8');
+  const css = fs.readFileSync(path.join(site, 'landing.css'), 'utf8');
+  const js = fs.readFileSync(path.join(site, 'landing.js'), 'utf8');
+  // Impaginazione mobile-first: le griglie partono a colonna singola.
+  assert.match(css, /grid-template-columns:\s*1fr;/);
+  assert.match(css, /@media \(min-width: 900px\)/);
+  // Viewport mobile con supporto safe-area.
+  assert.match(html, /width=device-width, initial-scale=1/);
+  // Animazioni progressive: rivelazione allo scroll e transizioni su transform/opacity.
+  assert.match(css, /\.reveal\s*\{/);
+  assert.match(css, /\.reveal\.armed/);
+  assert.match(css, /\.reveal\.armed\.in/);
+  assert.match(js, /IntersectionObserver/);
+  assert.match(js, /prefers-reduced-motion/);
+  // Reduced-motion: le animazioni non devono impedire l'accesso al contenuto.
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /\.reveal \{ opacity: 1; transform: none; \}/);
+  // Nessun contenuto nascosto senza JavaScript: il fallback 'not(.armed)'
+  // deve tenere il testo visibile quando lo script non viene eseguito.
+  assert.match(css, /\.reveal:not\(\.armed\) \{ opacity: 1; transform: none; \}/);
+  assert.doesNotMatch(css, /\.reveal-ready/);
+  // Scroll naturale: nessuna altezza rigida e nessuno scroll-snap obbligatorio.
+  assert.doesNotMatch(css, /scroll-snap/);
+  assert.doesNotMatch(css, /100svh|100vh/);
+  // La scena persistente (sticky) vale solo da 900px in su: su mobile
+  // il layout resta a stacking naturale.
+  const stickyBlock = css.match(/@media \(min-width: 900px\) \{[\s\S]*?\.feature-scene \{ position: sticky;[^}]*\}/);
+  assert.ok(stickyBlock, 'la scena sticky deve stare dentro il breakpoint desktop');
+  // Target touch da 44px per i controlli interattivi principali.
+  assert.match(css, /@media \(pointer: coarse\), \(max-width: 640px\)/);
+  assert.match(css, /\.cite \{ min-width: 44px; min-height: 44px; \}/);
+  // Lo scroll-driven CSS e' solo un miglioramento opzionale.
+  assert.match(css, /@supports \(animation-timeline: view\(\)\)/);
+  // Nessuna animazione basata su width/height/top/left (solo transform e opacity).
+  const animated = css.match(/@keyframes[\s\S]*?\}/g) || [];
+  assert.ok(animated.length >= 3, 'attese almeno tre animazioni chiave');
+  for (const block of animated) {
+    assert.doesNotMatch(block, /transition:.*\b(width|height|top|left)\b/, block);
+  }
+  // Nessuna dipendenza esterna: il sito resta statico e autonomo.
+  assert.doesNotMatch(html, /<script[^>]+src="https?:/);
+  assert.doesNotMatch(css, /url\(https?:/);
 });

@@ -8,7 +8,8 @@
     "build:model-thinking": "node scripts/build-model-thinking.cjs",
     "build:routing-index": "node scripts/routing-index.cjs build",
     "build:download-site": "node scripts/build-download-site.cjs",
-    "test:site": "node --test tests/download-site.test.cjs",
+    "test:site": "node --test tests/download-site.test.cjs tests/download-i18n.test.cjs tests/deploy-pages-branch.test.cjs",
+    "check:site:browser": "node scripts/check-download-browser.cjs",
     "validate": "node scripts/validate-catalog-source.cjs && node scripts/routing-index.cjs check",
     "test": "npm run validate && node --test tests/store.test.cjs tests/catalog-upgrade.test.cjs tests/artifact-retention.test.cjs tests/model-thinking.test.cjs",
     "validate:before-build": "node scripts/validate-before-build.cjs"
