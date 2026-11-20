@@ -13,7 +13,7 @@ const featuredAgents = [
   'ecommerce-researcher',
 ];
 function packageDirs(category, names) {
-  const root = path.join(storeRoot, category);
+  const root = path.join(storeRoot, 'packages', category);
   const selected = names || fs.readdirSync(root).filter((name) => fs.statSync(path.join(root, name)).isDirectory());
   return selected.map((name) => {
     const dir = path.join(root, name);

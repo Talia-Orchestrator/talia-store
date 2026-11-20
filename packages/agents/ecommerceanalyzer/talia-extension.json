@@ -1,0 +1,15 @@
+{
+  "id": "talia-agents/ecommerceanalyzer",
+  "kind": "agent",
+  "version": "1.0.0",
+  "name": "ECommerceAnalyzer",
+  "description": "Analyzes ecommerce sales, contribution profit, ads, refunds and inventory from supplied exports; delivers reconciled metrics, drivers and prioritized decisions; not for new-product selection, VOC analysis or live store changes; For: \"explain falling store profit\", \"compare channel performance\", \"find inventory risks\"; Triggers: ecommerce analytics, profit, ROAS, refunds, stock turnover",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-analytics"
+    }
+  ]
+}

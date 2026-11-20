@@ -10,7 +10,7 @@ già verificate del client hanno precedenza. Un modello senza livelli enumerati
 non ottiene una scala per analogia. `none` indica Off e non è uno step dello
 slider: il generatore lo esclude senza scartare gli altri effort validi.
 
-Public, anonymous HTTPS distribution for signed Talia resources. This repository is the source of truth for selected packages under `agents/`, `skills/`, `connectors/`, `apps/`, and `library/`. The signed v3 index and v2 artifacts are generated from these local directories. Talia desktop bundles Assistant, General Researcher, ContentWriter, six starter skills, and the complete manual for offline first use; the Store supplies all optional packages and updates.
+Public, anonymous HTTPS distribution for signed Talia resources. This repository is the source of truth for selected packages under `packages/agents/`, `packages/skills/`, `packages/connectors/`, `packages/apps/`, and `packages/library/`. The signed v3 index and v2 artifacts are generated from these local directories. Talia desktop bundles Assistant, General Researcher, ContentWriter, six starter skills, and the complete manual for offline first use; the Store supplies all optional packages and updates.
 
 ## Anonymous desktop source
 
@@ -22,6 +22,21 @@ Unauthenticated downloads require the repository and its `main` branch contents 
 
 `public-key.txt` contains the verification key shipped by Talia desktop. The corresponding private key is never stored here or in the other resource repositories. `catalog.signature.json` is generated separately from `catalog.json` after catalog QA.
 
+## Compatibilità delle app già installate
+
+Le versioni Talia già rilasciate continuano a richiedere l'URL pubblico sopra:
+la migrazione dei sorgenti in `packages/` non è un endpoint client e non può
+diventare una dipendenza dell'app. `npm run check:legacy-client` blocca un
+catalogo candidato se cambia il formato v3, l'envelope di firma, la chiave
+Ed25519 già inclusa nel client, l'origine/percorso relativo degli artifact o i
+loro hash e dimensioni. Confronta inoltre ID, tipo, versione e artifact con
+`origin/main:catalog.json`, cioè l'ultimo catalogo pubblico da cui parte il
+rollout. Eventuali delisting sono riportati separatamente: non cambiano il
+protocollo v3 consumato dal client né rimuovono le risorse già installate, ma
+richiedono una decisione di prodotto prima della pubblicazione. Usare un file
+di catalogo esplicito come argomento solo per verificare un baseline archiviato:
+`node scripts/check-legacy-client-compatibility.cjs percorso/catalogo-precedente.json`.
+
 ## Build
 
 From this repository, run:
@@ -32,11 +47,11 @@ node scripts/build-catalog.cjs
 
 This writes `catalog.json` and the referenced `artifacts/` files. Sign the exact catalog bytes with the release signing process; do not put a private key in this repository or CI logs.
 
-The builder selects seventeen specialist agents explicitly and reads skills, connectors, apps, and Library packages from this repository. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing.
+The builder selects seventeen specialist agents explicitly and reads skills, connectors, apps, and Library packages from `packages/`. It emits a v3 index containing package metadata and artifact hashes, plus one v2 package artifact per entry. It also removes stale files under `artifacts/` that are no longer referenced by the new index. Review that diff before signing.
 
 ## Team bundles
 
-`skills/app-development-team` is the signed bundle descriptor for the Team tab.
+`packages/skills/app-development-team` is the signed bundle descriptor for the Team tab.
 It stays a valid skill package so older Talia clients can still read the catalog.
 `team.json` names the required agents and optional roles; each agent's signed
 package declares its own skill dependencies. The host previews every package

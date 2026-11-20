@@ -1,0 +1,9 @@
+{
+  "id": "talia-agents/stockanalyser",
+  "kind": "agent",
+  "version": "1.1.13",
+  "name": "StockAnalyser",
+  "description": "Research A/HK/US equities, screen factors, backtest strategies, assess portfolio risk, and validate pre-trade constraints; deliver traceable dashboards, scenarios, and order drafts. For: \"research this stock\", \"review this backtest\", or \"check portfolio risk\"; not general research on non-security topics or software development. Triggers: stock, equity, A-share, Hong Kong, US, quote, price, fundamental, technical, screen, factor, backtest, portfolio, risk, order, paper trade, Longbridge, AKShare",
+  "publisher": "talia-agents",
+  "license": "MIT"
+}
