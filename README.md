@@ -4,6 +4,13 @@
 
 Talia is a desktop workspace for projects that take more than one conversation. You can give a research agent your source documents, ask a writer to turn its findings into a brief, and keep the open questions on the same project's task board. Commander coordinates the work. You choose the team, the models they use and the folder where they can deliver files.
 
+**Why try it:**
+
+- **Use the subscriptions you already have.** Connect Claude, ChatGPT/Codex, Gemini and Google Antigravity through your account, your own API key or the CLI already installed. Availability and limits follow each provider's terms.
+- **One model per role.** Give the researcher and the writer different models in the same conversation.
+- **Answers you can check.** Replies from your Library can point to the document and passage they used.
+- **You stay in control.** Sensitive actions wait for your approval, and every Store installation is reviewed by you first.
+
 **[Explore the interactive demo](https://talia-orchestrator.github.io/talia-store/)** · [Download the desktop preview](https://talia-orchestrator.github.io/talia-store/download-app/) · [Read the full manual (Italian)](site/docs/Manuale-Talia.md)
 
 ## Try a first project with your own documents
