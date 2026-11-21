@@ -1,0 +1,18 @@
+name: Share a Talia workflow
+description: Tell us what you tried, what worked and where you got stuck.
+title: "[Workflow] "
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: What were you trying to get done?
+      placeholder: I wanted to turn my project notes into a weekly brief with sources.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: How far did you get?
+      description: Tell us what worked, where you stopped, or what would make you use Talia again. Use a public example and leave out private documents and credentials.
+    validations:
+      required: true

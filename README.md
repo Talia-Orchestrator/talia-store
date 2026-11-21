@@ -16,6 +16,8 @@ Talia is a desktop workspace for AI agents. Give the Commander a brief, bring in
 
 Browse all [agents](agents/), [skills](skills/), [connectors](connectors/), [apps](apps/) and [Library packages](library/). You can inspect each package here before installing it in Talia.
 
+Tried Talia on a real task? [Tell us what you wanted to do and where you got stuck](https://github.com/Talia-Orchestrator/talia-store/issues/new?template=workflow-feedback.yml).
+
 If you find a specialist or workflow you want to come back to, give the Store a ★ on GitHub.
 
 <details>
