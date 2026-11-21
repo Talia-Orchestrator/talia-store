@@ -2,19 +2,57 @@
 
 # Talia Store
 
-Talia is a desktop workspace for AI agents. Give the Commander a brief, bring in specialists for research or writing, and keep the conversation and its sources together. This Store is where you can explore the agents, skills and tools that go into your team.
+Talia is a desktop workspace for projects that take more than one conversation. You can give a research agent your source documents, ask a writer to turn its findings into a brief, and keep the open questions on the same project's task board. Commander coordinates the work. You choose the team, the models they use and the folder where they can deliver files.
 
-**[See Talia in action on the homepage →](https://talia-orchestrator.github.io/talia-store/)** · [Download for macOS, Windows or Linux](https://talia-orchestrator.github.io/talia-store/download-app/)
+**[Explore the interactive demo](https://talia-orchestrator.github.io/talia-store/)** · [Download the desktop preview](https://talia-orchestrator.github.io/talia-store/download-app/) · [Read the full manual (Italian)](site/docs/Manuale-Talia.md)
 
-## What would you like to make?
+## Try a first project with your own documents
 
-| Start with a task | Explore the resources |
-| --- | --- |
-| Turn a research question into a brief with sources | [Deep Researcher](agents/deepresearcher/) and [Source Synthesis](skills/source-synthesis/) |
-| Shape an app idea into a build plan | [App Development Team](skills/app-development-team/) and [Guided Plan](skills/guided-plan/) |
-| Turn a report into slides for a meeting | [Presentation agent](agents/pptmaker/) and [PowerPoint skill](skills/office-ppt/) |
+Suppose you have two versions of a product brief and someone asks, “What changed before Friday’s review?” You can try this with the **General Researcher** and **Content Writer** included on a fresh profile. The desktop app also includes Assistant, six starter skills and a copy of the manual.
 
-Browse all [agents](agents/), [skills](skills/), [connectors](connectors/), [apps](apps/) and [Library packages](library/). You can inspect each package here before installing it in Talia.
+1. **Set up the workspace.** Choose a provider and model in Settings. Create a project and select a working folder for the output.
+2. **Add the two briefs to the project Library.** Give them names that distinguish the versions. Wait until both show *Ready* so the team can retrieve passages from them.
+3. **Open a project chat.** Review the team and its models, then give Commander the question, the sources and the deliverable. For example:
+
+   > Compare the March and April briefs in this project. Ask the researcher to identify changes to scope and deadlines, citing the document and section for each. Ask the writer to prepare a one-page review note. Put conflicting dates under “Needs a decision” and save the result as review-note.md in the project folder.
+
+4. **Check the handoff.** Open a cited section and compare it with the claim in the note. If two deadlines conflict, give the decision an owner on the project board. The next conversation can start from the saved note and the open task.
+
+The Library holds material for retrieval. The working folder is where you authorize file operations. Indexing runs locally when the required components are available. Retrieved passages used in an answer can reach the model provider you selected. [Library and source handling](site/docs/Manuale-Talia.md#manuale-3) · [Project folders](site/docs/Manuale-Talia.md#manuale-5)
+
+## Build a team around the deliverable
+
+| When you need… | A combination to try | What to ask for |
+| --- | --- | --- |
+| A decision brief from interviews and project notes | [Deep Researcher](agents/deepresearcher/) with [Source Synthesis](skills/source-synthesis/SKILL.md) | A findings table with a passage for each claim, disagreements between sources and questions still open. |
+| A development plan someone can implement | [App Development Team](skills/app-development-team/team.json) with [Guided Plan](skills/guided-plan/SKILL.md) | Have the analyst clarify the requirement, the architect lay out the dependencies and the tester define how to check the result. Review the plan before implementation. |
+| A presentation built from an approved report | [Presentation specialist](agents/pptmaker/) with the [PowerPoint skill](skills/office-ppt/SKILL.md) | Specify the audience, the decision they need to make and the requested file format. Ask for a slide outline first, then review the exported file in your presentation app. |
+
+The app development bundle is one example you can inspect in full. Its descriptor names seven required roles covering analysis, architecture, UI design, frontend, backend, operations and end-to-end testing. Product Manager is optional. On a compatible host the installed preset becomes a local team you can adapt. [Inspect the preset](agents/app-architetto/team-preset.json)
+
+## Bring the workflow back next week
+
+A project can keep its instructions, documents and backlog across conversations. For a recurring briefing, put the audience and editorial requirements in the project instructions. Give each new issue a task and a review criterion, such as “every changed deadline links back to a source.” The board tracks work through *To do*, *In progress*, *In review* and *Done*.
+
+Once the first briefing works, you can schedule a request to create the next one. Automatic backlog execution has its own setting. You can use scheduling to queue work for human review, or enable execution for eligible tasks while Talia is available. [Kanban and review](site/docs/Manuale-Talia.md#manuale-18) · [Scheduling and automation](site/docs/Manuale-Talia.md#manuale-9)
+
+## What you can install from this repository
+
+| Resource | What it adds to Talia | Example to inspect |
+| --- | --- | --- |
+| [Agents](agents/) | A specialist role you can add to a conversation and assign a model. | [Functional Analyst](agents/functional-analyst/) |
+| [Skills](skills/) | A reusable procedure for a particular kind of work. Read the instructions to see what the agent will be asked to do. | [Deliverable Review](skills/deliverable-review/SKILL.md) |
+| [Connectors](connectors/) | An integration definition for an external tool or service. Check its setup and host support before planning work around it. | [Excel connector](connectors/excel/) |
+| [Apps](apps/) | A tool with its own interface for working with a result. | [CSV Viewer](apps/csv-viewer/) |
+| [Library packages](library/) | Reference material you can keep in the workspace and consult across tasks. | [Talia manual package](library/manuale-talia/) |
+
+Talia verifies the signed catalog and package contents, then presents the installation for review. Configure accounts and grant service access separately. You can read the package sources here before installing anything. [Store and permissions](site/docs/Manuale-Talia.md#manuale-8)
+
+## Choosing models and tools
+
+Start with one configured model. When a project needs a different mix, review the models in the chat draft and override individual agents for that conversation. For example, you can assign one model to the researcher and another to the writer while they work from the same brief. An agent added to an existing chat can receive its shared history, so check the selected provider before inviting it into a sensitive project.
+
+If you already use a supported command-line assistant such as Claude Code or Codex, you can also bring it into the workflow using its local installation and account. Available tools and usage limits depend on that setup. The conversation’s usage panel shows model and agent breakdowns where the provider supplies data. [Models, providers and costs](site/docs/Manuale-Talia.md#manuale-23)
 
 Tried Talia on a real task? [Tell us what you wanted to do and where you got stuck](https://github.com/Talia-Orchestrator/talia-store/issues/new?template=workflow-feedback.yml).
 
