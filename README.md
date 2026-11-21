@@ -1,14 +1,29 @@
+<img src="site/assets/talia-symbol.svg" width="56" alt="">
+
 # Talia Store
 
-`model-capabilities/openrouter-thinking.json` è uno snapshot compatto dei soli
-livelli `reasoning_options` di tipo `effort` dichiarati per modelli OpenRouter
-esatti da [Models.dev](https://github.com/anomalyco/models.dev/tree/dev/providers/openrouter/models).
-`npm run build:catalog` prova ad aggiornarlo prima di rigenerare il catalogo
-delle estensioni. Il feed originale è pubblico e non riceve chiavi o chat.
-Il file è metadato di inferenza, non un pacchetto installabile; le policy locali
-già verificate del client hanno precedenza. Un modello senza livelli enumerati
-non ottiene una scala per analogia. `none` indica Off e non è uno step dello
-slider: il generatore lo esclude senza scartare gli altri effort validi.
+Talia is a desktop workspace for AI agents. Give the Commander a brief, bring in specialists for research or writing, and keep the conversation and its sources together. This Store is where you can explore the agents, skills and tools that go into your team.
+
+**[See Talia in action on the homepage →](https://talia-orchestrator.github.io/talia-store/)** · [Download for macOS, Windows or Linux](https://talia-orchestrator.github.io/talia-store/download-app/)
+
+## What would you like to make?
+
+| Start with a task | Explore the resources |
+| --- | --- |
+| Turn a research question into a brief with sources | [Deep Researcher](agents/deepresearcher/) and [Source Synthesis](skills/source-synthesis/) |
+| Shape an app idea into a build plan | [App Development Team](skills/app-development-team/) and [Guided Plan](skills/guided-plan/) |
+| Turn a report into slides for a meeting | [Presentation agent](agents/pptmaker/) and [PowerPoint skill](skills/office-ppt/) |
+
+Browse all [agents](agents/), [skills](skills/), [connectors](connectors/), [apps](apps/) and [Library packages](library/). You can inspect each package here before installing it in Talia.
+
+Tried Talia on a real task? [Tell us what you wanted to do and where you got stuck](https://github.com/Talia-Orchestrator/talia-store/issues/new?template=workflow-feedback.yml).
+
+If you find a specialist or workflow you want to come back to, give the Store a ★ on GitHub.
+
+<details>
+<summary>Technical reference for contributors and release maintainers</summary>
+
+## Distribution
 
 Public, anonymous HTTPS distribution for signed Talia resources. This repository is the source of truth for selected packages under `agents/`, `skills/`, `connectors/`, `apps/`, and `library/`. The signed v3 index and v2 artifacts are generated from these local directories. Talia desktop bundles Assistant, General Researcher, ContentWriter, six starter skills, and the complete manual for offline first use; the Store supplies all optional packages and updates.
 
@@ -114,3 +129,17 @@ Il preset del team è incluso nel pacchetto firmato Senior IT Architect.
 Installando i sette specialisti richiesti su un host compatibile, il team
 viene creato automaticamente e resta modificabile. Il PM è opzionale.
 Vedere [`teams/README.md`](teams/README.md) per limiti e comportamento.
+
+## OpenRouter model metadata
+
+`model-capabilities/openrouter-thinking.json` è uno snapshot compatto dei soli
+livelli `reasoning_options` di tipo `effort` dichiarati per modelli OpenRouter
+esatti da [Models.dev](https://github.com/anomalyco/models.dev/tree/dev/providers/openrouter/models).
+`npm run build:catalog` prova ad aggiornarlo prima di rigenerare il catalogo
+delle estensioni. Il feed originale è pubblico e non riceve chiavi o chat.
+Il file è metadato di inferenza, non un pacchetto installabile; le policy locali
+già verificate del client hanno precedenza. Un modello senza livelli enumerati
+non ottiene una scala per analogia. `none` indica Off e non è uno step dello
+slider: il generatore lo esclude senza scartare gli altri effort validi.
+
+</details>
