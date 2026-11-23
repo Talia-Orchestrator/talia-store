@@ -260,6 +260,6 @@
   "downloadTitle": "Scarica Talia.",
   "downloadSub": "macOS, Windows e Linux · software in anteprima.",
   "dlMac": "Apple silicon · Intel",
-  "dlWin": "10 · 11 · installer e portable",
+  "dlWin": "Windows 10 / 11 · x64",
   "dlLinux": ".deb · AppImage · tarball"
 }
