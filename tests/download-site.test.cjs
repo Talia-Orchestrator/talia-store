@@ -25,6 +25,12 @@ test('download accessible names include the visible format for every published i
   const script = fs.readFileSync(path.join(__dirname, '../site/app.js'), 'utf8');
   vm.runInContext(script.split('// Avvio dopo la selezione della lingua')[0], context);
   const index = JSON.parse(fs.readFileSync(path.join(__dirname, '../site/releases.json'), 'utf8'));
+  const linuxRelease = index.releases.find(release => release.platforms['linux-x64']);
+  const deb = file('Talia-linux-amd64.deb');
+  context.release = { ...linuxRelease, platforms: { 'linux-x64': { automaticUpdate: true, files: [deb] } } };
+  const debCard = vm.runInContext("makePlatformCard(release, TARGETS.find(t => t.extension === '.deb'))", context);
+  assert.equal(debCard.children.find(child => child.tag === 'a').href, deb.url);
+  assert.match(debCard.children.find(child => child.tag === 'details').children.find(child => child.className === 'file-meta').textContent, /manuale/);
   let checked = 0;
   const formats = new Set();
   for (const release of index.releases) {
