@@ -3,25 +3,143 @@
 Le note qui sotto registrano le release Talia; le distribuzioni pubbliche sono
 conservate nel repository talia-store.
 
-## 0.15.2-main.36.1+ce4f29443655
+## 0.16.3-main.40.1+2e7689beae39
 
-- **Connettori Store riconosciuti dopo la configurazione**: un pacchetto dello Store configurato, come Confluence, non resta più «Da configurare», mostra «Gestisci» e compare nella tendina `@` insieme agli altri connettori.
-- **Configurazione con memoria**: riaprendo un connettore i dati salvati sono già compilati e il token resta nascosto; salvando senza riscriverlo Talia riusa quello salvato, anche nei connettori MCP personalizzati e nei template.
-- **Chat trascinabili nella barra laterale**: trascina una chat tra le fissate per fissarla in quella posizione, o sull'Archivio per archiviarla; con una selezione multipla si spostano tutte insieme.
-- **Uscita protetta con agenti al lavoro**: se un agente sta lavorando Talia chiede conferma prima di chiudersi; Cmd-Q su macOS e Ctrl-Q su Windows e Linux vanno tenuti premuti un secondo e mezzo. Un puntino verde accanto al pulsante di invio segnala che l'agente è al lavoro.
-- **Build Windows più rapida**: il pacchetto portable usa una compressione veloce; il file scaricato è un po' più grande.
+- Windows x64 usa un installer NSIS con installazione guidata e scelta della cartella.
+- La stessa versione comprende il DMG per Mac Apple Silicon e i pacchetti AppImage e Debian amd64 per Linux.
 
-La versione mostrata accanto al logo è `v0.15.2`. Il trascinamento delle chat funziona con il mouse e dentro la stessa lista; l'Archivio accetta chat solo se ne contiene già almeno una. I connettori non sono stati provati con un servizio Atlassian reale.
+## 0.16.3 — Un rilascio per macOS, Windows e Linux
 
-- Connettori (#179, #180): stato del pacchetto letto dal collegamento cifrato;
-  strumenti `*_store_connector_*` nella tendina `@`; segreti mascherati
-  riusati al salvataggio; E2E `talia_store_connector_e2e_user_flow`.
-- Sidebar (#181): `conversations.placePins` e `pin_order`.
-- Uscita (#182): `quit_guard`, scorciatoia prolungata e submenu nativo macOS.
-- CI (#183): `ELECTRON_BUILDER_COMPRESSION_LEVEL=1` per il portable Windows.
+- Windows x64 usa un installer NSIS con installazione guidata e scelta della cartella.
+- La stessa versione comprende il DMG per Mac Apple Silicon e i pacchetti AppImage e Debian amd64 per Linux.
 
-## Non rilasciato
+## 0.16.2 — Installer Debian per Linux
 
+- Il pacchetto .deb per Debian e Ubuntu amd64 affianca l’AppImage. Offre l’installazione tramite il gestore dei pacchetti senza richiedere FUSE.
+
+## 0.16.1 — Distribuzione AppImage per Linux x64
+
+- Il pacchetto Linux include il launcher per avviare l’AppImage anche sui sistemi senza FUSE 2. La verifica controlla l’integrità del launcher insieme a quella dell’AppImage.
+
+## 0.16.0 — Tasks, archivio delle chat e materiali di progetto
+
+- **Ricerca condivisa in Tasks.** Progetti e ricerca si applicano a entrambe le schede. La vista automatica permette di scegliere tutte le attività non umane oppure soltanto quelle assegnate ad agenti e team.
+- **Archivio sempre accessibile.** Puoi aprire le chat archiviate prima di «Mostra altro», anche nelle liste di progetto.
+- **Cestino delle chat.** La cancellazione multipla mostra l’avanzamento fino alla conclusione e il riallineamento dei materiali consulta direttamente lo stato delle chat.
+
+- Chat collegate a task: sposta le chat nel Cestino senza cancellare i task, oppure scegli di eliminare definitivamente anche i task indicati, con una conferma separata. I collegamenti dai task e dai thread tornano utilizzabili dopo il ripristino della chat.
+
+- File di lavoro e mockup nelle cartelle `.talia`. Le chat di progetto con
+  cartella assegnata usano la sua sottocartella `.talia`, mentre le chat senza
+  progetto usano `~/.talia`. Letture, preview, revisioni e cestino riconoscono
+  la nuova sede e recuperano gli artefatti precedenti conservandone l'identità.
+
+- Pacchetti ZIP portabili di agenti e team: esportazione e importazione di agenti e team in un unico archivio ZIP, con verifica del contenuto all'importazione. Verificato con 53 test di feature; documentazione in `desktop/docs/portable-packages-zip.md`. Verifica live nella beta ancora da eseguire.
+
+- Chat lunghe, in verifica locale. Memoria automatica a gruppi con scambi recenti
+  in chiaro, recupero mirato dei dettagli tramite la ricerca esistente e log delle
+  dimensioni del contesto. La memoria salvata sopravvive alla riapertura delle
+  chat lunghe. Prove con provider sintetico, qualità e consumi reali da misurare.
+
+- Aggiornamenti: piccolo avviso non modale ancorato al numero versione al primo rilevamento nella sessione, senza spostare il focus. Chiusura e rinvio mantengono il badge; clic sulla versione per riaprire. Download e riavvio restano espliciti.
+
+- Antigravity: i tool interni del runtime (comandi, lettura e modifica file,
+  ricerca web e altri) sono ora disattivati alla creazione della sessione con
+  `enabledTools: []`. Il modello può agire solo con i tool di Talia, quindi i
+  turni lunghi non si interrompono più con `ANTIGRAVITY_NATIVE_TOOL_REJECTED`
+  quando sceglieva uno strumento proprio. Controllo fail-closed invariato.
+  Verifica live nella beta ancora da eseguire.
+- Antigravity: preriscaldamento del processo ACP. All'avvio, e dopo ogni chat
+  che lo adotta, Talia prepara in background processo, login e una sessione
+  vuota per il modello chat prioritario, senza alcun prompt. La prima chat
+  nuova lo adotta senza rifare avvio, login e `session/new`. Prova live con
+  account free: primo messaggio da circa 4 s di preparazione a 0 s, primo testo
+  in circa 5 s. Riserva unica per profilo, durata 30 minuti; login scaduto
+  scartato in silenzio. Dettagli in `desktop/docs/antigravity-provider-api.md`.
+
+- Antigravity: le risposte host con a capo letterali o recinzioni markdown
+  chiuse male vengono riparate senza perdita. Un envelope ancora invalido riceve
+  una sola richiesta di correzione nella stessa sessione ACP, senza rispedire il
+  prompt e senza duplicare il testo già mostrato; il veto al replay automatico
+  resta per gli effetti incerti. Il log registra solo la categoria del difetto.
+  Un `authenticate` -32603 senza marcatore, fuori dal login, diventa «accesso
+  richiesto» senza tre tentativi di rete. L'avviso testuale «No capacity
+  available for model …» non è più scambiato per JSON malformato: due nuovi
+  tentativi brevi nella stessa sessione, poi errore temporaneo ripetibile. Anche
+  uno strumento inesistente riceve la correzione. Prova live con account free:
+  17 prompt, 2 risposte rotte (capacità esaurita e JSON con token spurio)
+  riparate senza errori in chat. Enterprise non verificato. Dettagli in
+  `desktop/docs/antigravity-provider-api.md`.
+
+- Beta Git/SSH: in Piena fiducia la shell usa direttamente i file SSH esatti
+  necessari a Git, incluse le identità locali se l'agente SSH è vuoto. Nelle
+  altre modalità chiede un solo consenso per repository, remoto e risorse,
+  riutilizzabile nella stessa attività. `git push` e le operazioni locali
+  conservano i loro controlli distinti; una lettura diretta della chiave non
+  eredita il consenso Git. Nessuna lettura generale di `.ssh`. Su macOS il `PATH`
+  preferisce Homebrew Git ad Apple Git anche quando entrambi erano già
+  elencati, preservando le voci custom dell'utente. Il gate copre anche
+  `git -C repo ls-remote` da una chat con cartella diversa e i metadati dei
+  worktree Git esterni alla cartella selezionata. Anche `gh` diretto riceve
+  il solo file del portachiavi login necessario al token; nelle modalità con
+  consenso la richiesta vale per il comando esatto. Git SSH e `gh api` reali
+  sono passati nel profilo Seatbelt. Nell'app beta riavviata, Git `ls-remote`
+  e `fetch` e `gh api user` sono riusciti dopo i consensi monouso. Dettagli in
+  `doc/sandbox-autorizzazioni-filesystem.md`.
+
+- Inner Browser: modale standard Talia per certificati personalizzati;
+  casella di rischio e scelta umana **Procedi comunque** /
+  **Annulla**. Errori di caricamento spiegati al posto della vista vuota.
+  HTTPS senza certificato resta non apribile, senza downgrade automatico.
+  Pin origine/porta/certificato, sessione isolata e limite di cinque minuti
+  preservati. Candidato locale: prove e limiti in
+  `desktop/docs/inner-browser-tls-warning-handoff.md`; nessuna nuova build.
+
+- Privacy filesystem — rafforzamento post-QA (non distribuito): fail-closed
+  se il confinamento letture non è disponibile (sandbox-exec assente o
+  piattaforma senza sandbox equivalente: il comando viene rifiutato, mai
+  eseguito non confinato); allowlist ristretta (niente `subpath /private`
+  per metadata, `/Library` non più leggibile come dati, PATH preso solo
+  dall'env della sandbox); motivo concreto obbligatorio in ogni contesto
+  (richieste segnaposto tipo "motivo non specificato" sono bloccate prima
+  del popup); grant di cartella persistenti e visibili per progetto e chat
+  (`folderGrants.list/request/revoke`), solo lettura, revoca con stop
+  confermato dei processi sessione attivi. Dettagli e limiti:
+  desktop/docs/filesystem-privacy-audit.md.
+
+- Privacy filesystem: la sandbox shell su macOS ora confina anche le letture
+  (deny-by-default con allowlist esplicita) oltre alle scritture: workspace,
+  allegati, grant espliciti e percorsi runtime di sistema e app; symlink e
+  traversal risolti dal kernel fuori dalle radici sono negati. Le richieste
+  di accesso esterno richiedono consenso motivato; i riferimenti a percorsi
+  in file del workspace non autorizzano l'accesso. Limiti: non applicato alle
+  modalità globali all_files_* (autorizzazione esplicita utente), solo macOS
+  con sandbox-exec. Dettagli: desktop/docs/filesystem-privacy-audit.md.
+- Privacy filesystem: la policy predefinita include Music, Pictures e Movies
+  fuori dal workspace esplicito. La verifica del materiale pubblico non legge
+  file già bloccati da regole non esentabili; le librerie multimediali esterne
+  non vengono sondate per preparare grant di cartella. Correzione locale,
+  non distribuita; origine del popup Apple Music attribuito a Warp non provata.
+  Evidenze e limiti: desktop/docs/filesystem-privacy-audit.md.
+- Candidato locale: avatar flottanti degli agenti al lavoro sopra il composer,
+  con salto discreto disattivabile tramite movimento ridotto e navigazione
+  al balloon con click o tastiera. Supportati più attori e rimozione degli
+  indicatori al termine dell’attività. Verificati 30 controlli Chromium su
+  fixture, 48 regressioni e typecheck; QA indipendente Electron 7/7 e stress
+  layout 3/3 superati con backend reale e trasporti locali controllati.
+  Provider commerciali, Windows/Linux e packaging non verificati.
+  [Dettagli](desktop/docs/active-agent-avatars.md).
+
+- Correzione indicatore contesto subagente: il popover si apre ancorato al
+  balloon dell'attore cliccato, non più al composer di Commander in basso. Le
+  percentuali frazionarie non vengono più arrotondate a zero dall'host
+  (es. 73/55.808 token ora mostra ~0,13% invece di 0%). Sotto l'1% il pannello
+  mostra fino a due decimali; il riempimento resta proporzionale senza soglie
+  artificiali, quindi percentuali sub-pixel (es. 0,24% su 14 px) restano
+  visivamente impercettibili. Verificati con host/storage reali e provider
+  sintetico: probe 1/1, Electron 8/8, typecheck desktop/E2E; QA indipendente
+  con misure proporzionali su più livelli. Nessun provider live né confronto
+  col mock originale.
 ## 0.15.2 — connettori Store che ricordano la configurazione, chat trascinabili e uscita protetta
 
 - **Connettori Store riconosciuti dopo la configurazione**: un pacchetto dello Store configurato, come Confluence, non resta più «Da configurare», mostra «Gestisci» e compare nella tendina `@` insieme agli altri connettori.
