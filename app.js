@@ -36,6 +36,7 @@ const TARGETS = [
   { id: 'win32-x64', title: 'Windows · 64 bit', extension: '.exe' },
   { id: 'win32-x64', title: 'Windows · senza installazione', extension: '.zip', optional: true },
   { id: 'linux-x64', title: 'Linux · 64 bit', extension: '.appimage' },
+  { id: 'linux-x64', title: 'Debian / Ubuntu · amd64', extension: '.deb', optional: true },
 ];
 
 function safeDownloadUrl(value) {
@@ -105,7 +106,7 @@ function makePlatformCard(release, target) {
   const metadata = document.createElement('p');
   metadata.className = 'file-meta';
   const usage = target.extension === '.zip' ? translate('portable')
-    : platform.automaticUpdate ? translate('automatic') : translate('manual');
+    : target.extension !== '.deb' && platform.automaticUpdate ? translate('automatic') : translate('manual');
   metadata.textContent = `${file.name} · ${formatSize(file.size)} · ${usage}`;
 
   const checksum = document.createElement('details');
