@@ -1,0 +1,14 @@
+.community-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .55em;
+  min-height: 44px;
+  color: #6e501c;
+  font-size: .95rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: #b89b66;
+  text-underline-offset: .25em;
+}
+.community-link:hover { text-decoration-color: currentColor; }
+.community-link:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
