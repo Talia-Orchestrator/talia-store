@@ -11,7 +11,7 @@ Talia is a desktop workspace for projects that take more than one conversation. 
 - **Answers you can check.** Replies from your Library can point to the document and passage they used.
 - **You stay in control.** Sensitive actions wait for your approval, and every Store installation is reviewed by you first.
 
-**[Explore the interactive demo](https://talia-orchestrator.github.io/talia-store/)** · [Download the desktop preview](https://talia-orchestrator.github.io/talia-store/download-app/) · [Read the full manual (Italian)](site/docs/Manuale-Talia.md)
+**[Explore the interactive demo](https://talia-orchestrator.github.io/talia-store/)** · [Download the desktop preview](https://talia-orchestrator.github.io/talia-store/download-app/) · [Join the Telegram group](https://t.me/+N5E-gCIbfoxmMDc0) · [Read the full manual (Italian)](site/docs/Manuale-Talia.md)
 
 ## Try a first project with your own documents
 
