@@ -1652,6 +1652,22 @@
       }
     },
     {
+      "id": "talia-skills/opensource-implementation-scout",
+      "kind": "skill",
+      "version": "1.0.0",
+      "name": "opensource-implementation-scout",
+      "description": "Find how a feature is implemented in real open source projects, check the license of every source, and decide whether to reimplement, adopt the library or only describe the approach.",
+      "publisher": "talia-skills",
+      "license": "MIT",
+      "digest": "sha256:6a7f75945e861aa12e1a3237cc208c4582e601d262d67a034388bd03d0ab49ca",
+      "description_it": "Cerca come una feature è implementata in progetti open source reali, verifica la licenza di ogni fonte e decide se reimplementare, adottare la libreria o solo descrivere l'approccio.",
+      "artifact": {
+        "url": "artifacts/talia-skills-opensource-implementation-scout-1.0.0.json",
+        "sha256": "sha256:5a9121a42b1c8567cfaddc14dce3adc5b65d67bb04f517046febf4fc95655380",
+        "size": 18664
+      }
+    },
+    {
       "id": "talia-skills/pdf-editing",
       "kind": "skill",
       "version": "1.0.8",

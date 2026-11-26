@@ -1,0 +1,10 @@
+{
+  "id": "talia-skills/opensource-implementation-scout",
+  "kind": "skill",
+  "version": "1.0.0",
+  "name": "opensource-implementation-scout",
+  "description": "Find how a feature is implemented in real open source projects, check the license of every source, and decide whether to reimplement, adopt the library or only describe the approach.",
+  "description_it": "Cerca come una feature è implementata in progetti open source reali, verifica la licenza di ogni fonte e decide se reimplementare, adottare la libreria o solo descrivere l'approccio.",
+  "publisher": "talia-skills",
+  "license": "MIT"
+}
