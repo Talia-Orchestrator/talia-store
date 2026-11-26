@@ -773,6 +773,74 @@
       }
     },
     {
+      "id": "talia-connectors/atlassian-bitbucket",
+      "kind": "connector",
+      "version": "1.2.0",
+      "name": "Bitbucket Cloud",
+      "description": "Pilot connector for Bitbucket Cloud, limited to selected repository resources. Supports pull request comments with confirmation.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:a5d7dcdf115294e4bf1cf4062101c1dacfeb2da4d7091dba254263791576f227",
+      "description_it": "Connettore pilota per Bitbucket Cloud, limitato alle risorse selezionate. Consente commenti alle pull request previa conferma.",
+      "minHostVersion": "0.15.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-atlassian-bitbucket-1.2.0.json",
+        "sha256": "sha256:a18750fc77d33af4c36d9530d3a44c14ec31ca5a093a95fbe6a1e4c1d90be5fc",
+        "size": 3330
+      }
+    },
+    {
+      "id": "talia-connectors/atlassian-bitbucket-datacenter",
+      "kind": "connector",
+      "version": "1.1.0",
+      "name": "Bitbucket Data Center",
+      "description": "Pilot connector for Bitbucket Data Center, limited to selected repository resources. Supports pull request comments with confirmation.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:5bf1e1da95438f1aabd1ae1b183586ef5d65487f9cff0c1307ca05f002f13e83",
+      "description_it": "Connettore pilota per Bitbucket Data Center, limitato alle risorse selezionate. Consente commenti alle pull request previa conferma.",
+      "minHostVersion": "0.15.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-atlassian-bitbucket-datacenter-1.1.0.json",
+        "sha256": "sha256:27348f361a3776492b6d30b7b6695a0630f2681029ae3d3a17ac1834ee4b2c20",
+        "size": 3442
+      }
+    },
+    {
+      "id": "talia-connectors/atlassian-confluence",
+      "kind": "connector",
+      "version": "1.2.0",
+      "name": "Confluence",
+      "description": "Pilot connector for Confluence, limited to selected space resources. Supports creation with confirmation.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:f1664c820c62d82de09944031f00e74c52042db78cbc28f9a11dca062ebf83c3",
+      "description_it": "Connettore pilota per Confluence, limitato alle risorse selezionate. Consente la creazione previa conferma.",
+      "minHostVersion": "0.15.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-atlassian-confluence-1.2.0.json",
+        "sha256": "sha256:0049391f45d112f44050ab78dd733e0d6991a01beac868c92d17bfd2e6af551f",
+        "size": 3221
+      }
+    },
+    {
+      "id": "talia-connectors/atlassian-jira",
+      "kind": "connector",
+      "version": "1.2.0",
+      "name": "Jira",
+      "description": "Pilot connector for Jira, limited to selected project resources. Supports creation with confirmation.",
+      "publisher": "talia-connectors",
+      "license": "MIT",
+      "digest": "sha256:cbcfb7dc8950d6ada7fbee116e357539bad3769511293949cc2aebfab01eee7e",
+      "description_it": "Connettore pilota per Jira, limitato alle risorse selezionate. Consente la creazione previa conferma.",
+      "minHostVersion": "0.15.0",
+      "artifact": {
+        "url": "artifacts/talia-connectors-atlassian-jira-1.2.0.json",
+        "sha256": "sha256:b71865931f29e297438f9616f6a56dd7752a0f9d97267b3f1054a9dc247e4f54",
+        "size": 3365
+      }
+    },
+    {
       "id": "talia-connectors/bitbucket",
       "kind": "connector",
       "version": "1.0.0",
