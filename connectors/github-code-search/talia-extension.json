@@ -1,0 +1,10 @@
+{
+  "id": "talia/github-code-search",
+  "kind": "connector",
+  "version": "1.0.0",
+  "name": "GitHub Code Search MCP",
+  "description": "Search code, files and licenses on GitHub through the official GitHub MCP server. A personal access token is required; anonymous search is covered by the opensource-implementation-scout skill.",
+  "description_it": "Cerca codice, file e licenze su GitHub tramite il server MCP ufficiale di GitHub. Il token personale è obbligatorio; la ricerca senza login è coperta dalla skill opensource-implementation-scout.",
+  "publisher": "talia",
+  "license": "MIT"
+}
