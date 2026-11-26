@@ -1,6 +1,6 @@
 {
   "format": "talia-agent-routing-v1",
-  "catalog_sha256": "sha256:365902b98b4f0bd636c9453fca5cd0cdc5e21b3480d3df847b147184f3b23009",
+  "catalog_sha256": "sha256:fa9c562acb5c604a916dc4c94bacd982ef2baa0a7e4e4c83304cb6bbc9ebd83b",
   "agents": [
     {
       "id": "talia-agents/app-architetto",
