@@ -1,0 +1,9 @@
+{
+  "id": "talia-agents/voicestudio",
+  "kind": "agent",
+  "version": "1.0.7",
+  "name": "VoiceStudio",
+  "description": "Creates and edits narration, multi-role audio and long-form readings; transcribes recordings, produces subtitles, and edits or mixes audio with background music. Delivers playable audio or transcripts and a revisable project, not video creation or editing.",
+  "publisher": "talia-agents",
+  "license": "MIT"
+}

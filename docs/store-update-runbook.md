@@ -12,7 +12,8 @@ Questo documento distingue tre oggetti che hanno controlli diversi:
 
 Prima di intervenire, controllare `git status`, `git diff`, branch, tag e
 contenuti già pubblicati. Usare soltanto i pacchetti presenti nelle cartelle
-`agents/`, `skills/`, `connectors/`, `apps/` e `library/` di questo repository.
+`packages/agents/`, `packages/skills/`, `packages/connectors/`, `packages/apps/`
+e `packages/library/` di questo repository.
 Non incorporare file locali non committati o pacchetti ancora in bozza.
 Conservare i lavori altrui.
 
@@ -21,7 +22,7 @@ valido: non ricostruire `catalog.json` e non rigenerare `catalog.signature.json`
 
 ## 2. Aggiornare il catalogo delle risorse, quando necessario
 
-1. Integrare e verificare i pacchetti nello stesso repository Store.
+1. Integrare e verificare i pacchetti sotto `packages/` nello stesso repository Store.
 2. Preparare un checkout pulito e aggiornato di `talia-store`; la CI non usa
    altri repository come sorgente del catalogo.
 3. Eseguire `npm run build:catalog`. Esaminare il diff completo
@@ -58,6 +59,33 @@ valido: non ricostruire `catalog.json` e non rigenerare `catalog.signature.json`
    e che ogni artifact nuovo sia accessibile anonimamente con hash e dimensioni
    corrispondenti. Verificare poi nell'app il percorso Store → anteprima →
    installazione, distinguendo installazione da avvio del servizio esterno.
+
+### Compatibilità retroattiva e rollout del catalogo
+
+Le app Talia già installate consumano sempre
+`https://raw.githubusercontent.com/Talia-Orchestrator/talia-store/main/catalog.signature.json`.
+La riorganizzazione dei sorgenti sotto `packages/` è interna allo Store: non
+pubblicare URL che puntano ai nuovi sorgenti e non cambiare la trust root senza
+una release coordinata del client.
+
+1. Prima della PR e prima della pubblicazione eseguire `npm run check:legacy-client`.
+   Il gate confronta il candidato con `origin/main:catalog.json` e richiede:
+   formato v3, envelope v1 e firma Ed25519 con la chiave già distribuita,
+   artifact relativi a `artifacts/` sulla stessa origine pubblica, hash,
+   dimensioni e compatibilità delle risorse che restano pubblicate. I delisting
+   sono riportati: non rompono il parser v3 né eliminano le risorse già
+   installate, ma richiedono una decisione di prodotto documentata.
+2. Pubblicare insieme `catalog.json`, `catalog.signature.json` e ogni nuovo
+   artifact solo dopo il gate; mantenere raggiungibili tutti gli artifact
+   referenziati dall'ultimo catalogo firmato.
+3. Con almeno una build Talia precedente già installata, aggiornare lo Store
+   dall'URL pubblico e verificare elenco, anteprima, installazione e
+   aggiornamento di un pacchetto. Registrare versione dell'app, URL, commit
+   pubblicato ed esito; il gate locale non sostituisce questa prova.
+4. In caso di errore post-pubblicazione, ripristinare su `main` l'ultima coppia
+   verificata `catalog.json` + `catalog.signature.json` e gli artifact da essa
+   referenziati. Non pubblicare un catalogo non firmato e non rimuovere gli
+   artifact storici finché una coppia firmata può ancora indicarli.
 
 ### Gate locale prima di `talia-core:main` → `build`
 

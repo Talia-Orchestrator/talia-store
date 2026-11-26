@@ -86,7 +86,7 @@ test('packer validates scoped independent connector manifests', () => {
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);
   const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app', 'library'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
-  assert.deepEqual(counts, { agent: 17, skill: 28, connector: 51, app: 3, library: 1 });
+  assert.deepEqual(counts, { agent: 17, skill: 28, connector: 52, app: 3, library: 1 });
   const agents = new Set(catalog.packages.filter((pkg) => pkg.kind === 'agent').map((pkg) => pkg.id));
   assert.deepEqual([...agents].sort(), [
     'talia-agents/app-architetto',
@@ -120,7 +120,7 @@ test('signed sidecar routing tags stay compact and match their artifacts', () =>
 });
 
 test('senior app team references installable Store agent packages', () => {
-  const template = JSON.parse(fs.readFileSync(path.join(root, 'agents/app-architetto/team-preset.json'), 'utf8'));
+  const template = JSON.parse(fs.readFileSync(path.join(root, 'packages/agents/app-architetto/team-preset.json'), 'utf8'));
   const teamPackage = catalog.packages.find(row => row.kind === 'skill' && row.id === 'talia-teams/app-development');
   assert.ok(teamPackage, 'team bundle must be visible in the signed catalog');
   const teamArtifact = JSON.parse(fs.readFileSync(path.join(root, teamPackage.artifact.url), 'utf8')).packages[0];
@@ -183,7 +183,7 @@ test('the complete Library manual has one canonical source and a signed artifact
   assert.equal(item.minHostVersion, '0.11.0');
   const pkg = JSON.parse(fs.readFileSync(path.join(root, item.artifact.url), 'utf8')).packages[0];
   assert.deepEqual(JSON.parse(pkg.files['library.json']), { schemaVersion: 1, file: 'Manuale-Talia.md', destination: 'Manuale-Talia.md' });
-  assert.equal(pkg.files['Manuale-Talia.md'], fs.readFileSync(path.join(root, 'library/manuale-talia/Manuale-Talia.md'), 'utf8'));
+  assert.equal(pkg.files['Manuale-Talia.md'], fs.readFileSync(path.join(root, 'packages/library/manuale-talia/Manuale-Talia.md'), 'utf8'));
   assert.equal(pkg.files['Manuale-Talia.md'], fs.readFileSync(path.join(root, 'site/docs/Manuale-Talia.md'), 'utf8'));
 });
 

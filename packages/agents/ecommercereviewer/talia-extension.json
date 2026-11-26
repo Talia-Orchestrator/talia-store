@@ -1,0 +1,27 @@
+{
+  "id": "talia-agents/ecommercereviewer",
+  "kind": "agent",
+  "version": "1.1.1",
+  "name": "ECommerceReviewer",
+  "description": "Analyzes product reviews, ratings, follow-ups, competitor feedback, support feedback, and public social reputation to deliver evidence-backed VOC themes, negative-review root causes, and page, support, or creative priorities; not for product selection or full listing rewrite; For: \"analyze negative-review causes\", \"summarize VOC\", \"compare competitor feedback\"; Triggers: review analysis, VOC, negative-review root cause, pain clusters, competitor feedback, support feedback",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-review-analysis"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/social-data"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-listing"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-creative"
+    }
+  ]
+}

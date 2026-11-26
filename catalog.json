@@ -1811,6 +1811,22 @@
         "sha256": "sha256:7223a96a1f5b5631a604a38ee7bb5d16db6bf82639bd282179d157954b26c465",
         "size": 3338
       }
+    },
+    {
+      "id": "talia/github-code-search",
+      "kind": "connector",
+      "version": "1.0.0",
+      "name": "GitHub Code Search MCP",
+      "description": "Search code, files and licenses on GitHub through the official GitHub MCP server. A personal access token is required; anonymous search is covered by the opensource-implementation-scout skill.",
+      "publisher": "talia",
+      "license": "MIT",
+      "digest": "sha256:3318fb04a853952abb7601a36b328d9c6f988a08829da9bd5d9c9502b871f0cc",
+      "description_it": "Cerca codice, file e licenze su GitHub tramite il server MCP ufficiale di GitHub. Il token personale è obbligatorio; la ricerca senza login è coperta dalla skill opensource-implementation-scout.",
+      "artifact": {
+        "url": "artifacts/talia-github-code-search-1.0.0.json",
+        "sha256": "sha256:674a60edaf485684b4077749dcc9c1aa8e4e6517d2d6fdf7d4d03fcd6c3dcd3c",
+        "size": 7994
+      }
     }
   ]
 }

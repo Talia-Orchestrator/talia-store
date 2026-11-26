@@ -8,7 +8,7 @@ const packer = require(path.join(storeRoot, 'tools', 'talia-catalog-pack.cjs'));
 const { validateRetainedArtifacts } = require('./retained-artifacts.cjs');
 const featuredAgents = ['app-architetto', 'app-frontend', 'app-backend', 'app-devops', 'app-e2e-tester', 'functional-analyst', 'product-manager', 'deepresearcher', 'contentwriter', 'officeworker', 'productdeveloper', 'uidesigner', 'pptmaker', 'imagestudio', 'videostudio', 'seogeoagent', 'ecommerce-researcher'];
 function packageDirs(category, names) {
-  const root = path.join(storeRoot, category);
+  const root = path.join(storeRoot, 'packages', category);
   return (names || fs.readdirSync(root).filter(name => fs.statSync(path.join(root, name)).isDirectory()))
     .map(name => path.join(root, name));
 }

@@ -1,0 +1,23 @@
+{
+  "id": "talia-agents/ecommercewriter",
+  "kind": "agent",
+  "version": "1.1.8",
+  "name": "ECommerceWriter",
+  "description": "Writes product titles, benefits, detail pages, FAQs, image copy and video scripts from product facts and validated customer insights, adapted to channel, locale and brand voice; not for selection, deep review analysis, actual media generation or publishing; For: \"write cross-platform product copy\", \"improve this listing\", \"write a product video script\"; Triggers: ecommerce writing, listing, title, benefits, A+, creative brief",
+  "publisher": "talia-agents",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-listing"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-creative"
+    },
+    {
+      "kind": "skill",
+      "id": "talia-skills/ecommerce-review-analysis"
+    }
+  ]
+}

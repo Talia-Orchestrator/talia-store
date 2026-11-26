@@ -16,6 +16,7 @@ const MAX_V2_PACKAGE_BYTES = 4 * 1024 * 1024;
 const MAX_V2_TOTAL_BYTES = 8 * 1024 * 1024;
 const RESERVED_FILE = '_install.json';
 
+// Validazione dei connettori indipendenti, allineata al contratto gia pubblicato su main.
 function validIndependentConnector(manifest, id) {
   const hasKeys = (value, keys) => value && typeof value === 'object' && !Array.isArray(value)
     && Object.keys(value).sort().join(',') === keys;
@@ -205,6 +206,123 @@ function digestFiles(files) {
   return `sha256:${crypto.createHash('sha256').update(Buffer.from(JSON.stringify(sorted), 'utf8')).digest('hex')}`;
 }
 
+const TEMPLATE_KEYS = ['id', 'display_name', 'transport_kind', 'documentation_url', 'description_en', 'description_it',
+  'command_hint', 'args', 'url_hint', 'auth', 'url_editable', 'fields'];
+const TEMPLATE_FIELD_KEYS = ['key', 'input', 'required', 'label_en', 'label_it', 'help_en', 'help_it', 'env', 'header', 'header_prefix', 'flag'];
+const TEMPLATE_CREDENTIAL_SLOT = /(?:^|[-_])(?:token|password|passwd|secret|api[-_]?key|credential|authorization|auth|cookie|session)(?:$|[-_])/i;
+const TEMPLATE_ENV_DENYLIST = new Set(['PATH', 'HOME', 'SHELL', 'ENV', 'BASH_ENV', 'NODE_OPTIONS', 'NODE_PATH', 'PYTHONPATH',
+  'PYTHONSTARTUP', 'PYTHONHOME', 'PERL5OPT', 'PERL5LIB', 'RUBYOPT', 'ELECTRON_RUN_AS_NODE', 'ELECTRON_NO_ATTACH_CONSOLE']);
+const TEMPLATE_HEADER_DENYLIST = new Set(['host', 'content-length', 'content-type', 'cookie', 'transfer-encoding', 'connection',
+  'mcp-session-id', 'mcp-protocol-version']);
+
+function templateObject(value, label) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) fail(`${label} must be an object`);
+  return value;
+}
+
+function templatePublicHttps(value, label, max = 2048) {
+  safeMetadataText(value, label, max);
+  let url;
+  try { url = new URL(value); } catch (_) { url = null; }
+  if (!url || url.protocol !== 'https:' || url.username || url.password || url.search || url.hash) fail(`${label} must be a plain https URL`);
+  return value;
+}
+
+function validateTemplateField(value, kind, oauth, label) {
+  const raw = templateObject(value, `${label} field`);
+  if (Object.keys(raw).some(key => !TEMPLATE_FIELD_KEYS.includes(key))) fail(`${label} field contains unsupported keys`);
+  const key = safeMetadataText(raw.key, `${label} field key`, 40);
+  if (!/^[a-z][a-z0-9_]{0,39}$/.test(key)) fail(`${label} field key is invalid`);
+  if (!['text', 'secret', 'path'].includes(raw.input)) fail(`${label} field input must be text, secret or path`);
+  if (raw.required !== undefined && typeof raw.required !== 'boolean') fail(`${label} field required must be a boolean`);
+  safeMetadataText(raw.label_en, `${label} field label_en`, 160);
+  safeMetadataText(raw.label_it, `${label} field label_it`, 160);
+  for (const name of ['help_en', 'help_it']) {
+    if (raw[name] !== undefined) safeMetadataText(raw[name], `${label} field ${name}`, 500);
+  }
+  const targets = ['env', 'header', 'flag'].filter(name => raw[name] !== undefined);
+  if (targets.length !== 1) fail(`${label} field must declare exactly one of env, header or flag`);
+  if (raw.header_prefix !== undefined && raw.header === undefined) fail(`${label} field header_prefix requires header`);
+  if (raw.input === 'path' && kind !== 'stdio') fail(`${label} path fields require the stdio transport`);
+  if (raw.env !== undefined) {
+    if (kind !== 'stdio') fail(`${label} env fields require the stdio transport`);
+    const env = safeMetadataText(raw.env, `${label} field env`, 128);
+    if (!/^[A-Z_][A-Z0-9_]{0,127}$/.test(env) || TEMPLATE_ENV_DENYLIST.has(env) || env.startsWith('DYLD_') || env.startsWith('LD_')) {
+      fail(`${label} field env is not allowed: ${env}`);
+    }
+    return { key, env };
+  }
+  if (raw.flag !== undefined) {
+    if (kind !== 'stdio') fail(`${label} flag fields require the stdio transport`);
+    if (raw.input === 'secret') fail(`${label} secret values cannot be passed as a command flag`);
+    const flag = safeMetadataText(raw.flag, `${label} field flag`, 66);
+    if (!/^--[a-z0-9][a-z0-9-]{0,63}$/.test(flag) || TEMPLATE_CREDENTIAL_SLOT.test(flag.replace(/^-+/, ''))) {
+      fail(`${label} field flag is not allowed: ${flag}`);
+    }
+    return { key, flag };
+  }
+  if (kind !== 'streamable-http') fail(`${label} header fields require the streamable-http transport`);
+  const header = safeMetadataText(raw.header, `${label} field header`, 128);
+  const lower = header.toLowerCase();
+  if (!/^[A-Za-z0-9-]{1,128}$/.test(header) || TEMPLATE_HEADER_DENYLIST.has(lower) || (oauth && lower === 'authorization')) {
+    fail(`${label} field header is not allowed: ${header}`);
+  }
+  if (raw.header_prefix !== undefined && (typeof raw.header_prefix !== 'string' || !raw.header_prefix.trim()
+    || raw.header_prefix.length > 32 || /[^\u0020-\u007e]/.test(raw.header_prefix))) fail(`${label} field header_prefix is invalid`);
+  return { key, header: lower };
+}
+
+const ATLASSIAN_TOKEN_IDS = ['atlassian-confluence', 'atlassian-jira', 'atlassian-bitbucket'];
+const CATALOG_REFERENCE_IDS = new Set(['wecom', 'feishu', 'dingtalk', ...ATLASSIAN_TOKEN_IDS]);
+
+function validateConnectorCatalogReference(value, label) {
+  const reference = templateObject(value, `${label} catalog_reference`);
+  if (Object.keys(reference).sort().join(',') !== 'catalog_id,id') fail(`${label}: invalid catalog reference: id and catalog_id only`);
+  const catalogId = safeMetadataText(reference.catalog_id, `${label} catalog_reference catalog_id`, 64);
+  if (!CATALOG_REFERENCE_IDS.has(catalogId)) fail(`${label}: invalid catalog reference: ${catalogId} is not a built-in connector`);
+  if (reference.id !== `talia-connectors/${catalogId}`) fail(`${label}: invalid catalog reference: id must be talia-connectors/${catalogId}`);
+  return { id: reference.id, catalog_id: catalogId };
+}
+
+function validateConnectorTemplate(value, label) {
+  const template = templateObject(value, `${label} connector template`);
+  if (Object.keys(template).some(key => !TEMPLATE_KEYS.includes(key))) fail(`${label}: connector template contains unsupported keys`);
+  if (safePackageId(template.id, `${label} template id`) !== template.id) fail(`${label}: connector template id is invalid`);
+  safeMetadataText(template.display_name, `${label} template display_name`, 160);
+  if (!['stdio', 'streamable-http'].includes(template.transport_kind)) fail(`${label}: connector template transport_kind is invalid`);
+  safeMetadataText(template.description_en, `${label} template description_en`, 4000);
+  templatePublicHttps(template.documentation_url, `${label} template documentation_url`);
+  if (template.description_it !== undefined) safeMetadataText(template.description_it, `${label} template description_it`, 4000);
+  const kind = template.transport_kind;
+  if (kind === 'stdio') {
+    if (template.auth !== undefined || template.url_editable !== undefined || template.url_hint !== undefined) {
+      fail(`${label}: stdio connector template is invalid`);
+    }
+    safeMetadataText(template.command_hint, `${label} template command_hint`, 512);
+    if (!Array.isArray(template.args) || template.args.length > 64
+      || template.args.some(arg => typeof arg !== 'string' || arg.length > 512 || /[\u0000-\u001f\u007f]/.test(arg))) {
+      fail(`${label}: stdio connector template is invalid`);
+    }
+  } else {
+    if (template.command_hint !== undefined || template.args !== undefined) fail(`${label}: streamable-http connector template is invalid`);
+    templatePublicHttps(template.url_hint, `${label} template url_hint`);
+    if (template.auth !== undefined && template.auth !== 'none' && template.auth !== 'oauth') fail(`${label}: connector template auth is invalid`);
+    if (template.url_editable !== undefined && typeof template.url_editable !== 'boolean') fail(`${label}: connector template url_editable must be a boolean`);
+  }
+  if (template.fields === undefined) return;
+  if (!Array.isArray(template.fields) || template.fields.length > 16) fail(`${label}: connector template fields must be an array of at most 16 entries`);
+  const seen = { key: new Set(), env: new Set(), header: new Set(), flag: new Set() };
+  for (const entry of template.fields) {
+    const field = validateTemplateField(entry, kind, template.auth === 'oauth', `${label}:`);
+    for (const slot of ['key', 'env', 'header', 'flag']) {
+      const name = field[slot];
+      if (name === undefined) continue;
+      if (seen[slot].has(name)) fail(`${label}: connector template declares a duplicate field ${slot}: ${name}`);
+      seen[slot].add(name);
+    }
+  }
+}
+
 function readAgentSkillList(item, label) {
   let agent;
   try { agent = JSON.parse(item.files['agent.json']); } catch (_) { fail(`${label}: agent.json must be valid JSON`); }
@@ -365,12 +483,9 @@ function readPackage(packageDirectory, formatVersion = 1) {
         fail(`${id}: invalid catalog listing`);
       }
     } else if (connector.catalog_reference !== undefined && connector.preset === undefined && connector.template === undefined) {
-      const reference = connector.catalog_reference;
-      const allowed = new Set(['wecom', 'feishu', 'dingtalk', 'atlassian-confluence', 'atlassian-jira', 'atlassian-bitbucket']);
-      if (Object.keys(connector).sort().join(',') !== 'catalog_reference,schemaVersion'
-        || !reference || typeof reference !== 'object' || Array.isArray(reference)
-        || Object.keys(reference).sort().join(',') !== 'catalog_id,id'
-        || !allowed.has(reference.catalog_id) || id !== `talia-connectors/${reference.catalog_id}` || reference.id !== id) fail(`${id}: invalid catalog reference`);
+      if (Object.keys(connector).sort().join(',') !== 'catalog_reference,schemaVersion') fail(`${id}: invalid catalog reference: packages cannot declare other connector keys`);
+      const reference = validateConnectorCatalogReference(connector.catalog_reference, id);
+      if (reference.id !== id) fail(`${id}: invalid catalog reference: id must match the package id`);
     } else if (connector.preset !== undefined && connector.template === undefined) {
       if (!connector.preset || typeof connector.preset !== 'object' || Array.isArray(connector.preset)) fail(`${id}: connector preset must be an object`);
       if (Object.keys(connector).some(key => !['schemaVersion','preset','runtime'].includes(key))) fail(`${id}: connector preset has unknown fields`);
@@ -379,30 +494,7 @@ function readPackage(packageDirectory, formatVersion = 1) {
         validateCraftRuntime(connector.runtime, connector.preset.id, id);
       }
     } else if (connector.template !== undefined && connector.preset === undefined) {
-      const template = connector.template;
-      const allowed = ['id', 'display_name', 'transport_kind', 'description_en', 'documentation_url', 'command_hint', 'args', 'url_hint'];
-      if (!template || typeof template !== 'object' || Array.isArray(template)
-        || Object.keys(template).some(key => !allowed.includes(key))
-        || safePackageId(template.id, `${id} template id`) !== template.id
-        || !safeMetadataText(template.display_name, `${id} template display_name`)
-        || !['stdio', 'streamable-http'].includes(template.transport_kind)
-        || !safeMetadataText(template.description_en, `${id} template description_en`, 4000)
-        || !safeMetadataText(template.documentation_url, `${id} template documentation_url`, 2048)
-        || !/^https:\/\//i.test(template.documentation_url)
-        ) {
-        fail(`${id}: connector template is invalid`);
-      }
-      if (template.transport_kind === 'stdio') {
-        if (!safeMetadataText(template.command_hint, `${id} template command_hint`, 512)
-          || !Array.isArray(template.args) || template.args.length > 64
-          || template.args.some(arg => typeof arg !== 'string' || arg.length > 512 || /[\u0000-\u001f\u007f]/.test(arg))
-          || template.url_hint !== undefined) fail(`${id}: stdio connector template is invalid`);
-      } else {
-        let endpoint;
-        try { endpoint = new URL(template.url_hint); } catch (_) { endpoint = null; }
-        if (!endpoint || endpoint.protocol !== 'https:' || endpoint.username || endpoint.password || endpoint.search || endpoint.hash
-          || template.command_hint !== undefined || template.args !== undefined) fail(`${id}: streamable-http connector template is invalid`);
-      }
+      validateConnectorTemplate(connector.template, id);
     } else {
       fail(`${id}: connector.json must contain exactly one preset, template, catalog listing, or catalog reference object`);
     }
