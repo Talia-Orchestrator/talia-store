@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "template": {
+    "id": "talia/github-code-search",
+    "display_name": "GitHub Code Search (MCP ufficiale)",
+    "transport_kind": "streamable-http",
+    "description_en": "Connect to the official GitHub MCP server to search public code, read files and check repository licenses. A GitHub personal access token is required: the server rejects anonymous requests. For searching without a GitHub login, use the opensource-implementation-scout skill instead.",
+    "description_it": "Collega il server MCP ufficiale di GitHub per cercare codice pubblico, leggere file e verificare la licenza dei repository. Il token personale GitHub è obbligatorio: il server rifiuta le richieste anonime. Per cercare senza login GitHub si usa la skill opensource-implementation-scout.",
+    "documentation_url": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/use-the-github-mcp-server",
+    "url_hint": "https://api.githubcopilot.com/mcp/",
+    "auth": "none",
+    "url_editable": true,
+    "fields": [
+      {
+        "key": "github_token",
+        "input": "secret",
+        "required": true,
+        "header": "Authorization",
+        "header_prefix": "Bearer ",
+        "label_en": "GitHub personal access token",
+        "label_it": "Token di accesso personale GitHub",
+        "help_en": "Required. Fine-grained or classic token with read access to public repositories, stored on this device only. Without it the server answers 401; use the opensource-implementation-scout skill for anonymous search.",
+        "help_it": "Obbligatorio. Token fine-grained o classico con accesso in lettura ai repository pubblici, conservato solo su questo dispositivo. Senza token il server risponde 401; per la ricerca anonima usare la skill opensource-implementation-scout."
+      },
+      {
+        "key": "toolsets",
+        "input": "text",
+        "required": false,
+        "header": "X-MCP-Toolsets",
+        "label_en": "Enabled toolsets",
+        "label_it": "Toolset abilitati",
+        "help_en": "Optional comma-separated toolset list. Leave blank for the server defaults; use repos,context to keep code and file search only.",
+        "help_it": "Elenco facoltativo di toolset separati da virgola. Vuoto usa i valori predefiniti del server; repos,context limita a ricerca codice e lettura file."
+      },
+      {
+        "key": "readonly",
+        "input": "text",
+        "required": false,
+        "header": "X-MCP-Readonly",
+        "label_en": "Read-only mode",
+        "label_it": "Modalità sola lettura",
+        "help_en": "Optional. Set to true to expose read-only tools and block any write operation.",
+        "help_it": "Facoltativa. Imposta true per esporre solo strumenti di lettura e bloccare ogni scrittura."
+      }
+    ]
+  }
+}
