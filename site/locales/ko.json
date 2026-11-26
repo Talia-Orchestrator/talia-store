@@ -4,6 +4,7 @@
   "skip": "본문으로 건너뛰기",
   "home": "홈",
   "nav": "앱 다운로드",
+  "telegramGroup": "텔레그램 그룹 참여하기",
   "language": "언어",
   "releases": "GitHub 릴리스",
   "desktop": "Talia 데스크톱",
@@ -260,6 +261,6 @@
   "downloadTitle": "Download Talia.",
   "downloadSub": "macOS, Windows and Linux · preview software.",
   "dlMac": "Apple silicon · Intel",
-  "dlWin": "10 · 11 · installer & portable",
+  "dlWin": "Windows 10 / 11 · x64",
   "dlLinux": ".deb · AppImage · tarball"
 }

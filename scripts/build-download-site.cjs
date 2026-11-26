@@ -155,10 +155,17 @@ function buildDownloadIndex(records, options = {}) {
   const repository = safeRepository(options.repository || DEFAULT_REPOSITORY);
   const releases = records.map(record => normalizeRelease(record, repository)).filter(Boolean)
     .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+  // Ritira le due anteprime soltanto quando il rilascio unificato è scaricabile.
+  const complete = releases.some(release => {
+    if (release.baseVersion !== '0.16.3') return false;
+    const has = (target, extension) => release.platforms[target]?.files.some(file => file.name.endsWith(extension));
+    return has('darwin-arm64', '.dmg') && has('win32-x64', '-setup.exe')
+      && has('linux-x64', '.deb') && has('linux-x64', '.AppImage');
+  });
   return {
     schemaVersion: 1,
     generatedAt: options.generatedAt || new Date().toISOString(),
-    releases,
+    releases: complete ? releases.filter(release => !['0.16.0', '0.16.2'].includes(release.baseVersion)) : releases,
   };
 }
 

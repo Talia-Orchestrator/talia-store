@@ -4,6 +4,7 @@
   "skip": "ข้ามไปยังเนื้อหา",
   "home": "หน้าแรก",
   "nav": "ดาวน์โหลดแอป",
+  "telegramGroup": "เข้าร่วมกลุ่ม Telegram",
   "language": "ภาษา",
   "releases": "รุ่นบน GitHub",
   "desktop": "Talia สำหรับเดสก์ท็อป",
@@ -260,6 +261,6 @@
   "downloadTitle": "Download Talia.",
   "downloadSub": "macOS, Windows and Linux · preview software.",
   "dlMac": "Apple silicon · Intel",
-  "dlWin": "10 · 11 · installer & portable",
+  "dlWin": "Windows 10 / 11 · x64",
   "dlLinux": ".deb · AppImage · tarball"
 }

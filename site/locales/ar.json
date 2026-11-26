@@ -4,6 +4,7 @@
   "skip": "انتقل إلى المحتوى",
   "home": "الرئيسية",
   "nav": "تنزيل التطبيق",
+  "telegramGroup": "انضم إلى مجموعة تيليجرام",
   "language": "اللغة",
   "releases": "إصدارات GitHub",
   "desktop": "Talia لسطح المكتب",
@@ -260,6 +261,6 @@
   "downloadTitle": "Download Talia.",
   "downloadSub": "macOS, Windows and Linux · preview software.",
   "dlMac": "Apple silicon · Intel",
-  "dlWin": "10 · 11 · installer & portable",
+  "dlWin": "Windows 10 / 11 · x64",
   "dlLinux": ".deb · AppImage · tarball"
 }

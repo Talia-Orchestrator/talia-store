@@ -1,14 +1,74 @@
+<img src="site/assets/talia-symbol.svg" width="56" alt="">
+
 # Talia Store
 
-`model-capabilities/openrouter-thinking.json` è uno snapshot compatto dei soli
-livelli `reasoning_options` di tipo `effort` dichiarati per modelli OpenRouter
-esatti da [Models.dev](https://github.com/anomalyco/models.dev/tree/dev/providers/openrouter/models).
-`npm run build:catalog` prova ad aggiornarlo prima di rigenerare il catalogo
-delle estensioni. Il feed originale è pubblico e non riceve chiavi o chat.
-Il file è metadato di inferenza, non un pacchetto installabile; le policy locali
-già verificate del client hanno precedenza. Un modello senza livelli enumerati
-non ottiene una scala per analogia. `none` indica Off e non è uno step dello
-slider: il generatore lo esclude senza scartare gli altri effort validi.
+Talia is a desktop workspace for projects that take more than one conversation. You can give a research agent your source documents, ask a writer to turn its findings into a brief, and keep the open questions on the same project's task board. Commander coordinates the work. You choose the team, the models they use and the folder where they can deliver files.
+
+**Why try it:**
+
+- **Use the subscriptions you already have.** Connect Claude, ChatGPT/Codex, Gemini and Google Antigravity through your account, your own API key or the CLI already installed. Availability and limits follow each provider's terms.
+- **One model per role.** Give the researcher and the writer different models in the same conversation.
+- **Answers you can check.** Replies from your Library can point to the document and passage they used.
+- **You stay in control.** Sensitive actions wait for your approval, and every Store installation is reviewed by you first.
+
+**[Explore the interactive demo](https://talia-orchestrator.github.io/talia-store/)** · [Download the desktop preview](https://talia-orchestrator.github.io/talia-store/download-app/) · [Join the Telegram group](https://t.me/+N5E-gCIbfoxmMDc0) · [Read the full manual (Italian)](site/docs/Manuale-Talia.md)
+
+## Try a first project with your own documents
+
+Suppose you have two versions of a product brief and someone asks, “What changed before Friday’s review?” You can try this with the **General Researcher** and **Content Writer** included on a fresh profile. The desktop app also includes Assistant, six starter skills and a copy of the manual.
+
+1. **Set up the workspace.** Choose a provider and model in Settings. Create a project and select a working folder for the output.
+2. **Add the two briefs to the project Library.** Give them names that distinguish the versions. Wait until both show *Ready* so the team can retrieve passages from them.
+3. **Open a project chat.** Review the team and its models, then give Commander the question, the sources and the deliverable. For example:
+
+   > Compare the March and April briefs in this project. Ask the researcher to identify changes to scope and deadlines, citing the document and section for each. Ask the writer to prepare a one-page review note. Put conflicting dates under “Needs a decision” and save the result as review-note.md in the project folder.
+
+4. **Check the handoff.** Open a cited section and compare it with the claim in the note. If two deadlines conflict, give the decision an owner on the project board. The next conversation can start from the saved note and the open task.
+
+The Library holds material for retrieval. The working folder is where you authorize file operations. Indexing runs locally when the required components are available. Retrieved passages used in an answer can reach the model provider you selected. [Library and source handling](site/docs/Manuale-Talia.md#manuale-3) · [Project folders](site/docs/Manuale-Talia.md#manuale-5)
+
+## Build a team around the deliverable
+
+| When you need… | A combination to try | What to ask for |
+| --- | --- | --- |
+| A decision brief from interviews and project notes | [Deep Researcher](agents/deepresearcher/) with [Source Synthesis](skills/source-synthesis/SKILL.md) | A findings table with a passage for each claim, disagreements between sources and questions still open. |
+| A development plan someone can implement | [App Development Team](skills/app-development-team/team.json) with [Guided Plan](skills/guided-plan/SKILL.md) | Have the analyst clarify the requirement, the architect lay out the dependencies and the tester define how to check the result. Review the plan before implementation. |
+| A presentation built from an approved report | [Presentation specialist](agents/pptmaker/) with the [PowerPoint skill](skills/office-ppt/SKILL.md) | Specify the audience, the decision they need to make and the requested file format. Ask for a slide outline first, then review the exported file in your presentation app. |
+
+The app development bundle is one example you can inspect in full. Its descriptor names seven required roles covering analysis, architecture, UI design, frontend, backend, operations and end-to-end testing. Product Manager is optional. On a compatible host the installed preset becomes a local team you can adapt. [Inspect the preset](agents/app-architetto/team-preset.json)
+
+## Bring the workflow back next week
+
+A project can keep its instructions, documents and backlog across conversations. For a recurring briefing, put the audience and editorial requirements in the project instructions. Give each new issue a task and a review criterion, such as “every changed deadline links back to a source.” The board tracks work through *To do*, *In progress*, *In review* and *Done*.
+
+Once the first briefing works, you can schedule a request to create the next one. Automatic backlog execution has its own setting. You can use scheduling to queue work for human review, or enable execution for eligible tasks while Talia is available. [Kanban and review](site/docs/Manuale-Talia.md#manuale-18) · [Scheduling and automation](site/docs/Manuale-Talia.md#manuale-9)
+
+## What you can install from this repository
+
+| Resource | What it adds to Talia | Example to inspect |
+| --- | --- | --- |
+| [Agents](agents/) | A specialist role you can add to a conversation and assign a model. | [Functional Analyst](agents/functional-analyst/) |
+| [Skills](skills/) | A reusable procedure for a particular kind of work. Read the instructions to see what the agent will be asked to do. | [Deliverable Review](skills/deliverable-review/SKILL.md) |
+| [Connectors](connectors/) | An integration definition for an external tool or service. Check its setup and host support before planning work around it. | [Excel connector](connectors/excel/) |
+| [Apps](apps/) | A tool with its own interface for working with a result. | [CSV Viewer](apps/csv-viewer/) |
+| [Library packages](library/) | Reference material you can keep in the workspace and consult across tasks. | [Talia manual package](library/manuale-talia/) |
+
+Talia verifies the signed catalog and package contents, then presents the installation for review. Configure accounts and grant service access separately. You can read the package sources here before installing anything. [Store and permissions](site/docs/Manuale-Talia.md#manuale-8)
+
+## Choosing models and tools
+
+Start with one configured model. When a project needs a different mix, review the models in the chat draft and override individual agents for that conversation. For example, you can assign one model to the researcher and another to the writer while they work from the same brief. An agent added to an existing chat can receive its shared history, so check the selected provider before inviting it into a sensitive project.
+
+If you already use a supported command-line assistant such as Claude Code or Codex, you can also bring it into the workflow using its local installation and account. Available tools and usage limits depend on that setup. The conversation’s usage panel shows model and agent breakdowns where the provider supplies data. [Models, providers and costs](site/docs/Manuale-Talia.md#manuale-23)
+
+Tried Talia on a real task? [Tell us what you wanted to do and where you got stuck](https://github.com/Talia-Orchestrator/talia-store/issues/new?template=workflow-feedback.yml).
+
+If you find a specialist or workflow you want to come back to, give the Store a ★ on GitHub.
+
+<details>
+<summary>Technical reference for contributors and release maintainers</summary>
+
+## Distribution
 
 Public, anonymous HTTPS distribution for signed Talia resources. This repository is the source of truth for selected packages under `packages/agents/`, `packages/skills/`, `packages/connectors/`, `packages/apps/`, and `packages/library/`. The signed v3 index and v2 artifacts are generated from these local directories. Talia desktop bundles Assistant, General Researcher, ContentWriter, six starter skills, and the complete manual for offline first use; the Store supplies all optional packages and updates.
 
@@ -129,3 +189,17 @@ Il preset del team è incluso nel pacchetto firmato Senior IT Architect.
 Installando i sette specialisti richiesti su un host compatibile, il team
 viene creato automaticamente e resta modificabile. Il PM è opzionale.
 Vedere [`teams/README.md`](teams/README.md) per limiti e comportamento.
+
+## OpenRouter model metadata
+
+`model-capabilities/openrouter-thinking.json` è uno snapshot compatto dei soli
+livelli `reasoning_options` di tipo `effort` dichiarati per modelli OpenRouter
+esatti da [Models.dev](https://github.com/anomalyco/models.dev/tree/dev/providers/openrouter/models).
+`npm run build:catalog` prova ad aggiornarlo prima di rigenerare il catalogo
+delle estensioni. Il feed originale è pubblico e non riceve chiavi o chat.
+Il file è metadato di inferenza, non un pacchetto installabile; le policy locali
+già verificate del client hanno precedenza. Un modello senza livelli enumerati
+non ottiene una scala per analogia. `none` indica Off e non è uno step dello
+slider: il generatore lo esclude senza scartare gli altri effort validi.
+
+</details>

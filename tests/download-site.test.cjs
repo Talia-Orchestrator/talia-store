@@ -25,6 +25,12 @@ test('download accessible names include the visible format for every published i
   const script = fs.readFileSync(path.join(__dirname, '../site/app.js'), 'utf8');
   vm.runInContext(script.split('// Avvio dopo la selezione della lingua')[0], context);
   const index = JSON.parse(fs.readFileSync(path.join(__dirname, '../site/releases.json'), 'utf8'));
+  const linuxRelease = index.releases.find(release => release.platforms['linux-x64']);
+  const deb = file('Talia-linux-amd64.deb');
+  context.release = { ...linuxRelease, platforms: { 'linux-x64': { automaticUpdate: true, files: [deb] } } };
+  const debCard = vm.runInContext("makePlatformCard(release, TARGETS.find(t => t.extension === '.deb'))", context);
+  assert.equal(debCard.children.find(child => child.tag === 'a').href, deb.url);
+  assert.match(debCard.children.find(child => child.tag === 'details').children.find(child => child.className === 'file-meta').textContent, /manuale/);
   let checked = 0;
   const formats = new Set();
   for (const release of index.releases) {
@@ -316,4 +322,26 @@ test('landing is mobile-first with progressive animations and reduced-motion sup
   // Nessuna dipendenza esterna: il sito resta statico e autonomo.
   assert.doesNotMatch(html, /<script[^>]+src="https?:/);
   assert.doesNotMatch(css, /url\(https?:/);
+});
+
+test('ritira le anteprime 0.16 solo quando tutti e quattro i download sono disponibili', () => {
+  function release(version) {
+    const source = record();
+    const tag = `v${version}-main.6.1`;
+    source.release.tag_name = tag;
+    source.manifest.baseVersion = version;
+    source.manifest.version = `${version}-main.6.1+${COMMIT.slice(0, 12)}`;
+    source.manifest.releaseUrl = `https://github.com/${REPOSITORY}/releases/tag/${tag}`;
+    return source;
+  }
+  const merged = release('0.16.3');
+  const records = ['0.15.2', '0.16.0', '0.16.2'].map(release).concat(merged);
+  const versions = () => buildDownloadIndex(records).releases.map(r => r.baseVersion);
+  assert.equal(versions().length, 4);
+  for (const [platform, name] of [['win32-x64', 'Talia-x64-setup.exe'], ['linux-x64', 'Talia-amd64.deb']]) {
+    const f = file(name);
+    merged.manifest.platforms[platform].files.push(f);
+    merged.release.assets.push({ name, size: f.size, browser_download_url: f.url });
+  }
+  assert.deepEqual(versions().sort(), ['0.15.2', '0.16.3']);
 });

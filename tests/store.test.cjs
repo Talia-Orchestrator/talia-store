@@ -86,7 +86,7 @@ test('packer validates scoped independent connector manifests', () => {
 test('public store includes only the approved categories and canonical agent set', () => {
   assert.deepEqual([catalog.format, catalog.version], ['talia-extension-catalog', 3]);
   const counts = Object.fromEntries(['agent', 'skill', 'connector', 'app', 'library'].map((kind) => [kind, catalog.packages.filter((pkg) => pkg.kind === kind).length]));
-  assert.deepEqual(counts, { agent: 17, skill: 28, connector: 54, app: 3, library: 1 });
+  assert.deepEqual(counts, { agent: 17, skill: 28, connector: 52, app: 3, library: 1 });
   const agents = new Set(catalog.packages.filter((pkg) => pkg.kind === 'agent').map((pkg) => pkg.id));
   assert.deepEqual([...agents].sort(), [
     'talia-agents/app-architetto',
@@ -136,7 +136,7 @@ test('senior app team references installable Store agent packages', () => {
 });
 
 test('selected service listings are inert and complete', () => {
-  const selected = ['atlassian','bitbucket','excel','gcal','gdocs','gdrive','github','gitlab','gmail','google-ads','google-analytics','google-bigquery','google-classroom','google-maps','google-meet','google-photos','google-slides','google-tasks','google-workspace','gsearch-console','gsheets','gtasks','hugging-face','m365-calendar','m365-mail','microsoft-teams','onedrive','outlook','youtube'];
+  const selected = ['excel','gcal','gdocs','gdrive','github','gitlab','gmail','google-ads','google-analytics','google-bigquery','google-classroom','google-maps','google-meet','google-photos','google-slides','google-tasks','google-workspace','gsearch-console','gsheets','gtasks','hugging-face','m365-calendar','m365-mail','microsoft-teams','onedrive','outlook','youtube'];
   for (const slug of selected) {
     const id=`talia-connectors/${slug}`;
     const item=catalog.packages.find(pkg=>pkg.id===id);
@@ -162,6 +162,19 @@ test('CLI Store entries reference only the matching built-in setup', () => {
   }
   assert.equal(catalog.packages.some(pkg => pkg.id === 'talia-connectors/lark'), false);
   assert.equal(catalog.packages.some(pkg => pkg.id === 'talia-connectors/xero'), false);
+});
+test('Atlassian packages use independent scoped manifests', () => {
+  assert.ok(!catalog.packages.some(pkg => ['talia-connectors/atlassian', 'talia-connectors/bitbucket'].includes(pkg.id)));
+  for (const slug of ['atlassian-confluence', 'atlassian-jira', 'atlassian-bitbucket', 'atlassian-bitbucket-datacenter']) {
+    const id = `talia-connectors/${slug}`;
+    const item = catalog.packages.find(pkg => pkg.id === id);
+    assert.equal(item?.minHostVersion, '0.15.0');
+    const { packages: [pkg] } = JSON.parse(fs.readFileSync(path.join(root, item.artifact.url), 'utf8'));
+    const manifest = JSON.parse(pkg.files['connector.json']).independent_connector;
+    assert.equal(manifest.id, id);
+    assert.ok(manifest.operations.some(operation => operation.method === 'GET'));
+    assert.ok(manifest.operations.every(operation => operation.method === 'GET' || operation.bodyTextPath || operation.scopeWrite));
+  }
 });
 test('the complete Library manual has one canonical source and a signed artifact', () => {
   const item = catalog.packages.find(pkg => pkg.id === 'talia-library/manuale-talia');

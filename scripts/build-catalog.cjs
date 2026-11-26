@@ -3,6 +3,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { includeConnectorPackage } = require('./connector-selection.cjs');
 const { spawnSync } = require('node:child_process');
 const { validateRetainedArtifacts } = require('./retained-artifacts.cjs');
 const storeRoot = path.resolve(__dirname, '..');
@@ -24,7 +25,7 @@ function packageDirs(category, names) {
 const packages = [
   ...packageDirs('agents', featuredAgents),
   ...packageDirs('skills'),
-  ...packageDirs('connectors'),
+  ...packageDirs('connectors').filter(includeConnectorPackage),
   ...packageDirs('apps'),
   ...packageDirs('library'),
 ];
