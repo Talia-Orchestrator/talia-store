@@ -54,10 +54,10 @@ function fakeGh(calls, getPublishedCommit) {
       return JSON.stringify({ status: 'queued', url: 'https://api.github.com/repositories/1451454634/pages/builds/latest' });
     }
     const buildNumber = calls.filter(call => call[1] !== '--method').length;
-    return JSON.stringify({
+    return JSON.stringify([{
       status: 'built',
       commit: buildNumber === 1 ? 'b'.repeat(40) : getPublishedCommit(),
-    });
+    }]);
   };
 }
 
@@ -81,8 +81,8 @@ test('publishes a linear gh-pages commit, preserves its marker, and explicitly r
     assert.equal(result.pagesBuild.status, 'built');
     assert.deepEqual(calls, [
       ['api', '--method', 'POST', `repos/${REPOSITORY}/pages/builds`],
-      ['api', `repos/${REPOSITORY}/pages/builds/latest`],
-      ['api', `repos/${REPOSITORY}/pages/builds/latest`],
+      ['api', `repos/${REPOSITORY}/pages/builds?per_page=100`],
+      ['api', `repos/${REPOSITORY}/pages/builds?per_page=100`],
     ]);
 
     const checkout = path.join(sandbox.root, 'checkout');
@@ -126,18 +126,29 @@ test('skips a stale main run before changing gh-pages or requesting a Pages buil
   }
 });
 
-test('reports a failed legacy Pages build instead of masking its error', async () => {
-  const calls = [];
+test('accepts a built concurrent attempt for the exact commit after the explicit request errored', async () => {
+  const sha = 'c'.repeat(40); let polls = 0;
+  const result = await requestAndWaitForPagesBuild(REPOSITORY, {
+    runGh: args => args[1] === '--method' ? JSON.stringify({ status: 'queued' }) : JSON.stringify(++polls === 1
+      ? [{ status: 'errored', commit: sha, error: { message: 'Page build failed.' } }, { status: 'building', commit: sha }]
+      : [{ status: 'errored', commit: sha }, { status: 'built', commit: sha }]),
+    expectedCommit: sha, pollIntervalMs: 1, sleep: async () => {},
+  });
+  assert.equal(result.status, 'built'); assert.equal(polls, 2);
+});
+
+test('fails after bounded wait when no matching build succeeds, including the error', async () => {
+  const sha = 'c'.repeat(40);
   await assert.rejects(requestAndWaitForPagesBuild(REPOSITORY, {
-    runGh: args => {
-      calls.push(args);
-      return args[1] === '--method'
-        ? JSON.stringify({ status: 'queued', url: 'https://api.github.com/repositories/1451454634/pages/builds/latest' })
-        : JSON.stringify({ status: 'errored', commit: 'c'.repeat(40), error: { message: 'Jekyll could not publish the branch' } });
-    },
-    expectedCommit: 'c'.repeat(40),
-    pollIntervalMs: 1,
-    sleep: async () => {},
-  }), /Jekyll could not publish the branch/);
-  assert.equal(calls.length, 2);
+    runGh: args => args[1] === '--method' ? JSON.stringify({ status: 'queued' }) : JSON.stringify([{ status: 'errored', commit: sha, error: { message: 'Jekyll failed' } }]),
+    expectedCommit: sha, timeoutMs: 5, pollIntervalMs: 1, sleep: ms => new Promise(resolve => setTimeout(resolve, ms)),
+  }), /Timed out.*Jekyll failed/);
+});
+
+test('does not accept an older successful deployment when a different commit was built later', async () => {
+  const sha = 'c'.repeat(40);
+  await assert.rejects(requestAndWaitForPagesBuild(REPOSITORY, {
+    runGh: args => args[1] === '--method' ? JSON.stringify({ status: 'queued' }) : JSON.stringify([{ status: 'built', commit: 'd'.repeat(40) }, { status: 'built', commit: sha }]),
+    expectedCommit: sha, timeoutMs: 5, pollIntervalMs: 1, sleep: ms => new Promise(resolve => setTimeout(resolve, ms)),
+  }), /Timed out/);
 });

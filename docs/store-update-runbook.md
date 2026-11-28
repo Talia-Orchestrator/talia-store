@@ -130,3 +130,7 @@ manifesto o una pagina che dichiara disponibile una release ancora in bozza.
 Identificare l'esatto file o checkout divergente. Se la chiave privata primaria
 non è disponibile, usare la copia nel Portachiavi secondo il promemoria locale;
 non generare una nuova chiave per aggirare il gate.
+
+## 5. Diagnosi dei build Pages concorrenti
+
+Un push di `gh-pages` e una richiesta esplicita possono generare più build dello stesso commit. Il job attende un build `built` per il commit previsto, verifica che `main` e `gh-pages` non siano avanzati e registra il fallimento se scade il tempo senza un successo corrispondente. Un build `errored` non prova da solo la causa del servizio; consultare l'elenco dei build, la pagina pubblica e il job. Dopo errori di permessi o timeout correggere il problema prima di ripetere il workflow sullo stesso `main`. Non sostituire una review o i controlli della PR con questo job.

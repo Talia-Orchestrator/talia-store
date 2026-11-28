@@ -103,21 +103,26 @@ async function requestAndWaitForPagesBuild(repository, options = {}) {
   const matchesExpectedCommit = value => !expectedCommit || value && value.commit === expectedCommit;
   if (created.status === 'built' && matchesExpectedCommit(created)) return created;
 
-  const buildPath = `repos/${repository}/pages/builds/latest`;
+  // Un POST esplicito e il push possono produrre build diverse per lo stesso commit.
+  // Non trattare un errore immediato come definitivo finché una build concorrente può riuscire.
+  const buildPath = `repos/${repository}/pages/builds?per_page=100`;
   const deadline = Date.now() + (options.timeoutMs || PAGES_BUILD_TIMEOUT_MS);
   const sleep = options.sleep || (milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds)));
+  let lastError;
   while (Date.now() < deadline) {
     await sleep(options.pollIntervalMs || PAGES_BUILD_POLL_MS);
-    let current;
-    try { current = JSON.parse(gh(['api', buildPath])); } catch { fail('Unable to read GitHub Pages build status'); }
-    if (!current || !['queued', 'building', 'built', 'errored'].includes(current.status)) {
+    let builds;
+    try { builds = JSON.parse(gh(['api', buildPath])); } catch { fail('Unable to read GitHub Pages build status'); }
+    if (!Array.isArray(builds) || builds.some(build => !['queued', 'building', 'built', 'errored'].includes(build.status))) {
       fail('GitHub Pages build status is invalid');
     }
-    if (!matchesExpectedCommit(current)) continue;
-    if (current.status === 'built') return current;
-    if (current.status === 'errored') fail(`GitHub Pages build failed: ${current.error && current.error.message || 'unknown error'}`);
+    // Non segnalare successo per un commit precedentemente pubblicato se un commit più recente è già attivo.
+    const latestBuilt = builds.find(build => build.status === 'built');
+    if (latestBuilt && matchesExpectedCommit(latestBuilt)) return latestBuilt;
+    const failed = builds.find(build => build.status === 'errored' && matchesExpectedCommit(build));
+    if (failed) lastError = failed.error && failed.error.message || 'unknown error';
   }
-  fail(`Timed out waiting for GitHub Pages build${expectedCommit ? ` of ${expectedCommit}` : ''}`);
+  fail(`Timed out waiting for GitHub Pages build${expectedCommit ? ` of ${expectedCommit}` : ''}${lastError ? `; last error: ${lastError}` : ''}`);
 }
 
 async function deployPagesBranch(options = {}) {
@@ -190,6 +195,11 @@ async function deployPagesBranch(options = {}) {
         pollIntervalMs: options.pollIntervalMs,
         sleep: options.sleep,
       });
+      const finalMainSha = fetchPublishingRefs(repoRoot, git);
+      const finalPagesSha = git(repoRoot, ['rev-parse', `refs/remotes/origin/${PUBLISH_BRANCH}`]);
+      if (finalMainSha !== expectedMainSha || finalPagesSha !== publishedCommit) {
+        return { status: 'stale', expectedMainSha, currentMainSha: finalMainSha, pagesBuild: null };
+      }
       return { status: 'published', expectedMainSha, pushed, pagesBuild };
     } finally {
       if (worktreeAdded) {
